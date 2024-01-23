@@ -1,0 +1,11 @@
+.dropdown-toggle::after {
+    margin-right: 10px;
+}
+
+i{
+    cursor: pointer;
+}
+
+.brand{
+    max-height: 20px;
+}

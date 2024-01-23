@@ -1,0 +1,39 @@
+.content{
+    display: flex;
+    align-items: right;
+    flex-flow: column;
+    justify-content: center;
+}
+.round-l{
+    border-radius: 0 15px 15px 0 !important;
+}
+.round-r{
+    border-radius: 15px 0 0 15px !important;
+}
+
+.boxNumber{
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    justify-content: center;
+    box-shadow: 0px 8px 20px 0px rgba(42, 166, 183, 0.10);
+}
+
+.boxNumber i{
+    transform: scale(1.2);
+}
+
+.text-sm{
+    margin-top: -20px;
+}
+
+@media screen and (max-width:700px){
+    .content{
+        align-items: center;
+    }
+
+    .w-50{
+        width: 70% !important;
+    }
+    
+}

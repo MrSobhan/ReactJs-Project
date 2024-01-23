@@ -1,0 +1,11 @@
+.btnCategory{
+    min-width: max-content !important;
+}
+
+.col-category{
+    max-width: max-content !important;
+}
+
+.swiperSlider{
+    max-width: auto !important;
+}

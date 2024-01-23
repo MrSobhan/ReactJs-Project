@@ -1,0 +1,38 @@
+.cart {
+  width: 350px;
+  margin: 0 auto;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:  inset 0 0 25px rgba(0, 0, 0, 0.224);
+  flex-flow: column;
+  padding: 30px 20px;
+  margin-top: 100px;
+}
+
+.divBtn{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.divBtn button{
+  background-image: linear-gradient(45deg , rgb(98, 0, 255) , rgb(64, 255, 0));
+  padding: 5px 30px;
+  border-radius: 5px;
+  border: none;
+  font-size: 2rem;
+  color: aliceblue;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.divBtn button:active{
+  transform: scale(.9);
+}
+
+.orange {
+  background-color: orange;
+}

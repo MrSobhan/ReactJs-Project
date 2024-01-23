@@ -1,0 +1,86 @@
+@font-face {
+    font-family: "moraba";
+    src: url("./fonts/Morabba/woff2/Morabba-Medium.woff2");
+    /* IE9 Compat Modes */
+}
+
+@font-face {
+    font-family: "dana";
+    src: url("./fonts/Dana/woff2/DanaFaNum-Medium.woff2");
+    /* IE9 Compat Modes */
+}
+@font-face {
+    font-family: "dana-blod";
+    src: url("./fonts/Dana/woff2/DanaFaNum-DemiBold.woff2");
+    /* IE9 Compat Modes */
+}
+
+:root {
+    --primery: #F59D40;
+    --primery-Low: #fdf0e2;
+    --Secondary: #0094CC;
+    --Secondary-Low: #e6f7f9;
+    --Gray-1 : #E9E9E9;
+    --Gray-2 : #6A6A6A;
+    --Gray-3 : #4E4E4E;
+}
+
+
+body {
+    font-family: "dana-blod";
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    line-height: 1.8 !important;
+    color: var(--color-base);
+}
+
+.moraba {
+    font-family: "moraba" !important;
+}
+
+.dana-blod {
+    font-family: "dana-blod" !important;
+}
+
+.dana {
+    font-family: "dana" !important;
+}
+
+.primery {
+    color: var(--primery) !important;
+
+}
+
+.round {
+    border-radius: 10px !important;
+}
+
+.line{
+    width: 150px;
+    height: 3px;
+    background-color: var(--Secondary);
+    border-radius: 5px;
+}
+
+.Secondary{
+    color: var(--Secondary);
+}
+
