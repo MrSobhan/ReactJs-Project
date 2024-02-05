@@ -1,0 +1,7 @@
+.imgCartProduct{
+    max-height: 60px;
+    object-fit: cover;
+}
+.MuiSvgIcon-root{
+    margin-left: 10px;
+}

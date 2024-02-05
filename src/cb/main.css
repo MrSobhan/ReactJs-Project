@@ -50,6 +50,7 @@ h6,
 p {
     line-height: 1.8 !important;
     color: var(--color-base);
+    margin: 0 0;
 }
 
 .moraba {
@@ -66,21 +67,68 @@ p {
 
 .primery {
     color: var(--primery) !important;
-
 }
 
+.bg-primary{
+    background-color: var(--primery) !important;
+}
+
+.Secondary{
+    color: var(--Secondary);
+}
+.green{
+    color: var(--Secondary);
+}
+.bg-white{
+    background-color: #fff;
+}
+.bg-box{
+    background-color: var(--primery-Low);
+    color: var(--primery);
+}
+
+.bg-secondary{
+    background-color: var(--Secondary) !important;
+}
+.bg-secondary-low{
+    background-color: var(--Secondary-Low) !important;
+}
 .round {
     border-radius: 10px !important;
 }
 
-.line{
+.round-5{
+    border-radius: 1rem;
+}
+
+.line , .line-info{
     width: 150px;
     height: 3px;
     background-color: var(--Secondary);
     border-radius: 5px;
 }
 
-.Secondary{
-    color: var(--Secondary);
+.line-info{
+    background-color: var(--primery);
 }
 
+
+.btnAll{
+    background-color: var(--primery-Low) !important;
+    color: var(--primery) !important;
+    cursor: pointer;
+}
+.content-bg-1{
+    background-color: var(--primery-Low);
+}
+.content-bg-2{
+    background-color: var(--Secondary-Low);
+}
+
+.fs-7{
+    font-size: 12px;
+}
+
+.c-p{
+    cursor: pointer;
+}

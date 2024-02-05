@@ -17,10 +17,15 @@
     flex-flow: column;
     justify-content: center;
     box-shadow: 0px 8px 20px 0px rgba(42, 166, 183, 0.10);
+    transition: all .5s;
 }
 
 .boxNumber i{
     transform: scale(1.2);
+}
+
+.boxNumber:hover{
+    transform: scale(.9);
 }
 
 .text-sm{

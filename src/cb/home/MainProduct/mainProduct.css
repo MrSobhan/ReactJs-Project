@@ -1,0 +1,56 @@
+.icon-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.imgCourseMainProduct {
+    height: 300px;
+    /* max-height: min-content; */
+}
+
+.ml-custom {
+    margin-left: 20px;
+}
+
+.titleEfect {
+    position: relative;
+    margin-right: 30px;
+}
+
+.titleEfect::before {
+    content: '';
+    position: absolute;
+    right: -20px;
+    top: 15px;
+    width: 10px;
+    height: 40px;
+    background-color: #F59D40;
+    border-radius: 3px;
+}
+
+.divToast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.sticky-lg-top{
+    margin-top: -1.2rem;
+}
+
+@media screen and (max-width:700px) {
+
+    .flex-miniCart {
+        flex-flow: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+
+    .ml-custom {
+        margin-left: 0px;
+    }
+}

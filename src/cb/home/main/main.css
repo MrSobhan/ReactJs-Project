@@ -9,3 +9,35 @@
 .swiperSlider{
     max-width: auto !important;
 }
+.text-price{
+    width: max-content;
+}
+.imgCourse{
+    object-fit: cover;
+    object-position: bottom;
+}
+.iconHeart{
+    color: red;
+}
+.btnVoice svg{
+    cursor: pointer;
+}
+
+.btnInfo{
+    width: 162px;
+    height: 38px;
+}
+
+.imgTeacher{
+    width: 50px;
+    height: 50px;
+}
+
+.text-link p{
+    width: max-content;
+    margin: 0 auto;
+}
+.imgSvg{
+    height: 100px ;
+    width: 100%;
+}

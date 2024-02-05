@@ -18,14 +18,14 @@ export default function Content() {
         <Col lg="6" className="content">
           <div className="line"></div>
           <p className="fs-1 moraba mt-2">میخواهید چه چیزی یاد بگیرید؟</p>
-          <p className="fs-6 w-50">
+          <p className="fs-6 w-50 my-3">
             در بین بیش از ۲۰,۰۰۰ ساعت آموزش تیچی جستجو کنید و به جمع میلیونی
             دانشجویان تیچی بپیوندید
           </p>
           <Form className="d-flex w-75">
             <Form.Control
               type="search"
-              placeholder="جستجو"
+              placeholder="جستجو آموزش ..."
               className="shadow round-l"
               aria-label="Search"
             />
@@ -42,7 +42,7 @@ export default function Content() {
           <Image src="./img/untitled (1).png" fluid  className="d-none d-lg-block"/>
         </Col>
       </Row>
-      <Row className="mt-5 gap-5">
+      <Row className="mt-5 gap-5 px-3">
         {
             BoxData.map((data)=>(
                 <BoxNumber key={data.id} {...data}/>
