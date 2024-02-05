@@ -9,12 +9,6 @@ import Table from 'react-bootstrap/Table'
 
 import './Cart.css'
 
-// import Box from '@mui/material/Box';
-// import { DataGrid } from '@mui/x-data-grid';
-
-
-
-
 
 const Cart = () => {
 
