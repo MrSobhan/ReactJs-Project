@@ -3,6 +3,8 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 
+// ? Project React
+
 // import App from "./projects/test/App/App";
 // import Counter from "./projects/counter/App/count";
 // import Quiz from "./projects/Quiz/Quiz";
@@ -14,11 +16,12 @@ import { BrowserRouter } from "react-router-dom";
 // import App from "./projects/react-bootstrap/App";
 // import BasicAccordion from "./projects/mui/App";
 // import App from "./projects/Spa/App";
-import App from "./cb/App";
+// import App from "./Tichy/App";
+import App from "./DashboardAdmin/App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <App></App>
+    <App/>
   </BrowserRouter>
 );
