@@ -54,25 +54,25 @@ const newMembers = [
         id: 1,
         username: 'Mohammad Amin',
         title: 'Web Developer',
-        img:'images/amin.jpg'
+        img: 'images/amin.jpg'
     },
     {
         id: 2,
         username: 'Sasan Moq',
         title: 'Seo Eng',
-        img:'images/sasan.jpg'
+        img: 'images/sasan.jpg'
     },
     {
         id: 3,
         username: 'Zahra Agayi',
         title: 'Weblog',
-        img:'images/zahra.jpg'
+        img: 'images/zahra.jpg'
     },
     {
         id: 4,
         username: 'Qadir Yolme',
         title: 'Hacker',
-        img:'images/qadir.jpg'
+        img: 'images/qadir.jpg'
     },
 ]
 
@@ -181,4 +181,19 @@ let products = [
     },
 ]
 
-export { xAxisData, newMembers, transactions, userRows, products }
+const productsData = [
+    {
+        name: 'Jan',
+        sales: 4000,
+    },
+    {
+        name: 'Feb',
+        sales: 3000,
+    },
+    {
+        name: 'Mar',
+        sales: 5000,
+    },
+]
+
+export { xAxisData, newMembers, transactions, userRows, products, productsData }
