@@ -48,7 +48,7 @@ export default function NewUser() {
           </div>
         </div>
         <div class="col-12">
-          <button type="submit" class="btn btn-primary">Sign in</button>
+          <button type="submit" class="btn btn-primary px-4">Craete New User</button>
         </div>
       </form>
 
