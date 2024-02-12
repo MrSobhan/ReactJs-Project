@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom'
+import { Link , useParams} from 'react-router-dom'
 import Chart from './../../components/Chart/Chart'
-import { productsData } from '../../datas'
+import { productsData , products } from '../../datas'
 
 import PublishIcon from "@mui/icons-material/Publish";
 
@@ -8,6 +8,11 @@ import PublishIcon from "@mui/icons-material/Publish";
 import './Product.css'
 
 export default function Product() {
+
+  const Id = useParams()
+  const dataPro = products.filter((e)=> e.id == Id.productID)[0]
+  // console.log(dataPro);
+
   return (
     <div className='product'>
 
@@ -26,22 +31,22 @@ export default function Product() {
 
           <div className="productTopRight">
             <div className="productInfoTop">
-              <img src="/images/dell.jpg" alt="Dell LapTop" className='productInfoImg' />
-              <span className='productName'>Dell LapTop</span>
+              <img src={dataPro.avatar} alt={dataPro.title} className='productInfoImg' />
+              <span className='productName'>{dataPro.title}</span>
             </div>
 
             <div className="productInfoBottom">
               <div className="productInfoItem">
                 <div className="productInfoKey">ID: </div>
-                <div className="productInfoValue">132</div>
+                <div className="productInfoValue">{dataPro.id}</div>
               </div>
               <div className="productInfoItem">
                 <div className="productInfoKey">Name: </div>
-                <div className="productInfoValue">Dell Laptop</div>
+                <div className="productInfoValue">{dataPro.title}</div>
               </div>
               <div className="productInfoItem">
                 <div className="productInfoKey">Sales: </div>
-                <div className="productInfoValue">$90000</div>
+                <div className="productInfoValue">${dataPro.price}</div>
               </div>
               <div className="productInfoItem">
                 <div className="productInfoKey">Active: </div>
@@ -62,7 +67,7 @@ export default function Product() {
 
             <div className='productFormLeft'>
               <label>Product Name</label>
-              <input type="text" placeholder='Dell Laptop' />
+              <input type="text" placeholder={dataPro.title} />
 
               <label>In Stock</label>
               <select id="inStock">
@@ -81,7 +86,7 @@ export default function Product() {
             <div className='productFormRight'>
 
               <div className='productUploader'>
-                <img src="/images/dell.jpg" alt="profile photo" className='productUploaderImg' />
+                <img src={dataPro.avatar} alt="profile photo" className='productUploaderImg' />
                 <label>
                   <PublishIcon />
                 </label>

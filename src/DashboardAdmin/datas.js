@@ -158,25 +158,25 @@ let products = [
     {
         id: 1,
         title: 'Asus',
-        avatar: 'images/asus.jpeg',
+        avatar: './images/asus.jpeg',
         price: 890
     },
     {
         id: 2,
         title: 'Acer',
-        avatar: 'images/acer.jpg',
+        avatar: './images/acer.jpg',
         price: 890
     },
     {
         id: 3,
         title: 'HP',
-        avatar: 'images/hp.jpg',
+        avatar: './images/hp.jpg',
         price: 890
     },
     {
         id: 4,
         title: 'Dell',
-        avatar: 'images/dell.jpg',
+        avatar: './images/dell.jpg',
         price: 890
     },
 ]
