@@ -6,6 +6,7 @@
 .container {
   display: flex;
   margin-top: 10px;
+  min-width: 100%;
 }
 
 .link {
