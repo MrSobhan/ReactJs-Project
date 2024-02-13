@@ -17,7 +17,8 @@ import { BrowserRouter } from "react-router-dom";
 // import BasicAccordion from "./projects/mui/App";
 // import App from "./projects/Spa/App";
 // import App from "./Tichy/App";
-import App from "./DashboardAdmin/App";
+// import App from "./DashboardAdmin/App";
+import App from "./projects/CustomHooks/App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
