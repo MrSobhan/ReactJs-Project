@@ -1,5 +1,5 @@
 <h1>Hi 👋, I'm SobhanDev</h1>
-<h3>A passionate front end developer from Iran. This project is one of the great React library that I have shared live for you.</h3>
+<h3>A passionate front end developer from Iran. This project is one of the great React library that I have shared live for you. <img src="https://github.com/Tarikul-Islam-Anik/tarikul-islam-anik/raw/main/assets/images/Fire.png" alt="Slightly Smiling Face" width="35" height="35"/></h3>
 
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=mrsobhan" alt="mrsobhan" /></a> </p>
 
