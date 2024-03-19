@@ -18,7 +18,8 @@ import { BrowserRouter } from "react-router-dom";
 // import App from "./projects/Spa/App";
 // import App from "./Tichy/App";
 // import App from "./DashboardAdmin/App";
-import App from "./projects/CustomHooks/App";
+// import App from "./projects/CustomHooks/App";
+import App from "./projects/memo & useMemo & useCallback/App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
