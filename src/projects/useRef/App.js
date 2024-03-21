@@ -6,7 +6,7 @@ const App = () => {
   const [val, setVal] = useState("");
   const [war, setWar] = useState("");
 
-
+  
   useEffect(()=>{
     if(val.length < 8){
         setWar('NotValue')

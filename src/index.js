@@ -20,7 +20,8 @@ import { BrowserRouter } from "react-router-dom";
 // import App from "./DashboardAdmin/App";
 // import App from "./projects/CustomHooks/App";
 // import App from "./projects/memo & useMemo & useCallback/App";
-import App from "./projects/useRef/App";
+// import App from "./projects/useRef/App";
+import App from "./projects/pagination/App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
