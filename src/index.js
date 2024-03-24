@@ -22,7 +22,8 @@ import { BrowserRouter } from "react-router-dom";
 // import App from "./projects/memo & useMemo & useCallback/App";
 // import App from "./projects/useRef/App";
 // import App from "./projects/pagination/App";
-import App from "./projects/exp-HOC/App";
+// import App from "./projects/exp-HOC/App";
+import App from "./menu-project/App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
