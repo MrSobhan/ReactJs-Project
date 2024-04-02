@@ -20,6 +20,7 @@ export default function App() {
     <div>
       <productsContext.Provider value={{
         allProducts,
+        setAllProducts,
         userCart,
         setUserCart,
         isShowToast,

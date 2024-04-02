@@ -16,6 +16,14 @@ export default function ProductsSection() {
       (bagProduct) => bagProduct.title === product.title
     );
 
+    contextData.allProducts.forEach(itemProducts => {
+      itemProducts.infos.forEach((bagProduct) => {
+        if (bagProduct == product) {
+          product.count -= 1
+        }
+      });
+    });
+
     if (!isInUserCart) {
       let newUserCartProduct = {
         id: contextData.userCart.length + 1,
