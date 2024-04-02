@@ -5,7 +5,7 @@ import "./ProductsSection.css";
 export default function ProductsSection() {
   const contextData = useContext(productsContext);
 
-  const addToCart = product => {
+  const addToCart = (product) => {
     contextData.setIsShowToast(true);
 
     setTimeout(() => {
@@ -16,10 +16,10 @@ export default function ProductsSection() {
       (bagProduct) => bagProduct.title === product.title
     );
 
-    contextData.allProducts.forEach(itemProducts => {
+    contextData.allProducts.forEach((itemProducts) => {
       itemProducts.infos.forEach((bagProduct) => {
-        if (bagProduct == product) {
-          product.count -= 1
+        if (bagProduct == product && product.count >= 1) {
+          product.count -= 1;
         }
       });
     });
@@ -85,7 +85,9 @@ export default function ProductsSection() {
                   <a
                     href="javascript:void(0)"
                     className="btn btn-danger"
-                    onClick={() => addToCart(product)}
+                    onClick={() =>
+                      product.count != 0 ? addToCart(product) : ""
+                    }
                   >
                     Add To Cart
                   </a>
