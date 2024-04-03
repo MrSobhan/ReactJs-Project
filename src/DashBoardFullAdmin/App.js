@@ -5,7 +5,7 @@ import Sidebar from "./Components/Sidebar/Sidebar";
 import Header from "./Components/Header/Header";
 import routes from "./routes";
 
-
+import './custom.css';
 import './App.css'
 
 export default function App() {

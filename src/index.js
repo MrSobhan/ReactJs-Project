@@ -26,9 +26,12 @@ import { BrowserRouter } from "react-router-dom";
 // import App from "./projects/exp-HOC/App";
 // import App from "./menu-project/App";
 // import App from "./projects/ContextApi/App";
-import App from "./ProductShop/App";
+// import App from "./ProductShop/App";
+import App from "./DashBoardFullAdmin/App";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+// const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.querySelector("body"));
+
 root.render(
   <BrowserRouter>
     <App/>
