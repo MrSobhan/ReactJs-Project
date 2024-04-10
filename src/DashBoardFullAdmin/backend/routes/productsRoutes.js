@@ -7,7 +7,7 @@ const productsRouter = express.Router();
 
 productsRouter.get("/", (req, res) => {
   console.log('get products');
-  let selectAllProductsQuery = `SELECT * FROM Products`;
+  let selectAllProductsQuery = 'SELECT * FROM `products` ORDER BY `id` DESC';
   SabzlearnShopDB.query(selectAllProductsQuery, (err, result) => {
     console.log('get products query');
     if (err) {
