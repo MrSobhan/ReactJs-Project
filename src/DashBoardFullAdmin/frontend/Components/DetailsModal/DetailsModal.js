@@ -31,7 +31,7 @@ export default function DetailsModal({ onHide }) {
             <tr>
               <td>لپتاپ</td>
               <td>۱۲،۰۰۰،۰۰۰</td>
-              <td>91</td>
+              <td>19.00</td>
             </tr>
           </tbody>
         </table>
