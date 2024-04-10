@@ -7,7 +7,7 @@ const productsRouter = express.Router();
 
 productsRouter.get("/", (req, res) => {
   console.log('get products');
-  let selectAllProductsQuery = 'SELECT * FROM `products` ORDER BY `id` DESC';
+  let selectAllProductsQuery = `SELECT * FROM Products`;
   SabzlearnShopDB.query(selectAllProductsQuery, (err, result) => {
     console.log('get products query');
     if (err) {
@@ -50,6 +50,7 @@ productsRouter.put("/:productID", (req, res) => {
 
 productsRouter.post("/", (req, res) => {
   let body = req.body;
+
   let addNewProductQuery = `INSERT INTO Products VALUES (NULL, "${body.title}", ${body.price}, ${body.count}, "${body.img}", ${body.popularity}, ${body.sale}, ${body.colors})`;
 
   SabzlearnShopDB.query(addNewProductQuery, (err, result) => {

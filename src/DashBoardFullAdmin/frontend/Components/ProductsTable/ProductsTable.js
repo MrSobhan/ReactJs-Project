@@ -6,11 +6,10 @@ import EditModal from "./../EditModal/EditModal";
 import { AiOutlineDollarCircle } from "react-icons/ai";
 import ErrorBox from "../Errorbox/Errorbox";
 
-export default function ProductsTable() {
+export default function ProductsTable({ allProducts, getAllProducts }) {
   const [isShowDeleteModal, setIsShowDeleteModal] = useState(false);
   const [isShowDetailsModal, setIsShowDetailsModal] = useState(false);
   const [isShowEditModal, setIsShowEditModal] = useState(false);
-  const [allProducts, setAllProducts] = useState([]);
   const [productID, setProductID] = useState(null);
   const [mainProductInfos, setMainProductInfos] = useState({});
 
@@ -22,15 +21,7 @@ export default function ProductsTable() {
   const [productNewSale, setProductNewSale] = useState("");
   const [productNewColors, setProductNewColors] = useState("");
   
-  useEffect(() => {
-    getAllProducts();
-  }, []);
-
-  const getAllProducts = () => {
-    fetch("http://localhost:8000/api/products/")
-      .then((res) => res.json())
-      .then((products) => setAllProducts(products));
-  };
+  
 
   const deleteModalCancelAction = () => {
     console.log("مدال کنسل شد");
@@ -102,7 +93,7 @@ export default function ProductsTable() {
                 <td>
                   <img
                     src={product.img}
-                    alt="oil image"
+                    alt="product img"
                     className="products-table-img"
                   />
                 </td>
@@ -172,7 +163,7 @@ export default function ProductsTable() {
 
             <tbody>
               <tr>
-                <td>{mainProductInfos.popularity}</td>
+                <td>{mainProductInfos.popularity}%</td>
                 <td>{mainProductInfos.sale}</td>
                 <td>{mainProductInfos.colors}</td>
               </tr>

@@ -1,4 +1,4 @@
-main url = http://localhost:6000/api/
+main url = http://localhost:8000/api/
 
 
 ///////////////////// Start Products Routes (sub_url => products/) //////////////////////
