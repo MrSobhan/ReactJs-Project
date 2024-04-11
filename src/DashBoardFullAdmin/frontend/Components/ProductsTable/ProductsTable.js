@@ -20,8 +20,6 @@ export default function ProductsTable({ allProducts, getAllProducts }) {
   const [productNewPopularity, setProductNewPopularity] = useState("");
   const [productNewSale, setProductNewSale] = useState("");
   const [productNewColors, setProductNewColors] = useState("");
-  
-  
 
   const deleteModalCancelAction = () => {
     console.log("مدال کنسل شد");
@@ -56,20 +54,21 @@ export default function ProductsTable({ allProducts, getAllProducts }) {
       popularity: productNewPopularity,
       sale: productNewSale,
       colors: productNewColors,
-    }
+    };
 
     fetch(`http://localhost:8000/api/products/${productID}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(productsNewInfos)
-    }).then(res => res.json())
-    .then(result => {
-      console.log(result);
-      getAllProducts()
-      setIsShowEditModal(false)
+      body: JSON.stringify(productsNewInfos),
     })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        getAllProducts();
+        setIsShowEditModal(false);
+      });
 
     console.log("محصول ویرایش شد");
   };
@@ -123,14 +122,14 @@ export default function ProductsTable({ allProducts, getAllProducts }) {
                     className="products-table-btn"
                     onClick={() => {
                       setIsShowEditModal(true);
-                      setProductID(product.id)
-                      setProductNewTitle(product.title)
-                      setProductNewPrice(product.price)
-                      setProductNewCount(product.count)
-                      setProductNewImg(product.img)
-                      setProductNewPopularity(product.popularity)
-                      setProductNewSale(product.sale)
-                      setProductNewColors(product.colors)
+                      setProductID(product.id);
+                      setProductNewTitle(product.title);
+                      setProductNewPrice(product.price);
+                      setProductNewCount(product.count);
+                      setProductNewImg(product.img);
+                      setProductNewPopularity(product.popularity);
+                      setProductNewSale(product.sale);
+                      setProductNewColors(product.colors);
                     }}
                   >
                     ویرایش
@@ -146,6 +145,7 @@ export default function ProductsTable({ allProducts, getAllProducts }) {
 
       {isShowDeleteModal && (
         <DeleteModal
+          title="آیا از حذف اطمینان دارید؟"
           submitAction={deleteModalSubmitAction}
           cancelAction={deleteModalCancelAction}
         />
@@ -188,7 +188,7 @@ export default function ProductsTable({ allProducts, getAllProducts }) {
               onChange={(event) => setProductNewTitle(event.target.value)}
             />
           </div>
-          
+
           <div className="edit-proructs-form-group">
             <span>
               <AiOutlineDollarCircle />

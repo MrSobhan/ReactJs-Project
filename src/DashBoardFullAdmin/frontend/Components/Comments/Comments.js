@@ -12,6 +12,7 @@ export default function Comments() {
   const [commentText, setCommentText] = useState("");
 
   const [isShowDeleteModal, setIsShowDeleteModal] = useState(false);
+  const [isShowAcceptModal, setIsShowAcceptModal] = useState(false);
   const [isShowDetailsModal, setIsShowDetailsModal] = useState(false);
   const [isShowEditModal, setIsShowEditModal] = useState(false);
 
@@ -22,6 +23,8 @@ export default function Comments() {
       .then((res) => res.json())
       .then((comments) => setAllComments(comments));
   };
+
+  // ! getAllComment
 
   useEffect(() => {
     getAllComment();
@@ -54,19 +57,39 @@ export default function Comments() {
     console.log("مدال Edit بسته شد");
 
     fetch(`http://localhost:8000/api/comments/${commentID}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        body : contentEditInput
-      })
-    }).then(res => res.json())
-    .then(result => {
-      console.log(result);
-      getAllComment()
-      setIsShowEditModal(false)
+        body: contentEditInput,
+      }),
     })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        getAllComment();
+        setIsShowEditModal(false);
+      });
+  };
+
+  const acceptModalSubmitAction = () => {
+    console.log("مدال تایید اوکی شد");
+
+    // fetch(`http://localhost:8000/api/comments/${commentID}`, {
+    //   method: "POST",
+    // })
+    //   .then((res) => res.json())
+    //   .then((result) => {
+    //     console.log(result);
+    //     getAllComment();
+    //     setIsShowAcceptModal(false);
+    //   });
+  };
+
+  const acceptModalCancelAction = () => {
+    console.log("مدال تایید بسته شد");
+    setIsShowAcceptModal(false);
   };
 
   return (
@@ -116,13 +139,20 @@ export default function Comments() {
                     onClick={() => {
                       setIsShowEditModal(true);
                       setCommentID(comment.id);
-                      setContentEditInput(comment.body)
+                      setContentEditInput(comment.body);
                     }}
                   >
                     ویرایش
                   </button>
                   <button className="products-table-btn">پاسخ</button>
-                  <button className="products-table-btn">تایید</button>
+                  <button
+                    className="products-table-btn"
+                    onClick={() => {
+                      setIsShowAcceptModal(true);
+                    }}
+                  >
+                    تایید
+                  </button>
                 </td>
               </tr>
             ))}
@@ -136,6 +166,7 @@ export default function Comments() {
 
       {isShowDeleteModal && (
         <DeleteModal
+          title="آیا از حذف اطمینان دارید؟"
           submitAction={deleteModalSubmitAction}
           cancelAction={deleteModalCancelAction}
         />
@@ -157,6 +188,14 @@ export default function Comments() {
             onChange={(e) => setContentEditInput(e.target.value)}
           ></textarea>
         </EditModal>
+      )}
+
+      {isShowAcceptModal && (
+        <DeleteModal
+          title="آیا از تایید کامنت اطمینان دارید؟"
+          submitAction={acceptModalSubmitAction}
+          cancelAction={acceptModalCancelAction}
+        />
       )}
     </div>
   );
