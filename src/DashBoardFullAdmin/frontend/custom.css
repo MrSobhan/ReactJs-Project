@@ -5,10 +5,20 @@
     src: url(./fonts/Lalezar-Regular.ttf);
 }
 
+
 :root {
     --white: #ffffff;
     --white-50: #f0f0f0;
     --blue: #471AAA;
+}
+
+::-webkit-scrollbar{
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: var(--blue);
+    border-radius: 5px;
 }
 
 body {
