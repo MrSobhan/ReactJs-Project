@@ -4,7 +4,7 @@ import { MdProductionQuantityLimits } from "react-icons/md";
 import { BiCommentDetail } from "react-icons/bi";
 import { FiUsers } from "react-icons/fi";
 import { BsBagCheck, BsCurrencyDollar } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import "./Sidebar.css";
 
@@ -15,40 +15,40 @@ export default function Sidebar() {
 
       <ul className="sidebar-links">
         <li>
-          <Link to="/products">
+          <NavLink to="/">
             <AiOutlineHome className="icon" />
             صفحه اصلی
-          </Link>
+          </NavLink>
         </li>
         <li className="active">
-          <Link to="/products">
+          <NavLink to="/products">
             <MdProductionQuantityLimits className="icon" />
             محصولات
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to="/comments">
+          <NavLink to="/comments">
             <BiCommentDetail className="icon" />
             کامنت ها
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to="/users">
+          <NavLink to="/users">
             <FiUsers className="icon" />
             کاربران
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to="/orders">
+          <NavLink to="/orders">
               <BsBagCheck className="icon" />
               سفارشات
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to="/offs">
+          <NavLink to="/offs">
               <BsCurrencyDollar className="icon" />
               تخفیف ها
-          </Link>
+          </NavLink>
         </li>
       </ul>
     </div>
