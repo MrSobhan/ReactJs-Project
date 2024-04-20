@@ -15,6 +15,7 @@ export default function Comments() {
   const [isShowAcceptModal, setIsShowAcceptModal] = useState(false);
   const [isShowDetailsModal, setIsShowDetailsModal] = useState(false);
   const [isShowEditModal, setIsShowEditModal] = useState(false);
+  const [isShowRejectModal, setIsShowRejectModal] = useState(false);
 
   const [contentEditInput, setContentEditInput] = useState("");
 
@@ -76,20 +77,36 @@ export default function Comments() {
   const acceptModalSubmitAction = () => {
     console.log("مدال تایید اوکی شد");
 
-    // fetch(`http://localhost:8000/api/comments/${commentID}`, {
-    //   method: "POST",
-    // })
-    //   .then((res) => res.json())
-    //   .then((result) => {
-    //     console.log(result);
-    //     getAllComment();
-    //     setIsShowAcceptModal(false);
-    //   });
+    fetch(`http://localhost:8000/api/comments/accept/${commentID}`, {
+      method: "POST",
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        getAllComment();
+        setIsShowAcceptModal(false);
+      });
   };
 
   const acceptModalCancelAction = () => {
     console.log("مدال تایید بسته شد");
     setIsShowAcceptModal(false);
+  };
+
+  const rejectModalSubmitAction = () => {
+    fetch(`http://localhost:8000/api/comments/reject/${commentID}`, {
+      method: "POST",
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        setIsShowRejectModal(false);
+        getAllComment();
+      });
+  };
+  const rejectModalCancelAction = () => {
+    console.log("مدال رد بسته شد");
+    setIsShowRejectModal(false);
   };
 
   return (
@@ -145,14 +162,27 @@ export default function Comments() {
                     ویرایش
                   </button>
                   <button className="products-table-btn">پاسخ</button>
-                  <button
-                    className="products-table-btn"
-                    onClick={() => {
-                      setIsShowAcceptModal(true);
-                    }}
-                  >
-                    تایید
-                  </button>
+                  {comment.isAccept == 0 ? (
+                    <button
+                      className="products-table-btn"
+                      onClick={() => {
+                        setCommentID(comment.id);
+                        setIsShowAcceptModal(true);
+                      }}
+                    >
+                      تایید
+                    </button>
+                  ) : (
+                    <button
+                      className="products-table-btn"
+                      onClick={() => {
+                        setCommentID(comment.id);
+                        setIsShowRejectModal(true);
+                      }}
+                    >
+                      رد کردن
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}
@@ -195,6 +225,14 @@ export default function Comments() {
           title="آیا از تایید کامنت اطمینان دارید؟"
           submitAction={acceptModalSubmitAction}
           cancelAction={acceptModalCancelAction}
+        />
+      )}
+
+      {isShowRejectModal && (
+        <DeleteModal
+          title="آیا از رد کردن کامنت اطمینان دارید؟"
+          submitAction={rejectModalSubmitAction}
+          cancelAction={rejectModalCancelAction}
         />
       )}
     </div>
