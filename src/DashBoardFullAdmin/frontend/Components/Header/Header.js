@@ -10,7 +10,7 @@ export default function Header() {
         <div className="admin-profile">
             <img src="/img/saeedi.jpeg" alt="Admin Profile" />
             <div>
-                <h1>محمدامین سعیدی راد</h1>
+                <h1>سبحان موسی زاده</h1>
                 <h3>برنامه نویس فرانت اند</h3>
             </div>
         </div>
