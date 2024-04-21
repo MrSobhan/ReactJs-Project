@@ -21,7 +21,7 @@ export default function Orders() {
   }, []);
 
   const closeDeleteModal = () => setIsShowDeleteModal(false);
-  
+
   const removeOrder = () => {
     console.log(mainOrderID);
     fetch(`http://localhost:8000/api/orders/${mainOrderID}`, {
