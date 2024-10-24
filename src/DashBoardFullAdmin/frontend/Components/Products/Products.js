@@ -13,7 +13,9 @@ export default function Products() {
   const getAllProducts = () => {
     fetch("http://localhost:8000/api/products/")
       .then((res) => res.json())
-      .then((products) => setAllProducts(products));
+      .then((products) => setAllProducts(products))
+      .catch((err) =>  console.log(err));
+      
   };
 
   return (
