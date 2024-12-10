@@ -28,7 +28,8 @@ import { BrowserRouter } from "react-router-dom";
 // import App from "./projects/ContextApi/App";
 // import App from "./ProductShop/App";
 // import App from "./DashBoardFullAdmin/frontend/App";
-import App from "./Tichy/App";
+// import App from "./Tichy/App";
+import App from "./MovieApp/App";
 
 // const root = ReactDOM.createRoot(document.getElementById("root"));
 const root = ReactDOM.createRoot(document.getElementById("root"));
