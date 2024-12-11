@@ -1,0 +1,24 @@
+.sectionMain__myMovie{
+    margin-top: 160px !important;
+}
+
+.searchBar {
+    padding: 10px 10px;
+}
+
+.searchBar input {
+    border: none;
+    width: 100%;
+    outline: none;
+}
+
+
+.btnAdd{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 16px;
+    border-radius : 1rem;
+    background-color: black;
+    border: none;
+}

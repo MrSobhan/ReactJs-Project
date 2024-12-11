@@ -1,0 +1,16 @@
+.navbar{
+    top: 0;
+    background-color: #fff;
+}
+
+.nav-link{
+    color: rgba(0, 0, 0, 0.271);
+}
+.nav-link .active , .nav-link:hover{
+    color: black;
+}
+.tapHeader__headre{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

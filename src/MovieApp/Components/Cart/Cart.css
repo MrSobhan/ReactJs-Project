@@ -1,0 +1,12 @@
+/* Cart Ui */
+
+.cartMovie__img {
+    min-height: 240px;
+    border-radius: 1rem;
+    object-fit: cover;
+}
+
+.mainText__Cart {
+    flex-flow: column;
+    justify-content: space-between;
+}

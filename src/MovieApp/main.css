@@ -1,20 +1,3 @@
-@font-face {
-    font-family: "moraba";
-    src: url("./fonts/Morabba/woff2/Morabba-Medium.woff2");
-    /* IE9 Compat Modes */
-}
-
-@font-face {
-    font-family: "dana";
-    src: url("./fonts/Dana/woff2/DanaFaNum-Medium.woff2");
-    /* IE9 Compat Modes */
-}
-@font-face {
-    font-family: "dana-blod";
-    src: url("./fonts/Dana/woff2/DanaFaNum-DemiBold.woff2");
-    /* IE9 Compat Modes */
-}
-
 :root {
     --primery: #F59D40;
     --primery-Low: #fdf0e2;
@@ -27,10 +10,10 @@
 
 
 body {
-    font-family: "dana-blod";
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     overflow-x: hidden;
 }
-
+/* 
 a {
     text-decoration: none;
 }
@@ -93,13 +76,9 @@ p {
 .bg-secondary-low{
     background-color: var(--Secondary-Low) !important;
 }
-.round {
-    border-radius: 10px !important;
-}
 
-.round-5{
-    border-radius: 1rem;
-}
+
+
 
 .line , .line-info{
     width: 150px;
@@ -110,9 +89,9 @@ p {
 
 .line-info{
     background-color: var(--primery);
-}
+} */
 
-
+/* 
 .btnAll{
     background-color: var(--primery-Low) !important;
     color: var(--primery) !important;
@@ -125,10 +104,46 @@ p {
     background-color: var(--Secondary-Low);
 }
 
+ */
+
+.round {
+    border-radius: 10px !important;
+}
+
+.round-5{
+    border-radius: 1rem;
+}
+
 .fs-7{
     font-size: 12px;
 }
 
 .c-p{
     cursor: pointer;
+}
+
+.img-icon{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.flex-items{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.flex-between{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+/* Bootstrap Custom */
+
+
+.accordion-button:not(.collapsed) , .accordion-button:focus {
+    box-shadow: none;
+    background-color: transparent;
 }

@@ -1,0 +1,53 @@
+.sectionTop__main {
+    background: linear-gradient(180deg, transparent, rgb(0, 0, 0)), url('../../../public/movieApp/PeakyBlinders.webp');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 75vh;
+    border-radius: 30px;
+    padding: 40px 30px;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    margin-top: 160px !important;
+}
+
+.btnThem {
+    border: 2px solid #fff;
+    background-color: transparent;
+    padding: 2.5px 25px;
+    border-radius: 50px;
+    color: aliceblue;
+    transition: all .4s;
+}
+
+.sectionTop__main button:hover {
+    transform: scale(.9);
+}
+
+/* --------------------------------------------------- */
+.mediaSec__main{
+    background-color: black;
+    /* color: #fff; */
+    min-height: 90vh;
+}
+
+.mediaSec__main > .textBody{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+}
+.textBody > p{
+    color: rgba(255, 255, 255, 0.447);
+}
+/* .mediaSec__main  */
+
+@media screen and (max-width:600px) {
+    .sectionTop__main {
+        height: 30vh;
+        border-radius: 20px;
+        padding: 10px 20px;
+    }
+
+}
