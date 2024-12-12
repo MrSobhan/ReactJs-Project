@@ -1,9 +1,15 @@
 /* Cart Ui */
 
 .cartMovie__img {
-    min-height: 240px;
+    width: 100%;
+    height: 240px;
     border-radius: 1rem;
     object-fit: cover;
+    transition: all .3s;
+}
+
+.cartMovie__img:hover{
+    transform: scale(1.05);
 }
 
 .mainText__Cart {

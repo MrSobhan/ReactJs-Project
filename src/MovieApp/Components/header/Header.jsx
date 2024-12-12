@@ -14,7 +14,7 @@ export default function Header() {
           <img src="./movieApp/image.png" alt="" className="img-fluid border-none img-icon pt-1" />
           <a className="navbar-brand fw-blod" href="#">Whatsup!</a>
           <form className="d-flex gap-2 flex-items" role="search">
-            <img src="./movieApp/qwsearch.png" alt="" className="img-fluid img-icon" />
+           <NavLink to="/mymovie"><img src="./movieApp/qwsearch.png" alt="" className="img-fluid img-icon" /></NavLink>
 
             {/* <i className="bi bi-box-arrow-in-right fs-4 c-p"></i> */}
           </form>

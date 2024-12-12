@@ -21,10 +21,10 @@ const location = useLocation()
       <div className="container p-0 pt-2 ps-2 ps-lg-0">
         <div className="row w-100">
           <div className="col-12 tapHeader__headre">
-            <img src={`${topName == 'My Movie' ? '.' :".."}/movieApp/backIcon.png`} alt="" className="img-fluid border-none img-icon" />
+            <NavLink to={'/'}><img src={`${topName == 'My Movie' ? '.' :".."}/movieApp/backIcon.png`} alt="" className="img-fluid border-none img-icon scale-2" /></NavLink>
             <a className="navbar-brand fw-blod" href="#">{topName}</a>
             <form className="d-flex gap-2 flex-items" role="search">
-              <img src={`${topName == 'My Movie' ? '.' :".."}/movieApp/qwsearch.png`} alt="" className="img-fluid img-icon" />
+              <NavLink to="/mymovie"><img src={`${topName == 'My Movie' ? '.' :".."}/movieApp/qwsearch.png`} alt="" className="img-fluid img-icon" /></NavLink>
 
               {/* <i className="bi bi-box-arrow-in-right fs-4 c-p"></i> */}
             </form>

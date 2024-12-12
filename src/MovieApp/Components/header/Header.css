@@ -1,6 +1,7 @@
 .navbar{
     top: 0;
     background-color: #fff;
+    z-index: 999999;
 }
 
 .nav-link{

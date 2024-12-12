@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import AuthContext from '../context/authContext';
 import Header from '../Components/headerAddMovie/Header'
 import Footer from '../Components/Footer/Footer'
 import Cart from "../Components/Cart/Cart";
@@ -6,6 +7,49 @@ import Cart from "../Components/Cart/Cart";
 import './AddMovie.css'
 
 const AddMovie = () => {
+    const [movies, setMovies] = useState([])
+    const authContext = useContext(AuthContext)
+
+    const [isRecentSearch, setIsRecentSearch] = useState(true)
+
+    const [valueSearch, setValueSearch] = useState("")
+    const [filterArry, setFilterArry] = useState([])
+
+    useEffect(() => {
+
+        fetch(`${authContext.baseUrl}/movies`)
+            .then(res => res.json())
+            .then(allmovies => {
+                setMovies(allmovies)
+                // console.log(allmovies);
+
+            })
+
+
+    }, [])
+
+
+    const SearchHandler = (e) => {
+        if (e.keyCode == 13) {
+            setIsRecentSearch(false)
+            let filterMovie = movies.filter(movie => movie.title.includes(valueSearch))
+
+            if (filterMovie.length) {
+
+                setFilterArry(filterMovie)
+            } else {
+                setFilterArry([])
+
+            }
+
+        }
+
+    }
+
+
+
+
+
     return (
         <>
             <Header />
@@ -13,7 +57,7 @@ const AddMovie = () => {
             <div className="container sectionMain__myMovie">
                 <div className="shadow round-5 searchBar gap-3 flex-between">
                     <img src="./movieApp/qwsearch.png" alt="" className="img-fluid img-icon" />
-                    <input type="text" placeholder='Search Movie Name' />
+                    <input type="text" placeholder='Search Movie Name' value={valueSearch} onChange={(e) => setValueSearch(e.target.value)} onKeyUp={(e) => SearchHandler(e)} />
                 </div>
             </div>
 
@@ -40,17 +84,38 @@ const AddMovie = () => {
 
             <div className="container">
                 <h1>Recently Search</h1>
-                <div className="row mt-3">
+                <div className="row mt-3 px-2">
 
-                    <Cart />
-                    <Cart />
-                    <Cart />
+                    {
+                        isRecentSearch ? (
+                            movies && (
+                                movies.map(movie => {
+                                    if (movie.rating > 8) {
+                                        return <Cart key={movie.id} {...movie} />
+                                    }
+
+                                })
+                            )
+                        ) : (
+                            filterArry.length != 0 ? (
+                                filterArry.map(movie => (
+                                    <Cart key={movie.id} {...movie} />
+
+                                ))
+                            ) : (
+                                <div class="alert alert-danger" role="alert">
+                                    <i class="bi bi-ban"></i> Sorry, we couldn't find any movies :(
+                                </div>
+                            )
+                        )
+
+                    }
 
                 </div>
             </div>
 
-            <button className='btnAdd shadow'><i className="bi bi-plus fs-2 text-light"></i></button>
-    
+            <button className="btnAdd shadow"><i className="bi bi-plus fs-2 text-light"></i></button>
+
 
             <Footer />
 

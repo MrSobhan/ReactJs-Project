@@ -1,4 +1,27 @@
-.btnDetails{
+.firstContainer__details {
+    margin-top: 160px;
+}
+
+
+.sectionTop__details {
+    background-position:center !important;
+    background-repeat: no-repeat !important;
+    background-size:contain !important;
+    height: 75vh;
+    border-radius: 30px;
+    padding: 40px 30px;
+    display: flex;
+    align-items: end;
+    flex-flow: column;
+}
+
+.sectionTop__details>.row {
+    justify-content: space-between;
+    flex-flow: column;
+    height: 100%;
+}
+
+.btnDetails {
     border: 2px solid #000000;
     background-color: transparent;
     padding: 2.5px 20px;
@@ -9,6 +32,34 @@
     transition: all .4s;
 }
 
-.btnDetails:hover{
+.btnDetails:hover {
     transform: scale(.9);
+}
+
+.textAbout__details{
+    line-height: 2rem;
+}
+
+.episodeSection__details{
+    background: linear-gradient(90deg , black , transparent , black) , url(../../../public/movieApp/poster1.jpg);
+    background-position:center;
+    background-repeat: no-repeat;
+    background-size:cover;
+    height: 80vh;
+    background-attachment:fixed;
+}
+
+
+
+@media screen and (max-width:600px) {
+    .sectionTop__details {
+        height: 30vh;
+        border-radius: 20px;
+        padding: 10px 20px;
+    }
+
+    .episodeSection__details{
+        height: 50vh;
+    }
+
 }
