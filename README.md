@@ -6,7 +6,7 @@
 - 🔭 I’m currently working on [Tichy](https://github.com/MrSobhan/ReactJs-Project)
 
 
-<img src="https://s30.picofile.com/file/8473841250/2.jpg" alt="MR.SOBHAN" />
+<img src="https://s30.picofile.com/file/8473841250/2.jpg" alt="MR.SOBHAN(Sobhandev)" />
 
 
 
