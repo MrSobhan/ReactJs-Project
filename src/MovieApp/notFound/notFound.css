@@ -1,0 +1,23 @@
+.container__notFound{
+    margin-top: 100px !important;
+    height: 80vh;
+    background: linear-gradient(90deg , transparent , rgba(0, 0, 0, 0.529) , transparent) , url(../../../public/movieApp/poster2.jpg);
+    background-position: center;
+    background-size: cover;
+    border-radius: 30px;
+    flex-flow: column;
+}
+
+.container__notFound a{
+    text-decoration: none;
+}
+
+
+@media screen and (max-width:600px) {
+    .container__notFound {
+        margin-top: 150px !important;
+        height: 30vh;
+        border-radius: 20px;
+    }
+
+}

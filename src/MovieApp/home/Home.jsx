@@ -7,7 +7,7 @@ import Footer from "../Components/Footer/Footer";
 import './Home.css';
 
 export default function Home() {
-  const [isLoad, setIsLoad] = useState(true)
+  const [isLoad, setIsLoad] = useState(false)
   const [movies, setMovies] = useState([])
   const authContext = useContext(AuthContext)
 
@@ -24,7 +24,7 @@ export default function Home() {
 
   setTimeout(() => {
     setIsLoad(false)
-  }, 3000);
+  }, 2000);
 
   return (
     <>

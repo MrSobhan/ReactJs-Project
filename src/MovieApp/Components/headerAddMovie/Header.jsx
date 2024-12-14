@@ -20,7 +20,7 @@ const location = useLocation()
     <nav className="navbar navbar-expand-lg p-0 pt-2 ps-2 ps-lg-0 position-fixed w-100">
       <div className="container p-0 pt-2 ps-2 ps-lg-0">
         <div className="row w-100">
-          <div className="col-12 tapHeader__headre">
+          <div className="col-12 tapHeader__headre pb-2">
             <NavLink to={'/'}><img src={`${topName == 'My Movie' ? '.' :".."}/movieApp/backIcon.png`} alt="" className="img-fluid border-none img-icon scale-2" /></NavLink>
             <a className="navbar-brand fw-blod" href="#">{topName}</a>
             <form className="d-flex gap-2 flex-items" role="search">
@@ -29,7 +29,7 @@ const location = useLocation()
               {/* <i className="bi bi-box-arrow-in-right fs-4 c-p"></i> */}
             </form>
           </div>
-          <div className="col-12 mt-4 flex-items">
+          <div className="col-12 mt-4 flex-items d-flex d-md-none">
             <ul className="nav nav-underline">
               <li className="nav-item">
                 <NavLink className="nav-link" aria-current="page" to="/">Explore</NavLink>

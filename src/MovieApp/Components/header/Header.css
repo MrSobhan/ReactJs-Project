@@ -1,17 +1,42 @@
-.navbar{
+.navbar {
     top: 0;
+    /* backdrop-filter: blur(20px); */
     background-color: #fff;
     z-index: 999999;
 }
 
-.nav-link{
+.nav-link {
     color: rgba(0, 0, 0, 0.271);
 }
-.nav-link .active , .nav-link:hover{
+
+.nav-link .active,
+.nav-link:hover {
     color: black;
 }
-.tapHeader__headre{
+
+.tapHeader__headre {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.btnMenu__header{
+    background-color: #fff;
+}
+
+.offcanvas{
+    z-index: 99999999;
+}
+
+.offcanvas-body{
+    margin-top: 40px;
+    display: flex;
+    align-items: start;
+    gap: 20px;
+    flex-flow: column;
+}
+
+.offcanvas-body a{
+    color: black;
+    text-decoration: none;
 }
