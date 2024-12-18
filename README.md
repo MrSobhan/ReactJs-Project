@@ -2,7 +2,7 @@
 <h3>A passionate front end developer from Iran. This project is one of the great React library that I have shared live for you. <img src="https://github.com/Tarikul-Islam-Anik/tarikul-islam-anik/raw/main/assets/images/Fire.png" alt="Slightly Smiling Face" width="35" height="35"/></h3>
 
 
-- 🔭 I’m currently working on [Tichy](https://github.com/MrSobhan/ReactJs-Project)
+- 🔭 I’m currently working on `Tichy`
 
 
 <img src="https://s30.picofile.com/file/8473841250/2.jpg" alt="MR.SOBHAN(Sobhandev)" />
