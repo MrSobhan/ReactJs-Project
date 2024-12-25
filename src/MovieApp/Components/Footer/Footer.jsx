@@ -55,7 +55,7 @@ const Footer = () => {
             </section>
 
             <div className="text-center p-4">
-                © 2024 Craete With ❤️ By <a href="https://mrlegend.liara.run/">Sobahn Musazadeh</a> & Amirreza Julani
+                © 2024 Craete With ❤️ By <a href="https://mrlegend.liara.run/">Sobahn Musazadeh</a> & Amirreza Joulani
             </div>
         </footer>
     );

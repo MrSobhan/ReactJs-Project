@@ -7,7 +7,7 @@ import Footer from "../Components/Footer/Footer";
 import './Home.css';
 
 export default function Home() {
-  const [isLoad, setIsLoad] = useState(false)
+  const [isLoad, setIsLoad] = useState(true )
   const [movies, setMovies] = useState([])
   const authContext = useContext(AuthContext)
 

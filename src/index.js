@@ -29,8 +29,9 @@ import { BrowserRouter } from "react-router-dom";
 // import App from "./ProductShop/App";
 // import App from "./DashBoardFullAdmin/frontend/App";
 // import App from "./Tichy/App";
+// import App from "./AmoHasan/App";
 // import App from "./MovieApp/App";
-import App from "./AmoHasan/App";
+import App from "./Tailwindcss_Project/App";
 
 // const root = ReactDOM.createRoot(document.getElementById("root"));
 const root = ReactDOM.createRoot(document.getElementById("root"));
