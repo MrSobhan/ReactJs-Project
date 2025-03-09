@@ -1,8 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 // import "bootstrap/dist/css/bootstrap.css";
-import "./index.css";
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from "react-router-dom";
+import "./index.css";
 
 // ? Project React
 
@@ -31,13 +33,24 @@ import { BrowserRouter } from "react-router-dom";
 // import App from "./Tichy/App";
 // import App from "./AmoHasan/App";
 // import App from "./MovieApp/App";
-import App from "./Tailwindcss_Project/App";
+// import App from "./Tailwindcss_Project/App";
+import App from "./CarRental/App.jsx";
 
-// const root = ReactDOM.createRoot(document.getElementById("root"));
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <BrowserRouter>
-    <App/>
+    <StrictMode>
+      <App />
+    </StrictMode>
   </BrowserRouter>
 );
+
+
+// createRoot(document.getElementById('root')).render(
+//   <BrowserRouter>
+//     <StrictMode>
+//       <App />
+//     </StrictMode>
+//   </BrowserRouter>
+// )
