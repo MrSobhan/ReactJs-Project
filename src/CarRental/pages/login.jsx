@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 // @components
 import {
@@ -20,22 +21,28 @@ function Login() {
           className="md:px-24 md:py-14 py-8 border border-gray-300"
         >
           <CardHeader shadow={false} floated={false} className="text-center">
+            <div className="flex items-center justify-center">
+              <img src="./logoBrandCarRental.ico" alt="Logo_img" className="w-9 h-9" />
+              <Link to={'/'}>
+                <p
+                  className="mr-2 cursor-pointer font-medium lalezar text-3xl text-slate-900"
+                >
+                  سوارینا
+                </p>
+              </Link>
+
+            </div>
             <Typography
-              variant="h1"
-              color="blue-gray"
-              className="mb-4 !text-3xl lg:text-4xl"
+              variant="small"
+              className="text-center mx-auto max-w-[19rem] !font-medium text-gray-600 mt-3"
             >
-              Web3 Login Simplified
-            </Typography>
-            <Typography className="!text-gray-600 text-[18px] font-normal md:max-w-sm">
-              Enjoy quick and secure access to your accounts on various Web3
-              platforms.
+              حساب کاربری ندارید؟ <Link to={'/singup'} className="inline text-slate-900">ثبت نام کنید</Link>
             </Typography>
           </CardHeader>
           <CardBody>
             <form
               action="#"
-              className="flex flex-col gap-4 md:mt-12"
+              className="flex flex-col gap-4 md:mt-9"
             >
               <div>
                 <label htmlFor="email">
@@ -44,7 +51,7 @@ function Login() {
                     color="blue-gray"
                     className="block font-medium mb-2"
                   >
-                    Your Email
+                    ایمیل
                   </Typography>
                 </label>
                 <Input
@@ -60,42 +67,50 @@ function Login() {
                   }}
                 />
               </div>
-              <Button size="lg" color="gray" fullWidth>
-                continue
+              <div>
+                <label htmlFor="email">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="block font-medium mb-2"
+                  >
+                    رمز ورود
+                  </Typography>
+                </label>
+                <Input
+                  id="pass"
+                  color="gray"
+                  size="lg"
+                  type="password"
+                  name="pass"
+                  placeholder="*******"
+                  className="w-full placeholder:opacity-100 focus:border-t-primary border-t-blue-gray-200"
+                  labelProps={{
+                    className: "hidden",
+                  }}
+                />
+              </div>
+              <Button size="lg" color="gray" className="py-3" fullWidth>
+                ورود
               </Button>
               <Button
                 variant="outlined"
                 size="lg"
-                className="flex h-12 border-blue-gray-200 items-center justify-center gap-2"
+                className="flex h-12 w-12 rounded-full mx-auto border-blue-gray-200 items-center justify-center gap-2"
                 fullWidth
               >
                 <img
                   src={`https://www.material-tailwind.com/logos/logo-google.png`}
                   alt="google"
                   className="h-6 w-6"
-                />{" "}
-                sign in with google
+                />
               </Button>
-              <Button
-                variant="outlined"
-                size="lg"
-                className="flex h-12 border-blue-gray-200 items-center justify-center gap-2"
-                fullWidth
-              >
-                Wallet Authentication
-              </Button>
+
               <Typography
                 variant="small"
                 className="text-center mx-auto max-w-[19rem] !font-medium !text-gray-600"
               >
-                Upon signing in, you consent to abide by our{" "}
-                <a href="#" className="text-gray-900">
-                  Terms of Service
-                </a>{" "}
-                &{" "}
-                <a href="#" className="text-gray-900">
-                  Privacy Policy.
-                </a>
+                با عضویت در سایت، تمامی قوانین و شرایط استفاده از خدمات <span className="lalezar">سوارینا</span> را پذیرفته اید.
               </Typography>
             </form>
           </CardBody>

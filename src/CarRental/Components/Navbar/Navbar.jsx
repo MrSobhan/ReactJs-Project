@@ -41,15 +41,17 @@ export function NavbarDefault() {
 
 
     return (
-        <Navbar className="mx-auto max-w-screen-xl px-4 py-2 lg:px-8  shadow-lg md:mt-7">
+        <Navbar className="w-full lg:w-[80%] px-4 py-2 lg:px-8  shadow-lg sticky top-0 lg:top-3 left-0 lg:mx-auto z-50 bgNavbar">
             <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
                 <div className="flex items-center justify-between">
                     <img src="./logoBrandCarRental.ico" alt="Logo_img" className="w-9 h-9" />
-                    <p
-                        className="mr-2 cursor-pointer py-1.5 font-medium lalezar text-3xl text-slate-900"
-                    >
-                        سوارینا
-                    </p>
+                    <Link to={'/'}>
+                        <p
+                            className="mr-2 cursor-pointer py-1.5 font-medium lalezar text-3xl text-slate-900"
+                        >
+                            سوارینا
+                        </p>
+                    </Link>
 
                 </div>
                 <div className="hidden lg:block">
@@ -80,15 +82,18 @@ export function NavbarDefault() {
                 </IconButton>
             </div>
             <MobileNav open={openNav}>
-                <div className="container mx-auto">
+                <div className="container mx-auto text-center">
                     {navList}
                     <div className="flex items-center gap-x-1">
-                        <Button fullWidth variant="text" size="sm" className="">
-                            <span>ورود</span>
-                        </Button>
-                        <Button fullWidth variant="filled" size="sm" className="">
-                            <span>ثبت نام</span>
-                        </Button>
+                        <Link to={'/login'} className="w-full">
+                            <Button
+                                variant="filled"
+                                size="sm"
+                                className="w-full"
+                            >
+                                <span>ورود / ثبت نام</span>
+                            </Button>
+                        </Link>
                     </div>
                 </div>
             </MobileNav>
