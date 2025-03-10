@@ -12,6 +12,7 @@ export default function DefaultAccordion() {
  
   return (
     <div>
+      <h3 className="titleSlider lalezar mr-3 mb-12">سوالات متداول</h3>
       <Accordion open={open === 1}>
         <AccordionHeader onClick={() => handleOpen(1)}>What is Material Tailwind?</AccordionHeader>
         <AccordionBody>

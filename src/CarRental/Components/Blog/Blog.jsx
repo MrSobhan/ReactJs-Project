@@ -50,21 +50,7 @@ const contents = [
 export function BlogSection() {
   return (
     <section className="container mx-auto px-8 py-10 lg:py-28">
-      <Typography
-        variant="h2"
-        color="blue-gray"
-        className="!text-2xl !leading-snug lg:!text-3xl"
-      >
-        Build something great
-      </Typography>
-      <Typography
-        variant="lead"
-        className="mt-2 max-w-lg !font-normal !text-gray-500"
-      >
-        We&apos;re constantly trying to express ourselves and actualize our
-        dreams. If you have the opportunity to play this game of life you need
-        to appreciate every moment.
-      </Typography>
+      <h3 className="titleSlider lalezar mr-3">وبلاگ ها</h3>
 
       <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-3">
         {contents.map(({ img, title, desc }) => (

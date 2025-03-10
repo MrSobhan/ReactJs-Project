@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.titleSlider{
+    @apply text-3xl relative
+}
+.titleSlider::after{
+    content: '';
+    transform: rotate(25deg);
+    @apply bg-slate-900 absolute top-[0px] -right-[10px] w-[5px] h-[40px] rounded-2xl
+}
+.titleSlider::before{
+    content: '';
+    @apply bg-slate-500 absolute bottom-0 -right-[10px] w-32 h-[32px] opacity-20 rounded-2xl
+}

@@ -12,45 +12,36 @@ import {
     CardBody,
 } from "@material-tailwind/react";
 
-import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
+import { IoIosSettings } from "react-icons/io";
+import { GoGoal } from "react-icons/go";
+import { SlEnvolopeLetter } from "react-icons/sl";
+import { FaCar } from "react-icons/fa";
 
 const data = [
     {
-        title: "Revenue",
-        percentage: "12%",
-        price: "$50,846.90",
-        color: "red",
+        title: "ارائه فاکتور رسمی",
         icon: (
-            <FaChevronDown />
+            <SlEnvolopeLetter />
         ),
     },
     {
-        title: "Outbound Clicks",
-        percentage: "16%",
-        price: "10,342",
-        color: "green",
+        title: "رزرو رایگان با امتیاز",
         icon: (
-            <FaChevronDown />
+            <GoGoal />
         ),
     },
     {
-        title: "Total Audience",
-        percentage: "10%",
-        price: "19,720",
-        color: "green",
+        title: "ارائه ماشین های تمیز و نو",
         icon: (
-            <FaChevronUp />
+            <FaCar />
         ),
     },
     {
-        title: "Event Count",
-        percentage: "10%",
-        price: "20,000",
-        color: "red",
+        title: "امداد رسانی کمتر از 30 دقیقه",
         icon: (
-            <FaChevronUp />
+            <IoIosSettings />
         ),
-    },
+    }
 ];
 
 export function KpiCard({
@@ -61,30 +52,21 @@ export function KpiCard({
     icon,
 }) {
     return (
-        <Card className="shadow-sm border border-gray-200 !rounded-lg">
+        <Card className="shadow-md border border-gray-200 !rounded-lg transition-all hover:shadow-none hover:-translate-y-3">
             <CardBody className="p-4">
-                <div className="flex justify-between items-center">
+                <div className="flex flex-col justify-between items-center">
+
+                    <div className="flex items-center gap-1 text-slate-800 text-7xl">
+                        {/* <img src={icon} alt={title} /> */}
+                        {icon}
+                    </div>
+
                     <Typography
-                        className="!font-medium !text-xs text-gray-600"
+                        className="!font-medium mt-4 !text-md text-gray-700"
                     >
                         {title}
                     </Typography>
-                    <div className="flex items-center gap-1">
-                        {icon}
-                        <Typography
-                            color={color}
-                            className="font-medium !text-xs"
-                        >
-                            {percentage}
-                        </Typography>
-                    </div>
                 </div>
-                <Typography
-                    color="blue-gray"
-                    className="mt-1 font-bold text-2xl"
-                >
-                    {price}
-                </Typography>
             </CardBody>
         </Card>
     );
@@ -95,7 +77,7 @@ export function KpiCard({
 export function KpiCard1() {
     return (
 
-        <div className="my-24 grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 items-center md:gap-2.5 gap-4">
+        <div className="my-24 grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 items-center gap-4">
             {data.map((props, key) => (
                 <KpiCard key={key} {...props} />
             ))}
