@@ -63,25 +63,25 @@ export function FeatureSection() {
         </Card>
       </div> */}
 
-      <section className="grid max-h-max py-48 mb-20 w-full bg-cover bg-center bg-no-repeat bgImg__poster rounded-3xl">
+      <section className="grid max-h-max py-12 md:py-48 mb-20 w-full bg-cover bg-center bg-no-repeat bgImg__poster rounded-2xl">
         <div className="container mx-auto flex flex-col justify-center h-full px-8 text-center">
           <div className="my-auto text-center">
             <Typography
               variant="h2"
               color="white"
-              className="lg:!text-4xl !text-3xl iransans"
+              className="lg:!text-4xl !text-xl iransans"
             >
               لذت رانندگی را با ما تجربه کنید!
             </Typography>
             <Typography
               variant="lead"
-              className="mb-10 mt-4 mx-auto text-gray-400 w-full lg:max-w-3xl iransans"
+              className="mb-10 mt-4 mx-auto text-gray-400 w-full lg:max-w-3xl lg:text-lg text-md leading-6 iransans"
             >
               فقط با چند کلیک ساده خودرو خود را میهمان ما باشید. در هر کجای ایران
             </Typography>
             <Typography
               variant="lead"
-              className="font-bold text-gray-400 mb-6 iransans"
+              className="font-bold text-gray-400 mb-6 lg:text-lg text-md leading-6 iransans"
             >
               برای مشاهده ی خودرو های بیشتر در شهر های مختلف ایران رو دکمه زیر کلیک کنید.
             </Typography>
