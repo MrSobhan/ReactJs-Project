@@ -7,7 +7,7 @@ import BlogSection from "../Components/Blog/Blog";
 import { FeatureSection } from "../Components/Features/Features";
 import CardSlider from "../Components/Slider/Slider";
 
-import "./index.css";
+// import "./index.css";
 export default function Home() {
   return (
     <>

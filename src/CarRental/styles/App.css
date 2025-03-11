@@ -27,3 +27,32 @@ body{
     background-image: linear-gradient(45deg , rgb(0, 0, 0) , transparent) , url('/public/carReantal/f7.jpg') !important;
 }
 
+.titleSlider{
+    /* @apply text-3xl relative */
+    position: relative;
+    font-size: 30px;
+}
+.titleSlider::after{
+    content: '';
+    transform: rotate(25deg);
+    position: absolute;
+    top: 0;
+    right: -10px;
+    width: 5px;
+    height: 40px;
+    border-radius: 1rem;
+    background-color: black;
+    /* @apply bg-slate-900 absolute top-[0px] -right-[10px] w-[5px] h-[40px] rounded-2xl */
+}
+.titleSlider::before{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: -10px;
+    width: 8rem;
+    height: 32px;
+    opacity: .2;
+    border-radius: 1rem;
+    background-color: rgba(0, 0, 0, 0.24);
+    /* @apply bg-slate-500 absolute bottom-0 -right-[10px] w-32 h-[32px] opacity-20 rounded-2xl */
+}
