@@ -56,13 +56,13 @@ export function KpiCard({
             <CardBody className="p-4">
                 <div className="flex flex-col justify-between items-center">
 
-                    <div className="flex items-center gap-1 text-slate-800 text-7xl">
+                    <div className="flex items-center gap-1 text-slate-800 text-5xl md:text-7xl">
                         {/* <img src={icon} alt={title} /> */}
                         {icon}
                     </div>
 
                     <Typography
-                        className="!font-medium mt-4 !text-md text-gray-700"
+                        className="!font-medium mt-4 text-xs md:!text-md text-gray-700 text-center"
                     >
                         {title}
                     </Typography>
@@ -74,10 +74,10 @@ export function KpiCard({
 
 
 
-export function KpiCard1() {
+export function KpiCardSection() {
     return (
 
-        <div className="my-24 grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 items-center gap-4">
+        <div className="my-24 grid lg:grid-cols-4  grid-cols-2 items-center gap-4">
             {data.map((props, key) => (
                 <KpiCard key={key} {...props} />
             ))}
@@ -86,4 +86,4 @@ export function KpiCard1() {
     );
 }
 
-export default KpiCard1;
+export default KpiCardSection;

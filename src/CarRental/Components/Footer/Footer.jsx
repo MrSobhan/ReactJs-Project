@@ -2,24 +2,25 @@ import { Typography } from "@material-tailwind/react";
 
 const LINKS = [
     {
-        title: "Product",
-        items: ["Overview", "Features", "Solutions", "Tutorials"],
+        title: "خدمات",
+        items: ["ناوگان خودروها", "پلن‌های اجاره", "رزرو خودرو", "تخفیف‌های ویژه"],
     },
     {
-        title: "Company",
-        items: ["About us", "Careers", "Press", "News"],
+        title: "شرکت",
+        items: ["درباره ما", "داستان ما", "فرصت‌های شغلی", "اخبار"],
     },
     {
-        title: "Resource",
-        items: ["Blog", "Newsletter", "Events", "Help center"],
+        title: "پشتیبانی",
+        items: ["بلاگ", "سوالات متداول", "مرکز راهنما", "قوانین و مقررات"],
     },
 ];
+
 
 
 export function Footer() {
     return (
         <footer className="relative w-full">
-            <div className="mx-auto w-full max-w-7xl px-8">
+            <div className="mx-auto w-full max-w-7xl px-8 pb-20 md:pb-0">
                 <div className="grid grid-cols-1 justify-between gap-4 md:grid-cols-2">
                     <div className="flex justify-between max-w-fit">
                         <img src="./logoBrandCarRental.ico" alt="Logo_img" className="w-9 h-9 mt-2" />
@@ -56,7 +57,7 @@ export function Footer() {
                         ))}
                     </div>
                 </div>
-                <div className="mt-12 flex w-full flex-col items-center justify-center border-t border-blue-gray-50 py-4 md:flex-row md:justify-between">
+                <div className="mt-12  flex w-full flex-col items-center justify-center border-t border-blue-gray-50 py-4 md:flex-row md:justify-between">
                     <Typography
                         variant="small"
                         className="mb-4 text-center font-normal text-blue-gray-900 md:mb-0"

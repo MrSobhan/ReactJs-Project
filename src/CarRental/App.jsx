@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useRoutes, useParams, useNavigate } from "react-router-dom";
 import AuthContext from "./context/authContext";
 import routes from "./routes";
-import "./styles/reset.css";;
+import "./styles/reset.css";
+import "./styles/App.css";
 
 const App = () => {
 
@@ -14,9 +15,9 @@ const App = () => {
 
 
   return (
-    <div>
+    <>
       {router}
-    </div>
+    </>
   );
 }
 

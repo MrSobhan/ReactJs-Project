@@ -1,180 +1,58 @@
-import {
-    Card,
-    CardHeader,
-    CardBody,
-    CardFooter,
-    Typography,
-    Button,
-} from "@material-tailwind/react";
-
+import Card from "../Card/Card";
 import { FaCaretLeft, FaCaretRight } from "react-icons/fa6";
-import "./Slider.css"
+import { useRef } from "react";
+import "./Slider.css";
 
 export default function CardSlider() {
-    return (
-        <>
-            <div className="container w-full flex items-center justify-between">
+    const sliderRef = useRef(null);
+    const scrollAmount = 300;
 
+    const rightSlideHandler = () => {
+        if (sliderRef.current) {
+            sliderRef.current.scrollLeft += scrollAmount;
+        }
+    };
+
+    const leftSlideHandler = () => {
+        if (sliderRef.current) {
+            sliderRef.current.scrollLeft -= scrollAmount;
+        }
+    };
+
+    return (
+        <div className="relative">
+        <div className="absolute inset-x-0 top-20 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
+        <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" style={{ clipPath: "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" }}></div>
+      </div>
+            <div className="container w-full flex items-center justify-between">
                 <h3 className="titleSlider lalezar mr-3">لیست خودرو ها</h3>
 
-
                 <div className="hidden md:flex items-center justify-between gap-x-2">
-                    <p className="text-xl bg-black text-slate-50 cursor-pointer rounded-full p-3"><FaCaretRight /></p>
-                    <p className="text-xl bg-black text-slate-50 cursor-pointer rounded-full p-3"><FaCaretLeft /></p>
+                    <button onClick={rightSlideHandler}>
+                        <p className="text-xl bg-black text-slate-50 cursor-pointer rounded-full p-3">
+                            <FaCaretRight />
+                        </p>
+                    </button>
+                    <button onClick={leftSlideHandler}>
+                        <p className="text-xl bg-black text-slate-50 cursor-pointer rounded-full p-3">
+                            <FaCaretLeft />
+                        </p>
+                    </button>
                 </div>
+            </div>
 
-            </div>
-            <div className="sliderBox">
-                <div className="content__sliderBox">
-                    <Card className="mt-6 !w-72">
-                        <CardHeader color="blue-gray" className="relative h-56">
-                            <img
-                                src="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
-                                alt="card-image"
-                            />
-                        </CardHeader>
-                        <CardBody>
-                            <Typography variant="h5" color="blue-gray" className="mb-2">
-                                UI/UX Review Check
-                            </Typography>
-                            <Typography>
-                                The place is close to Barceloneta Beach and bus stop just 2 min by
-                                walk and near to &quot;Naviglio&quot; where you can enjoy the main
-                                night life in Barcelona.
-                            </Typography>
-                        </CardBody>
-                        <CardFooter className="pt-0">
-                            <Button>Read More</Button>
-                        </CardFooter>
-                    </Card>
-                    <Card className="mt-6 !w-72">
-                        <CardHeader color="blue-gray" className="relative h-56">
-                            <img
-                                src="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
-                                alt="card-image"
-                            />
-                        </CardHeader>
-                        <CardBody>
-                            <Typography variant="h5" color="blue-gray" className="mb-2">
-                                UI/UX Review Check
-                            </Typography>
-                            <Typography>
-                                The place is close to Barceloneta Beach and bus stop just 2 min by
-                                walk and near to &quot;Naviglio&quot; where you can enjoy the main
-                                night life in Barcelona.
-                            </Typography>
-                        </CardBody>
-                        <CardFooter className="pt-0">
-                            <Button>Read More</Button>
-                        </CardFooter>
-                    </Card>
-                    <Card className="mt-6 !w-72">
-                        <CardHeader color="blue-gray" className="relative h-56">
-                            <img
-                                src="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
-                                alt="card-image"
-                            />
-                        </CardHeader>
-                        <CardBody>
-                            <Typography variant="h5" color="blue-gray" className="mb-2">
-                                UI/UX Review Check
-                            </Typography>
-                            <Typography>
-                                The place is close to Barceloneta Beach and bus stop just 2 min by
-                                walk and near to &quot;Naviglio&quot; where you can enjoy the main
-                                night life in Barcelona.
-                            </Typography>
-                        </CardBody>
-                        <CardFooter className="pt-0">
-                            <Button>Read More</Button>
-                        </CardFooter>
-                    </Card>
-                    <Card className="mt-6 !w-72">
-                        <CardHeader color="blue-gray" className="relative h-56">
-                            <img
-                                src="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
-                                alt="card-image"
-                            />
-                        </CardHeader>
-                        <CardBody>
-                            <Typography variant="h5" color="blue-gray" className="mb-2">
-                                UI/UX Review Check
-                            </Typography>
-                            <Typography>
-                                The place is close to Barceloneta Beach and bus stop just 2 min by
-                                walk and near to &quot;Naviglio&quot; where you can enjoy the main
-                                night life in Barcelona.
-                            </Typography>
-                        </CardBody>
-                        <CardFooter className="pt-0">
-                            <Button>Read More</Button>
-                        </CardFooter>
-                    </Card>
-                    <Card className="mt-6 !w-72">
-                        <CardHeader color="blue-gray" className="relative h-56">
-                            <img
-                                src="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
-                                alt="card-image"
-                            />
-                        </CardHeader>
-                        <CardBody>
-                            <Typography variant="h5" color="blue-gray" className="mb-2">
-                                UI/UX Review Check
-                            </Typography>
-                            <Typography>
-                                The place is close to Barceloneta Beach and bus stop just 2 min by
-                                walk and near to &quot;Naviglio&quot; where you can enjoy the main
-                                night life in Barcelona.
-                            </Typography>
-                        </CardBody>
-                        <CardFooter className="pt-0">
-                            <Button>Read More</Button>
-                        </CardFooter>
-                    </Card>
-                    <Card className="mt-6 !w-72">
-                        <CardHeader color="blue-gray" className="relative h-56">
-                            <img
-                                src="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
-                                alt="card-image"
-                            />
-                        </CardHeader>
-                        <CardBody>
-                            <Typography variant="h5" color="blue-gray" className="mb-2">
-                                UI/UX Review Check
-                            </Typography>
-                            <Typography>
-                                The place is close to Barceloneta Beach and bus stop just 2 min by
-                                walk and near to &quot;Naviglio&quot; where you can enjoy the main
-                                night life in Barcelona.
-                            </Typography>
-                        </CardBody>
-                        <CardFooter className="pt-0">
-                            <Button>Read More</Button>
-                        </CardFooter>
-                    </Card>
-                    <Card className="mt-6 !w-72">
-                        <CardHeader color="blue-gray" className="relative h-56">
-                            <img
-                                src="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
-                                alt="card-image"
-                            />
-                        </CardHeader>
-                        <CardBody>
-                            <Typography variant="h5" color="blue-gray" className="mb-2">
-                                UI/UX Review Check
-                            </Typography>
-                            <Typography>
-                                The place is close to Barceloneta Beach and bus stop just 2 min by
-                                walk and near to &quot;Naviglio&quot; where you can enjoy the main
-                                night life in Barcelona.
-                            </Typography>
-                        </CardBody>
-                        <CardFooter className="pt-0">
-                            <Button>Read More</Button>
-                        </CardFooter>
-                    </Card>
+            <div className="sliderBox overflow-x-scroll scroll-smooth" ref={sliderRef}>
+                <div className="content__sliderBox flex gap-x-4 pt-10">
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
                 </div>
             </div>
-        </>
+        </div>
     );
 }
