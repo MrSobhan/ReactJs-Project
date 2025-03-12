@@ -18,46 +18,46 @@ export default function CarRentalFAQ() {
       <h3 className="titleSlider lalezar mr-3 mb-12">سوالات متداول</h3>
 
       <Accordion open={open === 1}>
-        <AccordionHeader onClick={() => handleOpen(1)}>
+        <AccordionHeader onClick={() => handleOpen(1)} className="text-start text-sm leading-6 md:text-lg">
           سایت کرایه خودرو چیست؟
         </AccordionHeader>
-        <AccordionBody>
+        <AccordionBody className="iransans">
           این سایت یک پلتفرم آنلاین است که خدمات کرایه و اجاره خودروهای ایرانی را به مشتریان ارائه می‌دهد.
         </AccordionBody>
       </Accordion>
 
       <Accordion open={open === 2}>
-        <AccordionHeader onClick={() => handleOpen(2)}>
+        <AccordionHeader onClick={() => handleOpen(2)} className="text-start text-sm leading-6 md:text-lg">
           چگونه می‌توانم خودرو اجاره کنم؟
         </AccordionHeader>
-        <AccordionBody>
+        <AccordionBody className="iransans">
           شما می‌توانید با ثبت‌نام و ورود به سایت، خودرو مورد نظر خود را انتخاب کرده و پس از پرداخت هزینه اجاره، از خدمات بهره‌مند شوید.
         </AccordionBody>
       </Accordion>
 
       <Accordion open={open === 3}>
-        <AccordionHeader onClick={() => handleOpen(3)}>
+        <AccordionHeader onClick={() => handleOpen(3)} className="text-start text-sm leading-6 md:text-lg">
           آیا خودروهای ارائه شده دارای بیمه هستند؟
         </AccordionHeader>
-        <AccordionBody>
+        <AccordionBody className="iransans">
           بله، تمامی خودروهای کرایه‌ای دارای بیمه و سرویس‌های منظم هستند تا شما با اطمینان کامل از خدمات ما استفاده کنید.
         </AccordionBody>
       </Accordion>
 
       <Accordion open={open === 4}>
-        <AccordionHeader onClick={() => handleOpen(4)}>
+        <AccordionHeader onClick={() => handleOpen(4)} className="text-start text-sm leading-6 md:text-lg">
           آیا امکان تحویل و دریافت خودرو در محل‌های مختلف وجود دارد؟
         </AccordionHeader>
-        <AccordionBody>
+        <AccordionBody className="iransans">
           بله، خدمات ما شامل تحویل و دریافت خودرو در شهرهای مختلف و حتی در فرودگاه‌ها می‌باشد.
         </AccordionBody>
       </Accordion>
 
       <Accordion open={open === 5}>
-        <AccordionHeader onClick={() => handleOpen(5)}>
+        <AccordionHeader onClick={() => handleOpen(5)} className="text-start text-sm leading-6 md:text-lg">
           چگونه از تخفیف‌ها و پیشنهادهای ویژه بهره‌مند شوم؟
         </AccordionHeader>
-        <AccordionBody>
+        <AccordionBody className="iransans">
           با عضویت در خبرنامه و دنبال کردن شبکه‌های اجتماعی ما، از آخرین تخفیف‌ها و پیشنهادهای ویژه مطلع خواهید شد.
         </AccordionBody>
       </Accordion>

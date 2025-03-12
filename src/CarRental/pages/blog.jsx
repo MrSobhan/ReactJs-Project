@@ -7,7 +7,7 @@ export function Blog() {
     return (
         <>
             <NavbarDefault />
-            <div className="container mx-auto lg:w-[80%] w-[90%]">
+            <div className="container md:mt-16 mx-auto lg:w-[80%] w-[90%]">
                 <section className="p-8">
                     <div className="mx-auto max-w-screen-md">
                         <img

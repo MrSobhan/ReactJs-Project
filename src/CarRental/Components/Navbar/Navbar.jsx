@@ -21,7 +21,7 @@ export function NavbarDefault() {
     }, []);
 
     const navList = (
-        <ul className="text-slate-900 mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+        <ul className="text-blue-gray-900 mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
             <li>
                 <p className="text-sm cursor-pointer">صفحه اصلی</p>
             </li>
@@ -47,10 +47,10 @@ export function NavbarDefault() {
                 <Navbar className="w-full lg:w-[80%] px-4 py-2 lg:px-8 mx-auto  shadow-lg bgNavbar">
                     <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
                         <div className="flex items-center justify-between">
-                            <img src="./logoBrandCarRental.ico" alt="Logo_img" className="w-9 h-9" />
+                            <img src="../logoBrandCarRental.ico" alt="Logo_img" className="w-9 h-9" />
                             <Link to={'/'}>
                                 <p
-                                    className="mr-2 cursor-pointer py-1.5 font-medium lalezar text-3xl text-slate-900"
+                                    className="mr-2 cursor-pointer py-1.5 font-medium lalezar text-3xl text-gray-900"
                                 >
                                     سوارینا
                                 </p>
@@ -110,7 +110,7 @@ export function NavbarDefault() {
                 >
                     <div class="group relative px-3 cursor-pointer">
                         <div
-                            class="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-slate-200 hover:text-slate-900 transition-colors duration-300"
+                            class="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-blue-gray-200 hover:text-blue-gray-900 transition-colors duration-300"
                         >
                             <svg
                                 class="group-hover:scale-110 transition-transform duration-300"
@@ -136,7 +136,7 @@ export function NavbarDefault() {
 
                     <div class="group relative px-3 cursor-pointer">
                         <div
-                            class="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-slate-200 hover:text-slate-900 transition-colors duration-300"
+                            class="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-blue-gray-200 hover:text-blue-gray-900 transition-colors duration-300"
                         >
                             <svg
                                 class="group-hover:scale-110 transition-transform duration-300"
@@ -164,7 +164,7 @@ export function NavbarDefault() {
 
                     <div class="group relative px-3 cursor-pointer">
                         <div
-                            class="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-slate-200 hover:text-slate-900 transition-colors duration-300"
+                            class="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-blue-gray-200 hover:text-blue-gray-900 transition-colors duration-300"
                         >
                             <svg
                                 class="group-hover:scale-110 transition-transform duration-300"
@@ -192,7 +192,7 @@ export function NavbarDefault() {
 
                     <div class="group relative px-3 cursor-pointer">
                         <div
-                            class="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-slate-200 hover:text-slate-900 transition-colors duration-300"
+                            class="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-blue-gray-200 hover:text-blue-gray-900 transition-colors duration-300"
                         >
                             <FaCar className="text-xl"/>
                         </div>

@@ -11,6 +11,8 @@ import {
   Typography,
 } from "@material-tailwind/react";
 
+import { FcGoogle } from "react-icons/fc";
+
 
 function Login() {
   return (
@@ -25,7 +27,7 @@ function Login() {
               <img src="./logoBrandCarRental.ico" alt="Logo_img" className="w-9 h-9" />
               <Link to={'/'}>
                 <p
-                  className="mr-2 cursor-pointer font-medium lalezar text-3xl text-slate-900"
+                  className="mr-2 cursor-pointer font-medium lalezar text-3xl text-gray-900"
                 >
                   سوارینا
                 </p>
@@ -36,7 +38,7 @@ function Login() {
               variant="small"
               className="text-center mx-auto max-w-[19rem] !font-medium text-gray-600 mt-3"
             >
-              حساب کاربری ندارید؟ <Link to={'/singup'} className="inline text-slate-900">ثبت نام کنید</Link>
+              حساب کاربری ندارید؟ <Link to={'/singup'} className="inline text-blue-gray-900">ثبت نام کنید</Link>
             </Typography>
           </CardHeader>
           <CardBody>
@@ -93,19 +95,9 @@ function Login() {
               <Button size="lg" color="gray" className="py-3" fullWidth>
                 ورود
               </Button>
-              <Button
-                variant="outlined"
-                size="lg"
-                className="flex h-12 w-12 rounded-full mx-auto border-blue-gray-200 items-center justify-center gap-2"
-                fullWidth
-              >
-                <img
-                  src={`https://www.material-tailwind.com/logos/logo-google.png`}
-                  alt="google"
-                  className="h-6 w-6"
-                />
-              </Button>
-
+              <div className="h-12 w-12 rounded-full mx-auto flex items-center justify-center border-2 border-solid border-gray-300">
+                <FcGoogle className="text-2xl" />
+              </div>
               <Typography
                 variant="small"
                 className="text-center mx-auto max-w-[19rem] !font-medium !text-gray-600"

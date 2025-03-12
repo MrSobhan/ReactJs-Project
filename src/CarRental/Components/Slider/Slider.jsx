@@ -29,12 +29,12 @@ export default function CardSlider() {
 
                 <div className="hidden md:flex items-center justify-between gap-x-2">
                     <button onClick={rightSlideHandler}>
-                        <p className="text-xl bg-black text-slate-50 cursor-pointer rounded-full p-3">
+                        <p className="text-xl bg-black text-blue-gray-50 cursor-pointer rounded-full p-3">
                             <FaCaretRight />
                         </p>
                     </button>
                     <button onClick={leftSlideHandler}>
-                        <p className="text-xl bg-black text-slate-50 cursor-pointer rounded-full p-3">
+                        <p className="text-xl bg-black text-blue-gray-50 cursor-pointer rounded-full p-3">
                             <FaCaretLeft />
                         </p>
                     </button>

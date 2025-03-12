@@ -24,21 +24,21 @@ const CarPage = () => {
         <>
             <NavbarDefault />
             <div className="container mx-auto lg:w-[80%] w-[90%] py-24">
-                <Carousel className="rounded-xl w-full max-h-[600px] overflow-hidden mb-14">
+                <Carousel className="rounded-xl w-full overflow-hidden mb-14">
                     <img
-                        src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80"
+                        src="/carReantal/f2.jpg"
                         alt="image 1"
-                        className="h-full w-full object-cover"
+                        className="max-h-[600px] w-full object-cover"
                     />
                     <img
-                        src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
+                        src="/carReantal/f2.jpg"
                         alt="image 2"
-                        className="h-full w-full object-cover"
+                        className="max-h-[600px] w-full object-cover"
                     />
                     <img
-                        src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
+                        src="/carReantal/f2.jpg"
                         alt="image 3"
-                        className="h-full w-full object-cover"
+                        className="max-h-[600px] w-full object-cover"
                     />
                 </Carousel>
                 <div className="lg:mb-8 mb-4 container mx-auto grid lg:gap-x-8 gap-y-8 grid-cols-1 lg:grid-cols-3 gap-x-4 w-full relative">
@@ -131,7 +131,7 @@ const CarPage = () => {
                         <div
                             class="relative rounded-xl overflow-hidden flex flex-col items-center shadow-lg bg-white font-Roboto-light"
                         >
-                            <div class="h-24 w-full bg-slate-900"></div>
+                            <div class="h-24 w-full bg-blue-gray-900"></div>
                             <div class="top-16 z-10 flex items-center flex-col gap-4 px-5 py-5">
                                 <div class="-mt-20">
                                     <svg
@@ -263,7 +263,7 @@ const CarPage = () => {
                                     </p>
                                 </div>
                                 <div class="flex items-center flex-col mt-4">
-                                    <p title="name/نام" class="text-black font-Roboto-md text-3xl lalezar">14,500,000<sup className='text-xs text-slate-600'>تومان</sup></p>
+                                    <p title="name/نام" class="text-black font-Roboto-md text-3xl lalezar">14,500,000<sup className='text-xs text-blue-gray-600'>تومان</sup></p>
                                     <p title="bio/بیوگرافی" class="text-xs text-gray-500 font-medium">
                                         در هر روز
                                     </p>
@@ -301,7 +301,7 @@ const CarPage = () => {
                                 </div>
 
                                 <div class="flex items-center flex-col mt-4">
-                                    <p title="name/نام" class="text-black font-Roboto-md text-xs">هزینه را بعد از پذیرش درخواست توسط میزبان پرداخت خواهید کرد.</p>
+                                    <p title="name/نام" class="text-black font-Roboto-md text-xs text-center">هزینه را بعد از پذیرش درخواست توسط میزبان پرداخت خواهید کرد.</p>
                                     <Button className='w-full mt-3'>ادامه</Button>
                                 </div>
 

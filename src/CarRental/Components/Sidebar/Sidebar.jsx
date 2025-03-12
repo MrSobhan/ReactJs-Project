@@ -13,6 +13,10 @@ import {
 } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import { Select, Option } from "@material-tailwind/react";
+import { Slider } from "@material-tailwind/react";
+import { FaAngleDown } from "react-icons/fa6";
+import { Radio } from "@material-tailwind/react";
+
 
 export function Sidebar() {
     const [open, setOpen] = useState(0);
@@ -22,15 +26,15 @@ export function Sidebar() {
     };
 
     const LIST_ITEM_STYLES =
-        "select-none hover:bg-gray-100 focus:bg-gray-100 active:bg-gray-100 hover:text-gray-900 focus:text-gray-900 active:text-gray-900 data-[selected=true]:text-gray-900";
+        "select-none hover:bg-gray-100 focus:bg-gray-100 active:bg-gray-100 hover:text-gray-900 focus:text-gray-900 active:text-gray-900 data-[selected=true]:text-gray-900 iransans text-xs";
 
     return (
-        <Card className="h-[calc(100vh-2rem)] w-full max-w-[20rem] mx-auto p-6 shadow-md">
+        <Card className="h-max w-full mx-auto p-6 shadow-md overflow-hidden">
             <div className="flex items-center justify-start">
                 <img src="./logoBrandCarRental.ico" alt="Logo_img" className="w-9 h-9" />
                 <Link to={'/'}>
                     <p
-                        className="mr-2 cursor-pointer py-1.5 font-medium lalezar text-3xl text-slate-900"
+                        className="mr-2 cursor-pointer py-1.5 font-medium lalezar text-3xl text-gray-900"
                     >
                         سوارینا
                     </p>
@@ -46,20 +50,15 @@ export function Sidebar() {
                         onClick={() => handleOpen(1)}
                         className="p-3 select-none hover:bg-gray-100 focus:bg-gray-100 active:bg-gray-100 hover:text-gray-900 focus:text-gray-900 active:text-gray-900 data-[selected=true]:text-gray-900"
                     >
-                        <Typography className="mr-auto font-normal text-inherit">
+                        <Typography className="ml-auto font-normal text-inherit">
                             قیمت
                         </Typography>
-                        ChevronDownIcon
+                        <FaAngleDown />
                     </ListItem>
                     <AccordionBody className="py-1">
-                        <List className="p-0">
-                            <ListItem className={`px-16 ${LIST_ITEM_STYLES}`}>
-                                My Profile
-                            </ListItem>
-                            <ListItem className={`px-16 ${LIST_ITEM_STYLES}`}>
-                                Settings
-                            </ListItem>
-                        </List>
+                        <div className="w-full py-4">
+                            <Slider defaultValue={50} />
+                        </div>
                     </AccordionBody>
                 </Accordion>
                 <Accordion open={open === 2}>
@@ -69,51 +68,79 @@ export function Sidebar() {
                         onClick={() => handleOpen(2)}
                         className="px-3 py-[9px] select-none hover:bg-gray-100 focus:bg-gray-100 active:bg-gray-100 hover:text-gray-900 focus:text-gray-900 active:text-gray-900 data-[selected=true]:text-gray-900"
                     >
-                        <Typography className="mr-auto font-normal text-inherit">
+                        <Typography className="ml-auto font-normal text-inherit">
                             وضعیت راننده
                         </Typography>
-                        ChevronDownIcon
+                        <FaAngleDown />
                     </ListItem>
                     <AccordionBody className="py-1">
                         <List className="p-0">
-                            <ListItem className={`px-12 ${LIST_ITEM_STYLES}`}>
-                                با راننده
+
+                            <ListItem className={`px-8 ${LIST_ITEM_STYLES} flex items-center justify-between`}>
+                                <Radio name="type" label="با راننده"  className="p-0"/>
                             </ListItem>
-                            <ListItem className={`px-12 ${LIST_ITEM_STYLES}`}>
-                                بدون راننده
+                            <ListItem className={`px-8 ${LIST_ITEM_STYLES} flex items-center justify-between`}>
+                                <Radio name="type" label="بدون راننده"  className="p-0"/>
+                            </ListItem>
+                        </List>
+                    </AccordionBody>
+                </Accordion>
+                <Accordion open={open === 3}>
+                    <ListItem
+                        selected={open === 3}
+                        data-selected={open === 3}
+                        onClick={() => handleOpen(3)}
+                        className="px-3 py-[9px] select-none hover:bg-gray-100 focus:bg-gray-100 active:bg-gray-100 hover:text-gray-900 focus:text-gray-900 active:text-gray-900 data-[selected=true]:text-gray-900"
+                    >
+                        <Typography className="ml-auto font-normal text-inherit">
+                        خدمات اجاره
+                        </Typography>
+                        <FaAngleDown />
+                    </ListItem>
+                    <AccordionBody className="py-1">
+                        <List className="p-0">
+
+                            <ListItem className={`px-8 ${LIST_ITEM_STYLES} flex items-center justify-between`}>
+                                <Radio name="type" label="تحویل در محل با شما"  className="p-0"/>
+                            </ListItem>
+                        </List>
+                    </AccordionBody>
+                </Accordion>
+                <Accordion open={open === 4}>
+                    <ListItem
+                        selected={open === 4}
+                        data-selected={open === 4}
+                        onClick={() => handleOpen(4)}
+                        className="px-3 py-[9px] select-none hover:bg-gray-100 focus:bg-gray-100 active:bg-gray-100 hover:text-gray-900 focus:text-gray-900 active:text-gray-900 data-[selected=true]:text-gray-900"
+                    >
+                        <Typography className="ml-auto font-normal text-inherit">
+                        نوع بدنه
+                        </Typography>
+                        <FaAngleDown />
+                    </ListItem>
+                    <AccordionBody className="py-1">
+                        <List className="!p-0">
+
+                            <ListItem className={`px-8 ${LIST_ITEM_STYLES} flex items-center justify-between`}>
+                                <Radio name="type" label="با راننده"  className="w-3 h-3"/>
+                            </ListItem>
+                            <ListItem className={`px-8 ${LIST_ITEM_STYLES} flex items-center justify-between`}>
+                                <Radio name="type" label="بدون راننده"  className="w-3 h-3"/>
                             </ListItem>
                         </List>
                     </AccordionBody>
                 </Accordion>
 
-                <ListItem className={LIST_ITEM_STYLES}>
-                    <ListItemPrefix>
-                        ChatBubbleLeftEllipsisIcon
-                    </ListItemPrefix>
-                    <p>خدمات اجاره</p>
-                    <div className="flex flex-row gap-2">
-
-                    </div>
-                </ListItem>
-                <ListItem className={LIST_ITEM_STYLES}>
-                    <ListItemPrefix>
-                        ChatBubbleLeftEllipsisIcon
-                    </ListItemPrefix>
-                    <p>نوع بدنه</p>
-                    <div className="flex flex-row gap-2">
-
-                    </div>
-                </ListItem>
             </List>
             <hr className="my-2 border-gray-200" />
-            <div className="w-72">
-                <Select label="Select Version">
-                    <Option>Material Tailwind HTML</Option>
-                    <Option>Material Tailwind React</Option>
-                    <Option>Material Tailwind Vue</Option>
-                    <Option>Material Tailwind Angular</Option>
-                    <Option>Material Tailwind Svelte</Option>
-                </Select>
+            <div className="w-full px-4">
+                <select label="سازنده" dir="rtl" className="w-full px-1 py-2 rounded-xl outline-none">
+                    <option>Material Tailwind HTML</option>
+                    <option>Material Tailwind React</option>
+                    <option>Material Tailwind Vue</option>
+                    <option>Material Tailwind Angular</option>
+                    <option>Material Tailwind Svelte</option>
+                </select>
             </div>
 
             <Typography

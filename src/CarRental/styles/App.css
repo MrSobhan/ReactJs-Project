@@ -2,37 +2,57 @@
     font-family: "iransans";
     src: url(../fonts/IRANSans/IRANSans.ttf);
 }
+
 @font-face {
     font-family: "lalezar";
     src: url(../fonts/Lalezar-Font/TTF/Lalezar-Regular.ttf);
 }
-body{
+
+body {
     overflow-x: hidden !important;
     font-family: "iransans" !important;
 }
-.lalezar{
-    font-family: "lalezar" !important;
-}
-.iransans{
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button ,
+Typography , 
+li , 
+input {
     font-family: "iransans" !important;
 }
 
 
-.bgNavbar{
+.lalezar {
+    font-family: "lalezar" !important;
+}
+
+.iransans {
+    font-family: "iransans" !important;
+}
+
+
+.bgNavbar {
     background-color: rgba(255, 255, 255, 0.386);
     backdrop-filter: blur(20px);
 }
 
-.bgImg__poster{
-    background-image: linear-gradient(45deg , rgb(0, 0, 0) , transparent) , url('/public/carReantal/f7.jpg') !important;
+.bgImg__poster {
+    background-image: linear-gradient(45deg, rgb(0, 0, 0), transparent), url('/public/carReantal/f7.jpg') !important;
 }
 
-.titleSlider{
+.titleSlider {
     /* @apply text-3xl relative */
     position: relative;
     font-size: 30px;
 }
-.titleSlider::after{
+
+.titleSlider::after {
     content: '';
     transform: rotate(25deg);
     position: absolute;
@@ -42,9 +62,10 @@ body{
     height: 40px;
     border-radius: 1rem;
     background-color: black;
-    /* @apply bg-slate-900 absolute top-[0px] -right-[10px] w-[5px] h-[40px] rounded-2xl */
+    /* @apply bg-blue-gray-900 absolute top-[0px] -right-[10px] w-[5px] h-[40px] rounded-2xl */
 }
-.titleSlider::before{
+
+.titleSlider::before {
     content: '';
     position: absolute;
     bottom: 0;
@@ -54,5 +75,5 @@ body{
     opacity: .2;
     border-radius: 1rem;
     background-color: rgba(0, 0, 0, 0.24);
-    /* @apply bg-slate-500 absolute bottom-0 -right-[10px] w-32 h-[32px] opacity-20 rounded-2xl */
+    /* @apply bg-blue-gray-500 absolute bottom-0 -right-[10px] w-32 h-[32px] opacity-20 rounded-2xl */
 }

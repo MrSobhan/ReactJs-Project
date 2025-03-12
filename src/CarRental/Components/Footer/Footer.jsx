@@ -23,9 +23,9 @@ export function Footer() {
             <div className="mx-auto w-full max-w-7xl px-8 pb-20 md:pb-0">
                 <div className="grid grid-cols-1 justify-between gap-4 md:grid-cols-2">
                     <div className="flex justify-between max-w-fit">
-                        <img src="./logoBrandCarRental.ico" alt="Logo_img" className="w-9 h-9 mt-2" />
+                        <img src="../logoBrandCarRental.ico" alt="Logo_img" className="w-9 h-9 mt-2" />
                         <p
-                            className="mr-2 cursor-pointer py-1.5 font-medium lalezar text-3xl text-slate-900"
+                            className="mr-2 cursor-pointer py-1.5 font-medium lalezar text-3xl text-gray-900"
                         >
                             سوارینا
                         </p>
@@ -37,7 +37,7 @@ export function Footer() {
                                 <Typography
                                     variant="small"
                                     color="blue-gray"
-                                    className="mb-3 font-medium opacity-40"
+                                    className="mb-3 font-medium opacity-40 text-md"
                                 >
                                     {title}
                                 </Typography>
@@ -47,7 +47,7 @@ export function Footer() {
                                             as="a"
                                             href="#"
                                             color="gray"
-                                            className="py-1.5 font-normal transition-colors hover:text-blue-gray-900"
+                                            className="py-1.5 font-normal transition-colors hover:text-blue-gray-900 iransans text-sm"
                                         >
                                             {link}
                                         </Typography>

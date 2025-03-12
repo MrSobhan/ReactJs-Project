@@ -56,13 +56,13 @@ export function KpiCard({
             <CardBody className="p-4">
                 <div className="flex flex-col justify-between items-center">
 
-                    <div className="flex items-center gap-1 text-slate-800 text-5xl md:text-7xl">
+                    <div className="flex items-center gap-1 text-blue-gray-800 text-5xl md:text-7xl">
                         {/* <img src={icon} alt={title} /> */}
                         {icon}
                     </div>
 
                     <Typography
-                        className="!font-medium mt-4 text-xs md:!text-md text-gray-700 text-center"
+                        className="!font-medium mt-4 text-xs md:!text-md text-blue-gray-700 text-center"
                     >
                         {title}
                     </Typography>
