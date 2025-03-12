@@ -166,7 +166,7 @@ function Singup() {
                             <Button size="lg" color="gray" className="py-3" fullWidth>
                                 ثبت نام
                             </Button>
-                            <div className="h-12 w-12 rounded-full mx-auto flex items-center justify-center border-2 border-solid border-gray-300">
+                            <div className="h-12 w-12 rounded-full mx-auto flex items-center justify-center border-2 border-solid border-gray-300 cursor-pointer">
                                 <FcGoogle className="text-2xl" />
                             </div>
 
