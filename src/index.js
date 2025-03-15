@@ -34,7 +34,7 @@ import "./index.css";
 // import App from "./AmoHasan/App";
 // import App from "./MovieApp/App";
 // import App from "./Tailwindcss_Project/App";
-import App from "./CarRental/App.jsx";
+import App from "./CarRental/App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
