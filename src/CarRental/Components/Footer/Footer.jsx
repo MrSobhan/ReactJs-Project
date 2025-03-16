@@ -1,4 +1,6 @@
 import { Typography } from "@material-tailwind/react";
+import { FaApple } from "react-icons/fa";
+import { ImAndroid } from "react-icons/im";
 
 const LINKS = [
     {
@@ -19,16 +21,24 @@ const LINKS = [
 
 export function Footer() {
     return (
-        <footer className="relative w-full">
+        <footer className="relative w-full mt-20">
             <div className="mx-auto w-full max-w-7xl px-8 pb-20 md:pb-0">
                 <div className="grid grid-cols-1 justify-between gap-4 md:grid-cols-2">
-                    <div className="flex justify-between max-w-fit">
-                        <img src="../logoBrandCarRental.ico" alt="Logo_img" className="w-9 h-9 mt-2" />
+                    <div className="flex flex-col justify-start gap-y-7 max-w-fit">
+                        <div className="flex justify-between max-w-fit">
+                            <img src="../logoBrandCarRental.ico" alt="Logo_img" className="w-9 h-9 mt-2" />
+                            <p
+                                className="mr-2 cursor-pointer py-1.5 font-medium lalezar text-3xl text-gray-900"
+                            >
+                                سوارینا
+                            </p>
+                        </div>
                         <p
-                            className="mr-2 cursor-pointer py-1.5 font-medium lalezar text-3xl text-gray-900"
+                            className="py-1 gap-x-2 text-md text-gray-700 flex items-center justify-evenly"
                         >
-                            سوارینا
+                           <span className="lalezar">سوارینا</span> را در نسخه های دیگر دنبال کنید : <ImAndroid  className="inline cursor-pointer hover:text-blue-gray-900"/> <FaApple className="inline cursor-pointer hover:text-blue-gray-900"/>
                         </p>
+
 
                     </div>
                     <div className="grid grid-cols-3 justify-between gap-4">

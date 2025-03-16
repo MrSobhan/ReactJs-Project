@@ -6,19 +6,24 @@ import Header from "../Components/Header/Header";
 import BlogSection from "../Components/Blog/Blog";
 import { FeatureSection } from "../Components/Features/Features";
 import CardSlider from "../Components/Slider/Slider";
+import About from "../Components/About/About";
+import Contact from "../Components/Contact/Contact";
 
 // import "./index.css";
 export default function Home() {
   return (
     <>
       <NavbarDefault />
-      <main className="container mx-auto lg:w-[80%] w-[90%] py-20">
+      <main>
         <Header />
-        <KpiCardSection />
+        {/* <KpiCardSection /> */}
+        <About/>
         <CardSlider />
+
         <FeatureSection />
         <CardSlider />
         <BlogSection />
+        <Contact/>
         <DefaultAccordion />
       </main>
       <Footer />

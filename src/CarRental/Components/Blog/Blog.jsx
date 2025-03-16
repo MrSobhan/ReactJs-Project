@@ -4,7 +4,7 @@ import { Typography, Card, CardBody } from "@material-tailwind/react";
 function ContentCard({ img, title, desc }) {
   return (
     <Card
-      className="relative grid min-h-[30rem] items-end overflow-hidden rounded-xl"
+      className="relative grid min-h-[25rem] items-end overflow-hidden rounded-xl"
       color="transparent"
     >
       <img
@@ -20,7 +20,7 @@ function ContentCard({ img, title, desc }) {
         <Typography
           variant="paragraph"
           color="white"
-          className="my-2 font-normal"
+          className="my-2 font-normal text-xs"
         >
           {desc}
         </Typography>
@@ -45,6 +45,11 @@ const contents = [
     title: "Grow in a beautiful area",
     desc: "Free people make free choices. Free choices mean you get unequal outcomes. You can have freedom, or you can have equal outcomes. You can't have both.",
   },
+  {
+    img: "https://demos.creative-tim.com/material-kit-pro/assets/img/examples/card-blog2.jpg",
+    title: "Grow in a beautiful area",
+    desc: "Free people make free choices. Free choices mean you get unequal outcomes. You can have freedom, or you can have equal outcomes. You can't have both.",
+  },
 ];
 
 export function BlogSection() {
@@ -52,7 +57,7 @@ export function BlogSection() {
     <section className="container mx-auto px-8 py-10 lg:py-28">
       <h3 className="titleSlider lalezar mr-3">وبلاگ ها</h3>
 
-      <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-3">
+      <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-4">
         {contents.map(({ img, title, desc }) => (
           <ContentCard key={title} img={img} title={title} desc={desc} />
         ))}
