@@ -12,8 +12,8 @@ export function FeatureSection() {
       
 
       <div className="h-auto lg:h-52 py-1 bg-blue-gray-900 relative rounded-lg">
-        <p className=" hidden md:block text-center w-96 text-white mx-auto leading-8 pt-10">کارنت به عنوان یک کمپانی با سابقه درخشان، گستره وسیعی
-          از خدمات کاربردی و مفید را به مشتریان خود عرضه می کند.</p>
+        <p className=" hidden md:block text-center w-96 text-white mx-auto leading-8 pt-10">سوارینا به عنوان یک کمپانی با سابقه درخشان، گستره وسیعی
+          از خدمات کاربردی را به مشتریان خود عرضه می کند.</p>
       
 
       <div className="my-24 grid lg:grid-cols-4  grid-cols-2 items-center gap-4 lg:absolute -bottom-40 left-0 z-40 w-full px-10">

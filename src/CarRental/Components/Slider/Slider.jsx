@@ -1,6 +1,6 @@
 import Card from "../Card/Card";
 import { FaCaretLeft, FaCaretRight } from "react-icons/fa6";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Button } from "@material-tailwind/react";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import "./Slider.css";
@@ -9,9 +9,17 @@ export default function CardSlider() {
     const sliderRef = useRef(null);
     const scrollAmount = 300;
 
+    const [showBtnSlide, setShowBtnSlide] = useState('hidden')
+
     const rightSlideHandler = () => {
         if (sliderRef.current) {
             sliderRef.current.scrollLeft += scrollAmount;
+            console.log(sliderRef.current.scrollLeft + scrollAmount);
+            
+            if (sliderRef.current.scrollLeft == 0) {
+                setShowBtnSlide('hidden')
+            }
+
         }
     };
 
@@ -19,6 +27,7 @@ export default function CardSlider() {
         if (sliderRef.current) {
             sliderRef.current.scrollLeft -= scrollAmount;
         }
+        setShowBtnSlide('block')
     };
 
     return (
@@ -29,23 +38,23 @@ export default function CardSlider() {
             <div className="container w-full flex items-center justify-between">
                 <h3 className="titleSlider lalezar mr-3">لیست خودرو ها</h3>
 
-                
+
                 <Button variant="text" className="py-2 px-3">مشاهده همه خودرو ها <IoArrowBackCircleOutline className="inline text-xl" /></Button>
 
             </div>
 
-            <div className="hidden md:flex items-center justify-between gap-x-2 w-[100%] absolute left-0 top-56 z-40">
-                    <button onClick={rightSlideHandler}>
-                        <p className="text-xl bg-black text-blue-gray-50 cursor-pointer rounded-full p-3">
-                            <FaCaretRight />
-                        </p>
-                    </button>
-                    <button onClick={leftSlideHandler}>
-                        <p className="text-xl bg-black text-blue-gray-50 cursor-pointer rounded-full p-3">
-                            <FaCaretLeft />
-                        </p>
-                    </button>
-                </div>
+            {/* <div className="hidden md:flex items-center justify-between gap-x-2 w-[100%] absolute left-0 top-56 z-40"> */}
+            <button onClick={rightSlideHandler}>
+                <p className={`text-xl bg-black text-blue-gray-50 cursor-pointer rounded-full p-2.5 absolute -right-5 top-60 z-40 ${showBtnSlide}`}>
+                    <FaCaretRight />
+                </p>
+            </button>
+            <button onClick={leftSlideHandler}>
+                <p className="text-xl bg-black text-blue-gray-50 cursor-pointer rounded-full p-2.5 absolute -left-5 top-60 z-40">
+                    <FaCaretLeft />
+                </p>
+            </button>
+            {/* </div> */}
             <div className="sliderBox overflow-x-scroll scroll-smooth relative" ref={sliderRef}>
                 <div className="content__sliderBox flex gap-x-4 pt-10">
                     <Card />

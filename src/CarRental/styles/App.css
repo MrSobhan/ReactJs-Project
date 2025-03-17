@@ -20,9 +20,9 @@ h3,
 h4,
 h5,
 h6,
-button ,
-Typography , 
-li , 
+button,
+Typography,
+li,
 input {
     font-family: "iransans" !important;
 }
@@ -76,4 +76,8 @@ input {
     border-radius: 1rem;
     background-color: rgba(0, 0, 0, 0.24);
     /* @apply bg-blue-gray-500 absolute bottom-0 -right-[10px] w-32 h-[32px] opacity-20 rounded-2xl */
+}
+
+span >.w-0\.5 {
+    display: none !important;
 }

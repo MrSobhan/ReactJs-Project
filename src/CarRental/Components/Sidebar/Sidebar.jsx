@@ -22,14 +22,14 @@ export function Sidebar() {
     const [open, setOpen] = useState(0);
 
     const handleOpen = (value) => {
-        setOpen(open === value ? 0 : value);
+        setOpen(open == value ? 0 : value);
     };
 
     const LIST_ITEM_STYLES =
         "select-none hover:bg-gray-100 focus:bg-gray-100 active:bg-gray-100 hover:text-gray-900 focus:text-gray-900 active:text-gray-900 data-[selected=true]:text-gray-900 iransans text-xs";
 
     return (
-        <Card className="h-max w-full mx-auto p-6 shadow-md overflow-hidden">
+        <Card className="h-max w-full mx-auto py-6 px-3 shadow-md overflow-hidden">
             <div className="flex items-center justify-start">
                 <img src="./logoBrandCarRental.ico" alt="Logo_img" className="w-9 h-9" />
                 <Link to={'/'}>
@@ -56,15 +56,15 @@ export function Sidebar() {
                         <FaAngleDown />
                     </ListItem>
                     <AccordionBody className="py-1">
-                        <div className="w-full py-4">
+                        <div className=" py-4 w-56 mx-auto">
                             <Slider defaultValue={50} />
                         </div>
                     </AccordionBody>
                 </Accordion>
-                <Accordion open={open === 2}>
+                <Accordion open={open == 2}>
                     <ListItem
-                        selected={open === 2}
-                        data-selected={open === 2}
+                        selected={open == 2}
+                        data-selected={open == 2}
                         onClick={() => handleOpen(2)}
                         className="px-3 py-[9px] select-none hover:bg-gray-100 focus:bg-gray-100 active:bg-gray-100 hover:text-gray-900 focus:text-gray-900 active:text-gray-900 data-[selected=true]:text-gray-900"
                     >
@@ -77,23 +77,25 @@ export function Sidebar() {
                         <List className="p-0">
 
                             <ListItem className={`px-8 ${LIST_ITEM_STYLES} flex items-center justify-between`}>
-                                <Radio name="type" label="با راننده"  className="p-0"/>
+                                <input type="radio" name="type" id="carWith" className="w-4 h-4 accent-blue-gray-900" />
+                                <label htmlFor="carWith" className="w-full mr-2 cursor-pointer">با راننده</label>
                             </ListItem>
                             <ListItem className={`px-8 ${LIST_ITEM_STYLES} flex items-center justify-between`}>
-                                <Radio name="type" label="بدون راننده"  className="p-0"/>
+                                <input type="radio" name="type" id="carWith2" className="w-4 h-4 accent-blue-gray-900" />
+                                <label htmlFor="carWith2" className="w-full mr-2 cursor-pointer">بدون راننده</label>
                             </ListItem>
                         </List>
                     </AccordionBody>
                 </Accordion>
-                <Accordion open={open === 3}>
+                <Accordion open={open == 3}>
                     <ListItem
-                        selected={open === 3}
-                        data-selected={open === 3}
+                        selected={open == 3}
+                        data-selected={open == 3}
                         onClick={() => handleOpen(3)}
                         className="px-3 py-[9px] select-none hover:bg-gray-100 focus:bg-gray-100 active:bg-gray-100 hover:text-gray-900 focus:text-gray-900 active:text-gray-900 data-[selected=true]:text-gray-900"
                     >
                         <Typography className="ml-auto font-normal text-inherit">
-                        خدمات اجاره
+                            خدمات اجاره
                         </Typography>
                         <FaAngleDown />
                     </ListItem>
@@ -101,20 +103,21 @@ export function Sidebar() {
                         <List className="p-0">
 
                             <ListItem className={`px-8 ${LIST_ITEM_STYLES} flex items-center justify-between`}>
-                                <Radio name="type" label="تحویل در محل با شما"  className="p-0"/>
+                                <input type="radio" name="type" id="carWith3" className="w-4 h-4 accent-blue-gray-900" />
+                                <label htmlFor="carWith3" className="w-full mr-2 cursor-pointer">تحویل در محل با شما</label>
                             </ListItem>
                         </List>
                     </AccordionBody>
                 </Accordion>
-                <Accordion open={open === 4}>
+                <Accordion open={open == 4}>
                     <ListItem
-                        selected={open === 4}
-                        data-selected={open === 4}
+                        selected={open == 4}
+                        data-selected={open == 4}
                         onClick={() => handleOpen(4)}
                         className="px-3 py-[9px] select-none hover:bg-gray-100 focus:bg-gray-100 active:bg-gray-100 hover:text-gray-900 focus:text-gray-900 active:text-gray-900 data-[selected=true]:text-gray-900"
                     >
                         <Typography className="ml-auto font-normal text-inherit">
-                        نوع بدنه
+                            نوع بدنه
                         </Typography>
                         <FaAngleDown />
                     </ListItem>
@@ -122,10 +125,12 @@ export function Sidebar() {
                         <List className="!p-0">
 
                             <ListItem className={`px-8 ${LIST_ITEM_STYLES} flex items-center justify-between`}>
-                                <Radio name="type" label="با راننده"  className="w-3 h-3"/>
+                                <input type="radio" name="type" id="carWith4" className="w-4 h-4 accent-blue-gray-900" />
+                                <label htmlFor="carWith4" className="w-full mr-2 cursor-pointer">با راننده</label>
                             </ListItem>
                             <ListItem className={`px-8 ${LIST_ITEM_STYLES} flex items-center justify-between`}>
-                                <Radio name="type" label="بدون راننده"  className="w-3 h-3"/>
+                                <input type="radio" name="type" id="carWith5" className="w-4 h-4 accent-blue-gray-900" />
+                                <label htmlFor="carWith5" className="w-full mr-2 cursor-pointer">بدون راننده</label>
                             </ListItem>
                         </List>
                     </AccordionBody>
@@ -135,7 +140,7 @@ export function Sidebar() {
             <hr className="my-2 border-gray-200" />
             <div className="w-full px-4">
                 <select label="سازنده" dir="rtl" className="w-full px-1 py-2 rounded-xl outline-none">
-                    <option>Material Tailwind HTML</option>
+                    <option>سازنده</option>
                     <option>Material Tailwind React</option>
                     <option>Material Tailwind Vue</option>
                     <option>Material Tailwind Angular</option>

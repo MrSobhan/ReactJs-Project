@@ -11,19 +11,23 @@ import {
     TimelineBody,
     Typography,
     Carousel,
-    Button
-  } from "@material-tailwind/react";
+    Button,
+    Input,
+    Textarea
+} from "@material-tailwind/react";
+
 import { Rating } from "@material-tailwind/react";
 import { LiaTelegram } from "react-icons/lia";
 import { AiOutlineInstagram } from "react-icons/ai";
 import { FaLocationDot, FaBookOpen } from "react-icons/fa6";
 import { IoIosApps, IoIosTimer } from "react-icons/io";
+import { PiStarFill, PiStarBold } from "react-icons/pi";
 
 const CarPage = () => {
     return (
         <>
             <NavbarDefault />
-            <div className="container mx-auto lg:w-[80%] w-[90%] py-24">
+            <div className="container mx-auto lg:w-[80%] w-[90%] pt-24">
                 <Carousel className="rounded-xl w-full overflow-hidden mb-14">
                     <img
                         src="/carReantal/f2.jpg"
@@ -41,11 +45,11 @@ const CarPage = () => {
                         className="max-h-[600px] w-full object-cover"
                     />
                 </Carousel>
-                <div className="lg:mb-8 mb-4 container mx-auto grid lg:gap-x-8 gap-y-8 grid-cols-1 lg:grid-cols-3 gap-x-4 w-full relative">
+                <div className="lg:mb-16 mb-4 container mx-auto grid lg:gap-x-8 gap-y-8 grid-cols-1 lg:grid-cols-3 gap-x-4 w-full relative">
                     <div className=" col-span-1 md:col-span-2 shadow-lg rounded-xl py-9 px-7 h-max flex flex-col gap-y-10">
                         <h1 className='text-3xl'>هیوندای اچ ۳۵۰ <sub className='text-lg'>(۲۰۱۹ - ۱۳۹۸)</sub></h1>
                         <div className='flex items-center justify-start gap-x-2'>
-                        <span>نظرات کاربران :</span> <Rating value={4} className='text-yellow-500'/>
+                            <span>نظرات کاربران : <PiStarFill className='inline mx-0 text-lg text-yellow-600' /><PiStarFill className='inline mx-0 text-lg text-yellow-600' /><PiStarFill className='inline mx-0 text-lg text-yellow-600' /><PiStarFill className='inline mx-0 text-lg text-yellow-600' /><PiStarBold className='inline mx-0 text-lg' /></span>
                         </div>
 
                         <div className="w-full">
@@ -125,6 +129,97 @@ const CarPage = () => {
                                     </TimelineBody>
                                 </TimelineItem>
                             </Timeline>
+                            <h3 className="titleSlider lalezar mr-3 mt-16">ارتباط با ما</h3>
+                            <form
+                                action="#"
+                                className="flex flex-col gap-4 w-full mt-10"
+                            >
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <Typography
+                                            variant="small"
+                                            className="mb-2 text-right font-medium !text-gray-900"
+                                        >
+                                            نام
+                                        </Typography>
+                                        <Input
+                                            color="gray"
+                                            size="lg"
+                                            name="first-name"
+                                            className="focus:border-t-gray-900"
+                                            containerProps={{
+                                                className: "min-w-full",
+                                            }}
+                                            labelProps={{
+                                                className: "hidden",
+                                            }}
+                                        />
+                                    </div>
+                                    <div>
+                                        <Typography
+                                            variant="small"
+                                            className="mb-2 text-right font-medium !text-gray-900"
+                                        >
+                                            نام خانوادگی
+                                        </Typography>
+                                        <Input
+                                            color="gray"
+                                            size="lg"
+                                            name="last-name"
+                                            className="focus:border-t-gray-900"
+                                            containerProps={{
+                                                className: "!min-w-full",
+                                            }}
+                                            labelProps={{
+                                                className: "hidden",
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                                <div>
+                                    <Typography
+                                        variant="small"
+                                        className="mb-2 text-right font-medium !text-gray-900"
+                                    >
+                                        ایمیل
+                                    </Typography>
+                                    <Input
+                                        color="gray"
+                                        size="lg"
+                                        name="email"
+                                        className="focus:border-t-gray-900"
+                                        containerProps={{
+                                            className: "!min-w-full",
+                                        }}
+                                        labelProps={{
+                                            className: "hidden",
+                                        }}
+                                    />
+                                </div>
+                                <div>
+                                    <Typography
+                                        variant="small"
+                                        className="mb-2 text-right font-medium !text-gray-900"
+                                    >
+                                        متن نظر
+                                    </Typography>
+                                    <Textarea
+                                        rows={6}
+                                        color="gray"
+                                        name="message"
+                                        className="focus:border-t-gray-900"
+                                        containerProps={{
+                                            className: "!min-w-full",
+                                        }}
+                                        labelProps={{
+                                            className: "hidden",
+                                        }}
+                                    />
+                                </div>
+                                <Button className="w-full" color="gray">
+                                    ارسال نظرات
+                                </Button>
+                            </form>
                         </div>
                     </div>
                     <div className=" col-span-1 md:col-span-1 shadow-lg rounded-xl sticky max-h-max top-20 left-0">

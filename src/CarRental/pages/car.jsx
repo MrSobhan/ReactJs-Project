@@ -4,7 +4,7 @@ import { Footer } from '../Components/Footer/Footer';
 import Card from '../Components/Card/Card';
 import Sidebar from '../Components/Sidebar/Sidebar';
 import { FaFilter } from "react-icons/fa";
-import { Button } from '@material-tailwind/react';
+import { Button, Spinner } from '@material-tailwind/react';
 const Car = () => {
     return (
         <>
@@ -29,6 +29,7 @@ const Car = () => {
                     </div>
 
                 </div>
+                <Spinner className="h-8 w-8 mx-auto mt-16" />
             </div>
             <Footer />
         </>

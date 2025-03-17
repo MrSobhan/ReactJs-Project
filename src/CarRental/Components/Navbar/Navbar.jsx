@@ -84,22 +84,6 @@ export function NavbarDefault() {
                             )}
                         </IconButton>
                     </div>
-                    <MobileNav open={openNav}>
-                        <div className="container mx-auto text-center">
-                            {navList}
-                            <div className="flex items-center gap-x-1">
-                                <Link to={'/login'} className="w-full">
-                                    <Button
-                                        variant="filled"
-                                        size="sm"
-                                        className="w-full"
-                                    >
-                                        <span>ورود / ثبت نام</span>
-                                    </Button>
-                                </Link>
-                            </div>
-                        </div>
-                    </MobileNav>
                 </Navbar>
             </header>
 

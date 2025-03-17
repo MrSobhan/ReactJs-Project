@@ -34,9 +34,9 @@ export function Footer() {
                             </p>
                         </div>
                         <p
-                            className="py-1 gap-x-2 text-md text-gray-700 flex items-center justify-evenly"
+                            className="py-1 gap-x-2 text-md text-gray-700 flex items-center justify-evenly text-sm md:text-md"
                         >
-                           <span className="lalezar">سوارینا</span> را در نسخه های دیگر دنبال کنید : <ImAndroid  className="inline cursor-pointer hover:text-blue-gray-900"/> <FaApple className="inline cursor-pointer hover:text-blue-gray-900"/>
+                            <span className="lalezar">ما</span> را در نسخه های دیگر دنبال کنید : <ImAndroid className="inline cursor-pointer bg-blue-gray-900 !text-white rounded-full w-8 h-8 p-2" /><FaApple className="inline cursor-pointer bg-blue-gray-900 !text-white rounded-full w-8 h-8 p-2" />
                         </p>
 
 
