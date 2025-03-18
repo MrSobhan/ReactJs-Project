@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState ,useContext } from "react";
 import { Link } from "react-router-dom";
 
 // @components
@@ -12,9 +12,45 @@ import {
 } from "@material-tailwind/react";
 
 import { FcGoogle } from "react-icons/fc";
+import AuthContext from "../context/authContext";
 
 
 function Login() {
+  const authContext = useContext(AuthContext)
+  const [usernameInput, setUserInput] = useState('')
+  const [passInput, setPassInput] = useState('')
+
+
+  const LoginHandler = async () => {
+    console.log(usernameInput,
+      passInput);
+
+      const loginInfoJson = {
+        "username": "amirj",
+        "password": "StringStringString1@",
+        "role": "SuperAdmin"
+      }
+
+
+    const response = await fetch(`${authContext.baseUrl}/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(loginInfoJson),
+    });
+
+    // if (!response.ok) {
+    //   throw new Error(`Response status: ${response.status}`);
+    // }
+
+    const json = await response.json();
+
+    console.log(json);
+
+  }
+
+
   return (
     <section className="px-8">
       <div className="absolute inset-x-0 top-20 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
@@ -56,20 +92,22 @@ function Login() {
                     color="blue-gray"
                     className="block font-medium mb-2"
                   >
-                    ایمیل
+                    نام کاربری
                   </Typography>
                 </label>
                 <Input
-                  id="email"
+                  id="username"
                   color="gray"
                   size="lg"
-                  type="email"
-                  name="email"
-                  placeholder="name@mail.com"
+                  type="username"
+                  name="username"
+                  placeholder="savarina"
                   className="w-full placeholder:opacity-100 focus:border-t-primary border-t-blue-gray-200"
                   labelProps={{
                     className: "hidden",
                   }}
+                  value={usernameInput}
+                  onChange={(e) => setUserInput(e.target.value)}
                 />
               </div>
               <div>
@@ -93,9 +131,11 @@ function Login() {
                   labelProps={{
                     className: "hidden",
                   }}
+                  value={passInput}
+                  onChange={(e) => setPassInput(e.target.value)}
                 />
               </div>
-              <Button size="lg" color="gray" className="py-3" fullWidth>
+              <Button size="lg" color="gray" className="py-3" fullWidth onClick={LoginHandler}>
                 ورود
               </Button>
               <div className="h-12 w-12 rounded-full mx-auto flex items-center justify-center border-2 border-solid border-gray-300 cursor-pointer">

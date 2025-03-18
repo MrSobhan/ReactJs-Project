@@ -10,14 +10,18 @@ const App = () => {
   const navigator = useNavigate()
   const router = useRoutes(routes);
 
-  const baseUrl = "https://divarapi.liara.run"
+  const baseUrl = "https://crms-h94h.onrender.com"
 
 
 
   return (
-    <>
+    <AuthContext.Provider
+      value={{
+        baseUrl
+      }}
+    >
       {router}
-    </>
+    </AuthContext.Provider>
   );
 }
 
