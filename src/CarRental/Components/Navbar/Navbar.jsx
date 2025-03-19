@@ -88,9 +88,9 @@ export function NavbarDefault() {
             </header>
 
 
-            <div className=" md:hidden container w-full fixed bottom-3 z-50 mx-auto ">
+            <div className=" md:hidden container w-full fixed bottom-3 z-50 mx-auto">
                 <div
-                    class="border mx-auto py-3 px-2 w-[300px] bgNavbar flex gap-2 shadow-lg rounded-xl backdrop-blur-sm hover:shadow-xl transition-all duration-300"
+                    class="border mx-auto py-3 px-2 w-[300px] bgNavbar flex gap-2 shadow-2xl rounded-xl backdrop-blur-sm hover:shadow-xl transition-all duration-300"
                 >
                     <Link to={'/'}>
                         <div class="group relative px-3 cursor-pointer">

@@ -1,4 +1,4 @@
-import React, { useState ,useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
 // @components
@@ -13,29 +13,31 @@ import {
 
 import { FcGoogle } from "react-icons/fc";
 import AuthContext from "../context/authContext";
-
-
+import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
 function Login() {
   const authContext = useContext(AuthContext)
   const [usernameInput, setUserInput] = useState('')
   const [passInput, setPassInput] = useState('')
-
+  const navigate = useNavigate();
 
   const LoginHandler = async () => {
     console.log(usernameInput,
       passInput);
 
-      const loginInfoJson = {
-        "username": "amirj",
-        "password": "StringStringString1@",
-        "role": "SuperAdmin"
-      }
+    const loginInfoJson = {
+      "username": "amirj",
+      "password": "StringStringString1@",
+      "role": "SuperAdmin"
+    }
 
 
     const response = await fetch(`${authContext.baseUrl}/login`, {
       method: "POST",
+      credentials: "include",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "accept": "application/json"
       },
       body: JSON.stringify(loginInfoJson),
     });
@@ -46,7 +48,31 @@ function Login() {
 
     const json = await response.json();
 
-    console.log(json);
+
+    if (json) {
+      swal({
+        title: "با موفقیت لاگین شدید",
+        icon: "success",
+        buttons: "ورود به پنل",
+      }).then((value) => {
+        navigate("/");
+      });
+    }
+
+
+    // fetch(`https://crms-h94h.onrender.com/login`, {
+    //   method: "POST",
+    //   credentials: "include",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     "accept": "application/json"
+    //   },
+    //   body: JSON.stringify(loginInfoJson),
+    // }).then((res) => res.json()).then((data) => {
+
+    //   console.log(data);
+    // });
+
 
   }
 

@@ -81,3 +81,7 @@ input {
 span >.w-0\.5 {
     display: none !important;
 }
+
+.swal-button{
+    margin: 0 auto !important;
+}
