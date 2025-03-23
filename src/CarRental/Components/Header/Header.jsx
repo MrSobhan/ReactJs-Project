@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState , useEffect } from 'react';
 import { Button, Typography, Input } from "@material-tailwind/react";
 import { FiSearch } from "react-icons/fi";
 
 const Header = () => {
 
-  console.log(document.cookie);
   
   return (
     <header className=' relative'>

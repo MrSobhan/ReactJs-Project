@@ -1,5 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import { Spinner } from "@material-tailwind/react";
+
 
 // @components
 import {
@@ -19,11 +21,14 @@ function Login() {
   const authContext = useContext(AuthContext)
   const [usernameInput, setUserInput] = useState('')
   const [passInput, setPassInput] = useState('')
+  const [loadingSub, setLoadingSub] = useState(false)
   const navigate = useNavigate();
 
   const LoginHandler = async () => {
     console.log(usernameInput,
       passInput);
+
+      setLoadingSub(true)
 
     const loginInfoJson = {
       "username": "amirj",
@@ -50,6 +55,9 @@ function Login() {
 
 
     if (json) {
+      setLoadingSub(false)
+      const tokenFakeLogin = String(Math.floor(Math.random() * 9999999999) + 1000000000)
+      authContext.setLocalStorage('token' , tokenFakeLogin)
       swal({
         title: "با موفقیت لاگین شدید",
         icon: "success",
@@ -58,20 +66,6 @@ function Login() {
         navigate("/");
       });
     }
-
-
-    // fetch(`https://crms-h94h.onrender.com/login`, {
-    //   method: "POST",
-    //   credentials: "include",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "accept": "application/json"
-    //   },
-    //   body: JSON.stringify(loginInfoJson),
-    // }).then((res) => res.json()).then((data) => {
-
-    //   console.log(data);
-    // });
 
 
   }
@@ -162,7 +156,7 @@ function Login() {
                 />
               </div>
               <Button size="lg" color="gray" className="py-3" fullWidth onClick={LoginHandler}>
-                ورود
+              {loadingSub ? <Spinner className=" inline h-4 w-4"/> : ''} ورود 
               </Button>
               <div className="h-12 w-12 rounded-full mx-auto flex items-center justify-center border-2 border-solid border-gray-300 cursor-pointer">
                 <FcGoogle className="text-2xl" />

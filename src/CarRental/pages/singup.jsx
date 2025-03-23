@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import { Spinner } from "@material-tailwind/react";
 
 // @components
 import {
@@ -12,8 +13,84 @@ import {
 } from "@material-tailwind/react";
 
 import { FcGoogle } from "react-icons/fc";
-
+import AuthContext from "../context/authContext";
+import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
 function Singup() {
+    const navigate = useNavigate();
+    const authContext = useContext(AuthContext)
+    const [loadingSub, setLoadingSub] = useState(false)
+
+
+    const [usernameInput, setUserNameInput] = useState('')
+    const [nameInput, setNameInput] = useState('')
+    const [emailInput, setEmailInput] = useState('')
+    const [phoneInput, setPhoneInput] = useState(0)
+    const [nationalIDInput, setNationalIDInput] = useState('')
+    const [passInput, setPassInput] = useState('')
+
+    const SingupHandler = async () => {
+        console.log(usernameInput,
+            nameInput,
+            emailInput,
+            phoneInput,
+            nationalIDInput,
+            passInput);
+
+        setLoadingSub(true)
+
+        const singUpInfoJson = {
+            "name_prefix": " ",
+            "first_name": nameInput,
+            "middle_name": " ",
+            "last_name": " ",
+            "name_suffix": " ",
+            "gender": "مرد",
+            "birthday": " ",
+            "national_id": nationalIDInput,
+            "phone": phoneInput,
+            "username": usernameInput,
+            "email": emailInput,
+            "address": "string",
+            "password": passInput
+        }
+
+
+        const response = await fetch(`${authContext.baseUrl}/customers`, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+                "accept": "application/json"
+            },
+            body: JSON.stringify(singUpInfoJson),
+        });
+
+        const json = await response.json();
+
+        console.log(json);
+        
+
+        if (json) {
+            setLoadingSub(false)
+
+            // * Set Token
+            // const tokenFakeLogin = String(Math.floor(Math.random() * 9999999999) + 1000000000)
+            // authContext.setLocalStorage('token', tokenFakeLogin)
+
+
+            // swal({
+            //     title: "با موفقیت لاگین شدید",
+            //     icon: "success",
+            //     buttons: "ورود به پنل",
+            // }).then((value) => {
+            //     navigate("/");
+            // });
+        }
+
+
+    }
+
     return (
         <section className="px-8">
             <div className="absolute inset-x-0 top-20 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
@@ -69,6 +146,33 @@ function Singup() {
                                     labelProps={{
                                         className: "hidden",
                                     }}
+                                    value={nameInput}
+                                    onChange={(e) => setNameInput(e.target.value)}
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="email">
+                                    <Typography
+                                        variant="small"
+                                        color="blue-gray"
+                                        className="block font-medium mb-2"
+                                    >
+                                        نام کاربری
+                                    </Typography>
+                                </label>
+                                <Input
+                                    id="name"
+                                    color="gray"
+                                    size="lg"
+                                    type="text"
+                                    name="name"
+                                    placeholder="Mohammad__00"
+                                    className="w-full placeholder:opacity-100 focus:border-t-primary border-t-blue-gray-200"
+                                    labelProps={{
+                                        className: "hidden",
+                                    }}
+                                    value={usernameInput}
+                                    onChange={(e)=>setUserNameInput(e.target.value)}
                                 />
                             </div>
                             <div>
@@ -92,6 +196,8 @@ function Singup() {
                                     labelProps={{
                                         className: "hidden",
                                     }}
+                                    value={emailInput}
+                                    onChange={(e)=>setEmailInput(e.target.value)}
                                 />
                             </div>
                             <div>
@@ -108,13 +214,15 @@ function Singup() {
                                     id="meliCode"
                                     color="gray"
                                     size="lg"
-                                    type="number"
+                                    type="text"
                                     name="meliCode"
                                     placeholder="0072657821"
                                     className="w-full placeholder:opacity-100 focus:border-t-primary border-t-blue-gray-200"
                                     labelProps={{
                                         className: "hidden",
                                     }}
+                                    value={nationalIDInput}
+                                    onChange={(e)=>setNationalIDInput(e.target.value)}
                                 />
                             </div>
                             <div>
@@ -138,6 +246,8 @@ function Singup() {
                                     labelProps={{
                                         className: "hidden",
                                     }}
+                                    value={phoneInput}
+                                    onChange={(e)=>setPhoneInput(e.target.value)}
                                 />
                             </div>
                             <div>
@@ -161,10 +271,12 @@ function Singup() {
                                     labelProps={{
                                         className: "hidden",
                                     }}
+                                    value={passInput}
+                                    onChange={(e)=>setPassInput(e.target.value)}
                                 />
                             </div>
-                            <Button size="lg" color="gray" className="py-3" fullWidth>
-                                ثبت نام
+                            <Button size="lg" color="gray" className="py-3" fullWidth onClick={SingupHandler}>
+                                {loadingSub ? <Spinner className=" inline h-4 w-4" /> : ''}  ثبت نام
                             </Button>
                             <div className="h-12 w-12 rounded-full mx-auto flex items-center justify-center border-2 border-solid border-gray-300 cursor-pointer">
                                 <FcGoogle className="text-2xl" />

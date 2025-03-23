@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
     Navbar,
     MobileNav,
@@ -8,8 +8,9 @@ import {
 import { RiMenu2Line } from "react-icons/ri";
 import { IoCloseOutline } from "react-icons/io5";
 import { FaRegUser, FaCar } from "react-icons/fa";
+import { TbLogout2 } from "react-icons/tb";
 import { Link } from "react-router-dom";
-
+import AuthContext from "../../context/authContext";
 export function NavbarDefault() {
     const [openNav, setOpenNav] = useState(false);
 
@@ -19,6 +20,24 @@ export function NavbarDefault() {
             () => window.innerWidth >= 960 && setOpenNav(false),
         );
     }, []);
+
+    // ! Login
+
+    const authContext = useContext(AuthContext)
+
+    const [isLoginUser, setIsLoginUser] = useState(false)
+
+    useEffect(() => {
+        if (authContext.getLocalStorage('token')) {
+            setIsLoginUser(true)
+        }
+    }, [])
+
+    const LogoutHandler = ()=>{
+        if(authContext.LogOut()){
+            setIsLoginUser(false)
+        }
+    }
 
     const navList = (
         <ul className="text-blue-gray-900 mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
@@ -61,15 +80,37 @@ export function NavbarDefault() {
                             {navList}
                         </div>
                         <div className="flex items-center gap-x-1">
-                            <Link to={'/login'}>
-                                <Button
-                                    variant="filled"
-                                    size="sm"
-                                    className="hidden lg:inline-block py-2 px-5 text-sm"
-                                >
-                                    <span><FaRegUser className="inline ml-2" />ورود / ثبت نام</span>
-                                </Button>
-                            </Link>
+
+                            {
+                                isLoginUser ? (
+                                    <>
+                                        <Link to={'/panel'}>
+                                            <Button
+                                                variant="filled"
+                                                size="sm"
+                                                className="hidden lg:inline-block py-2 px-5 text-sm"
+                                            >
+                                                <span><FaRegUser className="inline ml-2" />پنل کاربری</span>
+                                            </Button>
+
+                                        </Link>
+                                        <span className=" cursor-pointer" onClick={LogoutHandler}><TbLogout2 className="inline mx-2"/>خروج</span>
+                                    </>
+                                ) : (
+
+                                    <Link to={'/login'}>
+                                        <Button
+                                            variant="filled"
+                                            size="sm"
+                                            className="hidden lg:inline-block py-2 px-5 text-sm"
+                                        >
+                                            <span><FaRegUser className="inline ml-2" />ورود / ثبت نام</span>
+
+                                        </Button>
+
+                                    </Link>
+                                )
+                            }
                         </div>
                         <IconButton
                             variant="text"
