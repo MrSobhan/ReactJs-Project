@@ -28,13 +28,16 @@ export function NavbarDefault() {
     const [isLoginUser, setIsLoginUser] = useState(false)
 
     useEffect(() => {
-        if (authContext.getLocalStorage('token')) {
-            setIsLoginUser(true)
-        }
+
+        authContext.isLogin() && setIsLoginUser(true)
+        
     }, [])
 
-    const LogoutHandler = ()=>{
-        if(authContext.LogOut()){
+    // ! Logout
+
+    const LogoutHandler = async ()=>{
+        const checkLogOut = await authContext.LogOut()
+        if(checkLogOut){
             setIsLoginUser(false)
         }
     }

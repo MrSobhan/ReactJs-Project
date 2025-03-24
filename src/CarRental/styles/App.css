@@ -82,6 +82,18 @@ span >.w-0\.5 {
     display: none !important;
 }
 
-.swal-button{
-    margin: 0 auto !important;
+.swal-footer{
+    text-align: center !important;
+}
+
+.swal-modal{
+    border-radius: 30px;
+}
+
+.swal-button {
+    background-color: black;
+}
+
+.swal-button--cancel{
+    background-color: white !important;
 }

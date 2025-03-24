@@ -21,44 +21,38 @@ const App = () => {
   const calcuteRelativeTimeDifference = (createdAt) => {
 
 
-    const publishDate = new Date(createdAt)
-    const newDate = new Date()
+    // const publishDate = new Date(createdAt)
+    // const newDate = new Date()
 
-    let relativeTime = null
+    // console.log(newDate);
+    
 
-    let miliSecond = newDate - publishDate
-    relativeTime = Math.floor((miliSecond / 3600000))
+    // let relativeTime = null
 
-    let TimeReturn = relativeTime > 24 ? (Math.floor(relativeTime / 24) + ' روز پیش') : (relativeTime + 'ساعت پیش ')
+    // let miliSecond = newDate - publishDate
+    // relativeTime = Math.floor((miliSecond / 3600000))
 
-    return TimeReturn;
+    // let TimeReturn = relativeTime > 24 ? (Math.floor(relativeTime / 24) + ' روز پیش') : (relativeTime + 'ساعت پیش ')
+
+    return createdAt.slice(0 , 10);
 
   }
+  const isLogin = () => {
+    let IsToken = getLocalStorage('token') && getLocalStorage('token').length == 10
 
-  
-  const isLogin = async () => {
-    let IsToken = getLocalStorage('token')
-
-    if (IsToken) {
-
-      IsToken = IsToken.length == 10 ? true : false
-    }
-
-    console.log("jjjj" , IsToken)
-
-    return IsToken == null || IsToken == false ? false : true
+    return IsToken === null ? false : true
   }
-
-
-
   const LogOut = async () => {
-    swal({
+    let isTrueLogout = false
+    await swal({
       title: "آیا از خروج مطمئن هستید؟",
       icon: "warning",
       buttons: ["خیر", "بله"]
     }).then(async (result) => {
       if (result) {
         localStorage.removeItem("token");
+        localStorage.removeItem("ID");
+        localStorage.removeItem("Role");
 
         const response = await fetch(`${baseUrl}/logout`, {
           method: "POST",
@@ -68,12 +62,11 @@ const App = () => {
             "accept": "application/json"
           }
         });
+        
 
 
-        const json = await response.json();
-
-
-        if (json) {
+        if (response.status === 200) {
+          isTrueLogout = true
           swal({
             title: "با موفقیت خارج شدید",
             icon: "success",
@@ -83,6 +76,9 @@ const App = () => {
 
       }
     });
+
+    return isTrueLogout
+
   }
 
   return (

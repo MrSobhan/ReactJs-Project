@@ -30,23 +30,18 @@ function Singup() {
     const [passInput, setPassInput] = useState('')
 
     const SingupHandler = async () => {
-        console.log(usernameInput,
-            nameInput,
-            emailInput,
-            phoneInput,
-            nationalIDInput,
-            passInput);
-
         setLoadingSub(true)
 
+
+
         const singUpInfoJson = {
-            "name_prefix": " ",
-            "first_name": nameInput,
-            "middle_name": " ",
-            "last_name": " ",
-            "name_suffix": " ",
+            "name_prefix": null,
+            "first_name": nameInput.split(' ')[0],
+            "middle_name": null,
+            "last_name": nameInput.split(' ')[1],
+            "name_suffix": null,
             "gender": "مرد",
-            "birthday": " ",
+            "birthday": "1380/11/11",
             "national_id": nationalIDInput,
             "phone": phoneInput,
             "username": usernameInput,
@@ -66,26 +61,55 @@ function Singup() {
             body: JSON.stringify(singUpInfoJson),
         });
 
-        const json = await response.json();
+        if (response.status === 200) {
 
-        console.log(json);
-        
-
-        if (json) {
-            setLoadingSub(false)
-
-            // * Set Token
-            // const tokenFakeLogin = String(Math.floor(Math.random() * 9999999999) + 1000000000)
-            // authContext.setLocalStorage('token', tokenFakeLogin)
+            const loginInfoJson = {
+                "username": usernameInput,
+                "password": passInput
+            }
 
 
-            // swal({
-            //     title: "با موفقیت لاگین شدید",
-            //     icon: "success",
-            //     buttons: "ورود به پنل",
-            // }).then((value) => {
-            //     navigate("/");
-            // });
+            const responseLogin = await fetch(`${authContext.baseUrl}/login`, {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                    "accept": "application/json"
+                },
+                body: JSON.stringify(loginInfoJson),
+            });
+
+
+            if (responseLogin.status === 200) {
+                responseLogin.json().then(dataLogin => {
+                    setLoadingSub(false)
+
+
+                    const tokenFakeLogin = String(Math.floor(Math.random() * 9999999999) + 1000000000)
+                    authContext.setLocalStorage('token', tokenFakeLogin)
+                    authContext.setLocalStorage('ID', dataLogin.id)
+                    authContext.setLocalStorage('Role', dataLogin.role)
+
+
+                    swal({
+                        title: "با موفقیت لاگین شدید",
+                        icon: "success",
+                        buttons: "ورود به پنل",
+                    }).then((value) => {
+                        navigate("/");
+                    });
+
+                });
+
+            }
+
+        } else {
+            swal({
+                title: response.detail,
+                icon: "warning",
+                buttons: "تلاش مجدد",
+            })
+
         }
 
 
@@ -172,7 +196,7 @@ function Singup() {
                                         className: "hidden",
                                     }}
                                     value={usernameInput}
-                                    onChange={(e)=>setUserNameInput(e.target.value)}
+                                    onChange={(e) => setUserNameInput(e.target.value)}
                                 />
                             </div>
                             <div>
@@ -197,7 +221,7 @@ function Singup() {
                                         className: "hidden",
                                     }}
                                     value={emailInput}
-                                    onChange={(e)=>setEmailInput(e.target.value)}
+                                    onChange={(e) => setEmailInput(e.target.value)}
                                 />
                             </div>
                             <div>
@@ -222,7 +246,7 @@ function Singup() {
                                         className: "hidden",
                                     }}
                                     value={nationalIDInput}
-                                    onChange={(e)=>setNationalIDInput(e.target.value)}
+                                    onChange={(e) => setNationalIDInput(e.target.value)}
                                 />
                             </div>
                             <div>
@@ -247,7 +271,7 @@ function Singup() {
                                         className: "hidden",
                                     }}
                                     value={phoneInput}
-                                    onChange={(e)=>setPhoneInput(e.target.value)}
+                                    onChange={(e) => setPhoneInput(e.target.value)}
                                 />
                             </div>
                             <div>
@@ -272,7 +296,7 @@ function Singup() {
                                         className: "hidden",
                                     }}
                                     value={passInput}
-                                    onChange={(e)=>setPassInput(e.target.value)}
+                                    onChange={(e) => setPassInput(e.target.value)}
                                 />
                             </div>
                             <Button size="lg" color="gray" className="py-3" fullWidth onClick={SingupHandler}>

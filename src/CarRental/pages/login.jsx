@@ -25,15 +25,11 @@ function Login() {
   const navigate = useNavigate();
 
   const LoginHandler = async () => {
-    console.log(usernameInput,
-      passInput);
-
-      setLoadingSub(true)
+    setLoadingSub(true)
 
     const loginInfoJson = {
-      "username": "amirj",
-      "password": "StringStringString1@",
-      "role": "SuperAdmin"
+      "username": "amirj", //rezat
+      "password": "StringStringString1@"
     }
 
 
@@ -47,24 +43,29 @@ function Login() {
       body: JSON.stringify(loginInfoJson),
     });
 
-    // if (!response.ok) {
-    //   throw new Error(`Response status: ${response.status}`);
-    // }
-
-    const json = await response.json();
 
 
-    if (json) {
-      setLoadingSub(false)
-      const tokenFakeLogin = String(Math.floor(Math.random() * 9999999999) + 1000000000)
-      authContext.setLocalStorage('token' , tokenFakeLogin)
-      swal({
-        title: "با موفقیت لاگین شدید",
-        icon: "success",
-        buttons: "ورود به پنل",
-      }).then((value) => {
-        navigate("/");
+    if (response.status === 200) {
+      response.json().then(dataLogin => {
+        setLoadingSub(false)
+
+
+        const tokenFakeLogin = String(Math.floor(Math.random() * 9999999999) + 1000000000)
+        authContext.setLocalStorage('token', tokenFakeLogin)
+        authContext.setLocalStorage('ID', dataLogin.id)
+        authContext.setLocalStorage('Role', dataLogin.role)
+
+
+        swal({
+          title: "با موفقیت لاگین شدید",
+          icon: "success",
+          buttons: "ورود به پنل",
+        }).then((value) => {
+          navigate("/");
+        });
+
       });
+
     }
 
 
@@ -156,7 +157,7 @@ function Login() {
                 />
               </div>
               <Button size="lg" color="gray" className="py-3" fullWidth onClick={LoginHandler}>
-              {loadingSub ? <Spinner className=" inline h-4 w-4"/> : ''} ورود 
+                {loadingSub ? <Spinner className=" inline h-4 w-4" /> : ''} ورود
               </Button>
               <div className="h-12 w-12 rounded-full mx-auto flex items-center justify-center border-2 border-solid border-gray-300 cursor-pointer">
                 <FcGoogle className="text-2xl" />

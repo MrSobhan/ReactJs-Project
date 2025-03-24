@@ -8,24 +8,23 @@ import { FeatureSection } from "../Components/Features/Features";
 import CardSlider from "../Components/Slider/Slider";
 import About from "../Components/About/About";
 import Contact from "../Components/Contact/Contact";
+import CarSlider from "../Components/CarSlider/CarSlider";
 
 // import "./index.css";
 export default function Home() {
   return (
     <>
       <NavbarDefault />
-      <main>
-        <Header />
-        {/* <KpiCardSection /> */}
-        <About/>
-        <CardSlider />
-
-        <FeatureSection />
-        <CardSlider />
-        <BlogSection />
-        <Contact/>
-        <DefaultAccordion />
-      </main>
+      <Header />
+      <About />
+      {/* <CardSlider /> */}
+      <CarSlider />
+      <FeatureSection />
+      {/* <CardSlider /> */}
+      <CarSlider />
+      <BlogSection />
+      <Contact />
+      <DefaultAccordion />
       <Footer />
     </>
   );

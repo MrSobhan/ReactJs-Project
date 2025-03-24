@@ -1,4 +1,6 @@
+import React, { useEffect, useContext, useState } from 'react';
 import { Typography, Card, CardBody } from "@material-tailwind/react";
+import AuthContext from "../../context/authContext";
 
 
 function ContentCard({ img, title, desc }) {
@@ -53,6 +55,26 @@ const contents = [
 ];
 
 export function BlogSection() {
+
+  // const authContext = useContext(AuthContext)
+  // const [contents, setContents] = useState([])
+
+
+  // useEffect(() => {
+  //   fetchBlog()
+  // }, [])
+
+  // const fetchBlog = async () => {
+  //   const response = await fetch(`${authContext.baseUrl}/posts`);
+
+  //   const allBlog = await response.json();
+
+
+  //   if (response.status === 200) {
+  //     setContents(allBlog)
+  //   }
+  // }
+
   return (
     <section className="container mx-auto px-8 py-10 lg:py-28">
       <h3 className="titleSlider lalezar mr-3">وبلاگ ها</h3>
