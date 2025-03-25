@@ -87,7 +87,7 @@ export function NavbarDefault() {
                             {
                                 isLoginUser ? (
                                     <>
-                                        <Link to={'/panel'}>
+                                        <Link to={'/p-admin/'}>
                                             <Button
                                                 variant="filled"
                                                 size="sm"
@@ -95,7 +95,6 @@ export function NavbarDefault() {
                                             >
                                                 <span><FaRegUser className="inline ml-2" />پنل کاربری</span>
                                             </Button>
-
                                         </Link>
                                         <span className=" cursor-pointer" onClick={LogoutHandler}><TbLogout2 className="inline mx-2"/>خروج</span>
                                     </>

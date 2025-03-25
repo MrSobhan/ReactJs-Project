@@ -64,13 +64,23 @@ export function Contact() {
           title: "با موفقیت نظر شما ثبت شد",
           icon: "success",
         })
+      } else {
+        setLoadingSub(false)
+        swal({
+          title: "ارسال نظرات شما به مشکل خورد...",
+          icon: "error",
+          buttons: "تلاش مجدد",
+        })
       }
     } else {
       setLoadingSub(false)
       swal({
-        title: "لطفا برای ثبت نطر ابتدا وارد شوید",
+        title: "لطفا برای ثبت نظر ابتدا وارد شوید",
         icon: "error",
-      })
+        buttons: "صفحه ورود",
+      }).then((value) => {
+        navigate("/login");
+      });
     }
 
 
@@ -80,11 +90,10 @@ export function Contact() {
     const resComments = await fetch(`${authContext.baseUrl}/comments`);
 
     resComments.json().then(comment => {
-      setComments(comment);
+      const commentsData = comment.reverse().slice(0, 6)
+      // console.log(commentsData);
 
-      console.log(comment);
-      
-
+      setComments(commentsData);
     })
 
 
@@ -200,6 +209,7 @@ export function Contact() {
         </div>
       </div>
       <div className="container mx-auto mt-16">
+        <h3 className="titleSlider lalezar mr-3 mb-16">نظرات شما</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           {
             comments.map((data) => (

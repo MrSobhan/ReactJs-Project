@@ -21,33 +21,57 @@ export default function Sidebar() {
           </NavLink>
         </li>
         <li className="active">
-          <NavLink to="/products">
+          <NavLink to="admins">
             <MdProductionQuantityLimits className="icon" />
-            محصولات
+            ادمین ها 
           </NavLink>
         </li>
         <li>
-          <NavLink to="/comments">
+          <NavLink to="customers">
             <BiCommentDetail className="icon" />
-            کامنت ها
+            مشتریان
           </NavLink>
         </li>
         <li>
-          <NavLink to="/users">
+          <NavLink to="vehicles">
             <FiUsers className="icon" />
-            کاربران
+            خودرو ها
           </NavLink>
         </li>
         <li>
-          <NavLink to="/orders">
+          <NavLink to="vehicleInsurances">
               <BsBagCheck className="icon" />
-              سفارشات
+              بیمه خودرو
           </NavLink>
         </li>
         <li>
-          <NavLink to="/offs">
+          <NavLink to="invoices">
               <BsCurrencyDollar className="icon" />
-              تخفیف ها
+             فاکتور
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="rentals">
+              <BsCurrencyDollar className="icon" />
+              اجارات
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="payments">
+              <BsCurrencyDollar className="icon" />
+              پرداختی ها
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="posts">
+              <BsCurrencyDollar className="icon" />
+              وبلاگ
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="comments">
+              <BsCurrencyDollar className="icon" />
+              کامنت ه
           </NavLink>
         </li>
       </ul>

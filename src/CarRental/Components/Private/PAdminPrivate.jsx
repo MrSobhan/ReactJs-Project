@@ -9,10 +9,9 @@ export default function PAdminPrivate({ children }) {
 
   return (
       <>
-        {/* {
-            authContext.userInfos.role === 'ADMIN' ? <>{children}</> : navigate('/login')
-        } */}
-        <>{children}</>
+        {
+            authContext.getLocalStorage('Role') == 'SuperAdmin' ? <>{children}</> : navigate('/login')
+        }
       </>
   )
 }

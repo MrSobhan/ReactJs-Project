@@ -1,3 +1,9 @@
+:root{
+    --white : white;
+    --primary-bg : black;
+}
+
+
 @font-face {
     font-family: "iransans";
     src: url(../fonts/IRANSans/IRANSans.ttf);
@@ -92,7 +98,17 @@ span >.w-0\.5 {
 
 .swal-button {
     background-color: black;
+    transition: all .4s;
 }
+.swal-button:hover {
+    background-color: white !important;
+    border: 2px solid black;
+    color: black;
+    box-shadow: none;
+    outline: none;
+    transform: scale(.9);
+}
+
 
 .swal-button--cancel{
     background-color: white !important;

@@ -1,22 +1,37 @@
 import React from 'react';
 import { FaAngleLeft } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
+import { GrStatusGood } from "react-icons/gr";
+import { MdCalendarMonth } from "react-icons/md";
+import { Link } from 'react-router-dom';
 
-const Card = () => {
+const Card = (props) => {
+
     return (
-        <div class="relative flex max-w-72 h-max flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
-            <div class="relative mx-4 -mt-6 h-28 md:h-40 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40 bg-gradient-to-r from-blue-400 to-blue-600">
-            </div>
+        <div class="relative pb-3 flex max-w-72 h-max flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
+            <Link to={'/car/' + props.id}>
+                <div class="relative mx-4 -mt-6 h-28 md:h-40 overflow-hidden rounded-xl shadow-lg shadow-blue-gray-500/40">
+                    <img src={props.local_image_address} alt={props.model} className='h-full w-full cursor-pointer' />
+                </div>
+            </Link>
             <div class="p-6">
-                <h5 class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-                    Tailwind card
+                <h5 class="mb-2 block font-sans text-xl text-end font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+                    {props.brand} {props.model}
                 </h5>
-                <p class=" hidden md:block font-sans text-sm font-light leading-relaxed text-inherit antialiased">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc felis ligula.
+                <p class=" hidden md:block font-sans text-xl font-light leading-relaxed text-inherit antialiased lalezar">
+                    {props.hourly_rental_rate.toLocaleString()} <sub className='text-sm'>تومان</sub> در هر ساعت
                 </p>
+                <div className="flex flex-col gap-y-3 mt-4">
+                    <p className='font-bold'><GrStatusGood className='inline' /> وضعیت : {props.status}</p>
+                    <p className='font-bold'><MdCalendarMonth className='inline' /> سال ساخت : {props.year}</p>
+                </div>
             </div>
-            <div class="p-2 pt-0 w-full md:px-4">
-                <button data-ripple-light="true"  type="button" class="w-full  select-none rounded-lg bg-blue-gray-800 py-3 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-gray-500 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none flex items-center justify-center gap-x-3">
-                    اطلاعات بیشتر<FaAngleLeft />
+            <div class="p-2 md:ml-20 pt-0 w-full md:px-4 flex items-center justify-start gap-x-3">
+                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md font-bold text-sm lg:text-md'>
+                    <FaLocationDot className='inline' /> {props.location}
+                </button>
+                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md font-bold text-sm lg:text-md'>
+                    تحویل در محل
                 </button>
             </div>
         </div>

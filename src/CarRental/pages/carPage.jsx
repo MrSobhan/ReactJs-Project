@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { NavbarDefault } from '../Components/Navbar/Navbar';
 import { Footer } from '../Components/Footer/Footer';
 import DefaultAccordion from '../Components/FAQs/FAQs';
+import { useParams } from 'react-router-dom';
+import AuthContext from "../context/authContext";
+
 import {
     Timeline,
     TimelineItem,
@@ -24,30 +27,39 @@ import { IoIosApps, IoIosTimer } from "react-icons/io";
 import { PiStarFill, PiStarBold } from "react-icons/pi";
 
 const CarPage = () => {
+    const authContext = useContext(AuthContext)
+    const { carId } = useParams()
+    const [singleCarData, setSingleCarData] = useState([])
+
+    useEffect(() => {
+        getOneCar()
+    }, [])
+
+    const getOneCar = async () => {
+        const response = await fetch(`${authContext.baseUrl}/vehicles/${carId}`);
+
+        const carRes = await response.json();
+
+        if (response.status === 200) {
+            console.log(carRes);
+
+            setSingleCarData(carRes)
+        }
+    }
     return (
         <>
             <NavbarDefault />
             <div className="container mx-auto lg:w-[80%] w-[90%] pt-24">
                 <Carousel className="rounded-xl w-full overflow-hidden mb-14">
                     <img
-                        src="/carReantal/f2.jpg"
+                        src={singleCarData.local_image_address}
                         alt="image 1"
-                        className="max-h-[600px] w-full object-cover"
-                    />
-                    <img
-                        src="/carReantal/f2.jpg"
-                        alt="image 2"
-                        className="max-h-[600px] w-full object-cover"
-                    />
-                    <img
-                        src="/carReantal/f2.jpg"
-                        alt="image 3"
                         className="max-h-[600px] w-full object-cover"
                     />
                 </Carousel>
                 <div className="lg:mb-16 mb-4 container mx-auto grid lg:gap-x-8 gap-y-8 grid-cols-1 lg:grid-cols-3 gap-x-4 w-full relative">
                     <div className=" col-span-1 md:col-span-2 shadow-lg rounded-xl py-9 px-7 h-max flex flex-col gap-y-10">
-                        <h1 className='text-3xl'>هیوندای اچ ۳۵۰ <sub className='text-lg'>(۲۰۱۹ - ۱۳۹۸)</sub></h1>
+                        <h1 className='text-3xl'>{singleCarData.brand} {singleCarData.model}<sub className='text-lg'>(۲۰۱۹ - {singleCarData.year})</sub></h1>
                         <div className='flex items-center justify-start gap-x-2'>
                             <span>نظرات کاربران : <PiStarFill className='inline mx-0 text-lg text-yellow-600' /><PiStarFill className='inline mx-0 text-lg text-yellow-600' /><PiStarFill className='inline mx-0 text-lg text-yellow-600' /><PiStarFill className='inline mx-0 text-lg text-yellow-600' /><PiStarBold className='inline mx-0 text-lg' /></span>
                         </div>
@@ -65,11 +77,11 @@ const CarPage = () => {
                                         </Typography>
                                     </TimelineHeader>
                                     <TimelineBody className="pb-8">
-                                        <Typography color="gary" className="font-normal text-gray-600">
-                                            The key to more success is to have a lot of pillows. Put it this way, it took me
-                                            twenty five years to get these plants, twenty five years of blood sweat and tears, and
-                                            I&apos;m never giving up, I&apos;m just getting started. I&apos;m up to something. Fan
-                                            luv.
+                                        <Typography color="gary" className="font-blod mt-3 text-gray-600">
+                                            استان {singleCarData.location}
+                                        </Typography>
+                                        <Typography color="gary" className="font-blod mt-3 text-gray-600">
+                                            وضعیت خودرو : {singleCarData.status}
                                         </Typography>
                                     </TimelineBody>
                                 </TimelineItem>
@@ -85,10 +97,35 @@ const CarPage = () => {
                                     </TimelineHeader>
                                     <TimelineBody className="pb-8">
                                         <Typography color="gary" className="font-normal text-gray-600">
-                                            The key to more success is to have a lot of pillows. Put it this way, it took me
-                                            twenty five years to get these plants, twenty five years of blood sweat and tears, and
-                                            I&apos;m never giving up, I&apos;m just getting started. I&apos;m up to something. Fan
-                                            luv.
+                                            🔴 گواهینامه معتبر. <br/>
+                                            🟠 افراد بالای ۲۴ سال. 🚻<br/>
+                                            🔘 مدارک شغلی و سکونتی. 📜<br/>
+                                            🟤 چک یا سفته به مبلغ ماشین. 📝<br/>
+                                            🟣 بیمه‌نامه اجاره فقط طرح الماس 🗒<br/>
+                                            ⚪️ ودیعه نقدی به مبلغ: ۷ میلیون تومان 💵<br/>
+                                            🔵 تحویل خودرو در کرج مهرشهر رایگان میباشد 🆓<br/>
+                                            🟢 تحویل یکطرفه درب منزل کرج (۲۵۰ت)🏛<br/>
+                                            🟡تحویل یکطرفه درب منزل در داخل تهران (۵۰۰ت)🏡<br/>
+                                            🟣 تحویل یکطرفه فرودگاه امام خمینی (۶۵۰ت) ✈️<br/>
+                                            🟥 ساعت تحویل درب منزل از ۹:۳۰ الی ۱۸:۰۰ میباشد ⏰️<br/>
+                                            ⛔️ محدودیت مسافت هر ۱ روز ۲۰۰ کیلومتر میباشد⛔️<br/>
+                                            شرایط لغو رزرو:<br/>
+                                            در روزهای عادی:<br/>
+                                            یک روز مانده به روز تحویل: ٪۲۵ مبلغ اجاره<br/>
+                                            از زمان رزرو تا ۲ روز قبل از روز تحویل: ٪۱۵ مبلغ اجاره<br/>
+                                            از زمان رزرو تا ۳ روز قبل از روز تحویل: ٪۵ مبلغ اجاره<br/>
+                                            بیشتر از ۳ روز مانده به روز تحویل: بدون جریمه<br/>
+<br/>
+<br/>
+                                            در تعطیلات:<br/>
+                                            یک روز مانده به روز تحویل: ٪۵۰ مبلغ اجاره<br/>
+                                            از زمان رزرو تا ۲ روز قبل از روز تحویل: ٪۲۵ مبلغ اجاره<br/>
+                                            از زمان رزرو تا ۳ روز قبل از روز تحویل: ٪۱۰ مبلغ اجاره<br/>
+                                            بیشتر از ۳ روز مانده به روز تحویل: ٪۵ مبلغ اجاره<br/>
+
+                                            تعطیلات نوروز: ( رزروهای۲۵ اسفند تا ۱۵ فروردین<br/>
+                                            از زمان رزرو تا ۷ روز مانده به روز تحویل ۳۰٪ مبلغ اجاره<br/>
+                                            کمتر از ۷ روز مانده به روز تحویل ۵۰٪ مبلغ اجاره<br/>
                                         </Typography>
                                     </TimelineBody>
                                 </TimelineItem>
@@ -103,10 +140,11 @@ const CarPage = () => {
                                     </TimelineHeader>
                                     <TimelineBody>
                                         <Typography color="gary" className="font-normal text-gray-600">
-                                            The key to more success is to have a lot of pillows. Put it this way, it took me
-                                            twenty five years to get these plants, twenty five years of blood sweat and tears, and
-                                            I&apos;m never giving up, I&apos;m just getting started. I&apos;m up to something. Fan
-                                            luv.
+                                            محدودیت مسافت: ۶۰۰ کیلومتر برای 3 روز<br />
+
+                                            هزینه هر کیلومتر اضافه: ۶,۰۰۰ تومان<br />
+
+                                            جریمه هر ساعت دیرکرد در بازتحویل: ۵۰,۰۰۰ تومان
                                         </Typography>
                                     </TimelineBody>
                                 </TimelineItem>
@@ -121,10 +159,29 @@ const CarPage = () => {
                                     </TimelineHeader>
                                     <TimelineBody>
                                         <Typography color="gary" className="font-normal text-gray-600">
-                                            The key to more success is to have a lot of pillows. Put it this way, it took me
-                                            twenty five years to get these plants, twenty five years of blood sweat and tears, and
-                                            I&apos;m never giving up, I&apos;m just getting started. I&apos;m up to something. Fan
-                                            luv.
+                                            <div class="p-2 pt-0 w-full flex items-center justify-start gap-3 flex-wrap">
+                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md font-bold text-sm lg:text-md'>
+                                                    {singleCarData.location}
+                                                </button>
+                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md font-bold text-sm lg:text-md'>
+                                                    تحویل در محل
+                                                </button>
+                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md font-bold text-sm lg:text-md'>
+                                                    ارزان
+                                                </button>
+                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md font-bold text-sm lg:text-md'>
+                                                    رزرو خودرو
+                                                </button>
+                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md font-bold text-sm lg:text-md'>
+                                                    ایران
+                                                </button>
+                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md font-bold text-sm lg:text-md'>
+                                                    اجاره خودرو
+                                                </button>
+                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md font-bold text-sm lg:text-md'>
+                                                    نو
+                                                </button>
+                                            </div>
                                         </Typography>
                                     </TimelineBody>
                                 </TimelineItem>
@@ -358,9 +415,9 @@ const CarPage = () => {
                                     </p>
                                 </div>
                                 <div class="flex items-center flex-col mt-4">
-                                    <p title="name/نام" class="text-black font-Roboto-md text-3xl lalezar">14,500,000<sup className='text-xs text-blue-gray-600'>تومان</sup></p>
+                                    <p title="name/نام" class="text-black font-Roboto-md text-3xl lalezar">{Number(singleCarData.hourly_rental_rate).toLocaleString()}<sup className='text-xs text-blue-gray-600'>تومان</sup></p>
                                     <p title="bio/بیوگرافی" class="text-xs text-gray-500 font-medium">
-                                        در هر روز
+                                        در هر ساعت
                                     </p>
                                 </div>
 

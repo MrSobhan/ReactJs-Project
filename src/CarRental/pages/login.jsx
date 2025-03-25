@@ -28,7 +28,7 @@ function Login() {
     setLoadingSub(true)
 
     const loginInfoJson = {
-      "username": "amirj", //rezat
+      "username": "amirj", //rezat  amirj
       "password": "StringStringString1@"
     }
 
@@ -66,6 +66,13 @@ function Login() {
 
       });
 
+    }else{
+      setLoadingSub(false)
+      swal({
+        title: "رمز ورود اشتباه است.",
+        icon: "error",
+        buttons: "تلاش مجدد",
+        })
     }
 
 
