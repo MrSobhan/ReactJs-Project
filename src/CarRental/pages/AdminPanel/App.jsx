@@ -18,7 +18,9 @@ export default function App() {
       <div className="main">
         <Header />
 
-        <Outlet />
+        <div className="container p-10">
+          <Outlet />
+        </div>
       </div>
     </>
   );

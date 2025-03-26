@@ -116,7 +116,24 @@ const Vehicles = () => {
                                     <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
                                         مکان
                                     </Typography>
-                                    <Input color="gray" size="lg" name="location" value={formData.location} onChange={handleChange} />
+                                    <Select name="city" value={formData.location} onChange={(val) => setFormData({ ...formData, location: val })}>
+                                        <Option value="تهران">تهران</Option>
+                                        <Option value="مشهد">مشهد</Option>
+                                        <Option value="اصفهان">اصفهان</Option>
+                                        <Option value="شیراز">شیراز</Option>
+                                        <Option value="تبریز">تبریز</Option>
+                                        <Option value="کیش">کیش</Option>
+                                        <Option value="قم">قم</Option>
+                                        <Option value="اهواز">اهواز</Option>
+                                        <Option value="رشت">رشت</Option>
+                                        <Option value="کرمان">کرمان</Option>
+                                        <Option value="همدان">همدان</Option>
+                                        <Option value="یزد">یزد</Option>
+                                        <Option value="ارومیه">ارومیه</Option>
+                                        <Option value="بندرعباس">بندرعباس</Option>
+                                        <Option value="بوشهر">بوشهر</Option>
+                                    </Select>
+
                                 </div>
                             </div>
 
