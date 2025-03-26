@@ -15,7 +15,7 @@ export default function Sidebar() {
 
       <ul className="sidebar-links">
         <li>
-          <NavLink to="/">
+          <NavLink to="vehicles">
             <AiOutlineHome className="icon" />
             صفحه اصلی
           </NavLink>
@@ -71,7 +71,7 @@ export default function Sidebar() {
         <li>
           <NavLink to="comments">
               <BsCurrencyDollar className="icon" />
-              کامنت ه
+              کامنت ها
           </NavLink>
         </li>
       </ul>
