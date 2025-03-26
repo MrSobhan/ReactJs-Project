@@ -29,7 +29,7 @@ function Login() {
     setLoadingSub(true)
 
     const loginInfoJson = {
-      "username": "amirj", //rezat  amirj
+      "username": "amirj", //rezat  amirj alim
       "password": "StringStringString1@"
     }
 

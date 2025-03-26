@@ -33,6 +33,18 @@ const Vehicles = () => {
         getAllVehicles()
     }, [])
 
+    const carBrands = [
+        "تویوتا", "فورد", "هوندا", "بی ام و", "مرسدس بنز", "آودی", "شورلت", "نیسان",
+        "فولکس‌واگن", "هیوندای", "کیا", "سابارو", "مازدا", "ولوا", "لند روور", "جیپ",
+        "پورشه", "فيات", "لکسوس", "دوج", "اکورا", "اینفینیتی", "جی ام سی", "اسمارت",
+        "منی", "رنو", "پوژو", "سیتروئن", "سئات", "اسکودا", "مازراتی", "فراری",
+        "لامبورگینی", "بوگاتی", "تسلا", "سوزوکی", "اوپل", "میتسوبیشی", "ایزوزو",
+        "دایو", "ام‌جی", "گریت وال", "بی‌وای‌دی", "چری", "جیلی", "فیسکِر",
+        "رولز رویس", "بنتلی", "استون مارتین", "آلفا رومئو", "لادا", "دایهاتسو",
+        "کریسلر", "پانتیاک", "سیان"
+    ];
+
+
     const getAllVehicles = async () => {
         const response = await fetch(`${authContext.baseUrl}/vehicles`);
 
@@ -142,7 +154,15 @@ const Vehicles = () => {
                                     <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
                                         برند خودرو
                                     </Typography>
-                                    <Input color="gray" size="lg" name="brand" value={formData.brand} onChange={handleChange} />
+                                    <Select
+                                        name="carBrand"
+                                        value={formData.brand}
+                                        onChange={(val) => setFormData({ ...formData, brand: val })}
+                                    >
+                                        {carBrands.map((brand, index) => (
+                                            <Option key={index} value={brand}>{brand}</Option>
+                                        ))}
+                                    </Select>
                                 </div>
                                 <div>
                                     <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
