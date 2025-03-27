@@ -3,6 +3,7 @@ import { Card, Typography, Spinner, Button } from "@material-tailwind/react";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import AuthContext from "../../context/authContext";
+import swal from "sweetalert";
 
 const TABLE_HEAD = ["موضوع", "محتوا", "وضعیت", "شناسه مشتری", ""];
 
@@ -29,6 +30,35 @@ const Comments = () => {
             setCommentsData(commentsRes)
         }
         console.log("Fetching customers...");
+    };
+
+    const handleDelete = async (id) => {
+        swal({
+            title: "آیا مطمئن هستید؟",
+            text: "این عملیات قابل بازگشت نیست!",
+            icon: "warning",
+            buttons: ["لغو", "حذف"],
+            dangerMode: true,
+        }).then(async (willDelete) => {
+            if (willDelete) {
+                const response = await fetch(`${authContext.baseUrl}/comments/${id}`, {
+                    method: "DELETE",
+                    credentials: "include",
+                });
+
+                if (response.status === 200) {
+                    swal("کامنت با موفقیت حذف شد!", { icon: "success" });
+                    getAllComments();
+                } else {
+                    swal("خطا در حذف", { icon: "error" });
+                }
+            }
+        });
+    };
+
+    const handleEdit = (comment) => {
+        console.log(comment);
+        
     };
 
     return (
@@ -81,10 +111,10 @@ const Comments = () => {
                                                 </Typography>
                                             </td>
                                             <td className={classes}>
-                                                <button className="p-2 ml-2 pl-3 rounded-full bg-blue-gray-900 text-white text-xl">
+                                                <button className="p-2 ml-2 pl-3 rounded-full bg-blue-gray-900 text-white text-xl"  onClick={() => handleEdit(comment)}>
                                                     <FaEdit />
                                                 </button>
-                                                <button className="p-2 rounded-full bg-red-600 text-white text-xl">
+                                                <button className="p-2 rounded-full bg-red-600 text-white text-xl" onClick={() => handleDelete(comment.id)}>
                                                     <MdDelete />
                                                 </button>
                                             </td>

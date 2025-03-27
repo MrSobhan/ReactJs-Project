@@ -67,18 +67,25 @@ const Admins = () => {
     }, [])
 
     const getAllAdmins = async () => {
-        // const response = await fetch(`${authContext.baseUrl}/admins`);
+        const response = await fetch(`${authContext.baseUrl}/admins` , {
+            method: "GET",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+                "accept": "application/json"
+            },
+        });
 
-        // const adminsRes = await response.json();
+        const adminsRes = await response.json();
 
-        // console.log(adminsRes);
+        console.log(adminsRes);
 
 
-        // if (response.status === 200) {
-        //     setLoaderAdmin(false)
-        //     setAdminsData(adminsRes)
-        // }
-        console.log("admin");
+        if (response.status === 200) {
+            setLoaderAdmin(false)
+            setAdminsData(adminsRes)
+        }
+        console.log(response);
 
     }
 
@@ -128,6 +135,37 @@ const Admins = () => {
             })
         }
     };
+
+    
+    const handleDelete = async (id) => {
+        swal({
+            title: "آیا مطمئن هستید؟",
+            text: "این عملیات قابل بازگشت نیست!",
+            icon: "warning",
+            buttons: ["لغو", "حذف"],
+            dangerMode: true,
+        }).then(async (willDelete) => {
+            if (willDelete) {
+                const response = await fetch(`${authContext.baseUrl}/admins/${id}`, {
+                    method: "DELETE",
+                    credentials: "include",
+                });
+
+                if (response.status === 200) {
+                    swal("ادمین با موفقیت حذف شد!", { icon: "success" });
+                    getAllAdmins();
+                } else {
+                    swal("خطا در حذف ادمین", { icon: "error" });
+                }
+            }
+        });
+    };
+
+    const handleEdit = (admin) => {
+        console.log(admin);
+        
+    };
+
 
     return (
         <>
@@ -349,8 +387,8 @@ const Admins = () => {
                                                         color="blue-gray"
                                                         className="font-medium"
                                                     >
-                                                        <button className='p-2 ml-2 pl-3 rounded-full bg-blue-gray-900 text-white text-xl'><FaEdit /></button>
-                                                        <button className='p-2 rounded-full bg-blue-gray-900 text-white text-xl'><MdDelete /></button>
+                                                        <button className='p-2 ml-2 pl-3 rounded-full bg-blue-gray-900 text-white text-xl' onClick={() => handleEdit(admin)}><FaEdit /></button>
+                                                        <button className='p-2 rounded-full bg-blue-gray-900 text-white text-xl' onClick={() => handleDelete(admin.id)}><MdDelete /></button>
                                                     </Typography>
                                                 </td>
                                             </tr>

@@ -83,6 +83,35 @@ const Posts = () => {
         });
     }
 
+    const handleDelete = async (id) => {
+        swal({
+            title: "آیا مطمئن هستید؟",
+            text: "این عملیات قابل بازگشت نیست!",
+            icon: "warning",
+            buttons: ["لغو", "حذف"],
+            dangerMode: true,
+        }).then(async (willDelete) => {
+            if (willDelete) {
+                const response = await fetch(`${authContext.baseUrl}/posts/${id}`, {
+                    method: "DELETE",
+                    credentials: "include",
+                });
+
+                if (response.status === 200) {
+                    swal("بلاگ با موفقیت حذف شد!", { icon: "success" });
+                    getAllPosts();
+                } else {
+                    swal("خطا در حذف", { icon: "error" });
+                }
+            }
+        });
+    };
+
+    const handleEdit = (post) => {
+        console.log(post);
+        
+    };
+
     return (
         <>
             {loaderPosts ? (
@@ -148,10 +177,10 @@ const Posts = () => {
                                             </td>
                                             <td className={classes}>{post.admin_id}</td>
                                             <td className={classes}>
-                                                <button className="p-2 ml-2 pl-3 rounded-full bg-blue-gray-900 text-white text-xl">
+                                                <button className="p-2 ml-2 pl-3 rounded-full bg-blue-gray-900 text-white text-xl"  onClick={() => handleEdit(post)}>
                                                     <FaEdit />
                                                 </button>
-                                                <button className="p-2 rounded-full bg-red-600 text-white text-xl">
+                                                <button className="p-2 rounded-full bg-red-600 text-white text-xl" onClick={() => handleDelete(post.id)}>
                                                     <MdDelete />
                                                 </button>
                                             </td>

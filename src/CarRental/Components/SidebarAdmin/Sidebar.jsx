@@ -1,13 +1,10 @@
 import React from "react";
 import { AiOutlineHome } from "react-icons/ai";
-import { MdProductionQuantityLimits } from "react-icons/md";
-import { BiCommentDetail } from "react-icons/bi";
 import { FiUsers } from "react-icons/fi";
-import { BsBagCheck, BsCurrencyDollar } from "react-icons/bs";
 import { NavLink, Link } from "react-router-dom";
 
 import { RiAdminLine  , RiSecurePaymentFill  } from "react-icons/ri";
-import { FaCarSide , FaBook , FaRegCommentDots   } from "react-icons/fa";
+import { FaCarSide , FaRegCommentDots   } from "react-icons/fa";
 import { SiCodefactor } from "react-icons/si";
 import { MdCarRental } from "react-icons/md";
 import { FaRegComments } from "react-icons/fa6";

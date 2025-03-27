@@ -89,6 +89,35 @@ const Customers = () => {
         }
     };
 
+    const handleDelete = async (id) => {
+        swal({
+            title: "آیا مطمئن هستید؟",
+            text: "این عملیات قابل بازگشت نیست!",
+            icon: "warning",
+            buttons: ["لغو", "حذف"],
+            dangerMode: true,
+        }).then(async (willDelete) => {
+            if (willDelete) {
+                const response = await fetch(`${authContext.baseUrl}/customers/${id}`, {
+                    method: "DELETE",
+                    credentials: "include",
+                });
+
+                if (response.status === 200) {
+                    swal("مشتری با موفقیت حذف شد!", { icon: "success" });
+                    getAllCustomers();
+                } else {
+                    swal("خطا در حذف", { icon: "error" });
+                }
+            }
+        });
+    };
+
+    const handleEdit = (vehicles) => {
+        console.log(vehicles);
+        
+    };
+
     return (
         <>
             {
@@ -184,8 +213,8 @@ const Customers = () => {
                                                 <td className={classes}>{customer.address}</td>
                                                 <td className={classes}>{customer.password}</td>
                                                 <td className={classes}>
-                                                    <button className='p-2 ml-2 pl-3 rounded-full bg-blue-gray-900 text-white text-xl'><FaEdit /></button>
-                                                    <button className='p-2 rounded-full bg-red-600 text-white text-xl'><MdDelete /></button>
+                                                    <button className='p-2 ml-2 pl-3 rounded-full bg-blue-gray-900 text-white text-xl'  onClick={() => handleEdit(customer)}><FaEdit /></button>
+                                                    <button className='p-2 rounded-full bg-red-600 text-white text-xl' onClick={() => handleDelete(customer.id)}><MdDelete /></button>
                                                 </td>
                                             </tr>
                                         );

@@ -68,7 +68,7 @@ const Vehicles = () => {
         e.preventDefault();
         setLoading(true);
 
-        const response = await fetch(`${authContext.baseUrl}/login`, {
+        const response = await fetch(`${authContext.baseUrl}/vehicles`, {
             method: "POST",
             credentials: "include",
             headers: {
@@ -104,6 +104,35 @@ const Vehicles = () => {
                 buttons: "تلاش مجدد",
             })
         }
+    };
+
+    const handleDelete = async (id) => {
+        swal({
+            title: "آیا مطمئن هستید؟",
+            text: "این عملیات قابل بازگشت نیست!",
+            icon: "warning",
+            buttons: ["لغو", "حذف"],
+            dangerMode: true,
+        }).then(async (willDelete) => {
+            if (willDelete) {
+                const response = await fetch(`${authContext.baseUrl}/vehicles/${id}`, {
+                    method: "DELETE",
+                    credentials: "include",
+                });
+
+                if (response.status === 200) {
+                    swal("خودرو با موفقیت حذف شد!", { icon: "success" });
+                    getAllVehicles();
+                } else {
+                    swal("خطا در حذف", { icon: "error" });
+                }
+            }
+        });
+    };
+
+    const handleEdit = (vehicles) => {
+        console.log(vehicles);
+        
     };
 
 
@@ -354,8 +383,8 @@ const Vehicles = () => {
                                                         color="blue-gray"
                                                         className="font-medium"
                                                     >
-                                                        <button className='p-2 ml-2 pl-3 rounded-full bg-blue-gray-900 text-white text-xl'><FaEdit /></button>
-                                                        <button className='p-2 rounded-full bg-blue-gray-900 text-white text-xl'><MdDelete /></button>
+                                                        <button className='p-2 ml-2 pl-3 rounded-full bg-blue-gray-900 text-white text-xl'  onClick={() => handleEdit(car)}><FaEdit /></button>
+                                                        <button className='p-2 rounded-full bg-blue-gray-900 text-white text-xl' onClick={() => handleDelete(car.id)}><MdDelete /></button>
                                                     </Typography>
                                                 </td>
                                             </tr>

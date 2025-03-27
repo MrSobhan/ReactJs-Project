@@ -2,6 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import AuthContext from "../../context/authContext";
 import swal from "sweetalert";
 import { Card, Typography, Spinner, Button, Input, Select, Option } from "@material-tailwind/react";
+import { MdDelete } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
+
 
 const TABLE_HEAD = ["تاریخ پرداخت", "روش پرداخت", "شناسه تراکنش", "مبلغ", "وضعیت پرداخت", "فاکتور"];
 
@@ -99,6 +102,35 @@ const Payments = () => {
         });
     };
 
+    const handleDelete = async (id) => {
+        swal({
+            title: "آیا مطمئن هستید؟",
+            text: "این عملیات قابل بازگشت نیست!",
+            icon: "warning",
+            buttons: ["لغو", "حذف"],
+            dangerMode: true,
+        }).then(async (willDelete) => {
+            if (willDelete) {
+                const response = await fetch(`${authContext.baseUrl}/payments/${id}`, {
+                    method: "DELETE",
+                    credentials: "include",
+                });
+
+                if (response.status === 200) {
+                    swal("پرداخت با موفقیت حذف شد!", { icon: "success" });
+                    getAllPayments();
+                } else {
+                    swal("خطا در حذف", { icon: "error" });
+                }
+            }
+        });
+    };
+
+    const handleEdit = (payment) => {
+        console.log(payment);
+
+    };
+
     return (
         <>
             {loader ? (
@@ -180,6 +212,12 @@ const Payments = () => {
                                         <td className="p-4">
                                             <Button size="sm" onClick={() => showInvoiceInfo(payment.invoice)}>نمایش</Button>
                                         </td>
+                                        <button className="p-2 ml-2 pl-3 rounded-full bg-blue-gray-900 text-white text-xl" onClick={() => handleEdit(payment)}>
+                                            <FaEdit />
+                                        </button>
+                                        <button className="p-2 rounded-full bg-red-600 text-white text-xl" onClick={() => handleDelete(payment.id)}>
+                                            <MdDelete />
+                                        </button>
                                     </tr>
                                 ))}
                             </tbody>

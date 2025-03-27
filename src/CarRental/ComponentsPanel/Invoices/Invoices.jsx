@@ -73,6 +73,36 @@ const Invoices = () => {
         }
     };
 
+    const handleDelete = async (id) => {
+        swal({
+            title: "آیا مطمئن هستید؟",
+            text: "این عملیات قابل بازگشت نیست!",
+            icon: "warning",
+            buttons: ["لغو", "حذف"],
+            dangerMode: true,
+        }).then(async (willDelete) => {
+            if (willDelete) {
+                const response = await fetch(`${authContext.baseUrl}/invoices/${id}`, {
+                    method: "DELETE",
+                    credentials: "include",
+                });
+
+                if (response.status === 200) {
+                    swal("فاکتور با موفقیت حذف شد!", { icon: "success" });
+                    getAllInvoices();
+                } else {
+                    swal("خطا در حذف", { icon: "error" });
+                }
+            }
+        });
+    };
+
+    const handleEdit = (invoices) => {
+        console.log(invoices);
+        
+    };
+    
+
     return (
         <>
             {loaderInvoices ? (
@@ -181,10 +211,10 @@ const Invoices = () => {
                                             </td>
                                             <td className={classes}>
                                                 <Typography as="a" href="#" variant="" color="blue-gray" className="font-medium">
-                                                    <button className="p-2 ml-2 pl-3 rounded-full bg-blue-gray-900 text-white text-xl">
+                                                    <button className="p-2 ml-2 pl-3 rounded-full bg-blue-gray-900 text-white text-xl"  onClick={() => handleEdit(invoice)}>
                                                         <FaEdit />
                                                     </button>
-                                                    <button className="p-2 rounded-full bg-blue-gray-900 text-white text-xl">
+                                                    <button className="p-2 rounded-full bg-blue-gray-900 text-white text-xl" onClick={() => handleDelete(invoice.id)}>
                                                         <MdDelete />
                                                     </button>
                                                 </Typography>

@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import AuthContext from "../../context/authContext";
 import swal from "sweetalert";
 import { Card, Typography, Spinner, Button, Input, Select, Option } from "@material-tailwind/react";
+import { MdDelete } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
 
 const TABLE_HEAD = ["شرکت بیمه", "نوع بیمه", "شماره بیمه‌نامه", "تاریخ شروع", "تاریخ انقضا", "حق بیمه", "خودرو"];
 
@@ -105,6 +107,35 @@ const VehicleInsurances = () => {
         });
     };
 
+    const handleDelete = async (id) => {
+        swal({
+            title: "آیا مطمئن هستید؟",
+            text: "این عملیات قابل بازگشت نیست!",
+            icon: "warning",
+            buttons: ["لغو", "حذف"],
+            dangerMode: true,
+        }).then(async (willDelete) => {
+            if (willDelete) {
+                const response = await fetch(`${authContext.baseUrl}/vehicle_insurances/${id}`, {
+                    method: "DELETE",
+                    credentials: "include",
+                });
+
+                if (response.status === 200) {
+                    swal("بیمه خودرو با موفقیت حذف شد!", { icon: "success" });
+                    getAllInsurances();
+                } else {
+                    swal("خطا در حذف", { icon: "error" });
+                }
+            }
+        });
+    };
+
+    const handleEdit = (insurance) => {
+        console.log(insurance);
+        
+    };
+
     return (
 
         <>
@@ -192,6 +223,8 @@ const VehicleInsurances = () => {
                                         <td className="p-4">
                                             <Button size="sm" onClick={() => showVehicleInfo(insurance.vehicle)}>نمایش</Button>
                                         </td>
+                                        <button className='p-2 ml-2 pl-3 rounded-full bg-blue-gray-900 text-white text-xl'  onClick={() => handleEdit(insurance)}><FaEdit /></button>
+                                                                                                <button className='p-2 rounded-full bg-blue-gray-900 text-white text-xl' onClick={() => handleDelete(insurance.id)}><MdDelete /></button>
                                     </tr>
                                 ))}
                             </tbody>
