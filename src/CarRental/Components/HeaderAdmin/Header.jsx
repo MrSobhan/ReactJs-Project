@@ -10,16 +10,16 @@ export default function Header() {
     return (
         <div className='header'>
             <div className="admin-profile">
-                <img src="/images/amir.jpg" alt="Admin Profile" />
+                <img src="/img/1.jpg" alt="Admin Profile" />
                 <div>
                     <h1>سبحان موسی زاده</h1>
-                    <h3>برنامه نویس فرانت اند</h3>
+                    <h3 className="text-sm">برنامه نویس فرانت اند</h3>
                 </div>
             </div>
 
             <div className='header-left-section'>
                 <div className="search-box">
-                    <input type="text" placeholder='جست و جو بکنید ...' />
+                    <input type="text" placeholder='جست و جو کنید ...' />
                     <button><FaSearch /></button>
                 </div>
 

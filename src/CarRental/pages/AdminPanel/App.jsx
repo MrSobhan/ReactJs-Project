@@ -18,7 +18,7 @@ export default function App() {
       <div className="main">
         <Header />
 
-        <div className="container p-10">
+        <div className="py-10">
           <Outlet />
         </div>
       </div>

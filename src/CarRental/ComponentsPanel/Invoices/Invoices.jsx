@@ -78,9 +78,9 @@ const Invoices = () => {
             {loaderInvoices ? (
                 <Spinner className="h-8 w-8 mx-auto mt-16" />
             ) : (
-                <div className="container">
+                <div className="container mx-auto">
 
-                    <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-xl mx-auto p-6 mb-16 bg-white shadow-md rounded-md">
+                    <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-xl mx-auto p-6 mb-16 bg-white shadow-lg rounded-md">
                         <Typography variant="h5" className="text-center text-gray-900 font-bold mb-4">
                             ثبت اطلاعات فاکتور
                         </Typography>

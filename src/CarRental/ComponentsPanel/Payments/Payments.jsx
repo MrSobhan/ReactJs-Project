@@ -100,91 +100,97 @@ const Payments = () => {
     };
 
     return (
-        <div className="container mx-auto p-6">
+        <>
+            {loader ? (
+                <Spinner className="h-8 w-8 mx-auto mt-16" />
+            ) : (
+                <div className="container mx-auto p-6">
 
-            <Card className="p-6 bg-white shadow-md rounded-md mb-6">
-                <Typography variant="h5" className="text-center text-gray-900 font-bold mb-4">
-                    ثبت پرداخت جدید
-                </Typography>
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                    <div>
-                        <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">تاریخ پرداخت</Typography>
-                        <Input type="datetime-local" color="gray" size="lg" name="payment_datetime" value={formData.payment_datetime} onChange={handleChange} />
-                    </div>
+                    <Card className="w-full max-w-xl mx-auto p-6 mb-16 bg-white shadow-lg rounded-md">
+                        <Typography variant="h5" className="text-center text-gray-900 font-bold mb-4">
+                            ثبت پرداخت جدید
+                        </Typography>
+                        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                            <div>
+                                <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">تاریخ پرداخت</Typography>
+                                <Input type="datetime-local" color="gray" size="lg" name="payment_datetime" value={formData.payment_datetime} onChange={handleChange} />
+                            </div>
 
-                    <div>
-                        <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">روش پرداخت</Typography>
-                        <Select
-                            name="payment_method"
-                            value={formData.payment_method}
-                            onChange={(val) => setFormData({ ...formData, payment_method: val })}
-                        >
-                            <Option value="انتقال وجه کارت به کارت">انتقال وجه کارت به کارت</Option>
-                            <Option value="انتقال وجه ساتنا">انتقال وجه ساتنا</Option>
-                            <Option value="انتقال وجه پایا">انتقال وجه پایا</Option>
-                            <Option value="پرداخت اینترنتی">پرداخت اینترنتی</Option>
-                            <Option value="سایر">سایر</Option>
-                        </Select>
+                            <div>
+                                <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">روش پرداخت</Typography>
+                                <Select
+                                    name="payment_method"
+                                    value={formData.payment_method}
+                                    onChange={(val) => setFormData({ ...formData, payment_method: val })}
+                                >
+                                    <Option value="انتقال وجه کارت به کارت">انتقال وجه کارت به کارت</Option>
+                                    <Option value="انتقال وجه ساتنا">انتقال وجه ساتنا</Option>
+                                    <Option value="انتقال وجه پایا">انتقال وجه پایا</Option>
+                                    <Option value="پرداخت اینترنتی">پرداخت اینترنتی</Option>
+                                    <Option value="سایر">سایر</Option>
+                                </Select>
 
-                    </div>
+                            </div>
 
-                    <div>
-                        <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">شناسه تراکنش</Typography>
-                        <Input color="gray" size="lg" name="transaction_id" value={formData.transaction_id} onChange={handleChange} />
-                    </div>
+                            <div>
+                                <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">شناسه تراکنش</Typography>
+                                <Input color="gray" size="lg" name="transaction_id" value={formData.transaction_id} onChange={handleChange} />
+                            </div>
 
-                    <div>
-                        <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">مبلغ (تومان)</Typography>
-                        <Input type="number" color="gray" size="lg" name="amount" value={formData.amount} onChange={handleChange} />
-                    </div>
+                            <div>
+                                <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">مبلغ (تومان)</Typography>
+                                <Input type="number" color="gray" size="lg" name="amount" value={formData.amount} onChange={handleChange} />
+                            </div>
 
-                    <div>
-                        <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">شناسه فاکتور</Typography>
-                        <Input color="gray" size="lg" name="invoice_id" value={formData.invoice_id} onChange={handleChange} />
-                    </div>
+                            <div>
+                                <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">شناسه فاکتور</Typography>
+                                <Input color="gray" size="lg" name="invoice_id" value={formData.invoice_id} onChange={handleChange} />
+                            </div>
 
-                    <Button type="submit" className="w-full bg-blue-gray-900 text-white">
-                        {loading ? <Spinner className="inline h-4 w-4" /> : "ثبت پرداخت"}
-                    </Button>
-                </form>
-            </Card>
+                            <Button type="submit" className="w-full bg-blue-gray-900 text-white">
+                                {loading ? <Spinner className="inline h-4 w-4" /> : "ثبت پرداخت"}
+                            </Button>
+                        </form>
+                    </Card>
 
 
-            <Card className="h-full w-full overflow-scroll">
-                <Typography variant="h5" className="text-center text-gray-900 font-bold mb-4">
-                    لیست پرداخت‌ها
-                </Typography>
-                {loader ? (
-                    <Spinner className="h-8 w-8 mx-auto mt-16" />
-                ) : (
-                    <table className="w-full min-w-max table-auto text-right">
-                        <thead>
-                            <tr>
-                                {TABLE_HEAD.map((head) => (
-                                    <th key={head} className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
-                                        <Typography className="font-normal leading-none opacity-70">{head}</Typography>
-                                    </th>
-                                ))}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {paymentData.map((payment, index) => (
-                                <tr key={payment.id}>
-                                    <td className="p-4">{payment.payment_datetime}</td>
-                                    <td className="p-4">{payment.payment_method}</td>
-                                    <td className="p-4">{payment.transaction_id}</td>
-                                    <td className="p-4">{payment.amount.toLocaleString()}</td>
-                                    <td className="p-4">{payment.payment_status}</td>
-                                    <td className="p-4">
-                                        <Button size="sm" onClick={() => showInvoiceInfo(payment.invoice)}>نمایش</Button>
-                                    </td>
+                    <Card className="h-full w-full overflow-scroll">
+                        <Typography variant="h5" className="text-center text-gray-900 font-bold mb-4">
+                            لیست پرداخت‌ها
+                        </Typography>
+
+                        <table className="w-full min-w-max table-auto text-right">
+                            <thead>
+                                <tr>
+                                    {TABLE_HEAD.map((head) => (
+                                        <th key={head} className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+                                            <Typography className="font-normal leading-none opacity-70">{head}</Typography>
+                                        </th>
+                                    ))}
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                )}
-            </Card>
-        </div>
+                            </thead>
+                            <tbody>
+                                {paymentData.map((payment, index) => (
+                                    <tr key={payment.id}>
+                                        <td className="p-4">{payment.payment_datetime}</td>
+                                        <td className="p-4">{payment.payment_method}</td>
+                                        <td className="p-4">{payment.transaction_id}</td>
+                                        <td className="p-4">{payment.amount.toLocaleString()}</td>
+                                        <td className="p-4">{payment.payment_status}</td>
+                                        <td className="p-4">
+                                            <Button size="sm" onClick={() => showInvoiceInfo(payment.invoice)}>نمایش</Button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+
+                    </Card>
+                </div>
+            )
+            }
+        </>
+
     );
 };
 

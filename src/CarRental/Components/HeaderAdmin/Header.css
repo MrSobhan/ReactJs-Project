@@ -8,11 +8,12 @@
 .admin-profile {
     display: flex;
     align-items: center;
-    column-gap: 20px;
+    column-gap: 15px;
+    margin-right: 20px;
 }
 
 .admin-profile img {
-    width: 50px;
+    width: 55px;
     border-radius: 50%;
 }
 
@@ -32,12 +33,12 @@
 
 .header-left-section {
     display: flex;
-    column-gap: 20px;
+    column-gap: 10px;
 }
 
 .search-box {
     background-color: var(--white);
-    border-radius: 15px;
+    border-radius: 50px;
     width: 400px;
     height: 45px;
     display: flex;
@@ -60,21 +61,22 @@
     display: flex;
     align-items: center;
     font-size: 1.1rem;
-    border-radius: 10px;
+    border-radius: 50%;
     background-color: var(--primary-bg);
     color: var(--white);
-    padding: 10px 18px;
+    padding: 12px 12px;
 }
 
 .header-left-icon {
-    padding: 10px;
+    padding: 0px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
+    border-radius: 50%;
     background-color: var(--primary-bg);
     color: var(--white);
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     box-shadow: rgba(149, 157, 165, 0.8) 0 8px 24px;
+    font-size: 1rem;
 }

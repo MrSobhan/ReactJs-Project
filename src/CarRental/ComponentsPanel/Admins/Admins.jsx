@@ -133,8 +133,8 @@ const Admins = () => {
         <>
             {
                 loaderAdmin ? (<Spinner className="h-8 w-8 mx-auto mt-16" />) : (
-                    <div className="container">
-                        <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-xl mb-16 mx-auto p-6 bg-white shadow-md rounded-md">
+                    <div className="container mx-auto">
+                        <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-xl mb-16 mx-auto p-6 bg-white shadow-lg rounded-md">
                             <Typography variant="h5" className="text-center text-gray-900 font-bold mb-4">
                                 ثبت اطلاعات کاربر
                             </Typography>
