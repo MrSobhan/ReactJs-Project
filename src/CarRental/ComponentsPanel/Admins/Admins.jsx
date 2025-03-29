@@ -4,6 +4,7 @@ import swal from "sweetalert";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import { Card, Typography, Spinner, Button, Input, Select, Option } from "@material-tailwind/react";
+import axios from 'axios';
 
 const TABLE_HEAD = ["نام", "نام خانوادگی", "نام کاربری", "ایمیل", " نقش", "وضعیت", "کد ملی", "جنسیت", "شماره تلفن", "رمز عبور", ""];
 
@@ -67,25 +68,40 @@ const Admins = () => {
     }, [])
 
     const getAllAdmins = async () => {
-        const response = await fetch(`${authContext.baseUrl}/admins` , {
-            method: "GET",
-            credentials: "include",
+        // const response = await fetch(`${authContext.baseUrl}/admins` , {
+        //     method: "GET",
+        //     credentials: "include",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //         "accept": "application/json"
+        //     },
+        // });
+
+        // const adminsRes = await response.json();
+
+        // console.log(adminsRes);
+
+
+        // if (response.status === 200) {
+        //     setLoaderAdmin(false)
+        //     setAdminsData(adminsRes)
+        // }
+        // console.log(response);
+
+        const response = await axios.get(`${authContext.baseUrl}/admins`, {
+            withCredentials: true, 
             headers: {
                 "Content-Type": "application/json",
-                "accept": "application/json"
-            },
+                "Accept": "application/json"
+            }
         });
 
-        const adminsRes = await response.json();
-
-        console.log(adminsRes);
-
+        console.log(response.data);
 
         if (response.status === 200) {
-            setLoaderAdmin(false)
-            setAdminsData(adminsRes)
+            setLoaderAdmin(false);
+            setAdminsData(response.data);
         }
-        console.log(response);
 
     }
 
