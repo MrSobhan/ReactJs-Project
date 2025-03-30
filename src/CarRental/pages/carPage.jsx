@@ -2,9 +2,9 @@ import React, { useEffect, useContext, useState } from 'react';
 import { NavbarDefault } from '../Components/Navbar/Navbar';
 import { Footer } from '../Components/Footer/Footer';
 import DefaultAccordion from '../Components/FAQs/FAQs';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import AuthContext from "../context/authContext";
-
+import swal from "sweetalert";
 import {
     Timeline,
     TimelineItem,
@@ -30,8 +30,10 @@ const CarPage = () => {
     const authContext = useContext(AuthContext)
     const { carId } = useParams()
     const [singleCarData, setSingleCarData] = useState([])
-
+    const [isLoginUser, setIsLoginUser] = useState(false)
+    const navigate = useNavigate();
     useEffect(() => {
+        authContext.isLogin() && setIsLoginUser(true)
         getOneCar()
     }, [])
 
@@ -41,10 +43,58 @@ const CarPage = () => {
         const carRes = await response.json();
 
         if (response.status === 200) {
-            console.log(carRes);
-
             setSingleCarData(carRes)
         }
+    }
+
+
+
+    const RentalHandle = async () => {
+
+        if (isLoginUser) {
+
+            const responseInvoices = await fetch(`${authContext.baseUrl}/invoices`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "accept": "application/json",
+                    "Authorization": `Bearer ${authContext.user.access_token}`,
+                    "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
+                },
+            });
+
+            const ResInvoices = await responseInvoices.json();
+
+            const invoicesUser = ResInvoices.find((inv) => inv.status == 'ایجاد شده')
+
+            if (responseInvoices.status === 200) {
+                let invoicesId = null
+                if (invoicesUser.length > 0) {
+                    invoicesId = invoicesUser.id
+
+
+                    console.log(invoicesUser.id);
+                } else {
+                    // Create
+                    console.log("de");
+                    
+                }
+
+                // Create Rental
+
+            }
+
+
+        } else {
+            swal({
+                title: "برای اجاره ابتدا وارد شوید",
+                icon: "success",
+                buttons: "صفحه ورود",
+            }).then((value) => {
+                navigate("/login");
+            });
+        }
+
     }
     return (
         <>
@@ -97,35 +147,35 @@ const CarPage = () => {
                                     </TimelineHeader>
                                     <TimelineBody className="pb-8">
                                         <Typography color="gary" className="font-normal text-gray-600">
-                                            🔴 گواهینامه معتبر. <br/>
-                                            🟠 افراد بالای ۲۴ سال. 🚻<br/>
-                                            🔘 مدارک شغلی و سکونتی. 📜<br/>
-                                            🟤 چک یا سفته به مبلغ ماشین. 📝<br/>
-                                            🟣 بیمه‌نامه اجاره فقط طرح الماس 🗒<br/>
-                                            ⚪️ ودیعه نقدی به مبلغ: ۷ میلیون تومان 💵<br/>
-                                            🔵 تحویل خودرو در کرج مهرشهر رایگان میباشد 🆓<br/>
-                                            🟢 تحویل یکطرفه درب منزل کرج (۲۵۰ت)🏛<br/>
-                                            🟡تحویل یکطرفه درب منزل در داخل تهران (۵۰۰ت)🏡<br/>
-                                            🟣 تحویل یکطرفه فرودگاه امام خمینی (۶۵۰ت) ✈️<br/>
-                                            🟥 ساعت تحویل درب منزل از ۹:۳۰ الی ۱۸:۰۰ میباشد ⏰️<br/>
-                                            ⛔️ محدودیت مسافت هر ۱ روز ۲۰۰ کیلومتر میباشد⛔️<br/>
-                                            شرایط لغو رزرو:<br/>
-                                            در روزهای عادی:<br/>
-                                            یک روز مانده به روز تحویل: ٪۲۵ مبلغ اجاره<br/>
-                                            از زمان رزرو تا ۲ روز قبل از روز تحویل: ٪۱۵ مبلغ اجاره<br/>
-                                            از زمان رزرو تا ۳ روز قبل از روز تحویل: ٪۵ مبلغ اجاره<br/>
-                                            بیشتر از ۳ روز مانده به روز تحویل: بدون جریمه<br/>
-<br/>
-<br/>
-                                            در تعطیلات:<br/>
-                                            یک روز مانده به روز تحویل: ٪۵۰ مبلغ اجاره<br/>
-                                            از زمان رزرو تا ۲ روز قبل از روز تحویل: ٪۲۵ مبلغ اجاره<br/>
-                                            از زمان رزرو تا ۳ روز قبل از روز تحویل: ٪۱۰ مبلغ اجاره<br/>
-                                            بیشتر از ۳ روز مانده به روز تحویل: ٪۵ مبلغ اجاره<br/>
+                                            🔴 گواهینامه معتبر. <br />
+                                            🟠 افراد بالای ۲۴ سال. 🚻<br />
+                                            🔘 مدارک شغلی و سکونتی. 📜<br />
+                                            🟤 چک یا سفته به مبلغ ماشین. 📝<br />
+                                            🟣 بیمه‌نامه اجاره فقط طرح الماس 🗒<br />
+                                            ⚪️ ودیعه نقدی به مبلغ: ۷ میلیون تومان 💵<br />
+                                            🔵 تحویل خودرو در کرج مهرشهر رایگان میباشد 🆓<br />
+                                            🟢 تحویل یکطرفه درب منزل کرج (۲۵۰ت)🏛<br />
+                                            🟡تحویل یکطرفه درب منزل در داخل تهران (۵۰۰ت)🏡<br />
+                                            🟣 تحویل یکطرفه فرودگاه امام خمینی (۶۵۰ت) ✈️<br />
+                                            🟥 ساعت تحویل درب منزل از ۹:۳۰ الی ۱۸:۰۰ میباشد ⏰️<br />
+                                            ⛔️ محدودیت مسافت هر ۱ روز ۲۰۰ کیلومتر میباشد⛔️<br />
+                                            شرایط لغو رزرو:<br />
+                                            در روزهای عادی:<br />
+                                            یک روز مانده به روز تحویل: ٪۲۵ مبلغ اجاره<br />
+                                            از زمان رزرو تا ۲ روز قبل از روز تحویل: ٪۱۵ مبلغ اجاره<br />
+                                            از زمان رزرو تا ۳ روز قبل از روز تحویل: ٪۵ مبلغ اجاره<br />
+                                            بیشتر از ۳ روز مانده به روز تحویل: بدون جریمه<br />
+                                            <br />
+                                            <br />
+                                            در تعطیلات:<br />
+                                            یک روز مانده به روز تحویل: ٪۵۰ مبلغ اجاره<br />
+                                            از زمان رزرو تا ۲ روز قبل از روز تحویل: ٪۲۵ مبلغ اجاره<br />
+                                            از زمان رزرو تا ۳ روز قبل از روز تحویل: ٪۱۰ مبلغ اجاره<br />
+                                            بیشتر از ۳ روز مانده به روز تحویل: ٪۵ مبلغ اجاره<br />
 
-                                            تعطیلات نوروز: ( رزروهای۲۵ اسفند تا ۱۵ فروردین<br/>
-                                            از زمان رزرو تا ۷ روز مانده به روز تحویل ۳۰٪ مبلغ اجاره<br/>
-                                            کمتر از ۷ روز مانده به روز تحویل ۵۰٪ مبلغ اجاره<br/>
+                                            تعطیلات نوروز: ( رزروهای۲۵ اسفند تا ۱۵ فروردین<br />
+                                            از زمان رزرو تا ۷ روز مانده به روز تحویل ۳۰٪ مبلغ اجاره<br />
+                                            کمتر از ۷ روز مانده به روز تحویل ۵۰٪ مبلغ اجاره<br />
                                         </Typography>
                                     </TimelineBody>
                                 </TimelineItem>
@@ -452,10 +502,19 @@ const CarPage = () => {
                                     </button>
                                 </div>
 
-                                <div class="flex items-center flex-col mt-4">
-                                    <p title="name/نام" class="text-black font-Roboto-md text-xs text-center">هزینه را بعد از پذیرش درخواست توسط میزبان پرداخت خواهید کرد.</p>
-                                    <Button className='w-full mt-3'>ادامه</Button>
-                                </div>
+                                {
+                                    singleCarData.status == "موجود" ? (
+                                        <div class="flex items-center flex-col mt-4">
+                                            <p title="name/نام" class="text-black font-Roboto-md text-xs text-center">هزینه را بعد از پذیرش درخواست توسط میزبان پرداخت خواهید کرد.</p>
+                                            <Button className='w-full mt-3' onClick={RentalHandle}>ادامه</Button>
+                                        </div>
+                                    ) : (
+                                        <div class="flex items-center flex-col mt-4">
+                                            <p title="name/نام" class="text-black font-Roboto-md text-xs text-center">هزینه را بعد از پذیرش درخواست توسط میزبان پرداخت خواهید کرد.</p>
+                                            <Button className='w-full mt-3'>این خودرو موجود نمی باشد.</Button>
+                                        </div>
+                                    )
+                                }
 
 
                             </div>

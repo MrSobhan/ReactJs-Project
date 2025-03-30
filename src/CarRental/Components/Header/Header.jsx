@@ -48,7 +48,7 @@ const Header = () => {
         <div className="flex gap-x-6 w-full justify-end items-center">
           <img src="https://w0.peakpx.com/wallpaper/999/452/HD-wallpaper-lamborghini-luxury-car-sports-car-luxury-cars-vertical-cars-thumbnail.jpg" alt="carReantalf1"  className='max-h-96 w-56 object-cover rounded-lg'/>
           <div className='flex flex-col gap-y-6'>
-            <img src="https://wallpapers.com/images/featured/4k-car-pictures-g6a4f0e15hkua5oa.jpg" alt="carReantalf2" className='h-44 w-56 object-cover rounded-lg' />
+            <img src="./carReantal/43.jpg" alt="carReantalf2" className='h-44 w-56 object-cover rounded-lg' />
             <img src="https://i.pinimg.com/736x/88/e0/c6/88e0c64bbd4e8646b80efdb68025a2c4.jpg" alt="carReantalf3" className='max-h-96 object-cover rounded-lg' />
           </div>
         </div>

@@ -63,45 +63,7 @@ function Singup() {
 
         if (response.status === 200) {
 
-            const loginInfoJson = {
-                "username": usernameInput,
-                "password": passInput
-            }
-
-
-            const responseLogin = await fetch(`${authContext.baseUrl}/login`, {
-                method: "POST",
-                credentials: "include",
-                headers: {
-                    "Content-Type": "application/json",
-                    "accept": "application/json"
-                },
-                body: JSON.stringify(loginInfoJson),
-            });
-
-
-            if (responseLogin.status === 200) {
-                responseLogin.json().then(dataLogin => {
-                    setLoadingSub(false)
-
-
-                    const tokenFakeLogin = String(Math.floor(Math.random() * 9999999999) + 1000000000)
-                    authContext.setLocalStorage('token', tokenFakeLogin)
-                    authContext.setLocalStorage('ID', dataLogin.id)
-                    authContext.setLocalStorage('Role', dataLogin.role)
-
-
-                    swal({
-                        title: "با موفقیت لاگین شدید",
-                        icon: "success",
-                        buttons: "ورود به پنل",
-                    }).then((value) => {
-                        navigate("/");
-                    });
-
-                });
-
-            }
+            authContext.LoginUser(usernameInput, passInput)
 
         } else {
             swal({

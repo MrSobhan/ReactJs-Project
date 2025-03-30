@@ -30,14 +30,14 @@ export function NavbarDefault() {
     useEffect(() => {
 
         authContext.isLogin() && setIsLoginUser(true)
-        
+
     }, [])
 
     // ! Logout
 
-    const LogoutHandler = async ()=>{
+    const LogoutHandler = async () => {
         const checkLogOut = await authContext.LogOut()
-        if(checkLogOut){
+        if (checkLogOut) {
             setIsLoginUser(false)
         }
     }
@@ -96,7 +96,7 @@ export function NavbarDefault() {
                                                 <span><FaRegUser className="inline ml-2" />پنل کاربری</span>
                                             </Button>
                                         </Link>
-                                        <span className=" cursor-pointer" onClick={LogoutHandler}><TbLogout2 className="inline mx-2"/>خروج</span>
+                                        <span className=" cursor-pointer" onClick={LogoutHandler}><TbLogout2 className="inline mx-2" />خروج</span>
                                     </>
                                 ) : (
 

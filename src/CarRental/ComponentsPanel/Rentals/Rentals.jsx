@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import AuthContext from "../../context/authContext";
 import swal from "sweetalert";
-import { Card, Typography, Spinner, Button, Input, Select, Option } from "@material-tailwind/react";
-import { MdDelete } from "react-icons/md";
+import { Card, Typography, Spinner, Button, Input } from "@material-tailwind/react";
+import { MdSearch, MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 
-const TABLE_HEAD = ["تاریخ شروع", "تاریخ پایان", "مبلغ کل", "مشتری", "خودرو", "فاکتور"];
-
 const Rentals = () => {
+
+    const TABLE_HEAD = ["تاریخ شروع", "تاریخ پایان", "مبلغ کل", "مشتری", "خودرو", "فاکتور", ""];
+
     const authContext = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [rentalData, setRentalData] = useState([]);
@@ -16,7 +17,7 @@ const Rentals = () => {
     const [formData, setFormData] = useState({
         rental_start_date: "",
         rental_end_date: "",
-        total_amount: "",
+        total_amount: 0,
         customer_id: "",
         vehicle_id: "",
         invoice_id: ""
@@ -27,55 +28,194 @@ const Rentals = () => {
     }, []);
 
     const getAllRentals = async () => {
-        try {
-            const response = await fetch(`${authContext.baseUrl}/rentals`);
-            const data = await response.json();
 
-            if (response.status === 200) {
-                setRentalData(data);
-            }
-        } catch (error) {
-            console.error("Error fetching rentals:", error);
-        } finally {
-            setLoader(false);
+        const response = await fetch(`${authContext.baseUrl}/rentals`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "accept": "application/json",
+                "Authorization": `Bearer ${authContext.user.access_token}`,
+                "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
+            },
+        });
+        const data = await response.json();
+
+
+        if (response.status === 200) {
+            setRentalData(data);
+            setLoader(false)
         }
+
     };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: ["total_amount"].includes(name) ? Number(value) || 0 : value,
+        }));
     };
+
+    // ? Modal Handler
+
+    const fetchCustomers = async () => {
+        try {
+            const response = await fetch(`${authContext.baseUrl}/customers`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${authContext.user.access_token}`,
+                },
+            });
+            const data = await response.json();
+
+            if (response.status === 200) {
+                swal({
+                    title: "انتخاب مشتری",
+                    content: createSelectionList(data, "customer_id"),
+                    buttons: false,
+                });
+            }
+        } catch (error) {
+            console.error("Error fetching customers:", error);
+        }
+    };
+
+    const fetchVehicles = async () => {
+        try {
+            const response = await fetch(`${authContext.baseUrl}/vehicles`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${authContext.user.access_token}`,
+                },
+            });
+            const data = await response.json();
+
+            const DataForShowRental = data.filter((car) => car.status == 'موجود')
+
+            if (response.status === 200) {
+                swal({
+                    title: "انتخاب خودرو",
+                    content: createSelectionList(DataForShowRental, "vehicle_id"),
+                    buttons: false,
+                });
+            }
+        } catch (error) {
+            console.error("Error fetching vehicles:", error);
+        }
+    };
+
+    const fetchInvoices = async () => {
+        try {
+            const response = await fetch(`${authContext.baseUrl}/invoices`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${authContext.user.access_token}`,
+                },
+            });
+            const data = await response.json();
+
+            if (response.status === 200) {
+                swal({
+                    title: "انتخاب فاکتور",
+                    content: createSelectionList(data, "invoice_id"),
+                    buttons: false,
+                });
+            }
+        } catch (error) {
+            console.error("Error fetching invoices:", error);
+        }
+    };
+
+    const createSelectionList = (data, field) => {
+        const div = document.createElement("div");
+        div.style.maxHeight = "350px";
+        div.style.overflowY = "auto";
+        div.style.textAlign = "right";
+
+        data.forEach((item) => {
+            const btn = document.createElement("button");
+            btn.innerText = `${item.username || item.plate_number || item.total_amount}`;
+            btn.style.display = "block";
+            btn.style.padding = "10px";
+            btn.style.margin = "5px";
+            btn.style.width = "100%";
+            btn.style.border = "1px solid #ccc";
+            btn.style.borderRadius = "5px";
+            btn.style.backgroundColor = "#f9f9f9";
+            btn.style.cursor = "pointer";
+            btn.onclick = () => {
+                setFormData((prev) => ({ ...prev, [field]: item.id }));
+                swal.close();
+            };
+            div.appendChild(btn);
+        });
+
+        return div;
+    };
+
+    // ? Data Func Handler
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
 
+        console.log(formData.vehicle_id);
+
+
         const response = await fetch(`${authContext.baseUrl}/rentals`, {
             method: "POST",
-            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
-                "accept": "application/json"
+                "accept": "application/json",
+                "Authorization": `Bearer ${authContext.user.access_token}`,
+                "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
+
             },
             body: JSON.stringify(formData),
         });
 
         if (response.status === 200) {
-            setLoading(false);
-            swal({
-                title: "اجاره با موفقیت ثبت شد",
-                icon: "success",
-                buttons: "باشه",
+
+
+            const responsePut = await fetch(`${authContext.baseUrl}/vehicles/${formData.vehicle_id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    "accept": "application/json",
+                    "Authorization": `Bearer ${authContext.user.access_token}`,
+                    "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
+                },
+                body: JSON.stringify({ "status": "اجاره شده" }),
             });
-            getAllRentals();
-            setFormData({
-                rental_start_date: "",
-                rental_end_date: "",
-                total_amount: "",
-                customer_id: "",
-                vehicle_id: "",
-                invoice_id: ""
-            });
+
+            if (responsePut.status === 200) {
+
+                setLoading(false);
+                swal({
+                    title: "اجاره با موفقیت ثبت شد",
+                    icon: "success",
+                    buttons: "باشه",
+                });
+                getAllRentals();
+                setFormData({
+                    rental_start_date: "",
+                    rental_end_date: "",
+                    total_amount: 0,
+                    customer_id: "",
+                    vehicle_id: "",
+                    invoice_id: ""
+                });
+            }
+
+
+
+
+
+
         } else {
             setLoading(false);
             swal({
@@ -145,14 +285,20 @@ const Rentals = () => {
             if (willDelete) {
                 const response = await fetch(`${authContext.baseUrl}/rentals/${id}`, {
                     method: "DELETE",
-                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "accept": "application/json",
+                        "Authorization": `Bearer ${authContext.user.access_token}`,
+                        "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
+
+                    },
                 });
 
                 if (response.status === 200) {
-                    swal("اجاره خودرو با موفقیت حذف شد!", { icon: "success" });
+                    swal({ title: "اجاره خودرو با موفقیت حذف شد!", icon: "success", buttons: "باشه", });
                     getAllRentals();
                 } else {
-                    swal("خطا در حذف", { icon: "error" });
+                    swal({ title: "خطا در حذف", icon: "error", buttons: "باشه", });
                 }
             }
         });
@@ -160,57 +306,78 @@ const Rentals = () => {
 
     const handleEdit = (vehicles) => {
         console.log(vehicles);
-        
+
     };
 
     return (
-
         <>
             {loader ? (
                 <Spinner className="h-8 w-8 mx-auto mt-16" />
             ) : (
                 <div className="container mx-auto p-6">
-
                     <Card className="w-full max-w-xl mx-auto p-6 mb-16 bg-white shadow-lg rounded-md">
                         <Typography variant="h5" className="text-center text-gray-900 font-bold mb-4">
                             ثبت اجاره جدید
                         </Typography>
-                        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                        <form className="flex flex-col gap-4">
                             <div>
                                 <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">تاریخ شروع</Typography>
-                                <Input type="date" color="gray" size="lg" name="rental_start_date" value={formData.rental_start_date} onChange={handleChange} />
+                                <Input type="text" color="gray" size="lg" name="rental_start_date" value={formData.rental_start_date} onChange={handleChange} />
+                                <p className="text-red-600 text-sm mt-2">تاریخ شروع کرایه از اکنون تا حداکثر 6 ماه اینده می باشد.</p>
                             </div>
 
                             <div>
                                 <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">تاریخ پایان</Typography>
-                                <Input type="date" color="gray" size="lg" name="rental_end_date" value={formData.rental_end_date} onChange={handleChange} />
+                                <Input type="text" color="gray" size="lg" name="rental_end_date" value={formData.rental_end_date} onChange={handleChange} />
+                                <p className="text-red-600 text-sm mt-2">تاریخ پایان کرایه حداکثر تا 12 ماه بعد از تاریخ شروع می باشد.</p>
                             </div>
 
                             <div>
                                 <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">مبلغ کل (تومان)</Typography>
                                 <Input type="number" color="gray" size="lg" name="total_amount" value={formData.total_amount} onChange={handleChange} />
                             </div>
-
                             <div>
-                                <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">شناسه مشتری</Typography>
-                                <Input color="gray" size="lg" name="customer_id" value={formData.customer_id} onChange={handleChange} />
+                                <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
+                                    شناسه مشتری
+                                </Typography>
+                                <div className="flex">
+                                    <Input color="gray" size="lg" name="customer_id" value={formData.customer_id} readOnly />
+                                    <Button onClick={fetchCustomers} className="mr-2 bg-blue-gray-900">
+                                        <MdSearch />
+                                    </Button>
+                                </div>
                             </div>
 
                             <div>
-                                <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">شناسه وسیله نقلیه</Typography>
-                                <Input color="gray" size="lg" name="vehicle_id" value={formData.vehicle_id} onChange={handleChange} />
+                                <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
+                                    شناسه وسیله نقلیه
+                                </Typography>
+                                <div className="flex">
+                                    <Input color="gray" size="lg" name="vehicle_id" value={formData.vehicle_id} readOnly />
+                                    <Button onClick={fetchVehicles} className="mr-2 bg-blue-gray-900">
+                                        <MdSearch />
+                                    </Button>
+                                </div>
                             </div>
 
                             <div>
-                                <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">شناسه فاکتور</Typography>
-                                <Input color="gray" size="lg" name="invoice_id" value={formData.invoice_id} onChange={handleChange} />
+                                <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
+                                    شناسه فاکتور
+                                </Typography>
+                                <div className="flex">
+                                    <Input color="gray" size="lg" name="invoice_id" value={formData.invoice_id} readOnly />
+                                    <Button onClick={fetchInvoices} className="mr-2 bg-blue-gray-900">
+                                        <MdSearch />
+                                    </Button>
+                                </div>
+                                <Button className="w-full mt-5 bg-blue-gray-900 text-white" onClick={handleSubmit}>
+                                    {loading ? <Spinner className="inline h-4 w-4" /> : "ثبت اجاره"}
+                                </Button>
                             </div>
-
-                            <Button type="submit" className="w-full bg-blue-gray-900 text-white">
-                                {loading ? <Spinner className="inline h-4 w-4" /> : "ثبت اجاره"}
-                            </Button>
                         </form>
                     </Card>
+
+
 
                     <Card className="h-full w-full overflow-scroll">
                         <Typography variant="h5" className="text-center text-gray-900 font-bold mb-4">
@@ -245,10 +412,8 @@ const Rentals = () => {
 
                     </Card>
                 </div>
-            )
-            }
+            )}
         </>
-
     );
 };
 

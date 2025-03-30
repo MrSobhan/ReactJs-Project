@@ -17,7 +17,7 @@ const Posts = () => {
         thumbnail: "",
         subject: "",
         content: "",
-        admin_id: authContext.getLocalStorage('ID'),
+        admin_id: authContext.user.ID,
     });
 
     useEffect(() => {
@@ -44,12 +44,16 @@ const Posts = () => {
         e.preventDefault();
         setLoading(true);
 
+        console.log(formData);
+        
+
         const response = await fetch(`${authContext.baseUrl}/posts`, {
             method: "POST",
-            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
-                accept: "application/json",
+                "accept": "application/json",
+                "Authorization" : `Bearer ${authContext.user.access_token}`,
+                "Authorization-Refresh" : `Bearer ${authContext.user.refresh_token}`
             },
             body: JSON.stringify(formData),
         });
@@ -94,14 +98,19 @@ const Posts = () => {
             if (willDelete) {
                 const response = await fetch(`${authContext.baseUrl}/posts/${id}`, {
                     method: "DELETE",
-                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "accept": "application/json",
+                        "Authorization" : `Bearer ${authContext.user.access_token}`,
+                        "Authorization-Refresh" : `Bearer ${authContext.user.refresh_token}`
+                    },
                 });
 
                 if (response.status === 200) {
-                    swal("بلاگ با موفقیت حذف شد!", { icon: "success" });
+                    swal({title:"بلاگ با موفقیت حذف شد!",  icon: "success" ,buttons: "باشه",});
                     getAllPosts();
                 } else {
-                    swal("خطا در حذف", { icon: "error" });
+                    swal({title:"خطا در حذف",  icon: "error" ,buttons: "باشه",});
                 }
             }
         });

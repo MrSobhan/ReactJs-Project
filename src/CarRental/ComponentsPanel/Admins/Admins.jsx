@@ -6,7 +6,7 @@ import { FaEdit } from "react-icons/fa";
 import { Card, Typography, Spinner, Button, Input, Select, Option } from "@material-tailwind/react";
 import axios from 'axios';
 
-const TABLE_HEAD = ["نام", "نام خانوادگی", "نام کاربری", "ایمیل", " نقش", "وضعیت", "کد ملی", "جنسیت", "شماره تلفن", "رمز عبور", ""];
+const TABLE_HEAD = ["شناسه","نام", "نام خانوادگی", "نام کاربری", "ایمیل", " نقش", "وضعیت", "کد ملی", "جنسیت", "شماره تلفن", ""];
 
 const TABLE_ROWS = [
     {
@@ -68,40 +68,26 @@ const Admins = () => {
     }, [])
 
     const getAllAdmins = async () => {
-        // const response = await fetch(`${authContext.baseUrl}/admins` , {
-        //     method: "GET",
-        //     credentials: "include",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //         "accept": "application/json"
-        //     },
-        // });
-
-        // const adminsRes = await response.json();
-
-        // console.log(adminsRes);
-
-
-        // if (response.status === 200) {
-        //     setLoaderAdmin(false)
-        //     setAdminsData(adminsRes)
-        // }
-        // console.log(response);
-
-        const response = await axios.get(`${authContext.baseUrl}/admins`, {
-            withCredentials: true, 
+        const response = await fetch(`${authContext.baseUrl}/admins` , {
+            method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
+                "accept": "application/json",
+                "Authorization" : `Bearer ${authContext.user.access_token}`,
+                "Authorization-Refresh" : `Bearer ${authContext.user.refresh_token}`
+            },
         });
 
-        console.log(response.data);
+        const adminsRes = await response.json();
+
+        console.log(adminsRes);
+
 
         if (response.status === 200) {
-            setLoaderAdmin(false);
-            setAdminsData(response.data);
+            setLoaderAdmin(false)
+            setAdminsData(adminsRes)
         }
+
 
     }
 
@@ -114,12 +100,15 @@ const Admins = () => {
         e.preventDefault();
         setLoading(true);
 
+        
+
         const response = await fetch(`${authContext.baseUrl}/admins`, {
             method: "POST",
-            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
-                "accept": "application/json"
+                "accept": "application/json",
+                "Authorization" : `Bearer ${authContext.user.access_token}`,
+                "Authorization-Refresh" : `Bearer ${authContext.user.refresh_token}`
             },
             body: JSON.stringify(formData),
         });
@@ -137,6 +126,23 @@ const Admins = () => {
                     icon: "success",
                     buttons: "باشه",
                 }).then((value) => {
+                    setFormData({
+                        name_prefix: null,
+                        first_name: "",
+                        middle_name: null,
+                        last_name: "",
+                        name_suffix: null,
+                        username: "",
+                        email: "",
+                        role: "",
+                        status: "",
+                        national_id: "",
+                        gender: "",
+                        birthday: "",
+                        phone: 0,
+                        address: "",
+                        password: "",
+                    })
                     getAllAdmins()
                 });
 
@@ -154,6 +160,8 @@ const Admins = () => {
 
     
     const handleDelete = async (id) => {
+        console.log(id);
+        
         swal({
             title: "آیا مطمئن هستید؟",
             text: "این عملیات قابل بازگشت نیست!",
@@ -164,14 +172,19 @@ const Admins = () => {
             if (willDelete) {
                 const response = await fetch(`${authContext.baseUrl}/admins/${id}`, {
                     method: "DELETE",
-                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "accept": "application/json",
+                        "Authorization" : `Bearer ${authContext.user.access_token}`,
+                        "Authorization-Refresh" : `Bearer ${authContext.user.refresh_token}`
+                    },
                 });
 
                 if (response.status === 200) {
-                    swal("ادمین با موفقیت حذف شد!", { icon: "success" });
+                    swal({title:"ادمین با موفقیت حذف شد!",  icon: "success" ,buttons: "باشه",});
                     getAllAdmins();
                 } else {
-                    swal("خطا در حذف ادمین", { icon: "error" });
+                    swal({title:"خطا در حذف ادمین",  icon: "error" ,buttons: "باشه",});
                 }
             }
         });
@@ -267,7 +280,7 @@ const Admins = () => {
                                     <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
                                         تاریخ تولد
                                     </Typography>
-                                    <Input type="date" color="gray" size="lg" name="birthday" value={formData.birthday} onChange={handleChange} />
+                                    <Input type="text" color="gray" size="lg" name="birthday" value={formData.birthday} onChange={handleChange} />
                                 </div>
                                 <div>
                                     <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
@@ -329,6 +342,15 @@ const Admins = () => {
                                                         color="blue-gray"
                                                         className="font-normal"
                                                     >
+                                                        {admin.id}
+                                                    </Typography>
+                                                </td>
+                                                <td className={classes}>
+                                                    <Typography
+                                                        variant="small"
+                                                        color="blue-gray"
+                                                        className="font-normal"
+                                                    >
                                                         {admin.first_name}
                                                     </Typography>
                                                 </td>
@@ -339,6 +361,24 @@ const Admins = () => {
                                                         className="font-normal"
                                                     >
                                                         {admin.last_name}
+                                                    </Typography>
+                                                </td>
+                                                <td className={classes}>
+                                                    <Typography
+                                                        variant="small"
+                                                        color="blue-gray"
+                                                        className="font-normal"
+                                                    >
+                                                        {admin.username}
+                                                    </Typography>
+                                                </td>
+                                                <td className={classes}>
+                                                    <Typography
+                                                        variant="small"
+                                                        color="blue-gray"
+                                                        className="font-normal"
+                                                    >
+                                                        {admin.email}
                                                     </Typography>
                                                 </td>
                                                 <td className={classes}>
@@ -384,15 +424,6 @@ const Admins = () => {
                                                         className="font-normal"
                                                     >
                                                         {admin.phone}
-                                                    </Typography>
-                                                </td>
-                                                <td className={classes}>
-                                                    <Typography
-                                                        variant="small"
-                                                        color="blue-gray"
-                                                        className="font-normal"
-                                                    >
-                                                        {admin.password}
                                                     </Typography>
                                                 </td>
                                                 <td className={classes}>

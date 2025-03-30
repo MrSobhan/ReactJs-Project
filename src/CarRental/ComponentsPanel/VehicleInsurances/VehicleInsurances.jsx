@@ -19,7 +19,7 @@ const VehicleInsurances = () => {
         policy_number: "",
         start_date: "",
         expiration_date: "",
-        premium: "",
+        premium: 0,
         vehicle_id: ""
     });
 
@@ -28,35 +28,50 @@ const VehicleInsurances = () => {
     }, []);
 
     const getAllInsurances = async () => {
-        try {
-            const response = await fetch(`${authContext.baseUrl}/vehicle_insurances`);
-            const data = await response.json();
+        const response = await fetch(`${authContext.baseUrl}/vehicle_insurances` ,{
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "accept": "application/json",
+                "Authorization" : `Bearer ${authContext.user.access_token}`,
+                "Authorization-Refresh" : `Bearer ${authContext.user.refresh_token}`
+            },
+        });
+        const data = await response.json();
 
-            if (response.status === 200) {
-                setInsuranceData(data);
-            }
-        } catch (error) {
-            console.error("Error fetching insurances:", error);
-        } finally {
-            setLoader(false);
+        if (response.status === 200) {
+            console.log(data);
+            
+            setInsuranceData(data);
+            setLoader(false)
         }
     };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: ["premium"].includes(name)
+                ? Number(value) || 0
+                : value,
+        }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
 
+        console.log(formData);
+        
+
         const response = await fetch(`${authContext.baseUrl}/vehicle_insurances`, {
             method: "POST",
-            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
-                "accept": "application/json"
+                "accept": "application/json",
+                "Authorization" : `Bearer ${authContext.user.access_token}`,
+                "Authorization-Refresh" : `Bearer ${authContext.user.refresh_token}`
+
             },
             body: JSON.stringify(formData),
         });
@@ -75,7 +90,7 @@ const VehicleInsurances = () => {
                 policy_number: "",
                 start_date: "",
                 expiration_date: "",
-                premium: "",
+                premium: 0,
                 vehicle_id: ""
             });
         } else {
@@ -118,14 +133,15 @@ const VehicleInsurances = () => {
             if (willDelete) {
                 const response = await fetch(`${authContext.baseUrl}/vehicle_insurances/${id}`, {
                     method: "DELETE",
-                    credentials: "include",
+                    "Authorization" : `Bearer ${authContext.user.access_token}`,
+                    "Authorization-Refresh" : `Bearer ${authContext.user.refresh_token}`
                 });
 
                 if (response.status === 200) {
-                    swal("بیمه خودرو با موفقیت حذف شد!", { icon: "success" });
+                    swal({title:"بیمه با موفقیت حذف شد!",  icon: "success" ,buttons: "باشه",});
                     getAllInsurances();
                 } else {
-                    swal("خطا در حذف", { icon: "error" });
+                    swal({title:"خطا در حذف",  icon: "error" ,buttons: "باشه",});
                 }
             }
         });
@@ -171,11 +187,11 @@ const VehicleInsurances = () => {
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
                                     <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">تاریخ شروع</Typography>
-                                    <Input type="date" color="gray" size="lg" name="start_date" value={formData.start_date} onChange={handleChange} />
+                                    <Input type="text" color="gray" size="lg" name="start_date" value={formData.start_date} onChange={handleChange} />
                                 </div>
                                 <div>
                                     <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">تاریخ انقضا</Typography>
-                                    <Input type="date" color="gray" size="lg" name="expiration_date" value={formData.expiration_date} onChange={handleChange} />
+                                    <Input type="text" color="gray" size="lg" name="expiration_date" value={formData.expiration_date} onChange={handleChange} />
                                 </div>
                             </div>
 

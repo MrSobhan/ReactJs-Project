@@ -18,16 +18,17 @@ const Vehicles = () => {
     const [loaderVehicles, setLoaderVehicles] = useState(true)
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
+        local_image_address: "",
         plate_number: "",
         location: "",
         brand: "",
         model: "",
-        year: "",
+        year: 0,
         color: "",
-        mileage: "",
+        mileage: 0,
         status: "",
-        hourly_rental_rate: "",
-        security_deposit: "",
+        hourly_rental_rate: 0,
+        security_deposit: 0,
     });
     useEffect(() => {
         getAllVehicles()
@@ -50,9 +51,6 @@ const Vehicles = () => {
 
         const vehiclesRes = await response.json();
 
-        console.log(vehiclesRes);
-
-
         if (response.status === 200) {
             setLoaderVehicles(false)
             setVehiclesData(vehiclesRes)
@@ -61,19 +59,40 @@ const Vehicles = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: ["year", "mileage", "hourly_rental_rate", "security_deposit"].includes(name)
+                ? Number(value) || 0
+                : value,
+        }));
     };
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
 
+        console.log(formData);
+
+        if (isNaN(formData.year) || isNaN(formData.mileage) || isNaN(formData.hourly_rental_rate) || isNaN(formData.security_deposit)) {
+            swal({
+                title: "خطا در ورود اطلاعات",
+                text: "مقادیر سال، کارکرد، نرخ اجاره و ودیعه باید عدد باشند!",
+                icon: "error",
+                buttons: "باشه",
+            });
+            setLoading(false);
+            return;
+        }
+        
+
         const response = await fetch(`${authContext.baseUrl}/vehicles`, {
             method: "POST",
-            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
-                "accept": "application/json"
+                "accept": "application/json",
+                "Authorization" : `Bearer ${authContext.user.access_token}`,
+                "Authorization-Refresh" : `Bearer ${authContext.user.refresh_token}`
             },
             body: JSON.stringify(formData),
         });
@@ -92,6 +111,19 @@ const Vehicles = () => {
                     buttons: "باشه",
                 }).then((value) => {
                     getAllVehicles()
+                    setFormData({
+                        local_image_address: "",
+                        plate_number: "",
+                        location: "",
+                        brand: "",
+                        model: "",
+                        year: 0,
+                        color: "",
+                        mileage: 0,
+                        status: "",
+                        hourly_rental_rate: 0,
+                        security_deposit: 0,
+                    })
                 });
 
             });
@@ -117,14 +149,19 @@ const Vehicles = () => {
             if (willDelete) {
                 const response = await fetch(`${authContext.baseUrl}/vehicles/${id}`, {
                     method: "DELETE",
-                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "accept": "application/json",
+                        "Authorization" : `Bearer ${authContext.user.access_token}`,
+                        "Authorization-Refresh" : `Bearer ${authContext.user.refresh_token}`
+                    },
                 });
 
                 if (response.status === 200) {
-                    swal("خودرو با موفقیت حذف شد!", { icon: "success" });
+                    swal({title:"خودرو با موفقیت حذف شد!",  icon: "success" ,buttons: "باشه",});
                     getAllVehicles();
                 } else {
-                    swal("خطا در حذف", { icon: "error" });
+                    swal({title:"خطا در حذف",  icon: "error" ,buttons: "باشه",});
                 }
             }
         });
@@ -255,9 +292,9 @@ const Vehicles = () => {
 
                             <div>
                                 <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
-                                    توضیحات اضافه
+                                    لینک عکس
                                 </Typography>
-                                <Textarea rows={4} color="gray" name="description" className="focus:border-t-gray-900" />
+                                <Input type="text" color="gray" size="lg" name="local_image_address" value={formData.local_image_address} onChange={handleChange} />
                             </div>
 
                             <Button type="submit" className="w-full bg-blue-gray-900 text-white">

@@ -22,14 +22,11 @@ const Comments = () => {
 
         const commentsRes = await response.json();
 
-        console.log(commentsRes);
-
 
         if (response.status === 200) {
             setLoading(false)
             setCommentsData(commentsRes)
         }
-        console.log("Fetching customers...");
     };
 
     const handleDelete = async (id) => {
@@ -43,14 +40,19 @@ const Comments = () => {
             if (willDelete) {
                 const response = await fetch(`${authContext.baseUrl}/comments/${id}`, {
                     method: "DELETE",
-                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "accept": "application/json",
+                        "Authorization" : `Bearer ${authContext.user.access_token}`,
+                        "Authorization-Refresh" : `Bearer ${authContext.user.refresh_token}`
+                    },
                 });
 
                 if (response.status === 200) {
-                    swal("کامنت با موفقیت حذف شد!", { icon: "success" });
+                    swal({title:"کامنت با موفقیت حذف شد!",  icon: "success" ,buttons: "باشه",});
                     getAllComments();
                 } else {
-                    swal("خطا در حذف", { icon: "error" });
+                    swal({title:"خطا در حذف",  icon: "error" ,buttons: "باشه",});
                 }
             }
         });

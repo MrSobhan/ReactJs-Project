@@ -3,6 +3,8 @@ import { createContext } from "react";
 
 const AuthContext = createContext({
     baseUrl: "",
+    LoginUser :() => { }  ,
+    user : () => { } ,
     setLocalStorage: () => { },
     getLocalStorage: () => { },
     calcuteRelativeTimeDifference: () => { },

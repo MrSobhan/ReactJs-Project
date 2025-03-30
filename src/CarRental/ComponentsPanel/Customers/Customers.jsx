@@ -5,7 +5,7 @@ import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import { Card, Typography, Spinner, Button, Input, Select, Option } from "@material-tailwind/react";
 
-const TABLE_HEAD = ["نام", "نام خانوادگی", "نام کاربری", "ایمیل", "کد ملی", "جنسیت", "شماره تلفن", "آدرس", "رمز عبور", ""];
+const TABLE_HEAD = ["شناسه","نام", "نام خانوادگی", "نام کاربری", "ایمیل", "کد ملی", "جنسیت", "شماره تلفن", "آدرس", "رمز عبور", ""];
 
 const Customers = () => {
     const authContext = useContext(AuthContext);
@@ -35,32 +35,56 @@ const Customers = () => {
 
     const getAllCustomers = async () => {
         // setLoaderCustomers(true)
-        const response = await fetch(`${authContext.baseUrl}/customers`);
+        const response = await fetch(`${authContext.baseUrl}/customers` , {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "accept": "application/json",
+                "Authorization" : `Bearer ${authContext.user.access_token}`,
+                "Authorization-Refresh" : `Bearer ${authContext.user.refresh_token}`
+            },
+        });
 
         const customerRes = await response.json();
 
-        console.log(customerRes);
 
 
         if (response.status === 200) {
             setLoaderCustomers(false)
             setCustomersData(customerRes)
         }
-        console.log("Fetching customers...");
     };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: ["phone"].includes(name)
+                ? Number(value) || 0
+                : value,
+        }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
 
+        console.log(formData);
+        
+
+        if (isNaN(formData.phone)) {
+            swal({
+                title: "خطا در ورود اطلاعات",
+                text: "شماره تلفن باید عدد باشند!",
+                icon: "error",
+                buttons: "باشه",
+            });
+            setLoading(false);
+            return;
+        }
+
         const response = await fetch(`${authContext.baseUrl}/customers`, {
             method: "POST",
-            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
                 "accept": "application/json"
@@ -77,6 +101,21 @@ const Customers = () => {
                     buttons: "باشه",
                 }).then(() => {
                     getAllCustomers();
+                    setFormData({
+                        name_prefix: null,
+                        first_name: "",
+                        middle_name: null,
+                        last_name: "",
+                        name_suffix: null,
+                        gender: "مرد",
+                        birthday: "",
+                        national_id: "",
+                        phone: 0,
+                        username: "",
+                        email: "",
+                        address: "",
+                        password: ""
+                    })
                 });
             });
         } else {
@@ -100,14 +139,19 @@ const Customers = () => {
             if (willDelete) {
                 const response = await fetch(`${authContext.baseUrl}/customers/${id}`, {
                     method: "DELETE",
-                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "accept": "application/json",
+                        "Authorization" : `Bearer ${authContext.user.access_token}`,
+                        "Authorization-Refresh" : `Bearer ${authContext.user.refresh_token}`
+                    },
                 });
 
                 if (response.status === 200) {
-                    swal("مشتری با موفقیت حذف شد!", { icon: "success" });
+                    swal({title:"مشتری با موفقیت حذف شد!",  icon: "success" ,buttons: "باشه",});
                     getAllCustomers();
                 } else {
-                    swal("خطا در حذف", { icon: "error" });
+                    swal({title:"خطا در حذف",  icon: "error" ,buttons: "باشه",});
                 }
             }
         });
@@ -147,6 +191,10 @@ const Customers = () => {
                             <div>
                                 <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">ایمیل</Typography>
                                 <Input type="email" color="gray" size="lg" name="email" value={formData.email} onChange={handleChange} />
+                            </div>
+                            <div>
+                                <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">سال تولد</Typography>
+                                <Input type="text" color="gray" size="lg" name="birthday" value={formData.birthday} onChange={handleChange} />
                             </div>
 
                             <div className="grid grid-cols-2 gap-4">
@@ -203,6 +251,7 @@ const Customers = () => {
 
                                         return (
                                             <tr key={customer.id}>
+                                                <td className={classes}>{customer.id}</td>
                                                 <td className={classes}>{customer.first_name}</td>
                                                 <td className={classes}>{customer.last_name}</td>
                                                 <td className={classes}>{customer.username}</td>

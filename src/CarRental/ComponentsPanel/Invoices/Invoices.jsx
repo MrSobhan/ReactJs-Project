@@ -5,7 +5,7 @@ import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import swal from "sweetalert";
 
-const TABLE_HEAD = ["مبلغ کل", "مالیات", "تخفیف", "مبلغ نهایی", "وضعیت", ""];
+const TABLE_HEAD = ["شناسه","مبلغ کل", "مالیات", "تخفیف", "مبلغ نهایی", "وضعیت", ""];
 
 const Invoices = () => {
     const authContext = useContext(AuthContext);
@@ -13,10 +13,10 @@ const Invoices = () => {
     const [loaderInvoices, setLoaderInvoices] = useState(false);
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
-        total_amount: "",
-        tax: "",
-        discount: "",
-        final_amount: "",
+        total_amount: 0,
+        tax: 0,
+        discount: 0,
+        final_amount: 0,
         status: "ایجاد شده",
     });
 
@@ -25,7 +25,15 @@ const Invoices = () => {
     }, []);
 
     const getAllInvoices = async () => {
-        const response = await fetch(`${authContext.baseUrl}/invoices`);
+        const response = await fetch(`${authContext.baseUrl}/invoices`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "accept": "application/json",
+                "Authorization": `Bearer ${authContext.user.access_token}`,
+                "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
+            },
+        });
         const invoicesRes = await response.json();
         if (response.status === 200) {
             setLoaderInvoices(false);
@@ -44,10 +52,11 @@ const Invoices = () => {
 
         const response = await fetch(`${authContext.baseUrl}/invoices`, {
             method: "POST",
-            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
                 "accept": "application/json",
+                "Authorization": `Bearer ${authContext.user.access_token}`,
+                "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
             },
             body: JSON.stringify(formData),
         });
@@ -84,14 +93,19 @@ const Invoices = () => {
             if (willDelete) {
                 const response = await fetch(`${authContext.baseUrl}/invoices/${id}`, {
                     method: "DELETE",
-                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "accept": "application/json",
+                        "Authorization": `Bearer ${authContext.user.access_token}`,
+                        "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
+                    },
                 });
 
                 if (response.status === 200) {
-                    swal("فاکتور با موفقیت حذف شد!", { icon: "success" });
+                    swal({ title: "فاکتور با موفقیت حذف شد!", icon: "success", buttons: "باشه", });
                     getAllInvoices();
                 } else {
-                    swal("خطا در حذف", { icon: "error" });
+                    swal({ title: "خطا در حذف", icon: "error", buttons: "باشه", });
                 }
             }
         });
@@ -99,9 +113,9 @@ const Invoices = () => {
 
     const handleEdit = (invoices) => {
         console.log(invoices);
-        
+
     };
-    
+
 
     return (
         <>
@@ -186,6 +200,11 @@ const Invoices = () => {
                                         <tr key={invoice.id}>
                                             <td className={classes}>
                                                 <Typography variant="" color="blue-gray" className="font-normal">
+                                                    {invoice.id}
+                                                </Typography>
+                                            </td>
+                                            <td className={classes}>
+                                                <Typography variant="" color="blue-gray" className="font-normal">
                                                     {invoice.total_amount.toLocaleString()}
                                                 </Typography>
                                             </td>
@@ -211,7 +230,7 @@ const Invoices = () => {
                                             </td>
                                             <td className={classes}>
                                                 <Typography as="a" href="#" variant="" color="blue-gray" className="font-medium">
-                                                    <button className="p-2 ml-2 pl-3 rounded-full bg-blue-gray-900 text-white text-xl"  onClick={() => handleEdit(invoice)}>
+                                                    <button className="p-2 ml-2 pl-3 rounded-full bg-blue-gray-900 text-white text-xl" onClick={() => handleEdit(invoice)}>
                                                         <FaEdit />
                                                     </button>
                                                     <button className="p-2 rounded-full bg-blue-gray-900 text-white text-xl" onClick={() => handleDelete(invoice.id)}>

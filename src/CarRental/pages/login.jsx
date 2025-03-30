@@ -25,56 +25,12 @@ function Login() {
   const [loadingSub, setLoadingSub] = useState(false)
   const navigate = useNavigate();
 
-  const LoginHandler = async () => {
+  const LoginHandler = () => {
     setLoadingSub(true)
 
-    const loginInfoJson = {
-      "username": "amirj", //rezat  amirj alim
-      "password": "StringStringString1@"
-    }
 
+    authContext.LoginUser(usernameInput, passInput)
 
-    const response = await fetch(`${authContext.baseUrl}/login`, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        "accept": "application/json"
-      },
-      body: JSON.stringify(loginInfoJson),
-    });
-
-
-
-    if (response.status === 200) {
-      response.json().then(dataLogin => {
-        setLoadingSub(false)
-
-
-        const tokenFakeLogin = String(Math.floor(Math.random() * 9999999999) + 1000000000)
-        authContext.setLocalStorage('token', tokenFakeLogin)
-        authContext.setLocalStorage('ID', dataLogin.id)
-        authContext.setLocalStorage('Role', dataLogin.role)
-
-
-        swal({
-          title: "با موفقیت لاگین شدید",
-          icon: "success",
-          buttons: "ورود به پنل",
-        }).then((value) => {
-          navigate("/");
-        });
-
-      });
-
-    }else{
-      setLoadingSub(false)
-      swal({
-        title: "رمز ورود اشتباه است.",
-        icon: "error",
-        buttons: "تلاش مجدد",
-        })
-    }
 
 
   }
