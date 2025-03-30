@@ -5,14 +5,16 @@ import {
     Button,
     IconButton,
 } from "@material-tailwind/react";
+import { BsCart2 } from "react-icons/bs";
 import { RiMenu2Line } from "react-icons/ri";
-import { IoCloseOutline } from "react-icons/io5";
-import { FaRegUser, FaCar } from "react-icons/fa";
-import { TbLogout2 } from "react-icons/tb";
+import { FaRegUser, FaCar, FaUserAlt } from "react-icons/fa";
+import { IoSettingsSharp, IoLogOut, IoCloseOutline } from "react-icons/io5";
+import { IoIosHelpCircle } from "react-icons/io";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/authContext";
 export function NavbarDefault() {
     const [openNav, setOpenNav] = useState(false);
+    const [openDropDown, setOpenDropDown] = useState(false);
 
     useEffect(() => {
         window.addEventListener(
@@ -86,8 +88,44 @@ export function NavbarDefault() {
 
                             {
                                 isLoginUser ? (
-                                    <>
-                                        <Link to={'/p-admin/'}>
+                                    <div className=" relative flex gap-x-2 items-center justify-start">
+
+                                        <Link to={'/cart'}>
+                                            <Button
+                                                variant="filled"
+                                                size="sm"
+                                                className="hidden lg:inline-block p-3 text-lg rounded-full"
+                                            >
+                                                <span><BsCart2 /></span>
+                                            </Button>
+                                        </Link>
+
+                                        <Button
+                                            variant="filled"
+                                            size="sm"
+                                            className="hidden lg:inline-block p-3 text-lg rounded-full"
+                                            onClick={() => setOpenDropDown(prev => !prev)}
+                                        >
+                                            <span><FaRegUser /></span>
+                                        </Button>
+
+
+                                        {
+                                            openDropDown && (
+                                                <ul className=" absolute -bottom-52 -left-20 w-40 p-2 bg-white shadow-lg rounded-lg">
+                                                    <Link to={'/p-admin/'}>
+                                                        <li className="px-2 py-3 cursor-pointer hover:bg-blue-gray-100 rounded-md"><FaUserAlt className="inline ml-1" /> پنل کاربری</li>
+                                                    </Link>
+                                                    <li className="px-2 py-3 cursor-pointer hover:bg-blue-gray-100 rounded-md"> <IoSettingsSharp className="inline ml-1" /> تنظیمات</li>
+                                                    <li className="px-2 py-3 cursor-pointer hover:bg-blue-gray-100 rounded-md"><IoIosHelpCircle className="inline ml-1" /> راهنما</li>
+                                                    <hr className="my-2" />
+                                                    <li className="px-2 py-3 cursor-pointer hover:bg-blue-gray-100 rounded-md" onClick={LogoutHandler}><IoLogOut className="inline ml-1" /> خروج</li>
+                                                </ul>
+
+                                            )
+                                        }
+
+                                        {/* <Link to={'/p-admin/'}>
                                             <Button
                                                 variant="filled"
                                                 size="sm"
@@ -96,8 +134,8 @@ export function NavbarDefault() {
                                                 <span><FaRegUser className="inline ml-2" />پنل کاربری</span>
                                             </Button>
                                         </Link>
-                                        <span className=" cursor-pointer" onClick={LogoutHandler}><TbLogout2 className="inline mx-2" />خروج</span>
-                                    </>
+                                        <span className=" cursor-pointer" onClick={LogoutHandler}><TbLogout2 className="inline mx-2" />خروج</span> */}
+                                    </div>
                                 ) : (
 
                                     <Link to={'/login'}>
@@ -133,15 +171,15 @@ export function NavbarDefault() {
 
             <div className=" md:hidden container w-full fixed bottom-3 z-50 mx-auto">
                 <div
-                    class="border mx-auto py-3 px-2 w-[300px] bgNavbar flex gap-2 shadow-2xl rounded-xl backdrop-blur-sm hover:shadow-xl transition-all duration-300"
+                    className="border mx-auto py-3 px-2 w-[300px] bgNavbar flex gap-2 shadow-2xl rounded-xl backdrop-blur-sm hover:shadow-xl transition-all duration-300"
                 >
                     <Link to={'/'}>
-                        <div class="group relative px-3 cursor-pointer">
+                        <div className="group relative px-3 cursor-pointer">
                             <div
-                                class="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-blue-gray-200 hover:text-blue-gray-900 transition-colors duration-300"
+                                className="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-blue-gray-200 hover:text-blue-gray-900 transition-colors duration-300"
                             >
                                 <svg
-                                    class="group-hover:scale-110 transition-transform duration-300"
+                                    className="group-hover:scale-110 transition-transform duration-300"
                                     width="20"
                                     height="20"
                                     viewBox="0 0 24 24"
@@ -156,7 +194,7 @@ export function NavbarDefault() {
                                 </svg>
                             </div>
                             <span
-                                class="absolute -top-12 left-[50%] -translate-x-[50%] z-20 origin-bottom scale-0 px-3 py-1.5 rounded-lg border border-gray-200 bg-white text-xs font-medium shadow-lg transition-all duration-300 ease-in-out group-hover:scale-100 before:absolute before:bottom-[-5px] before:left-[50%] before:-translate-x-[50%] before:border-[6px] before:border-transparent before:border-t-white"
+                                className="absolute -top-12 left-[50%] -translate-x-[50%] z-20 origin-bottom scale-0 px-3 py-1.5 rounded-lg border border-gray-200 bg-white text-xs font-medium shadow-lg transition-all duration-300 ease-in-out group-hover:scale-100 before:absolute before:bottom-[-5px] before:left-[50%] before:-translate-x-[50%] before:border-[6px] before:border-transparent before:border-t-white"
                             >
                                 خانه
                             </span>
@@ -164,12 +202,12 @@ export function NavbarDefault() {
                     </Link>
 
                     <Link to={'/blog'}>
-                        <div class="group relative px-3 cursor-pointer">
+                        <div className="group relative px-3 cursor-pointer">
                             <div
-                                class="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-blue-gray-200 hover:text-blue-gray-900 transition-colors duration-300"
+                                className="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-blue-gray-200 hover:text-blue-gray-900 transition-colors duration-300"
                             >
                                 <svg
-                                    class="group-hover:scale-110 transition-transform duration-300"
+                                    className="group-hover:scale-110 transition-transform duration-300"
                                     width="20"
                                     height="20"
                                     viewBox="0 0 24 24"
@@ -186,7 +224,7 @@ export function NavbarDefault() {
                                 </svg>
                             </div>
                             <span
-                                class="absolute -top-12 left-[50%] -translate-x-[50%] z-20 origin-bottom scale-0 px-3 py-1.5 rounded-lg border border-gray-200 bg-white text-xs font-medium shadow-lg transition-all duration-300 ease-in-out group-hover:scale-100 before:absolute before:bottom-[-5px] before:left-[50%] before:-translate-x-[50%] before:border-[6px] before:border-transparent before:border-t-white"
+                                className="absolute -top-12 left-[50%] -translate-x-[50%] z-20 origin-bottom scale-0 px-3 py-1.5 rounded-lg border border-gray-200 bg-white text-xs font-medium shadow-lg transition-all duration-300 ease-in-out group-hover:scale-100 before:absolute before:bottom-[-5px] before:left-[50%] before:-translate-x-[50%] before:border-[6px] before:border-transparent before:border-t-white"
                             >
                                 وبلاگ
                             </span>
@@ -194,12 +232,12 @@ export function NavbarDefault() {
                     </Link>
 
                     <Link to={'/login'}>
-                        <div class="group relative px-3 cursor-pointer">
+                        <div className="group relative px-3 cursor-pointer">
                             <div
-                                class="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-blue-gray-200 hover:text-blue-gray-900 transition-colors duration-300"
+                                className="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-blue-gray-200 hover:text-blue-gray-900 transition-colors duration-300"
                             >
                                 <svg
-                                    class="group-hover:scale-110 transition-transform duration-300"
+                                    className="group-hover:scale-110 transition-transform duration-300"
                                     width="20"
                                     height="20"
                                     viewBox="0 0 24 24"
@@ -216,7 +254,7 @@ export function NavbarDefault() {
                                 </svg>
                             </div>
                             <span
-                                class="absolute -top-12 left-[50%] -translate-x-[50%] z-20 origin-bottom scale-0 px-3 py-1.5 rounded-lg border border-gray-200 bg-white text-xs font-medium shadow-lg transition-all duration-300 ease-in-out group-hover:scale-100 before:absolute before:bottom-[-5px] before:left-[50%] before:-translate-x-[50%] before:border-[6px] before:border-transparent before:border-t-white"
+                                className="absolute -top-12 left-[50%] -translate-x-[50%] z-20 origin-bottom scale-0 px-3 py-1.5 rounded-lg border border-gray-200 bg-white text-xs font-medium shadow-lg transition-all duration-300 ease-in-out group-hover:scale-100 before:absolute before:bottom-[-5px] before:left-[50%] before:-translate-x-[50%] before:border-[6px] before:border-transparent before:border-t-white"
                             >
                                 حساب کاربری
                             </span>
@@ -224,14 +262,14 @@ export function NavbarDefault() {
                     </Link>
 
                     <Link to={'/carList'}>
-                        <div class="group relative px-3 cursor-pointer">
+                        <div className="group relative px-3 cursor-pointer">
                             <div
-                                class="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-blue-gray-200 hover:text-blue-gray-900 transition-colors duration-300"
+                                className="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-blue-gray-200 hover:text-blue-gray-900 transition-colors duration-300"
                             >
                                 <FaCar className="text-xl" />
                             </div>
                             <span
-                                class="absolute -top-12 left-[50%] -translate-x-[50%] z-20 origin-bottom scale-0 px-3 py-1.5 rounded-lg border border-gray-200 bg-white text-xs font-medium shadow-lg transition-all duration-300 ease-in-out group-hover:scale-100 before:absolute before:bottom-[-5px] before:left-[50%] before:-translate-x-[50%] before:border-[6px] before:border-transparent before:border-t-white"
+                                className="absolute -top-12 left-[50%] -translate-x-[50%] z-20 origin-bottom scale-0 px-3 py-1.5 rounded-lg border border-gray-200 bg-white text-xs font-medium shadow-lg transition-all duration-300 ease-in-out group-hover:scale-100 before:absolute before:bottom-[-5px] before:left-[50%] before:-translate-x-[50%] before:border-[6px] before:border-transparent before:border-t-white"
                             >
                                 خودرو
                             </span>

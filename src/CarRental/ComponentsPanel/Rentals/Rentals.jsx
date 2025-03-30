@@ -2,8 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import AuthContext from "../../context/authContext";
 import swal from "sweetalert";
 import { Card, Typography, Spinner, Button, Input } from "@material-tailwind/react";
-import { MdSearch, MdDelete } from "react-icons/md";
-import { FaEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+import { FaEdit , FaSearch } from "react-icons/fa";
 
 const Rentals = () => {
 
@@ -343,7 +343,7 @@ const Rentals = () => {
                                 <div className="flex">
                                     <Input color="gray" size="lg" name="customer_id" value={formData.customer_id} readOnly />
                                     <Button onClick={fetchCustomers} className="mr-2 bg-blue-gray-900">
-                                        <MdSearch />
+                                        <FaSearch />
                                     </Button>
                                 </div>
                             </div>
@@ -355,7 +355,7 @@ const Rentals = () => {
                                 <div className="flex">
                                     <Input color="gray" size="lg" name="vehicle_id" value={formData.vehicle_id} readOnly />
                                     <Button onClick={fetchVehicles} className="mr-2 bg-blue-gray-900">
-                                        <MdSearch />
+                                        <FaSearch />
                                     </Button>
                                 </div>
                             </div>
@@ -367,7 +367,7 @@ const Rentals = () => {
                                 <div className="flex">
                                     <Input color="gray" size="lg" name="invoice_id" value={formData.invoice_id} readOnly />
                                     <Button onClick={fetchInvoices} className="mr-2 bg-blue-gray-900">
-                                        <MdSearch />
+                                        <FaSearch />
                                     </Button>
                                 </div>
                                 <Button className="w-full mt-5 bg-blue-gray-900 text-white" onClick={handleSubmit}>

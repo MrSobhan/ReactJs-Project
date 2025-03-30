@@ -4,7 +4,6 @@ import swal from "sweetalert";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import { Card, Typography, Spinner, Button, Input, Select, Option } from "@material-tailwind/react";
-import axios from 'axios';
 
 const TABLE_HEAD = ["شناسه","نام", "نام خانوادگی", "نام کاربری", "ایمیل", " نقش", "وضعیت", "کد ملی", "جنسیت", "شماره تلفن", ""];
 

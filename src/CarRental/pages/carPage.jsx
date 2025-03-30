@@ -25,12 +25,14 @@ import { AiOutlineInstagram } from "react-icons/ai";
 import { FaLocationDot, FaBookOpen } from "react-icons/fa6";
 import { IoIosApps, IoIosTimer } from "react-icons/io";
 import { PiStarFill, PiStarBold } from "react-icons/pi";
+import { Spinner } from "@material-tailwind/react";
 
 const CarPage = () => {
     const authContext = useContext(AuthContext)
     const { carId } = useParams()
     const [singleCarData, setSingleCarData] = useState([])
     const [isLoginUser, setIsLoginUser] = useState(false)
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     useEffect(() => {
         authContext.isLogin() && setIsLoginUser(true)
@@ -42,6 +44,8 @@ const CarPage = () => {
 
         const carRes = await response.json();
 
+
+
         if (response.status === 200) {
             setSingleCarData(carRes)
         }
@@ -52,6 +56,8 @@ const CarPage = () => {
     const RentalHandle = async () => {
 
         if (isLoginUser) {
+
+            setLoading(true)
 
             const responseInvoices = await fetch(`${authContext.baseUrl}/invoices`, {
                 method: "GET",
@@ -65,22 +71,99 @@ const CarPage = () => {
 
             const ResInvoices = await responseInvoices.json();
 
-            const invoicesUser = ResInvoices.find((inv) => inv.status == 'ایجاد شده')
 
             if (responseInvoices.status === 200) {
-                let invoicesId = null
-                if (invoicesUser.length > 0) {
-                    invoicesId = invoicesUser.id
 
 
-                    console.log(invoicesUser.id);
-                } else {
-                    // Create
-                    console.log("de");
-                    
+                let invoicesUser = ResInvoices.find((inv) => inv.status == "ایجاد شده")
+
+                let invoicesId = invoicesUser && invoicesUser.id
+
+
+                if (!invoicesUser) {
+                    console.log("Create invoices...");
+
+                    const bodyInvoicesPost = {
+                        "total_amount": 0,
+                        "tax": 0,
+                        "discount": 0,
+                        "final_amount": 0,
+                        "status": "ایجاد شده"
+                    }
+
+                    const responseInvoicesPost = await fetch(`${authContext.baseUrl}/invoices`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "accept": "application/json",
+                            "Authorization": `Bearer ${authContext.user.access_token}`,
+                            "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
+                        },
+                        body: JSON.stringify(bodyInvoicesPost)
+                    });
+
+                    const ResInvoicesPost = await responseInvoicesPost.json();
+
+                    if (responseInvoicesPost.status === 200) {
+                        invoicesId = ResInvoicesPost.id
+                    }
+
                 }
 
-                // Create Rental
+                // ? Create Rental
+
+                console.log("Create Rental...");
+
+                const bodyCreateRental = {
+                    "rental_start_date": "1404/03/03",
+                    "rental_end_date": "1404/07/07",
+                    "total_amount": 1000,
+                    "customer_id": authContext.user.ID,
+                    "vehicle_id": singleCarData.id,
+                    "invoice_id": invoicesId
+                }
+
+
+                const responseCreateRental = await fetch(`${authContext.baseUrl}/rentals`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "accept": "application/json",
+                        "Authorization": `Bearer ${authContext.user.access_token}`,
+                        "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
+                    },
+                    body: JSON.stringify(bodyCreateRental)
+                });
+
+                if (responseCreateRental.status === 200) {
+
+
+                    // const responsePut = await fetch(`${authContext.baseUrl}/vehicles/${singleCarData.id}`, {
+                    //     method: "PATCH",
+                    //     headers: {
+                    //         "Content-Type": "application/json",
+                    //         "accept": "application/json",
+                    //         "Authorization": `Bearer ${authContext.user.access_token}`,
+                    //         "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
+                    //     },
+                    //     body: JSON.stringify({ "status": "اجاره شده" }),
+                    // });
+
+                    // if (responsePut.status === 200) {
+
+                    // }
+                    setLoading(false)
+                    swal({
+                        title: "با موفقیت به سبد اجارات شما اضافه شد",
+                        icon: "success",
+                        buttons: "باشه",
+                    })
+                    getOneCar()
+
+
+
+
+                }
 
             }
 
@@ -506,7 +589,9 @@ const CarPage = () => {
                                     singleCarData.status == "موجود" ? (
                                         <div class="flex items-center flex-col mt-4">
                                             <p title="name/نام" class="text-black font-Roboto-md text-xs text-center">هزینه را بعد از پذیرش درخواست توسط میزبان پرداخت خواهید کرد.</p>
-                                            <Button className='w-full mt-3' onClick={RentalHandle}>ادامه</Button>
+                                            <Button className='w-full mt-3' onClick={RentalHandle}>
+                                                {loading ? <Spinner className="inline h-4 w-4" /> : "ادامه"}
+                                            </Button>
                                         </div>
                                     ) : (
                                         <div class="flex items-center flex-col mt-4">

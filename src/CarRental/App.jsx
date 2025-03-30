@@ -5,6 +5,7 @@ import routes from "./routes";
 import "./styles/reset.css";
 import "./styles/App.css";
 import swal from "sweetalert";
+
 const App = () => {
 
   const navigate = useNavigate();

@@ -20,6 +20,7 @@ import Comments from "./ComponentsPanel/Comments/Comments";
 import Payments from "./ComponentsPanel/Payments/Payments";
 import Posts from "./ComponentsPanel/Posts/Posts";
 import Admins from "./ComponentsPanel/Admins/Admins";
+import Cart from "./pages/Cart";
 
 
 const routes = [
@@ -29,6 +30,7 @@ const routes = [
   { path: "/blog/:postId", element: <Blog /> },
   { path: "/car/:carId", element: <CarPage /> },
   { path: "/carList", element: <Car /> },
+  { path: "/cart", element: <Cart /> },
   { path: "*", element: <Error404 /> },
 
   {
