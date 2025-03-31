@@ -113,7 +113,7 @@ export function NavbarDefault() {
                                         {
                                             openDropDown && (
                                                 <ul className=" absolute -bottom-52 -left-20 w-40 p-2 bg-white shadow-lg rounded-lg">
-                                                    <Link to={'/p-admin/'}>
+                                                    <Link to={authContext.user.role == "SuperAdmin" || authContext.user.role == "Admin" ? "/p-admin/" : "/c-admin/"}>
                                                         <li className="px-2 py-3 cursor-pointer hover:bg-blue-gray-100 rounded-md"><FaUserAlt className="inline ml-1" /> پنل کاربری</li>
                                                     </Link>
                                                     <li className="px-2 py-3 cursor-pointer hover:bg-blue-gray-100 rounded-md"> <IoSettingsSharp className="inline ml-1" /> تنظیمات</li>

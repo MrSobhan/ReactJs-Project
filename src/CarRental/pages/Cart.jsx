@@ -4,21 +4,25 @@ import { Footer } from "../Components/Footer/Footer";
 import AuthContext from "../context/authContext";
 // import { Spinner, Button, Card, CardBody, CardHeader, Typography } from "@material-tailwind/react";
 import {
-    Step,
+    Option,
     Card,
     Button,
     Stepper,
     CardBody,
-    CardHeader,
+    Select,
     Typography,
     IconButton,
 } from "@material-tailwind/react";
+import { Alert } from "@material-tailwind/react";
+import { Spinner } from "@material-tailwind/react";
+import swal from "sweetalert";
 import { MdOutlineArrowCircleDown, MdDelete, MdOutlinePayment } from "react-icons/md";
 import { FaPencil } from "react-icons/fa6";
 const Cart = () => {
     const authContext = useContext(AuthContext);
-    const [loader, setLoader] = useState(true);
+    const [loader, setLoader] = useState(false);
     const [rentalData, setRentalData] = useState([]);
+    const [paymentInput, setPaymentInput] = useState("پرداخت اینترنتی");
     // const [priceTotal, setPriceTotal] = useState(0);
 
     let totalHelp = 0
@@ -39,10 +43,19 @@ const Cart = () => {
         });
         const data = await responseRental.json();
 
+        console.log(data);
+        
+
         if (responseRental.status === 200) {
-            console.log(data);
+            setLoader(true)
 
             setRentalData(data);
+        }else{
+            swal({
+                title: data.detail,
+                icon: "error",
+                buttons: "تلاش مجدد",
+            })
         }
     };
 
@@ -59,6 +72,9 @@ const Cart = () => {
 
         console.log(responseDeleteRental);
 
+        console.log(id);
+
+
 
         if (responseDeleteRental.status === 200) {
             setRentalData(rentalData.filter((rental) => rental.id !== id));
@@ -67,8 +83,46 @@ const Cart = () => {
         }
     };
 
-    const handleFullPayment = () => {
-        alert("پرداخت کل انجام شد!");
+    const handleFullPayment = async () => {
+        const objPayment = {
+            "payment_datetime": "1404",
+            "payment_method": paymentInput,
+            "transaction_id": null,
+            "amount": Number(priceTotal),
+            "payment_status": paymentInput == "پرداخت اینترنتی" ? "تایید شده" : "در انتظار تایید",
+            "invoice_id": rentalData[0].invoice.id
+        }
+
+        console.log(objPayment);
+        
+        const responsePaymentCreate = await fetch(`${authContext.baseUrl}/payments`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "accept": "application/json",
+                "Authorization": `Bearer ${authContext.user.access_token}`,
+                "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
+            },
+            body: JSON.stringify(objPayment)
+        });
+
+        console.log(responsePaymentCreate);
+
+
+
+        if (responsePaymentCreate.status === 200) {
+            swal({
+                title: "با موفقیت پرداخت انجام شد",
+                icon: "success",
+                buttons: "اوکی",
+            })
+        } else {
+            swal({
+                title: "ارسال پرداخت شما به مشکل خورد...",
+                icon: "error",
+                buttons: "تلاش مجدد",
+            })
+        }
     };
 
 
@@ -192,7 +246,7 @@ const Cart = () => {
                                 <div className="w-full">
                                     <Button
                                         variant="outlined"
-                                        className="ml-auto border-gray-200 flex items-center justify-center gap-2 w-full md:max-w-fit shadow-lg"
+                                        className="mr-auto border-gray-200 flex items-center justify-center gap-2 w-full md:max-w-fit shadow-lg"
                                     >
                                         دانلود فاکتور
                                         <MdOutlineArrowCircleDown className="h-4 w-4" />
@@ -203,21 +257,32 @@ const Cart = () => {
 
                         <Card className="border border-gray-300 !rounded-md shadow-sm">
                             <CardBody className="md:px-2 pb-14">
-                                {rentalData.map((rent) => (
-                                    <div key={rent.id} className="relative space-y-10 flex flex-wrap justify-center gap-x-4 md:justify-start items-start">
-                                        <img src={rent.vehicle.local_image_address} className="h-[140px] rounded-lg" alt={rent.vehicle.model} />
-                                        <div className="-translate-y-6 space-y-1 md:text-start text-center w-auto">
-                                            <Typography variant="h6" color="blue-gray">
-                                                {rent.vehicle.model} {rent.vehicle.brand}
-                                            </Typography>
-                                            <Typography className="font-normal text-gray-600">پلاک : {rent.vehicle.plate_number}</Typography>
-                                            <Typography className="font-normal text-gray-600">موقعیت : {rent.vehicle.location}</Typography>
-                                            <Typography className="font-normal text-gray-600">رنگ : {rent.vehicle.color}</Typography>
-                                        </div>
-                                        <Typography className="absolute left-0 bottom-7 text-sm text-gray-600">{rent.total_amount} <sub>تومان</sub></Typography>
-                                        <button className=" absolute left-0 -top-7 border-2 rounded-md border-solid border-blue-gray-100 p-1 text-lg cursor-pointer" onClick={() => handleRemove(rent.id)}><MdDelete /></button>
-                                    </div>
-                                ))}
+                                {
+                                    loader ? (
+                                        rentalData.length ? (
+                                            rentalData.map((rent) => (
+                                                <div key={rent.id} className="relative space-y-10 flex flex-wrap justify-center gap-x-4 md:justify-start items-start">
+                                                    <img src={rent.vehicle.local_image_address} className="h-[140px] rounded-lg" alt={rent.vehicle.model} />
+                                                    <div className="-translate-y-6 space-y-1 md:text-start text-center w-auto">
+                                                        <Typography variant="h6" color="blue-gray">
+                                                            {rent.vehicle.model} {rent.vehicle.brand}
+                                                        </Typography>
+                                                        <Typography className="font-normal text-gray-600">پلاک : {rent.vehicle.plate_number}</Typography>
+                                                        <Typography className="font-normal text-gray-600">موقعیت : {rent.vehicle.location}</Typography>
+                                                        <Typography className="font-normal text-gray-600">رنگ : {rent.vehicle.color}</Typography>
+                                                    </div>
+                                                    <Typography className="absolute left-0 bottom-7 text-sm text-gray-600">{rent.total_amount} <sub>تومان</sub></Typography>
+                                                    <button className=" absolute left-0 -top-7 border-2 rounded-md border-solid border-blue-gray-100 p-1 text-lg cursor-pointer" onClick={() => handleRemove(rent.id)}><MdDelete /></button>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <Alert>محصولی وجود ندارد...</Alert>
+                                        )
+                                    ) : (
+                                        <Spinner className="mx-auto" />
+                                    )
+
+                                }
                             </CardBody>
                         </Card>
                     </div>
@@ -281,8 +346,16 @@ const Cart = () => {
                         </Card>
                         <Card className="border border-gray-300 !rounded-md shadow-sm">
                             <CardBody className="p-4 w-auto mx-auto">
+                                <Select label="" value={paymentInput} onChange={(val) => setPaymentInput(val)}>
+                                    <Option value="انتقال وجه کارت به کارت">انتقال وجه کارت به کارت</Option>
+                                    <Option value="انتقال وجه ساتنا">انتقال وجه ساتنا</Option>
+                                    <Option value="انتقال وجه پایا">انتقال وجه پایا</Option>
+                                    <Option value="پرداخت اینترنتی">پرداخت اینترنتی</Option>
+                                    <Option value="سایر">سایر</Option>
+                                </Select>
+
                                 <button
-                                    className="overflow-hidden mx-auto relative w-56 p-2 h-12 bg-blue-gray-900 text-white border-none rounded-md text-xl  cursor-pointer z-10 group"
+                                    className="overflow-hidden mx-auto relative w-56 p-2 h-12 bg-blue-gray-900 text-white border-none rounded-md text-xl  cursor-pointer z-10 group mt-4"
                                     onClick={handleFullPayment}
                                 >
                                     ادامه سفارش

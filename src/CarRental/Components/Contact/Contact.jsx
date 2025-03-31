@@ -40,17 +40,18 @@ export function Contact() {
         "subject": subjectInput,
         "content": contentInput,
         "status": "pending",
-        "customer_id": "9b9ebddd-81bc-4529-8537-de2df96d31f0"
+        "customer_id": authContext.user.ID
       }
 
       console.log(dataComments);
 
       const response = await fetch(`${authContext.baseUrl}/comments/`, {
         method: "POST",
-        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          "accept": "application/json"
+          "accept": "application/json",
+          "Authorization": `Bearer ${authContext.user.access_token}`,
+          "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`,
         },
         body: JSON.stringify(dataComments),
       });
@@ -58,8 +59,8 @@ export function Contact() {
 
       if (response.status === 200) {
         setLoadingSub(false)
-
-
+        setSubjectInput('')
+        setContentInput('')
         swal({
           title: "با موفقیت نظر شما ثبت شد",
           icon: "success",
@@ -90,7 +91,7 @@ export function Contact() {
     const resComments = await fetch(`${authContext.baseUrl}/comments`);
 
     resComments.json().then(comment => {
-      const commentsData = comment.reverse().slice(0, 6)
+      const commentsData = comment.filter(comment => comment.status == 'approved').reverse().slice(0, 6)
       // console.log(commentsData);
 
       setComments(commentsData);
@@ -208,21 +209,25 @@ export function Contact() {
           />
         </div>
       </div>
-      <div className="container mx-auto mt-16">
-        <h3 className="titleSlider lalezar mr-3 mb-16">نظرات شما</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-          {
-            comments.map((data) => (
-              <div className="flex items-start flex-col justify-evenly gap-y-4 py-3 px-4 shadow-md rounded-lg">
-                <p>{data.subject}</p>
-                <p>{data.content}</p>
-                <p>{authContext.calcuteRelativeTimeDifference(data.created_at)}</p>
-              </div>
-            ))
-          }
+      {
+        comments.length ? (
+          <div className="container mx-auto mt-16">
+            <h3 className="titleSlider lalezar mr-3 mb-16">نظرات شما</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+              {
+                comments.map((data) => (
+                  <div className="flex items-start flex-col justify-evenly gap-y-4 py-3 px-4 shadow-md rounded-lg">
+                    <p>{data.subject}</p>
+                    <p>{data.content}</p>
+                    <p>{authContext.calcuteRelativeTimeDifference(data.created_at)}</p>
+                  </div>
+                ))
+              }
 
-        </div>
-      </div>
+            </div>
+          </div>
+        ) : (<></>)
+      }
     </section>
   );
 }

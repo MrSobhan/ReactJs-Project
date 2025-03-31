@@ -22,6 +22,15 @@ import Posts from "./ComponentsPanel/Posts/Posts";
 import Admins from "./ComponentsPanel/Admins/Admins";
 import Cart from "./pages/Cart";
 
+// ? Customer Panel
+
+import CustomerPanel from "./pages/CustomerPanel/App";
+
+import Account from "./ComponentsPanel/Account/Account.jsx";
+import PaymentsOld from "./ComponentsPanel/PaymentsOld/PaymentsOld.jsx";
+import MyComments from "./ComponentsPanel/MyComments/MyComments.jsx";
+import Setting from "./ComponentsPanel/Setting/Setting.jsx";
+
 
 const routes = [
   { path: "/", element: <Index /> },
@@ -51,6 +60,19 @@ const routes = [
       { path: "payments", element: <Payments /> },
       { path: "posts", element: <Posts /> },
       { path: "comments", element: <Comments /> },
+    ],
+  },
+  {
+    path: "/c-admin/*",
+    element: (
+        <CustomerPanel />
+    ),
+    children: [
+      { path: "", element: <Account /> },
+      { path: "account", element: <Account /> },
+      { path: "paymentsOld", element: <PaymentsOld /> },
+      { path: "mycomments", element: <MyComments /> },
+      { path: "setting", element: <Setting /> }
     ],
   },
 
