@@ -5,6 +5,7 @@ import routes from "./routes";
 import "./styles/reset.css";
 import "./styles/App.css";
 import swal from "sweetalert";
+import DevAuth from "./Components/DevAuth/DevAuth";
 
 const App = () => {
 
@@ -158,7 +159,11 @@ const App = () => {
         user
       }}
     >
-      {router}
+      <DevAuth>
+
+        {router}
+
+      </DevAuth>
     </AuthContext.Provider>
   );
 }

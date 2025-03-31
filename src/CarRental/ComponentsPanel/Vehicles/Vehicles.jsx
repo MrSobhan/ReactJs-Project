@@ -139,6 +139,8 @@ const Vehicles = () => {
     };
 
     const handleDelete = async (id) => {
+        console.log("saa");
+        
         swal({
             title: "آیا مطمئن هستید؟",
             text: "این عملیات قابل بازگشت نیست!",
