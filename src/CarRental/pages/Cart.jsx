@@ -43,14 +43,16 @@ const Cart = () => {
         });
         const data = await responseRental.json();
 
-        console.log(data);
-        
+        // console.log(data);
+
 
         if (responseRental.status === 200) {
             setLoader(true)
 
-            setRentalData(data);
-        }else{
+            const RentalNew = data.filter((rental)=>rental.invoice.status == "ایجاد شده")
+
+            setRentalData(RentalNew);
+        } else {
             swal({
                 title: data.detail,
                 icon: "error",
@@ -84,47 +86,69 @@ const Cart = () => {
     };
 
     const handleFullPayment = async () => {
-        const objPayment = {
-            "payment_datetime": "1404",
-            "payment_method": paymentInput,
-            "transaction_id": null,
-            "amount": Number(priceTotal),
-            "payment_status": paymentInput == "پرداخت اینترنتی" ? "تایید شده" : "در انتظار تایید",
-            "invoice_id": rentalData[0].invoice.id
-        }
 
-        console.log(objPayment);
-        
-        const responsePaymentCreate = await fetch(`${authContext.baseUrl}/payments`, {
+
+        const resLoginAdmin = await fetch(`${authContext.baseUrl}/login`, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                "accept": "application/json",
-                "Authorization": `Bearer ${authContext.user.access_token}`,
-                "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'accept': 'application/json'
             },
-            body: JSON.stringify(objPayment)
+            body: 'username=amirj&password=StringStringString1@',
         });
 
-        console.log(responsePaymentCreate);
+
+
+        if (resLoginAdmin.status === 200) {
+            resLoginAdmin.json().then(async (dataLogin) => {
+
+                const objPayment = {
+                    "payment_datetime": "1404/01/12 20:05:04",
+                    "payment_method": paymentInput,
+                    "transaction_id": null,
+                    "amount": Number(priceTotal - (priceTotal * 10 / 100)),
+                    "payment_status": paymentInput == "پرداخت اینترنتی" ? "تایید شده" : "در انتظار تایید",
+                    "invoice_id": rentalData[0].invoice.id
+                }
+
+                console.log(objPayment);
 
 
 
-        if (responsePaymentCreate.status === 200) {
-            swal({
-                title: "با موفقیت پرداخت انجام شد",
-                icon: "success",
-                buttons: "اوکی",
+                const responsePaymentCreate = await fetch(`${authContext.baseUrl}/payments`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "accept": "application/json",
+                        "Authorization": `Bearer ${dataLogin.access_token}`,
+                        "Authorization-Refresh": `Bearer ${dataLogin.refresh_token}`
+                    },
+                    body: JSON.stringify(objPayment)
+                });
+
+                console.log(responsePaymentCreate);
+
+
+
+                if (responsePaymentCreate.status === 200) {
+                    swal({
+                        title: "با موفقیت پرداخت انجام شد",
+                        icon: "success",
+                        buttons: "اوکی",
+                    })
+                } else {
+                    swal({
+                        title: "ارسال پرداخت شما به مشکل خورد...",
+                        icon: "error",
+                        buttons: "تلاش مجدد",
+                    })
+                }
+
             })
-        } else {
-            swal({
-                title: "ارسال پرداخت شما به مشکل خورد...",
-                icon: "error",
-                buttons: "تلاش مجدد",
-            })
-        }
-    };
 
+
+        };
+    }
 
     const priceTotal = useMemo(() => {
         return rentalData.reduce((sum, rent) => sum + rent.total_amount, 0);

@@ -30,7 +30,7 @@ export default function Sidebar() {
 
         <ul className="sidebar-links">
           <li>
-            <NavLink to="account">
+            <NavLink to="">
               <AiOutlineHome className="icon" />
               صفحه اصلی
             </NavLink>
@@ -42,9 +42,9 @@ export default function Sidebar() {
             </NavLink>
           </li>
           <li>
-            <NavLink to="paymentsOld">
+            <NavLink to="invoicesOld">
               <GoHistory  className="icon" />
-              تاریخچه پرداخت
+              تاریخچه فاکتور
             </NavLink>
           </li>
           <li>

@@ -43,7 +43,7 @@ export default function Sidebar() {
 
         <ul className="sidebar-links">
           <li>
-            <NavLink to="vehicles">
+            <NavLink to="">
               <AiOutlineHome className="icon" />
               صفحه اصلی
             </NavLink>

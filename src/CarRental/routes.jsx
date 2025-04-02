@@ -10,6 +10,7 @@ import Singup from "./pages/singup";
 
 import PAdminPrivate from "./Components/Private/PAdminPrivate";
 import AdminPanel from "./pages/AdminPanel/App";
+import AdminDashboard from "./ComponentsPanel/AdminDashboard/AdminDashboard";
 
 import Customers from "./ComponentsPanel/Customers/Customers";
 import Vehicles from "./ComponentsPanel/Vehicles/Vehicles";
@@ -25,9 +26,10 @@ import Cart from "./pages/Cart";
 // ? Customer Panel
 
 import CustomerPanel from "./pages/CustomerPanel/App";
+import CustomerDashboard from "./ComponentsPanel/CustomerDashboard/CustomerDashboard";
 
 import Account from "./ComponentsPanel/Account/Account.jsx";
-import PaymentsOld from "./ComponentsPanel/PaymentsOld/PaymentsOld.jsx";
+import InvoicesOld from "./ComponentsPanel/invoicesOld/invoicesOld.jsx";
 import MyComments from "./ComponentsPanel/MyComments/MyComments.jsx";
 import Setting from "./ComponentsPanel/Setting/Setting.jsx";
 
@@ -50,7 +52,7 @@ const routes = [
       </PAdminPrivate>
     ),
     children: [
-      { path: "", element: <Vehicles /> },
+      { path: "", element: <AdminDashboard /> },
       { path: "admins", element: <Admins /> },
       { path: "customers", element: <Customers /> },
       { path: "vehicles", element: <Vehicles /> },
@@ -68,9 +70,9 @@ const routes = [
         <CustomerPanel />
     ),
     children: [
-      { path: "", element: <Account /> },
+      { path: "", element: <CustomerDashboard /> },
       { path: "account", element: <Account /> },
-      { path: "paymentsOld", element: <PaymentsOld /> },
+      { path: "invoicesOld", element: <InvoicesOld /> },
       { path: "mycomments", element: <MyComments /> },
       { path: "setting", element: <Setting /> }
     ],
