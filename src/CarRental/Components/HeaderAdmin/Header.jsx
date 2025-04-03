@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { AiOutlineBell, AiOutlineMenu } from 'react-icons/ai';
-import { SlLogout } from "react-icons/sl";
+import { TbLogout2 } from "react-icons/tb";
 import { FaSearch } from "react-icons/fa";
 import AuthContext from '../../context/authContext';
 import './Header.css';
@@ -31,7 +31,7 @@ export default function Header({ toggleSidebar }) {
                 </div>
 
                 <button className='header-left-icon'><AiOutlineBell /></button>
-                <button className='header-left-icon' onClick={() => authContext.LogOut()}><SlLogout /></button>
+                <button className='header-left-icon' onClick={() => authContext.LogOut()}><TbLogout2  /></button>
             </div>
         </div>
     );
