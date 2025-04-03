@@ -1,27 +1,25 @@
-import React from "react";
-import { useRoutes } from "react-router-dom";
-
+import React, { useState } from "react";
+import { Outlet } from "react-router-dom";
 import Sidebar from "../../Components/SidebarAdmin/Sidebar";
 import Header from "../../Components/HeaderAdmin/Header";
-import { Outlet } from "react-router-dom";
-// import routes from "./routes";
-
 import "./App.css";
 
 export default function App() {
-  // const router = useRoutes(routes)
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  return (
-    <>
-      <Sidebar />
+    const toggleSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    };
 
-      <div className="main">
-        <Header />
-
-        <div className="py-10">
-          <Outlet />
-        </div>
-      </div>
-    </>
-  );
+    return (
+        <>
+            <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+            <div className={`main ${isSidebarOpen ? "sidebar-open" : ""}`}>
+                <Header toggleSidebar={toggleSidebar} />
+                <div className="py-10">
+                    <Outlet />
+                </div>
+            </div>
+        </>
+    );
 }

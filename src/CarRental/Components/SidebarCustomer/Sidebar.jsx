@@ -4,16 +4,18 @@ import { FiUsers } from "react-icons/fi";
 import { NavLink, Link } from "react-router-dom";
 import { GoHistory } from "react-icons/go";
 import { CiViewList } from "react-icons/ci";
-import { IoBookOutline , IoSettingsOutline } from "react-icons/io5";
+import { IoBookOutline, IoSettingsOutline, IoClose } from "react-icons/io5";
 
-import "./Sidebar.css";
+import "../SidebarAdmin/Sidebar.css";
 
-export default function Sidebar() {
-
+export default function Sidebar({ isSidebarOpen, toggleSidebar }) {
 
   return (
-    <div className="sidebar__Wrapper">
+    <div className={`sidebar__Wrapper ${isSidebarOpen ? "open" : "closed"}`}>
       <div className="sidebar">
+        <button className="close-btn" onClick={toggleSidebar}>
+          <IoClose size={24} />
+        </button>
         <h1 className="sidebar-title">
           <div className="flex items-center justify-start mx-auto">
             <img src="../logoBrandCarRental.ico" alt="Logo_img" className="w-9 h-9" />
@@ -43,13 +45,13 @@ export default function Sidebar() {
           </li>
           <li>
             <NavLink to="invoicesOld">
-              <GoHistory  className="icon" />
+              <GoHistory className="icon" />
               تاریخچه فاکتور
             </NavLink>
           </li>
           <li>
             <Link to="/cart">
-              <CiViewList  className="icon" />
+              <CiViewList className="icon" />
               لیست اجارات
             </Link>
           </li>

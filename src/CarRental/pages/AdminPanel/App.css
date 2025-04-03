@@ -2,4 +2,11 @@
     flex: 4;
     padding: 20px;
     padding-right: 280px;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+@media (max-width: 768px) {
+    .main {
+        padding-right: 0;
+    }
 }
