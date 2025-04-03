@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
-import { AiOutlineBell, AiOutlineMenu } from 'react-icons/ai';
+import { AiOutlineBell } from 'react-icons/ai';
 import { TbLogout2 } from "react-icons/tb";
 import { FaSearch } from "react-icons/fa";
+import { CgMenuRight } from "react-icons/cg";
 import AuthContext from '../../context/authContext';
 import './Header.css';
 
@@ -12,7 +13,7 @@ export default function Header({ toggleSidebar }) {
         <div className='header'>
             <div className='flex'>
                 <button className="menu-btn" onClick={toggleSidebar}>
-                    <AiOutlineMenu size={24} />
+                    <CgMenuRight size={24} />
                 </button>
 
                 <div className="admin-profile">

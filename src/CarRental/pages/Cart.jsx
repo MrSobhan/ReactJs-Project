@@ -49,7 +49,7 @@ const Cart = () => {
         if (responseRental.status === 200) {
             setLoader(true)
 
-            const RentalNew = data.filter((rental)=>rental.invoice.status == "ایجاد شده")
+            const RentalNew = data.filter((rental) => rental.invoice.status == "ایجاد شده")
 
             setRentalData(RentalNew);
         } else {

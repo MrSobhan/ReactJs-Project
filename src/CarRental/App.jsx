@@ -139,6 +139,49 @@ const App = () => {
 
   };
 
+  const RefreshToken = async () => {
+
+    const resRefreshToken = await fetch(`${baseUrl}/refresh-token`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "accept": "application/json",
+        "Authorization": `Bearer ${user.access_token}`,
+        "Authorization-Refresh": `Bearer ${user.refresh_token}`
+      },
+      body: '',
+    });
+
+
+
+    if (resRefreshToken.status === 200) {
+      resRefreshToken.json().then(dataLogin => {
+
+        // console.log(dataLogin);
+
+
+
+        // ? Set Data User In Context
+
+        const DataUserLogin = {
+          role: user.role,
+          ID: user.ID,
+          access_token: dataLogin.access_token,
+          refresh_token: dataLogin.refresh_token,
+        }
+
+        setUser(DataUserLogin);
+        localStorage.setItem("user", JSON.stringify(DataUserLogin));
+      });
+
+    }
+
+  };
+
+  setInterval(() => {
+    RefreshToken()
+  }, 780000);
+
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -157,7 +200,8 @@ const App = () => {
         isLogin,
         LogOut,
         LoginUser,
-        user
+        user,
+        RefreshToken
       }}
     >
       <DevAuth>
