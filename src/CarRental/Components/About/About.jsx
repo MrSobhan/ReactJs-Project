@@ -4,7 +4,7 @@ import { FaAngleLeft } from "react-icons/fa6";
 
 const About = () => {
     return (
-        <section className='container mx-auto lg:w-[80%] w-[90%]'>
+        <section className='container mx-auto lg:w-[80%] w-[90%] mb-28'>
             <div className="container mx-auto md:mb-10 text-center lg:my-2 text-blue-gray-900 md:flex items-center justify-center gap-x-10 relative">
                 <img src="./carReantal/Car-rental-bro.png" alt="CarPoster" className="w-full md:w-[300px] lg:w-[550px]" />
                 <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]" aria-hidden="true">

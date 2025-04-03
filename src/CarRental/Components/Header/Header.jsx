@@ -7,7 +7,7 @@ const Header = () => {
   
   return (
     <header className=' relative'>
-      <div className="absolute inset-x-0 top-20 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
+      <div className="absolute inset-x-0 lg:top-20 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
         <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" style={{ clipPath: "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" }}></div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 items-center md:mt-10 py-14 lg:py-24 container mx-auto lg:w-[80%] w-[90%]">
@@ -32,24 +32,13 @@ const Header = () => {
             سوییچ رنت این امکان را فراهم نموده است تا خدمات کرایه ماشین بدون راننده را چه در ایران و چه در هر نقطه دیگر از جهان با شرایط آسان در اختیار شما قرار دهد. با اجاره ماشین بدون راننده افراد خیلی آزادانه می توانند به هر کجا که
           </Typography>
           <Button className='rounded-full py-4 px-9 mt-5'>شروع جستجو</Button>
-          {/* <div className="mt-8 grid w-full  items-center justify-center mx-auto">
-            <div className="mb-2 flex  flex-col gap-4 md:flex-row">
-              <Input color="gray" placeholder="نام استان ..." size="lg" className='rounded-xl shadow-lg' />
-              <Input type="date" color="gray" placeholder="نام استان ..." size="lg" className='rounded-xl shadow-lg' />
-              <Button
-                color="gray"
-                className="w-full px-4 !md:w-[12rem]"
-              >
-                جستجوی خودرو
-              </Button>
-            </div>
-          </div> */}
+
         </div>
         <div className="flex gap-x-6 w-full justify-end items-center">
-          <img src="https://w0.peakpx.com/wallpaper/999/452/HD-wallpaper-lamborghini-luxury-car-sports-car-luxury-cars-vertical-cars-thumbnail.jpg" alt="carReantalf1"  className='max-h-96 w-56 object-cover rounded-lg'/>
+          <img src="./carReantal/42.jpg" alt="carReantalf1"  className='max-h-96 w-56 object-cover rounded-lg'/>
           <div className='flex flex-col gap-y-6'>
             <img src="./carReantal/43.jpg" alt="carReantalf2" className='h-44 w-56 object-cover rounded-lg' />
-            <img src="https://i.pinimg.com/736x/88/e0/c6/88e0c64bbd4e8646b80efdb68025a2c4.jpg" alt="carReantalf3" className='max-h-96 object-cover rounded-lg' />
+            <img src="./carReantal/44.jpg" alt="carReantalf3" className='max-h-96 object-cover rounded-lg' />
           </div>
         </div>
 

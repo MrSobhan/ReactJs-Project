@@ -67,7 +67,7 @@ export function NavbarDefault() {
 
     return (
         <>
-            <header className="hidden md:block w-full fixed top-0 lg:top-3 left-0 lg:mx-auto z-50">
+            <header className="hidden lg:block w-full fixed top-0 lg:top-3 left-0 mx-auto z-50">
                 <Navbar className="w-full lg:w-[80%] px-4 py-2 lg:px-8 mx-auto  shadow-lg bgNavbar">
                     <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
                         <div className="flex items-center justify-between">
@@ -169,9 +169,9 @@ export function NavbarDefault() {
             </header>
 
 
-            <div className=" md:hidden container w-full fixed bottom-3 z-50 mx-auto">
+            <div className="lg:hidden w-full fixed bottom-3 z-50 mx-auto">
                 <div
-                    className="border mx-auto py-3 px-2 w-[300px] bgNavbar flex gap-2 shadow-2xl rounded-xl backdrop-blur-sm hover:shadow-xl transition-all duration-300"
+                    className="border mx-auto p-2 w-max bgNavbar flex shadow-2xl rounded-xl backdrop-blur-sm hover:shadow-xl transition-all duration-300"
                 >
                     <Link to={'/'}>
                         <div className="group relative px-3 cursor-pointer">
@@ -231,35 +231,36 @@ export function NavbarDefault() {
                         </div>
                     </Link>
 
-                    <Link to={'/login'}>
+                    {
+                        authContext.isLogin() ? (
+                            <Link to={'/cart'}>
+                                <div className="group relative px-3 cursor-pointer">
+                                    <div className="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-blue-gray-200 hover:text-blue-gray-900 transition-colors duration-300">
+                                        <BsCart2 className="text-xl" />
+                                    </div>
+                                    <span className="absolute -top-12 left-[50%] -translate-x-[50%] z-20 origin-bottom scale-0 px-3 py-1.5 rounded-lg border border-gray-200 bg-white text-xs font-medium shadow-lg transition-all duration-300 ease-in-out group-hover:scale-100 before:absolute before:bottom-[-5px] before:left-[50%] before:-translate-x-[50%] before:border-[6px] before:border-transparent before:border-t-white">
+                                        لیست اجارات
+                                    </span>
+                                </div>
+                            </Link>
+                        ) : (<></>)
+                    }
+
+
+
+                    <Link to={authContext.isLogin() ? (authContext.user?.role === "Admin" || authContext.user?.role === "SuperAdmin" ? "/p-admin/" : "/c-admin/") : "/login"}>
                         <div className="group relative px-3 cursor-pointer">
-                            <div
-                                className="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-blue-gray-200 hover:text-blue-gray-900 transition-colors duration-300"
-                            >
-                                <svg
-                                    className="group-hover:scale-110 transition-transform duration-300"
-                                    width="20"
-                                    height="20"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13M16 3.13C16.8604 3.3503 17.623 3.8507 18.1676 4.55231C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89317 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88M13 7C13 9.20914 11.2091 11 9 11C6.79086 11 5 9.20914 5 7C5 4.79086 6.79086 3 9 3C11.2091 3 13 4.79086 13 7Z"
-                                        stroke-linejoin="round"
-                                        stroke-linecap="round"
-                                        stroke-width="2"
-                                        stroke="currentColor"
-                                    ></path>
+                            <div className="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-blue-gray-200 hover:text-blue-gray-900 transition-colors duration-300">
+                                <svg className="group-hover:scale-110 transition-transform duration-300" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13M16 3.13C16.8604 3.3503 17.623 3.8507 18.1676 4.55231C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89317 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88M13 7C13 9.20914 11.2091 11 9 11C6.79086 11 5 9.20914 5 7C5 4.79086 6.79086 3 9 3C11.2091 3 13 4.79086 13 7Z" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor"></path>
                                 </svg>
                             </div>
-                            <span
-                                className="absolute -top-12 left-[50%] -translate-x-[50%] z-20 origin-bottom scale-0 px-3 py-1.5 rounded-lg border border-gray-200 bg-white text-xs font-medium shadow-lg transition-all duration-300 ease-in-out group-hover:scale-100 before:absolute before:bottom-[-5px] before:left-[50%] before:-translate-x-[50%] before:border-[6px] before:border-transparent before:border-t-white"
-                            >
+                            <span className="absolute -top-12 left-[50%] -translate-x-[50%] z-20 origin-bottom scale-0 px-3 py-1.5 rounded-lg border border-gray-200 bg-white text-xs font-medium shadow-lg transition-all duration-300 ease-in-out group-hover:scale-100 before:absolute before:bottom-[-5px] before:left-[50%] before:-translate-x-[50%] before:border-[6px] before:border-transparent before:border-t-white">
                                 حساب کاربری
                             </span>
                         </div>
                     </Link>
+
 
                     <Link to={'/carList'}>
                         <div className="group relative px-3 cursor-pointer">

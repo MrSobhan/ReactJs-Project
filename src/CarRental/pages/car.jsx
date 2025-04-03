@@ -41,7 +41,7 @@ const Car = () => {
                     <div className="col-span-1 hidden lg:block">
                         <Sidebar />
                     </div>
-                    <div className="col-span-3 grid grid-cols-2 md:grid-cols-3 gap-x-3 gap-y-8 pt-7">
+                    <div className="col-span-3 grid grid-cols-1 md:grid-cols-3 gap-x-3 gap-y-8 pt-7">
 
                         {
                             carData.map((dataCar) => (

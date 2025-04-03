@@ -103,7 +103,7 @@ export function Contact() {
 
 
   return (
-    <section className="px-8 py-8 lg:pb-24 container mx-auto lg:w-[80%] w-[90%]">
+    <section className="py-8 pb-14 lg:pb-24 container mx-auto lg:w-[80%] w-[90%]">
       <h3 className="titleSlider lalezar mr-3 mb-16">ارتباط با ما</h3>
       <div className="container mx-auto text-center">
         <div className="grid grid-cols-1 gap-x-12 gap-y-6 lg:grid-cols-2 items-start">

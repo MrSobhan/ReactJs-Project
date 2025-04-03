@@ -79,10 +79,10 @@ export function BlogSection() {
   }
 
   return (
-    <section className="container mx-auto lg:w-[80%] w-[90%] px-8 py-10 lg:py-28">
+    <section className="container mx-auto lg:w-[80%] w-[90%] py-10 lg:py-28">
       <h3 className="titleSlider lalezar mr-3">وبلاگ ها</h3>
 
-      <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-4">
+      <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-3 lg:grid-cols-4">
         {contents.map((blog) => (
           <ContentCard key={blog.id} {...blog} />
         ))}
