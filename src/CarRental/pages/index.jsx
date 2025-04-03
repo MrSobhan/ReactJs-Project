@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { Footer } from "../Components/Footer/Footer"
 import { NavbarDefault } from "../Components/Navbar/Navbar"
 import { KpiCardSection } from "../Components/KPICard/KPICard";
@@ -9,23 +10,30 @@ import CardSlider from "../Components/Slider/Slider";
 import About from "../Components/About/About";
 import Contact from "../Components/Contact/Contact";
 import CarSlider from "../Components/CarSlider/CarSlider";
+import Loader from '../Components/Loader/Loader';
 
-// import "./index.css";
+
 export default function Home() {
+  const [loader, setLoader] = useState(true);
+  setTimeout(() => {
+    setLoader(false)
+  }, 2000);
   return (
-    <>
-      <NavbarDefault />
-      <Header />
-      <About />
-      {/* <CardSlider /> */}
-      <CarSlider />
-      <FeatureSection />
-      {/* <CardSlider /> */}
-      <CarSlider />
-      <BlogSection />
-      <Contact />
-      <DefaultAccordion />
-      <Footer />
-    </>
+    loader ? (
+      <Loader />
+    ) : (
+      <>
+        <NavbarDefault />
+        <Header />
+        <About />
+        <CarSlider />
+        <FeatureSection />
+        <CarSlider />
+        <BlogSection />
+        <Contact />
+        <DefaultAccordion />
+        <Footer />
+      </>
+    )
   );
 }

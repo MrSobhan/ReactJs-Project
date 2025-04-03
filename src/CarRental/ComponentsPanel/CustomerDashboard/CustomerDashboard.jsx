@@ -18,7 +18,7 @@ const CustomerDashboard = () => {
 
             
             <Card className="shadow-none text-center">
-                <Typography variant="h4" color="blue-gray" className="mb-2">
+                <Typography variant="h4" color="blue-gray" className="mb-2 lalezar">
                     خوش آمدید، {userName}! 👋
                 </Typography>
                 <Typography variant="paragraph" color="gray">

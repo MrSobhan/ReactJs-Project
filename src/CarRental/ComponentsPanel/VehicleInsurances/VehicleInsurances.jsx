@@ -184,7 +184,7 @@ const VehicleInsurances = () => {
                                 <Input color="gray" size="lg" name="policy_number" value={formData.policy_number} onChange={handleChange} />
                             </div>
 
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">تاریخ شروع</Typography>
                                     <Input type="text" color="gray" size="lg" name="start_date" value={formData.start_date} onChange={handleChange} />

@@ -185,7 +185,7 @@ const Vehicles = () => {
                                 ثبت اطلاعات خودرو
                             </Typography>
 
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
                                         شماره پلاک
@@ -217,7 +217,7 @@ const Vehicles = () => {
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
                                         برند خودرو
@@ -240,7 +240,7 @@ const Vehicles = () => {
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
                                         سال ساخت
@@ -255,7 +255,7 @@ const Vehicles = () => {
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
                                         کارکرد (کیلومتر)
@@ -277,7 +277,7 @@ const Vehicles = () => {
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
                                         نرخ اجاره ساعتی (تومان)

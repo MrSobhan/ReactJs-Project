@@ -97,7 +97,25 @@
     .menu-btn {
         display: block;
     }
-
+    .admin-profile img {
+        width: 40px;
+        border-radius: 50%;
+    }
+    .admin-profile div h1 {
+        font-size: .9rem;
+    }
+    
+    .admin-profile div h3 {
+        font-size: .7rem;
+    }
+    .header-left-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 1.2rem;
+    }
+    .header-left-section {
+        margin-left: 10px;
+    }
     
 }
 

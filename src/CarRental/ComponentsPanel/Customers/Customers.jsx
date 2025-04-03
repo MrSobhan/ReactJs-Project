@@ -172,7 +172,7 @@ const Customers = () => {
                                 ثبت اطلاعات مشتری
                             </Typography>
 
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">نام</Typography>
                                     <Input color="gray" size="lg" name="first_name" value={formData.first_name} onChange={handleChange} />
@@ -197,7 +197,7 @@ const Customers = () => {
                                 <Input type="text" color="gray" size="lg" name="birthday" value={formData.birthday} onChange={handleChange} />
                             </div>
 
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">کد ملی</Typography>
                                     <Input color="gray" size="lg" name="national_id" value={formData.national_id} onChange={handleChange} />

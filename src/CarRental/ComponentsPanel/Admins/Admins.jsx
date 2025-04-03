@@ -205,7 +205,7 @@ const Admins = () => {
                                 ثبت اطلاعات کاربر
                             </Typography>
 
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
                                         نام
@@ -234,7 +234,7 @@ const Admins = () => {
                                 <Input type="email" color="gray" size="lg" name="email" value={formData.email} onChange={handleChange} />
                             </div>
 
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
                                         نقش
@@ -255,7 +255,7 @@ const Admins = () => {
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
                                         کد ملی
@@ -274,7 +274,7 @@ const Admins = () => {
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
                                         تاریخ تولد
