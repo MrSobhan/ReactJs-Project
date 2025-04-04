@@ -86,50 +86,58 @@ const App = () => {
 
     let isLoginUser = false
 
-    const resLoginUser = await fetch(`${baseUrl}/login`, {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'accept': 'application/json'
-      },
-      body: `username=${userName}&password=StringStringString1@`, //amirj  rezat
-    });
-
-
-
-    if (resLoginUser.status === 200) {
-      resLoginUser.json().then(dataLogin => {
-
-        isLoginUser = true
-
-
-        // ? Set Data User In Context
-
-        const DataUserLogin = {
-          role: dataLogin.role,
-          ID: dataLogin.id,
-          access_token: dataLogin.access_token,
-          refresh_token: dataLogin.refresh_token,
-        }
-
-        setUser(DataUserLogin);
-        localStorage.setItem("user", JSON.stringify(DataUserLogin));
-
-
-        swal({
-          title: "با موفقیت لاگین شدید",
-          icon: "success",
-          buttons: "ورود به پنل",
-        }).then((value) => {
-          navigate("/");
-        });
-
+    try {
+      const resLoginUser = await fetch(`${baseUrl}/login`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'accept': 'application/json'
+        },
+        body: `username=${userName}&password=StringStringString1@`, //amirj  rezat
       });
-
-    } else {
-
+  
+  
+  
+      if (resLoginUser.status === 200) {
+        resLoginUser.json().then(dataLogin => {
+  
+          isLoginUser = true
+  
+  
+          // ? Set Data User In Context
+  
+          const DataUserLogin = {
+            role: dataLogin.role,
+            ID: dataLogin.id,
+            access_token: dataLogin.access_token,
+            refresh_token: dataLogin.refresh_token,
+          }
+  
+          setUser(DataUserLogin);
+          localStorage.setItem("user", JSON.stringify(DataUserLogin));
+  
+  
+          swal({
+            title: "با موفقیت لاگین شدید",
+            icon: "success",
+            buttons: "ورود به پنل",
+          }).then((value) => {
+            navigate("/");
+          });
+  
+        });
+  
+      } else {
+  
+        swal({
+          title: "رمز ورود اشتباه است.",
+          icon: "error",
+          buttons: "تلاش مجدد",
+        })
+      }
+    } catch (error) {
       swal({
-        title: "رمز ورود اشتباه است.",
+        title: "نام کاربری اشتباه است.",
         icon: "error",
         buttons: "تلاش مجدد",
       })

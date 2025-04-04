@@ -51,27 +51,35 @@ function Singup() {
         }
 
 
-        const response = await fetch(`${authContext.baseUrl}/customers`, {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-                "accept": "application/json"
-            },
-            body: JSON.stringify(singUpInfoJson),
-        });
-
-        if (response.status === 200) {
-
-            authContext.LoginUser(usernameInput, passInput)
-
-        } else {
+        try {
+            const response = await fetch(`${authContext.baseUrl}/customers`, {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                    "accept": "application/json"
+                },
+                body: JSON.stringify(singUpInfoJson),
+            });
+    
+            if (response.status === 200) {
+    
+                authContext.LoginUser(usernameInput, passInput)
+    
+            } else {
+                swal({
+                    title: response.detail,
+                    icon: "warning",
+                    buttons: "تلاش مجدد",
+                })
+    
+            }
+        } catch (error) {
             swal({
-                title: response.detail,
-                icon: "warning",
+                title: "اطلاعات وارد شده اشتباه است",
+                icon: "error",
                 buttons: "تلاش مجدد",
             })
-
         }
 
 

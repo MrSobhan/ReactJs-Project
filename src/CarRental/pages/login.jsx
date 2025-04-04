@@ -25,11 +25,14 @@ function Login() {
   const [loadingSub, setLoadingSub] = useState(false)
   const navigate = useNavigate();
 
-  const LoginHandler = () => {
+  const LoginHandler = async () => {
     setLoadingSub(true)
 
+    const LoginFormValid = await authContext.LoginUser(usernameInput, passInput)
 
-    authContext.LoginUser(usernameInput, passInput)
+    if (!LoginFormValid) {
+      setLoadingSub(false)
+    }
 
 
 
