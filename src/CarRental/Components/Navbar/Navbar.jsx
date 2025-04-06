@@ -201,7 +201,7 @@ export function NavbarDefault() {
                         </div>
                     </Link>
 
-                    <Link to={'/blog'}>
+                    <Link to={'/blogList'}>
                         <div className="group relative px-3 cursor-pointer">
                             <div
                                 className="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-blue-gray-200 hover:text-blue-gray-900 transition-colors duration-300"

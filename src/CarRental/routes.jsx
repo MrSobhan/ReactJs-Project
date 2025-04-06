@@ -22,6 +22,7 @@ import Payments from "./ComponentsPanel/Payments/Payments";
 import Posts from "./ComponentsPanel/Posts/Posts";
 import Admins from "./ComponentsPanel/Admins/Admins";
 import Cart from "./pages/Cart";
+import BlogList from "./pages/BlogList";
 
 // ? Customer Panel
 
@@ -41,6 +42,7 @@ const routes = [
   { path: "/blog/:postId", element: <Blog /> },
   { path: "/car/:carId", element: <CarPage /> },
   { path: "/carList", element: <Car /> },
+  { path: "/blogList", element: <BlogList /> },
   { path: "/cart", element: <Cart /> },
   { path: "*", element: <Error404 /> },
 

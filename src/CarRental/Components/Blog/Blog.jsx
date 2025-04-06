@@ -2,7 +2,8 @@ import React, { useEffect, useContext, useState } from 'react';
 import { Typography, Card, CardBody } from "@material-tailwind/react";
 import AuthContext from "../../context/authContext";
 import { Link } from 'react-router-dom';
-
+import { Button } from "@material-tailwind/react";
+import { IoArrowBackCircleOutline } from "react-icons/io5";
 
 function ContentCard({ id, subject, content, thumbnail }) {
   return (
@@ -80,7 +81,16 @@ export function BlogSection() {
 
   return (
     <section className="container mx-auto lg:w-[80%] w-[90%] py-10 lg:py-28">
-      <h3 className="titleSlider lalezar mr-3">وبلاگ ها</h3>
+      <div className="container w-full flex items-center justify-between">
+        <h3 className="titleSlider lalezar mr-3">وبلاگ ها</h3>
+
+
+        <Link to={'/blogList'}>
+          <Button variant="text" className="py-2 px-3">لیست وبلاگ ها <IoArrowBackCircleOutline className="inline text-xl" /></Button>
+        </Link>
+
+      </div>
+
 
       <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-3 lg:grid-cols-4">
         {contents.map((blog) => (
