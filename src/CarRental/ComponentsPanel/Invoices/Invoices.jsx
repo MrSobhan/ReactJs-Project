@@ -5,13 +5,17 @@ import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import swal from "sweetalert";
 
-const TABLE_HEAD = ["شناسه","مبلغ کل", "مالیات", "تخفیف", "مبلغ نهایی", "وضعیت", ""];
+const TABLE_HEAD = ["شناسه", "مبلغ کل", "مالیات", "تخفیف", "مبلغ نهایی", "وضعیت", ""];
 
 const Invoices = () => {
     const authContext = useContext(AuthContext);
     const [invoicesData, setInvoicesData] = useState([]);
     const [loaderInvoices, setLoaderInvoices] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [isUpdate, setIsUpdate] = useState(false);
+    const [idForUpdate, setIdForUpdate] = useState("");
+
+
     const [formData, setFormData] = useState({
         total_amount: 0,
         tax: 0,
@@ -50,20 +54,42 @@ const Invoices = () => {
         e.preventDefault();
         setLoading(true);
 
-        const response = await fetch(`${authContext.baseUrl}/invoices`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "accept": "application/json",
-                "Authorization": `Bearer ${authContext.user.access_token}`,
-                "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
-            },
-            body: JSON.stringify(formData),
-        });
+        let response = null;
+
+        if (isUpdate) {
+
+            console.log("Update..." , idForUpdate , formData);
+
+
+            response = await fetch(`${authContext.baseUrl}/invoices/${idForUpdate}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    "accept": "application/json",
+                    "Authorization": `Bearer ${authContext.user.access_token}`,
+                    "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
+                },
+                body: JSON.stringify(formData),
+            });
+
+        } else {
+
+            response = await fetch(`${authContext.baseUrl}/invoices`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "accept": "application/json",
+                    "Authorization": `Bearer ${authContext.user.access_token}`,
+                    "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
+                },
+                body: JSON.stringify(formData),
+            });
+        }
 
         if (response.status === 200) {
             response.json().then(() => {
                 setLoading(false);
+                setIsUpdate(false);
                 swal({
                     title: "فاکتور با موفقیت ثبت شد",
                     icon: "success",
@@ -112,7 +138,19 @@ const Invoices = () => {
     };
 
     const handleEdit = (invoices) => {
-        console.log(invoices);
+        // console.log(invoices);
+
+        setIsUpdate(true)
+
+        setIdForUpdate(invoices.id)
+
+        setFormData({
+            total_amount: invoices.total_amount,
+            tax: invoices.tax,
+            discount: invoices.discount,
+            final_amount: invoices.final_amount,
+            status: invoices.status,
+        })
 
     };
 

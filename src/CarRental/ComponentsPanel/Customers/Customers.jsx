@@ -5,13 +5,15 @@ import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import { Card, Typography, Spinner, Button, Input, Select, Option } from "@material-tailwind/react";
 
-const TABLE_HEAD = ["شناسه","نام", "نام خانوادگی", "نام کاربری", "ایمیل", "کد ملی", "جنسیت", "شماره تلفن", "آدرس", "رمز عبور", ""];
+const TABLE_HEAD = ["شناسه", "نام", "نام خانوادگی", "نام کاربری", "ایمیل", "کد ملی", "جنسیت", "شماره تلفن", "آدرس", "رمز عبور", ""];
 
 const Customers = () => {
     const authContext = useContext(AuthContext);
     const [customersData, setCustomersData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [loaderCustomers, setLoaderCustomers] = useState(false);
+    const [isUpdate, setIsUpdate] = useState(false);
+    const [idForUpdate, setIdForUpdate] = useState("");
 
     const [formData, setFormData] = useState({
         name_prefix: null,
@@ -35,13 +37,13 @@ const Customers = () => {
 
     const getAllCustomers = async () => {
         // setLoaderCustomers(true)
-        const response = await fetch(`${authContext.baseUrl}/customers` , {
+        const response = await fetch(`${authContext.baseUrl}/customers`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
                 "accept": "application/json",
-                "Authorization" : `Bearer ${authContext.user.access_token}`,
-                "Authorization-Refresh" : `Bearer ${authContext.user.refresh_token}`
+                "Authorization": `Bearer ${authContext.user.access_token}`,
+                "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
             },
         });
 
@@ -70,7 +72,7 @@ const Customers = () => {
         setLoading(true);
 
         console.log(formData);
-        
+
 
         if (isNaN(formData.phone)) {
             swal({
@@ -82,19 +84,40 @@ const Customers = () => {
             setLoading(false);
             return;
         }
+        let response = null;
 
-        const response = await fetch(`${authContext.baseUrl}/customers`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "accept": "application/json"
-            },
-            body: JSON.stringify(formData),
-        });
+        if (isUpdate) {
+
+            console.log("Update...");
+
+
+            response = await fetch(`${authContext.baseUrl}/customers/${idForUpdate}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    "accept": "application/json",
+                    "Authorization": `Bearer ${authContext.user.access_token}`,
+                    "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
+                },
+                body: JSON.stringify(formData),
+            });
+
+        } else {
+
+            response = await fetch(`${authContext.baseUrl}/customers`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "accept": "application/json"
+                },
+                body: JSON.stringify(formData),
+            });
+        }
 
         if (response.status === 200) {
             response.json().then(data => {
                 setLoading(false);
+                setIsUpdate(false);
                 swal({
                     title: "مشتری با موفقیت اضافه شد",
                     icon: "success",
@@ -142,24 +165,44 @@ const Customers = () => {
                     headers: {
                         "Content-Type": "application/json",
                         "accept": "application/json",
-                        "Authorization" : `Bearer ${authContext.user.access_token}`,
-                        "Authorization-Refresh" : `Bearer ${authContext.user.refresh_token}`
+                        "Authorization": `Bearer ${authContext.user.access_token}`,
+                        "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
                     },
                 });
 
                 if (response.status === 200) {
-                    swal({title:"مشتری با موفقیت حذف شد!",  icon: "success" ,buttons: "باشه",});
+                    swal({ title: "مشتری با موفقیت حذف شد!", icon: "success", buttons: "باشه", });
                     getAllCustomers();
                 } else {
-                    swal({title:"خطا در حذف",  icon: "error" ,buttons: "باشه",});
+                    swal({ title: "خطا در حذف", icon: "error", buttons: "باشه", });
                 }
             }
         });
     };
 
-    const handleEdit = (vehicles) => {
-        console.log(vehicles);
-        
+    const handleEdit = (customer) => {
+        console.log(customer);
+
+
+        setIsUpdate(true)
+
+        setIdForUpdate(customer.id)
+
+        setFormData({
+            name_prefix: null,
+            first_name: customer.first_name,
+            middle_name: null,
+            last_name: customer.last_name,
+            name_suffix: null,
+            gender: customer.gender,
+            birthday: customer.birthday,
+            national_id: customer.national_id,
+            phone: customer.phone,
+            username: customer.username,
+            email: customer.email,
+            address: customer.address
+        })
+
     };
 
     return (
@@ -262,7 +305,7 @@ const Customers = () => {
                                                 <td className={classes}>{customer.address}</td>
                                                 <td className={classes}>{customer.password}</td>
                                                 <td className={classes}>
-                                                    <button className='p-2 ml-2 pl-3 rounded-full bg-blue-gray-900 text-white text-xl'  onClick={() => handleEdit(customer)}><FaEdit /></button>
+                                                    <button className='p-2 ml-2 pl-3 rounded-full bg-blue-gray-900 text-white text-xl' onClick={() => handleEdit(customer)}><FaEdit /></button>
                                                     <button className='p-2 rounded-full bg-red-600 text-white text-xl' onClick={() => handleDelete(customer.id)}><MdDelete /></button>
                                                 </td>
                                             </tr>

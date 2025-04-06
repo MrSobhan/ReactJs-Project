@@ -50,7 +50,7 @@
 
 .sidebar-links a {
     position: relative;
-    padding: 15px;
+    padding: 12px;
     border-radius: 1rem;
     width: 100%;
     /* color: var(--white); */
@@ -58,7 +58,7 @@
     display: flex;
     justify-content: right;
     align-items: center;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
 }
 
 .sidebar-links a:hover {

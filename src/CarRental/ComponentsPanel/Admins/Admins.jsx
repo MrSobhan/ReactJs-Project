@@ -5,7 +5,7 @@ import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import { Card, Typography, Spinner, Button, Input, Select, Option } from "@material-tailwind/react";
 
-const TABLE_HEAD = ["شناسه","نام", "نام خانوادگی", "نام کاربری", "ایمیل", " نقش", "وضعیت", "کد ملی", "جنسیت", "شماره تلفن", ""];
+const TABLE_HEAD = ["شناسه", "نام", "نام خانوادگی", "نام کاربری", "ایمیل", " نقش", "وضعیت", "کد ملی", "جنسیت", "شماره تلفن", ""];
 
 const TABLE_ROWS = [
     {
@@ -41,6 +41,9 @@ const Admins = () => {
     const [adminsData, setAdminsData] = useState([])
     const [loaderAdmin, setLoaderAdmin] = useState(false)
     const [loading, setLoading] = useState(false);
+    const [isUpdate, setIsUpdate] = useState(false);
+    const [idForUpdate, setIdForUpdate] = useState("");
+
     const [formData, setFormData] = useState({
         name_prefix: null,
         first_name: "",
@@ -67,13 +70,13 @@ const Admins = () => {
     }, [])
 
     const getAllAdmins = async () => {
-        const response = await fetch(`${authContext.baseUrl}/admins` , {
+        const response = await fetch(`${authContext.baseUrl}/admins`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
                 "accept": "application/json",
-                "Authorization" : `Bearer ${authContext.user.access_token}`,
-                "Authorization-Refresh" : `Bearer ${authContext.user.refresh_token}`
+                "Authorization": `Bearer ${authContext.user.access_token}`,
+                "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
             },
         });
 
@@ -99,24 +102,43 @@ const Admins = () => {
         e.preventDefault();
         setLoading(true);
 
-        
+        let response = null;
 
-        const response = await fetch(`${authContext.baseUrl}/admins`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "accept": "application/json",
-                "Authorization" : `Bearer ${authContext.user.access_token}`,
-                "Authorization-Refresh" : `Bearer ${authContext.user.refresh_token}`
-            },
-            body: JSON.stringify(formData),
-        });
+        if (isUpdate) {
 
+            console.log("Update...");
+            
+
+            response = await fetch(`${authContext.baseUrl}/admins/${idForUpdate}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    "accept": "application/json",
+                    "Authorization": `Bearer ${authContext.user.access_token}`,
+                    "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
+                },
+                body: JSON.stringify(formData),
+            });
+
+        } else {
+            response = await fetch(`${authContext.baseUrl}/admins`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "accept": "application/json",
+                    "Authorization": `Bearer ${authContext.user.access_token}`,
+                    "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
+                },
+                body: JSON.stringify(formData),
+            });
+
+        }
 
 
         if (response.status === 200) {
             response.json().then(dataLogin => {
                 setLoading(false);
+                setIsUpdate(false);
                 console.log(dataLogin);
 
 
@@ -157,10 +179,10 @@ const Admins = () => {
         }
     };
 
-    
+
     const handleDelete = async (id) => {
         console.log(id);
-        
+
         swal({
             title: "آیا مطمئن هستید؟",
             text: "این عملیات قابل بازگشت نیست!",
@@ -174,16 +196,16 @@ const Admins = () => {
                     headers: {
                         "Content-Type": "application/json",
                         "accept": "application/json",
-                        "Authorization" : `Bearer ${authContext.user.access_token}`,
-                        "Authorization-Refresh" : `Bearer ${authContext.user.refresh_token}`
+                        "Authorization": `Bearer ${authContext.user.access_token}`,
+                        "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
                     },
                 });
 
                 if (response.status === 200) {
-                    swal({title:"ادمین با موفقیت حذف شد!",  icon: "success" ,buttons: "باشه",});
+                    swal({ title: "ادمین با موفقیت حذف شد!", icon: "success", buttons: "باشه", });
                     getAllAdmins();
                 } else {
-                    swal({title:"خطا در حذف ادمین",  icon: "error" ,buttons: "باشه",});
+                    swal({ title: "خطا در حذف ادمین", icon: "error", buttons: "باشه", });
                 }
             }
         });
@@ -191,7 +213,28 @@ const Admins = () => {
 
     const handleEdit = (admin) => {
         console.log(admin);
-        
+
+        setIsUpdate(true)
+
+        setIdForUpdate(admin.id)
+
+        setFormData({
+            name_prefix: null,
+            first_name: admin.first_name,
+            middle_name: null,
+            last_name: admin.last_name,
+            name_suffix: null,
+            username: admin.username,
+            email: admin.email,
+            role: admin.role,
+            status: admin.status,
+            national_id: admin.national_id,
+            gender: admin.gender,
+            birthday: admin.birthday,
+            phone: admin.phone,
+            address: admin.address,
+            password: admin.password,
+        })
     };
 
 

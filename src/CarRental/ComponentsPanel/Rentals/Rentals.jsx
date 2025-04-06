@@ -3,7 +3,7 @@ import AuthContext from "../../context/authContext";
 import swal from "sweetalert";
 import { Card, Typography, Spinner, Button, Input } from "@material-tailwind/react";
 import { MdDelete } from "react-icons/md";
-import { FaEdit , FaSearch } from "react-icons/fa";
+import { FaEdit, FaSearch } from "react-icons/fa";
 
 const Rentals = () => {
 
@@ -13,6 +13,8 @@ const Rentals = () => {
     const [loading, setLoading] = useState(false);
     const [rentalData, setRentalData] = useState([]);
     const [loader, setLoader] = useState(true);
+    const [isUpdate, setIsUpdate] = useState(false);
+    const [idForUpdate, setIdForUpdate] = useState("");
 
     const [formData, setFormData] = useState({
         rental_start_date: "",
@@ -165,18 +167,39 @@ const Rentals = () => {
 
         console.log(formData.vehicle_id);
 
+        let response = null;
 
-        const response = await fetch(`${authContext.baseUrl}/rentals`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "accept": "application/json",
-                "Authorization": `Bearer ${authContext.user.access_token}`,
-                "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
+        if (isUpdate) {
 
-            },
-            body: JSON.stringify(formData),
-        });
+            console.log("Update...");
+
+
+            response = await fetch(`${authContext.baseUrl}/rentals/${idForUpdate}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    "accept": "application/json",
+                    "Authorization": `Bearer ${authContext.user.access_token}`,
+                    "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
+                },
+                body: JSON.stringify(formData),
+            });
+
+        } else {
+            response = await fetch(`${authContext.baseUrl}/rentals`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "accept": "application/json",
+                    "Authorization": `Bearer ${authContext.user.access_token}`,
+                    "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
+                },
+                body: JSON.stringify(formData),
+            });
+
+        }
+
+
 
         if (response.status === 200) {
 
@@ -195,6 +218,7 @@ const Rentals = () => {
             if (responsePut.status === 200) {
 
                 setLoading(false);
+                setIsUpdate(false);
                 swal({
                     title: "اجاره با موفقیت ثبت شد",
                     icon: "success",
@@ -304,8 +328,21 @@ const Rentals = () => {
         });
     };
 
-    const handleEdit = (vehicles) => {
-        console.log(vehicles);
+    const handleEdit = (rental) => {
+        console.log(rental);
+
+        setIsUpdate(true)
+
+        setIdForUpdate(rental.id)
+
+        setFormData({
+            rental_start_date: rental.rental_start_date,
+            rental_end_date: rental.rental_end_date,
+            total_amount: rental.total_amount,
+            customer_id: rental.customer.id,
+            vehicle_id: rental.vehicle.id,
+            invoice_id: rental.invoice.id
+        })
 
     };
 

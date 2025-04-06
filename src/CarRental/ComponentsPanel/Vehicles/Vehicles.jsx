@@ -17,6 +17,9 @@ const Vehicles = () => {
     const [vehiclesData, setVehiclesData] = useState([])
     const [loaderVehicles, setLoaderVehicles] = useState(true)
     const [loading, setLoading] = useState(false);
+    const [isUpdate, setIsUpdate] = useState(false);
+    const [idForUpdate, setIdForUpdate] = useState("");
+
     const [formData, setFormData] = useState({
         local_image_address: "",
         plate_number: "",
@@ -72,41 +75,62 @@ const Vehicles = () => {
         e.preventDefault();
         setLoading(true);
 
-        console.log(formData);
+        const response = null
 
-        if (isNaN(formData.year) || isNaN(formData.mileage) || isNaN(formData.hourly_rental_rate) || isNaN(formData.security_deposit)) {
-            swal({
-                title: "خطا در ورود اطلاعات",
-                text: "مقادیر سال، کارکرد، نرخ اجاره و ودیعه باید عدد باشند!",
-                icon: "error",
-                buttons: "باشه",
+        if(isUpdate){
+            console.log("Updata..." , formData , idForUpdate);
+
+            response = await fetch(`${authContext.baseUrl}/vehicles/${idForUpdate}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    "accept": "application/json",
+                    "Authorization" : `Bearer ${authContext.user.access_token}`,
+                    "Authorization-Refresh" : `Bearer ${authContext.user.refresh_token}`
+                },
+                body: JSON.stringify(formData),
             });
-            setLoading(false);
-            return;
-        }
-        
+            
+        }else{
+            console.log(formData);
 
-        const response = await fetch(`${authContext.baseUrl}/vehicles`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "accept": "application/json",
-                "Authorization" : `Bearer ${authContext.user.access_token}`,
-                "Authorization-Refresh" : `Bearer ${authContext.user.refresh_token}`
-            },
-            body: JSON.stringify(formData),
-        });
+            if (isNaN(formData.year) || isNaN(formData.mileage) || isNaN(formData.hourly_rental_rate) || isNaN(formData.security_deposit)) {
+                swal({
+                    title: "خطا در ورود اطلاعات",
+                    text: "مقادیر سال، کارکرد، نرخ اجاره و ودیعه باید عدد باشند!",
+                    icon: "error",
+                    buttons: "باشه",
+                });
+                setLoading(false);
+                return;
+            }
+            
+    
+            response = await fetch(`${authContext.baseUrl}/vehicles`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "accept": "application/json",
+                    "Authorization" : `Bearer ${authContext.user.access_token}`,
+                    "Authorization-Refresh" : `Bearer ${authContext.user.refresh_token}`
+                },
+                body: JSON.stringify(formData),
+            });
+        }
+
+        
 
 
 
         if (response.status === 200) {
             response.json().then(dataLogin => {
                 setLoading(false);
+                setIsUpdate(false);
                 console.log(dataLogin);
 
 
                 swal({
-                    title: "با موفقیت خودرو اضافه شد",
+                    title: "با موفقیت انجام شد",
                     icon: "success",
                     buttons: "باشه",
                 }).then((value) => {
@@ -139,8 +163,6 @@ const Vehicles = () => {
     };
 
     const handleDelete = async (id) => {
-        console.log("saa");
-        
         swal({
             title: "آیا مطمئن هستید؟",
             text: "این عملیات قابل بازگشت نیست!",
@@ -171,6 +193,26 @@ const Vehicles = () => {
 
     const handleEdit = (vehicles) => {
         console.log(vehicles);
+
+        setIsUpdate(true)
+
+        setIdForUpdate(vehicles.id)
+
+        setFormData({
+            local_image_address: vehicles.local_image_address,
+            plate_number: vehicles.plate_number,
+            location: vehicles.location,
+            brand: vehicles.brand,
+            model: vehicles.model,
+            year: vehicles.year,
+            color: vehicles.color,
+            mileage: vehicles.mileage,
+            status: vehicles.status,
+            hourly_rental_rate: vehicles.hourly_rental_rate,
+            security_deposit: vehicles.security_deposit
+        })
+        
+        
         
     };
 

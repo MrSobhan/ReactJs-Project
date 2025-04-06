@@ -3,7 +3,7 @@ import AuthContext from "../../context/authContext";
 import swal from "sweetalert";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
-import { Card, Typography, Spinner, Button, Input } from "@material-tailwind/react";
+import { Card, Typography, Spinner, Button, Input, Textarea } from "@material-tailwind/react";
 
 const TABLE_HEAD = ["تصویر شاخص", "موضوع", "محتوا", "شناسه ادمین", ""];
 
@@ -12,6 +12,8 @@ const Posts = () => {
     const [postsData, setPostsData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [loaderPosts, setLoaderPosts] = useState(false);
+    const [isUpdate, setIsUpdate] = useState(false);
+    const [idForUpdate, setIdForUpdate] = useState("");
 
     const [formData, setFormData] = useState({
         thumbnail: "",
@@ -45,27 +47,56 @@ const Posts = () => {
         setLoading(true);
 
         console.log(formData);
-        
 
-        const response = await fetch(`${authContext.baseUrl}/posts`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "accept": "application/json",
-                "Authorization" : `Bearer ${authContext.user.access_token}`,
-                "Authorization-Refresh" : `Bearer ${authContext.user.refresh_token}`
-            },
-            body: JSON.stringify(formData),
-        });
+        let response = null;
+
+        if (isUpdate) {
+
+            console.log("Update...");
+
+
+            response = await fetch(`${authContext.baseUrl}/posts/${idForUpdate}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    "accept": "application/json",
+                    "Authorization": `Bearer ${authContext.user.access_token}`,
+                    "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
+                },
+                body: JSON.stringify(formData),
+            });
+
+        } else {
+            response = await fetch(`${authContext.baseUrl}/posts`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "accept": "application/json",
+                    "Authorization": `Bearer ${authContext.user.access_token}`,
+                    "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
+                },
+                body: JSON.stringify(formData),
+            });
+
+        }
+
+
 
         if (response.status === 200) {
             response.json().then(() => {
                 setLoading(false);
+                setIsUpdate(false);
                 swal({
                     title: "پست با موفقیت اضافه شد",
                     icon: "success",
                     buttons: "باشه",
                 }).then(() => {
+                    setFormData({
+                        thumbnail: "",
+                        subject: "",
+                        content: "",
+                        admin_id: authContext.user.ID,
+                    })
                     getAllPosts();
                 });
             });
@@ -79,7 +110,7 @@ const Posts = () => {
         }
     };
 
-    const ShowContent = (content)=>{
+    const ShowContent = (content) => {
         swal({
             title: content,
             icon: "info",
@@ -101,16 +132,16 @@ const Posts = () => {
                     headers: {
                         "Content-Type": "application/json",
                         "accept": "application/json",
-                        "Authorization" : `Bearer ${authContext.user.access_token}`,
-                        "Authorization-Refresh" : `Bearer ${authContext.user.refresh_token}`
+                        "Authorization": `Bearer ${authContext.user.access_token}`,
+                        "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
                     },
                 });
 
                 if (response.status === 200) {
-                    swal({title:"بلاگ با موفقیت حذف شد!",  icon: "success" ,buttons: "باشه",});
+                    swal({ title: "بلاگ با موفقیت حذف شد!", icon: "success", buttons: "باشه", });
                     getAllPosts();
                 } else {
-                    swal({title:"خطا در حذف",  icon: "error" ,buttons: "باشه",});
+                    swal({ title: "خطا در حذف", icon: "error", buttons: "باشه", });
                 }
             }
         });
@@ -118,7 +149,18 @@ const Posts = () => {
 
     const handleEdit = (post) => {
         console.log(post);
-        
+
+        setIsUpdate(true)
+
+        setIdForUpdate(post.id)
+
+        setFormData({
+            thumbnail: post.thumbnail,
+            subject: post.subject,
+            content: post.content,
+            admin_id: authContext.user.ID,
+        })
+
     };
 
     return (
@@ -150,7 +192,9 @@ const Posts = () => {
                             <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
                                 محتوا
                             </Typography>
-                            <Input color="gray" size="lg" name="content" value={formData.content} onChange={handleChange} />
+                            <div className="w-full">
+                                <Textarea label="" name="content" value={formData.content} onChange={handleChange} className="iransans"/>
+                            </div>
                         </div>
 
                         <Button type="submit" className="w-full bg-blue-gray-900 text-white">
@@ -186,7 +230,7 @@ const Posts = () => {
                                             </td>
                                             <td className={classes}>{post.admin_id}</td>
                                             <td className={classes}>
-                                                <button className="p-2 ml-2 pl-3 rounded-full bg-blue-gray-900 text-white text-xl"  onClick={() => handleEdit(post)}>
+                                                <button className="p-2 ml-2 pl-3 rounded-full bg-blue-gray-900 text-white text-xl" onClick={() => handleEdit(post)}>
                                                     <FaEdit />
                                                 </button>
                                                 <button className="p-2 rounded-full bg-red-600 text-white text-xl" onClick={() => handleDelete(post.id)}>
