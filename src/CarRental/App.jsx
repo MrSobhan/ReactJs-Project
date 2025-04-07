@@ -68,11 +68,12 @@ const App = () => {
         localStorage.removeItem("user");
 
         isTrueLogout = true
-        swal({
-          title: "با موفقیت خارج شدید",
-          icon: "success",
-          buttons: "رفتن به هوم پیج"
-        }).then(() => (navigate('/')));
+      //  swal({
+        //  title: "با موفقیت خارج شدید",
+        //  icon: "success",
+      //    buttons: "رفتن به هوم پیج"
+       // }).then(() => (navigate('/')));
+        navigate("/");
 
       }
     });
