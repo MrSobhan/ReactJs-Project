@@ -84,7 +84,10 @@ const BlogList = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-x-3 gap-y-8 pt-7">
-                    {filteredBlogs.length > 0 ? (
+                    {
+                    loaderBlog ? (<Spinner className="h-8 w-8 mx-auto mt-16" />)
+                : (
+                    filteredBlogs.length > 0 ? (
                         filteredBlogs.map((blog) => (
                             <ContentCard key={blog.id} {...blog} />
                         ))
@@ -92,10 +95,12 @@ const BlogList = () => {
                         <p className="text-gray-600 text-center col-span-3">
                             هیچ وبلاگی با این عنوان پیدا نشد! 😢
                         </p>
-                    )}
+                    )
+                )
+                    }
                 </div>
 
-                {loaderBlog && <Spinner className="h-8 w-8 mx-auto mt-16" />}
+                
             </div>
             <Footer />
         </>
