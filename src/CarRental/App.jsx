@@ -117,14 +117,14 @@ const App = () => {
           localStorage.setItem("user", JSON.stringify(DataUserLogin));
   
   
-          swal({
-            title: "با موفقیت لاگین شدید",
-            icon: "success",
-            buttons: "ورود به پنل",
-          }).then((value) => {
-            navigate("/");
-          });
-  
+        //  swal({
+         //   title: "با موفقیت لاگین شدید",
+          //  icon: "success",
+          //  buttons: "ورود به پنل",
+        //  }).then((value) => {
+         //   navigate("/");
+         // });
+  navigate("/");
         });
   
       } else {
