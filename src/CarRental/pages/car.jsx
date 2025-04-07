@@ -66,19 +66,22 @@ const Car = () => {
                     </div>
                     <div className="col-span-3 grid grid-cols-1 md:grid-cols-3 gap-x-3 gap-y-8 pt-7">
 
-
-                        {filteredCars.length > 0 ? (
+{
+                    loaderCar ? (<Spinner className="h-8 w-8 mx-auto mt-16" />)
+                    : (
+                        filteredCars.length > 0 ? (
                             filteredCars.map((dataCar) => <Card key={dataCar.id} {...dataCar} />)
                         ) : (
                             <Alert color="blue-gray-900" className="col-span-3 text-center h-14">
                                 هیچ خودرویی پیدا نشد! 😢
                             </Alert>
-                        )}
+                        )
+                    )
+}
+                        
                     </div>
                 </div>
-                {
-                    loaderCar && <Spinner className="h-8 w-8 mx-auto mt-16" />
-                }
+                
 
             </div>
             <Footer />
