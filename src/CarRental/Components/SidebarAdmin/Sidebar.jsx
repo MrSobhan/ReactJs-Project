@@ -24,13 +24,13 @@ export default function Sidebar({ isSidebarOpen, toggleSidebar }) {
         <div className={`sidebar__Wrapper ${isSidebarOpen ? "open" : "closed"}`}>
             <div className="sidebar">
                 <button className="close-btn" onClick={toggleSidebar}>
-                    <IoClose size={24} />
+                    <IoClose size={24} className="text-white"/>
                 </button>
-                <h1 className="sidebar-title">
+                <h1 className="sidebar-title my-10">
                     <div className="flex items-center">
-                        <img src="../logoBrandCarRental.ico" alt="Logo_img" className="w-9 h-9" />
+                        <img src="https://mitbix.com/wp-content/uploads/2024/02/google-gemini-icon.png" alt="Logo_img" className="w-9 h-9" />
                         <Link to={'/'}>
-                            <p className="mr-2 font-medium text-3xl text-gray-900 lalezar">سوارینا</p>
+                            <p className="mr-2 font-medium text-3xl text-white lalezar">سوارینا</p>
                         </Link>
                     </div>
                 </h1>

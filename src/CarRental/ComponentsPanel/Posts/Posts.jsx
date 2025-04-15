@@ -233,7 +233,7 @@ const Posts = () => {
                                                 <button className="p-2 ml-2 pl-3 rounded-full bg-blue-gray-900 text-white text-xl" onClick={() => handleEdit(post)}>
                                                     <FaEdit />
                                                 </button>
-                                                <button className="p-2 rounded-full bg-red-600 text-white text-xl" onClick={() => handleDelete(post.id)}>
+                                                <button className="p-2 rounded-full bg-blue-gray-900 text-white text-xl" onClick={() => handleDelete(post.id)}>
                                                     <MdDelete />
                                                 </button>
                                             </td>

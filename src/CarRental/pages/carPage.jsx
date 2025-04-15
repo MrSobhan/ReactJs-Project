@@ -16,7 +16,8 @@ import {
     Carousel,
     Button,
     Input,
-    Textarea
+    Textarea,
+    Breadcrumbs
 } from "@material-tailwind/react";
 
 import { Rating } from "@material-tailwind/react";
@@ -26,6 +27,7 @@ import { FaLocationDot, FaBookOpen } from "react-icons/fa6";
 import { IoIosApps, IoIosTimer } from "react-icons/io";
 import { PiStarFill, PiStarBold } from "react-icons/pi";
 import { Spinner } from "@material-tailwind/react";
+import { Link } from 'react-router-dom';
 
 const CarPage = () => {
     const authContext = useContext(AuthContext)
@@ -137,21 +139,6 @@ const CarPage = () => {
 
                 if (responseCreateRental.status === 200) {
 
-
-                    // const responsePut = await fetch(`${authContext.baseUrl}/vehicles/${singleCarData.id}`, {
-                    //     method: "PATCH",
-                    //     headers: {
-                    //         "Content-Type": "application/json",
-                    //         "accept": "application/json",
-                    //         "Authorization": `Bearer ${authContext.user.access_token}`,
-                    //         "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
-                    //     },
-                    //     body: JSON.stringify({ "status": "اجاره شده" }),
-                    // });
-
-                    // if (responsePut.status === 200) {
-
-                    // }
                     setLoading(false)
                     swal({
                         title: "با موفقیت به سبد اجارات شما اضافه شد",
@@ -159,10 +146,6 @@ const CarPage = () => {
                         buttons: "باشه",
                     })
                     getOneCar()
-
-
-
-
                 }
 
             }
@@ -192,6 +175,22 @@ const CarPage = () => {
                 </Carousel>
                 <div className="lg:mb-16 mb-4 container mx-auto grid lg:gap-x-8 gap-y-8 grid-cols-1 lg:grid-cols-3 gap-x-4 w-full relative">
                     <div className=" col-span-1 md:col-span-2 shadow-lg rounded-xl py-9 px-7 h-max flex flex-col gap-y-10">
+                        <Breadcrumbs className=' bg-white'>
+                            <Link to="/" className="opacity-60">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-4 w-4"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                >
+                                    <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                                </svg>
+                            </Link>
+                            <Link to="/carList" className="opacity-60">
+                                <span>خودرو ها</span>
+                            </Link>
+                            <Link to="#">{singleCarData.brand} {singleCarData.model}</Link>
+                        </Breadcrumbs>
                         <h1 className='text-3xl'>{singleCarData.brand} {singleCarData.model}<sub className='text-lg'>(۲۰۱۹ - {singleCarData.year})</sub></h1>
                         <div className='flex items-center justify-start gap-x-2'>
                             <span>نظرات کاربران : <PiStarFill className='inline mx-0 text-lg text-yellow-600' /><PiStarFill className='inline mx-0 text-lg text-yellow-600' /><PiStarFill className='inline mx-0 text-lg text-yellow-600' /><PiStarFill className='inline mx-0 text-lg text-yellow-600' /><PiStarBold className='inline mx-0 text-lg' /></span>
@@ -293,25 +292,25 @@ const CarPage = () => {
                                     <TimelineBody>
                                         <Typography color="gary" className="font-normal text-gray-600">
                                             <div class="p-2 pt-0 w-full flex items-center justify-start gap-3 flex-wrap">
-                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md font-bold text-sm lg:text-md'>
+                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md text-sm lg:text-md'>
                                                     {singleCarData.location}
                                                 </button>
-                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md font-bold text-sm lg:text-md'>
+                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md text-sm lg:text-md'>
                                                     تحویل در محل
                                                 </button>
-                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md font-bold text-sm lg:text-md'>
+                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md text-sm lg:text-md'>
                                                     ارزان
                                                 </button>
-                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md font-bold text-sm lg:text-md'>
+                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md text-sm lg:text-md'>
                                                     رزرو خودرو
                                                 </button>
-                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md font-bold text-sm lg:text-md'>
+                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md text-sm lg:text-md'>
                                                     ایران
                                                 </button>
-                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md font-bold text-sm lg:text-md'>
+                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md text-sm lg:text-md'>
                                                     اجاره خودرو
                                                 </button>
-                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md font-bold text-sm lg:text-md'>
+                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md text-sm lg:text-md'>
                                                     نو
                                                 </button>
                                             </div>
@@ -607,8 +606,8 @@ const CarPage = () => {
 
                     </div>
                 </div>
-                <DefaultAccordion />
             </div>
+            <DefaultAccordion />
             <Footer />
         </>
     );

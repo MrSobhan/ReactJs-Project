@@ -41,7 +41,6 @@ const AdminDashboard = () => {
         { title: "تعداد خودروها", value: stats?.vehicle_count, icon: <FaCar />, color: "bg-blue-500" },
         { title: "تعداد کامنت‌ها", value: stats?.comment_count, icon: <FaComments />, color: "bg-yellow-500" },
         { title: "تعداد وبلاگ‌ها", value: stats?.post_count, icon: <FaBlog />, color: "bg-green-500" },
-        { title: "تعداد فاکتورها", value: stats?.invoice_count, icon: <FaFileInvoice />, color: "bg-red-500" },
         { title: "پرداختی‌های روزانه", value: stats?.today_purchase_count, icon: <FaMoneyBill />, color: "bg-purple-500" },
         { title: "تعداد مشتریان", value: stats?.customer_count, icon: <FaUsers />, color: "bg-cyan-500" },
         { title: "تعداد ادمین‌ها", value: stats?.admin_count, icon: <FaUserShield />, color: "bg-pink-500" },
@@ -108,8 +107,8 @@ const AdminDashboard = () => {
             {
                 label: "پرداختی‌های روزانه",
                 data: [10, 20, 15, 30, 25, 40, 35],
-                borderColor: "#000",
-                backgroundColor: "rgba(176, 168, 176, 0.4)",
+                borderColor: "#5851bf",
+                backgroundColor: "#5851bf5a",
                 borderWidth: 2,
                 fill: true,
                 tension: 0.4,
@@ -165,18 +164,18 @@ const AdminDashboard = () => {
                     </Typography>
 
 
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                         {
                             authContext.user.role == "Admin" ?
                                 (
                                     cardsGeneralAdmin.map((card, index) => {
                                         return (
-                                            <Card key={index} className="p-6 shadow-md flex items-center justify-between text-blue-gray-900 rounded-lg">
-                                                <div className={`p-4 text-3xl rounded-full text-white mb-3 bg-blue-gray-900`}>
+                                            <Card key={index} className="p-6 shadow-md flex md:flex-row items-center justify-between text-blue-gray-900 boxAdmin">
+                                                <div className={`p-4 text-3xl rounded-full text-white mb-3 bg-[#5851bf]`}>
                                                     {card.icon}
                                                 </div>
                                                 <div>
-                                                    <Typography variant="h6" className="lalezar">{card.title}</Typography>
+                                                    <Typography variant="h6" className="lalezar md:text-lg">{card.title}</Typography>
                                                     <Typography variant="h4" className="font-bold text-center">{card.value}</Typography>
                                                 </div>
                                             </Card>
@@ -185,12 +184,12 @@ const AdminDashboard = () => {
                                 ) : (
                                     cards.map((card, index) => {
                                         return (
-                                            <Card key={index} className="p-6 shadow-md flex items-center justify-between text-blue-gray-900 rounded-lg">
-                                                <div className={`p-4 text-3xl rounded-full text-white mb-3 bg-blue-gray-900`}>
+                                            <Card key={index} className="p-6 shadow-none flex md:flex-row items-center justify-between text-blue-gray-900 boxAdmin">
+                                                <div className={`p-4 text-3xl rounded-full text-white mb-3 bg-[#5851bf]`}>
                                                     {card.icon}
                                                 </div>
-                                                <div>
-                                                    <Typography variant="h6" className="lalezar">{card.title}</Typography>
+                                                <div className="w-full flex flex-col md:flex-row items-center justify-between md:ms-5">
+                                                    <Typography variant="h6" className="lalezar md:text-lg">{card.title}</Typography>
                                                     <Typography variant="h4" className="font-bold text-center">{card.value}</Typography>
                                                 </div>
                                             </Card>
@@ -202,7 +201,7 @@ const AdminDashboard = () => {
                     </div>
 
 
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
 
                         <Card className="p-6 shadow-md bg-white !max-h-max">
                             <Typography variant="h6" className="text-center text-blue-gray-900 font-semibold mb-4 lalezar">
@@ -212,7 +211,7 @@ const AdminDashboard = () => {
                         </Card>
 
 
-                        <Card className="p-6 shadow-md bg-white !max-h-max">
+                        <Card className="p-6 shadow-md bg-white !max-h-max xl:col-span-2">
                             <Typography variant="h6" className="text-center text-blue-gray-900 font-semibold mb-4 lalezar">
                                 روند پرداختی‌های روزانه
                             </Typography>

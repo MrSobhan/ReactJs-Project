@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 const Card = (props) => {
 
     return (
-        <div class="relative pb-3 flex w-60 md:w-64 h-max flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md mx-auto">
+        <div class="relative pb-3 flex w-60 md:w-72 h-max flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md mx-auto">
             <Link to={'/car/' + props.id}>
                 <div class="relative mx-4 -mt-6 h-28 md:h-40 overflow-hidden rounded-xl shadow-lg shadow-blue-gray-500/40">
                     <img src={props.local_image_address} alt={props.model} className='h-full w-full cursor-pointer' />

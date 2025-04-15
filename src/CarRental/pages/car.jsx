@@ -60,28 +60,34 @@ const Car = () => {
                     <p className='lalezar hidden md:block'>+{carData.length} خودرو موجود است.</p>
                     <Button className='block md:hidden p-3' onClick={() => setOpenSidebarPhone(true)}><FaFilter /></Button>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-3">
-                    <div className="col-span-1 hidden lg:block">
-                        <Sidebar setFilters={setFilters} openSidebarPhone={openSidebarPhone} />
-                    </div>
-                    <div className="col-span-3 grid grid-cols-1 md:grid-cols-3 gap-x-3 gap-y-8 pt-7">
 
-{
+                {
                     loaderCar ? (<Spinner className="h-8 w-8 mx-auto mt-16" />)
-                    : (
-                        filteredCars.length > 0 ? (
-                            filteredCars.map((dataCar) => <Card key={dataCar.id} {...dataCar} />)
-                        ) : (
-                            <Alert color="blue-gray-900" className="col-span-3 text-center h-14">
-                                هیچ خودرویی پیدا نشد! 😢
-                            </Alert>
+                        : (
+                            <div className="flex gap-x-3">
+                                <div className="col-span-1 hidden lg:block">
+                                    <Sidebar setFilters={setFilters} openSidebarPhone={openSidebarPhone} />
+                                </div>
+                                <div className="flex flex-wrap gap-x-3 gap-y-8 pt-7">
+
+
+
+                                    {
+                                        filteredCars.length > 0 ? (
+                                            filteredCars.map((dataCar) => <Card key={dataCar.id} {...dataCar} />)
+                                        ) : (
+                                            <Alert color="blue-gray-900" className="col-span-3 text-center h-14">
+                                                هیچ خودرویی پیدا نشد! 😢
+                                            </Alert>
+                                        )
+                                    }
+
+                                </div>
+                            </div>
                         )
-                    )
-}
-                        
-                    </div>
-                </div>
-                
+                }
+
+
 
             </div>
             <Footer />

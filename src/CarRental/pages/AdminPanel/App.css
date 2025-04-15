@@ -1,3 +1,8 @@
+.Panel__Wrapper{
+
+    background-color: #f8f8f8;
+    min-height: 100vh;
+}
 .main {
     flex: 4;
     padding: 20px;

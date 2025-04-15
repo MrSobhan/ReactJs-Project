@@ -2,10 +2,30 @@ import React, { useState, useContext, useEffect } from "react";
 import AuthContext from "../../context/authContext";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
-import { Spinner } from "@material-tailwind/react";
-import { Button, Input, Textarea, Typography } from "@material-tailwind/react";
-import { Select, Option } from "@material-tailwind/react";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  Typography,
+  Avatar, Select, Option, Button, Input, Textarea, Spinner
+} from "@material-tailwind/react";
 
+function StarIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className="h-5 w-5 text-yellow-700"
+    >
+      <path
+        fillRule="evenodd"
+        d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+        clipRule="evenodd"
+      />
+    </svg>
+  );
+}
 
 export function Contact() {
   const navigate = useNavigate();
@@ -14,7 +34,7 @@ export function Contact() {
   const [isLoginUser, setIsLoginUser] = useState(false)
 
 
-  const [subjectInput, setSubjectInput] = useState('')
+  const [subjectInput, setSubjectInput] = useState('پیشنهاد')
   const [contentInput, setContentInput] = useState('')
 
   const [comments, setComments] = useState([])
@@ -110,11 +130,11 @@ export function Contact() {
           <img
             src="https://i.redd.it/0uermbt9q8b61.jpg"
             alt="map"
-            className="block lg:hidden w-full h-full lg:max-h-[510px] rounded-lg object-contain"
+            className="block lg:hidden w-full h-full max-w-[500px] max-h-[500px] rounded-xl object-contain mx-auto"
           />
           <form
             action="#"
-            className="flex flex-col gap-4 w-full"
+            className="flex flex-col gap-4 max-w-[500px] mx-auto"
           >
             <div className="grid grid-cols-2 gap-4">
               <div>
@@ -122,7 +142,7 @@ export function Contact() {
                   variant="small"
                   className="mb-2 text-right font-medium !text-gray-900"
                 >
-                  نام
+                  نام و نام خانوادگی
                 </Typography>
                 <Input
                   color="gray"
@@ -142,7 +162,7 @@ export function Contact() {
                   variant="small"
                   className="mb-2 text-right font-medium !text-gray-900"
                 >
-                  نام خانوادگی
+                  ایمیل
                 </Typography>
                 <Input
                   color="gray"
@@ -216,11 +236,35 @@ export function Contact() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
               {
                 comments.map((data) => (
-                  <div className="flex items-start flex-col justify-evenly gap-y-4 py-3 px-4 shadow-md rounded-lg">
-                    <p>{data.subject}</p>
-                    <p>{data.content}</p>
-                    <p>{authContext.calcuteRelativeTimeDifference(data.created_at)}</p>
-                  </div>
+                  <Card color="transparent" shadow={false} className="w-full max-w-[26rem]">
+                    <CardHeader
+                      color="transparent"
+                      floated={false}
+                      shadow={false}
+                      className="mx-0 flex items-center gap-6 pt-0 pb-4"
+                    >
+                      <div className="flex w-full flex-col gap-0.5">
+                        <div className="flex items-center justify-between">
+                          <Typography variant="h5" color="blue-gray">
+                            {data.subject}
+                          </Typography>
+                          <div className="5 flex items-center gap-0">
+                            <StarIcon />
+                            <StarIcon />
+                            <StarIcon />
+                            <StarIcon />
+                            <StarIcon />
+                          </div>
+                        </div>
+                        <Typography color="blue-gray">{authContext.calcuteRelativeTimeDifference(data.created_at)}</Typography>
+                      </div>
+                    </CardHeader>
+                    <CardBody className="mb-6 p-0">
+                      <Typography>
+                        {data.content}
+                      </Typography>
+                    </CardBody>
+                  </Card>
                 ))
               }
 

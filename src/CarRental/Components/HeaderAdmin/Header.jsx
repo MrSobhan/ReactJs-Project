@@ -10,17 +10,17 @@ export default function Header({ toggleSidebar }) {
     const authContext = useContext(AuthContext);
 
     return (
-        <div className='header'>
+        <div className='header mr-0 md:mr-4'>
             <div className='flex'>
                 <button className="menu-btn" onClick={toggleSidebar}>
-                    <CgMenuRight size={24} />
+                    <CgMenuRight size={24}  />
                 </button>
 
                 <div className="admin-profile">
                     <img src="/img/1.jpg" alt="Admin Profile" />
                     <div>
-                        <h1>سبحان موسی زاده</h1>
-                        <h3 className="text-sm">برنامه نویس فرانت اند</h3>
+                        <h1>موسی زاده و جولانی</h1>
+                        <h3 className="text-sm">مدیر عامل سوارینا</h3>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
-:root{
-    --white : white;
-    --primary-bg : black;
+:root {
+    --white: white;
+    --primary-bg: black;
 }
 
 
@@ -84,15 +84,15 @@ input {
     /* @apply bg-blue-gray-500 absolute bottom-0 -right-[10px] w-32 h-[32px] opacity-20 rounded-2xl */
 }
 
-span >.w-0\.5 {
+span>.w-0\.5 {
     display: none !important;
 }
 
-.swal-footer{
+.swal-footer {
     text-align: center !important;
 }
 
-.swal-modal{
+.swal-modal {
     border-radius: 30px;
 }
 
@@ -100,6 +100,7 @@ span >.w-0\.5 {
     background-color: black;
     transition: all .4s;
 }
+
 .swal-button:hover {
     background-color: white !important;
     border: 2px solid black;
@@ -110,6 +111,33 @@ span >.w-0\.5 {
 }
 
 
-.swal-button--cancel{
+.swal-button--cancel {
     background-color: white !important;
+}
+
+.boxAdmin {
+    position: relative;
+    border: 2px solid rgba(101, 101, 101, 0.192);
+    border-radius: 1rem;
+}
+
+.boxAdmin::after{
+    content: '';
+    position: absolute;
+    left: 20%;
+    top: 60px;
+    width: 150px;
+    height: 2px;
+    filter: blur(20px);
+    background-color: blueviolet;
+}
+
+@media screen and (min-width:960px) {
+    .divide>div {
+        border-left: 2px solid rgba(0, 0, 0, 0.129);
+    }
+
+    .endDivide {
+        border-left: 0 !important;
+    }
 }

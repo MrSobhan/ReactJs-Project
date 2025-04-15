@@ -19,7 +19,7 @@ function ContentCard({ id, subject, content, thumbnail }) {
         />
         <div className="absolute inset-0 bg-black/70" />
         <CardBody className="relative flex flex-col justify-end">
-          <Typography variant="h5" color="white" className='mb-4 leading-8'>
+          <Typography variant="h5" color="white" className='mb-4 leading-8 hover:-translate-y-2 transition-all'>
             {subject}
           </Typography>
           <Typography

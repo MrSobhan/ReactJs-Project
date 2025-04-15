@@ -68,7 +68,7 @@ export function NavbarDefault() {
     return (
         <>
             <header className="hidden lg:block w-full fixed top-0 lg:top-3 left-0 mx-auto z-50">
-                <Navbar className="w-full lg:w-[80%] px-4 py-2 lg:px-8 mx-auto  shadow-lg bgNavbar">
+                <Navbar className="w-full lg:w-[80%] px-4 py-2 lg:px-8 mx-auto  shadow-lg bgNavbar rounded-full">
                     <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
                         <div className="flex items-center justify-between">
                             <img src="../logoBrandCarRental.ico" alt="Logo_img" className="w-9 h-9" />
@@ -85,7 +85,7 @@ export function NavbarDefault() {
                             {navList}
                         </div>
                         <div className="flex items-center gap-x-1">
-
+                            
                             {
                                 isLoginUser ? (
                                     <div className=" relative flex gap-x-2 items-center justify-start">
@@ -114,12 +114,12 @@ export function NavbarDefault() {
                                             openDropDown && (
                                                 <ul className=" absolute -bottom-52 -left-20 w-40 p-2 bg-white shadow-lg rounded-lg">
                                                     <Link to={authContext.user.role == "SuperAdmin" || authContext.user.role == "Admin" ? "/p-admin/" : "/c-admin/"}>
-                                                        <li className="px-2 py-3 cursor-pointer hover:bg-blue-gray-100 rounded-md"><FaUserAlt className="inline ml-1" /> پنل کاربری</li>
+                                                        <li className="px-2 py-3 cursor-pointer hover:bg-blue-gray-50 rounded-md"><FaUserAlt className="inline ml-1" /> پنل کاربری</li>
                                                     </Link>
-                                                    <li className="px-2 py-3 cursor-pointer hover:bg-blue-gray-100 rounded-md"> <IoSettingsSharp className="inline ml-1" /> تنظیمات</li>
-                                                    <li className="px-2 py-3 cursor-pointer hover:bg-blue-gray-100 rounded-md"><IoIosHelpCircle className="inline ml-1" /> راهنما</li>
+                                                    <li className="px-2 py-3 cursor-pointer hover:bg-blue-gray-50 rounded-md"> <IoSettingsSharp className="inline ml-1" /> تنظیمات</li>
+                                                    <li className="px-2 py-3 cursor-pointer hover:bg-blue-gray-50 rounded-md"><IoIosHelpCircle className="inline ml-1" /> راهنما</li>
                                                     <hr className="my-2" />
-                                                    <li className="px-2 py-3 cursor-pointer hover:bg-blue-gray-100 rounded-md" onClick={LogoutHandler}><IoLogOut className="inline ml-1" /> خروج</li>
+                                                    <li className="px-2 py-3 cursor-pointer hover:bg-blue-gray-50 rounded-md" onClick={LogoutHandler}><IoLogOut className="inline ml-1" /> خروج</li>
                                                 </ul>
 
                                             )
@@ -142,7 +142,7 @@ export function NavbarDefault() {
                                         <Button
                                             variant="filled"
                                             size="sm"
-                                            className="hidden lg:inline-block py-2 px-5 text-sm"
+                                            className="hidden lg:inline-block py-2 px-5 text-sm rounded-full"
                                         >
                                             <span><FaRegUser className="inline ml-2" />ورود / ثبت نام</span>
 

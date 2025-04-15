@@ -5,6 +5,7 @@ import { Button } from "@material-tailwind/react";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import "./Slider.css";
 import { Link } from "react-router-dom";
+import CityCard from "../CityCard/CityCard";
 
 export default function CardSlider({ title, data }) {
     const sliderRef = useRef(null);
@@ -51,22 +52,32 @@ export default function CardSlider({ title, data }) {
 
                         </div>
 
-                        <button onClick={rightSlideHandler} className=" hidden lg:block">
-                            <p className={`text-xl bg-black text-blue-gray-50 cursor-pointer rounded-full p-2.5 absolute -right-5 top-60 z-40 ${showBtnSlide}`}>
-                                <FaCaretRight />
-                            </p>
-                        </button>
-                        <button onClick={leftSlideHandler} className=" hidden lg:block">
-                            <p className="text-xl bg-black text-blue-gray-50 cursor-pointer rounded-full p-2.5 absolute -left-5 top-60 z-40">
-                                <FaCaretLeft />
-                            </p>
-                        </button>
-                        
+                        {
+                            data.length > 6 && data[0].brand ? (
+
+                                <>
+                                    <button onClick={rightSlideHandler} className=" hidden lg:block">
+                                        <p className={`text-xl bg-black text-blue-gray-50 cursor-pointer rounded-full p-2.5 absolute -right-5 top-60 z-40 ${showBtnSlide}`}>
+                                            <FaCaretRight />
+                                        </p>
+                                    </button>
+                                    <button onClick={leftSlideHandler} className=" hidden lg:block">
+                                        <p className="text-xl bg-black text-blue-gray-50 cursor-pointer rounded-full p-2.5 absolute -left-5 top-60 z-40">
+                                            <FaCaretLeft />
+                                        </p>
+                                    </button>
+                                </>
+                            ) : (<></>)
+                        }
+
+
                         <div className="sliderBox overflow-x-scroll scroll-smooth relative" ref={sliderRef}>
                             <div className="content__sliderBox flex gap-x-4 pt-10">
                                 {
                                     data.map((dataCar) => (
-                                        <Card key={dataCar.id} {...dataCar} />
+                                        dataCar.brand ? (<Card key={dataCar.id} {...dataCar} />) : (
+                                            (<CityCard key={dataCar.id} {...dataCar} />)
+                                        )
                                     ))
                                 }
 

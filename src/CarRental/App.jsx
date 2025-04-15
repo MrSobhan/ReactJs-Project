@@ -68,11 +68,6 @@ const App = () => {
         localStorage.removeItem("user");
 
         isTrueLogout = true
-      //  swal({
-        //  title: "با موفقیت خارج شدید",
-        //  icon: "success",
-      //    buttons: "رفتن به هوم پیج"
-       // }).then(() => (navigate('/')));
         navigate("/");
 
       }
@@ -96,40 +91,32 @@ const App = () => {
         },
         body: `username=${userName}&password=StringStringString1@`, //amirj  rezat
       });
-  
-  
-  
+
+
+
       if (resLoginUser.status === 200) {
         resLoginUser.json().then(dataLogin => {
-  
+
           isLoginUser = true
-  
-  
+
+
           // ? Set Data User In Context
-  
+
           const DataUserLogin = {
             role: dataLogin.role,
             ID: dataLogin.id,
             access_token: dataLogin.access_token,
             refresh_token: dataLogin.refresh_token,
           }
-  
+
           setUser(DataUserLogin);
           localStorage.setItem("user", JSON.stringify(DataUserLogin));
-  
-  
-        //  swal({
-         //   title: "با موفقیت لاگین شدید",
-          //  icon: "success",
-          //  buttons: "ورود به پنل",
-        //  }).then((value) => {
-         //   navigate("/");
-         // });
-  navigate("/");
+
+          navigate("/");
         });
-  
+
       } else {
-  
+
         swal({
           title: "رمز ورود اشتباه است.",
           icon: "error",
@@ -187,9 +174,9 @@ const App = () => {
 
   };
 
-  setInterval(() => {
-    RefreshToken()
-  }, 780000);
+  // setInterval(() => {
+  //   RefreshToken()
+  // }, 780000);
 
 
   useEffect(() => {

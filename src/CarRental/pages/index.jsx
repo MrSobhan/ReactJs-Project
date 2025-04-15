@@ -12,6 +12,7 @@ import Contact from "../Components/Contact/Contact";
 import CarSlider from "../Components/CarSlider/CarSlider";
 import Loader from '../Components/Loader/Loader';
 import AuthContext from "../context/authContext";
+import CitySlider from '../Components/citySlider/citySlider';
 
 
 export default function Home() {
@@ -30,7 +31,7 @@ export default function Home() {
         <About />
         <CarSlider />
         <FeatureSection />
-        <CarSlider />
+        <CitySlider />
         <BlogSection />
         <Contact />
         <DefaultAccordion />

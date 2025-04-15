@@ -12,14 +12,14 @@ export default function App() {
     };
 
     return (
-        <>
+        <div className="Panel__Wrapper">
             <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
             <div className={`main ${isSidebarOpen ? "sidebar-open" : ""}`}>
-                <Header toggleSidebar={toggleSidebar} />
+                <Header toggleSidebar={toggleSidebar}/>
                 <div className="py-10">
                     <Outlet />
                 </div>
             </div>
-        </>
+        </div>
     );
 }

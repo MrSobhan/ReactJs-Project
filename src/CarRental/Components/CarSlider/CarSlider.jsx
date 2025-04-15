@@ -16,8 +16,6 @@ const CarSlider = () => {
 
         const allCar = await response.json();
 
-        // console.log(allCar, response.status);
-
         if(response.status ===200){
             setCarData(allCar)
         }

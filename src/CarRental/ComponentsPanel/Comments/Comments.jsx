@@ -163,13 +163,7 @@ const Comments = () => {
                                             </td>
                                             <td className={classes}>
                                                 <button
-                                                    className="p-2 ml-2 pl-3 rounded-full bg-blue-gray-900 text-white text-xl"
-                                                    onClick={() => console.log("ویرایش کلیک شد")}
-                                                >
-                                                    <FaEdit />
-                                                </button>
-                                                <button
-                                                    className="p-2 rounded-full bg-red-600 text-white text-xl"
+                                                    className="p-2 rounded-full bg-blue-gray-900 text-white text-xl"
                                                     onClick={() => handleDelete(comment.id)}
                                                 >
                                                     <MdDelete />
