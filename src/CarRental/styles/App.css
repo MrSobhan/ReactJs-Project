@@ -141,3 +141,20 @@ span>.w-0\.5 {
         border-left: 0 !important;
     }
 }
+
+
+.imgBox__HeaderHome{
+    animation: box-img-head 5s linear infinite;
+}
+
+@keyframes box-img-head {
+    0% , 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    75% {
+        transform: translateY(10px);
+    }
+}

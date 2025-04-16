@@ -34,7 +34,7 @@ const Header = () => {
           <Button className='rounded-full py-4 px-9 mt-5'>شروع جستجو</Button>
 
         </div>
-        <div className="flex gap-x-6 w-full justify-end items-center">
+        <div className="flex gap-x-6 w-full justify-end items-center imgBox__HeaderHome">
           <img src="./carReantal/42.jpg" alt="carReantalf1"  className='max-h-96 w-56 object-cover rounded-lg'/>
           <div className='flex flex-col gap-y-6'>
             <img src="./carReantal/43.jpg" alt="carReantalf2" className='h-44 w-56 object-cover rounded-lg' />

@@ -233,10 +233,10 @@ export function Contact() {
         comments.length ? (
           <div className="container mx-auto mt-16">
             <h3 className="titleSlider lalezar mr-3 mb-16">نظرات شما</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
               {
                 comments.map((data) => (
-                  <Card color="transparent" shadow={false} className="w-full max-w-[26rem]">
+                  <Card color="transparent" shadow={false} className="w-full max-w-[26rem] border-2 border-solid border-blue-gray-100 p-3">
                     <CardHeader
                       color="transparent"
                       floated={false}

@@ -171,7 +171,7 @@ const AdminDashboard = () => {
                                     cardsGeneralAdmin.map((card, index) => {
                                         return (
                                             <Card key={index} className="p-6 shadow-md flex md:flex-row items-center justify-between text-blue-gray-900 boxAdmin">
-                                                <div className={`p-4 text-3xl rounded-full text-white mb-3 bg-[#5851bf]`}>
+                                                <div className={`p-4 text-3xl rounded-full text-white mb-3 bg-[#10163a]`}>
                                                     {card.icon}
                                                 </div>
                                                 <div>
@@ -185,7 +185,7 @@ const AdminDashboard = () => {
                                     cards.map((card, index) => {
                                         return (
                                             <Card key={index} className="p-6 shadow-none flex md:flex-row items-center justify-between text-blue-gray-900 boxAdmin">
-                                                <div className={`p-4 text-3xl rounded-full text-white mb-3 bg-[#5851bf]`}>
+                                                <div className={`p-4 text-3xl rounded-full text-white mb-3 bg-[#10163a]`}>
                                                     {card.icon}
                                                 </div>
                                                 <div className="w-full flex flex-col md:flex-row items-center justify-between md:ms-5">

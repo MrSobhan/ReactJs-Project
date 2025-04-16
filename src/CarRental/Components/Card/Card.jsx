@@ -27,10 +27,10 @@ const Card = (props) => {
                 </div>
             </div>
             <div class="p-2 md:ml-20 pt-0 w-full md:px-4 flex items-center justify-start gap-x-3">
-                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md font-bold text-xs lg:text-md'>
+                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-50 rounded-lg shadow-md font-bold text-xs lg:text-md'>
                     <FaLocationDot className='inline' /> {props.location}
                 </button>
-                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md font-bold text-xs lg:text-md'>
+                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-50 rounded-lg shadow-md font-bold text-xs lg:text-md'>
                     تحویل در محل
                 </button>
             </div>

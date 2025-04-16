@@ -64,7 +64,7 @@
     align-items: center;
     font-size: 1.1rem;
     border-radius: 50%;
-    background-color: #5851bf;
+    background-color: #10163a;
     color: var(--white);
     padding: 12px 12px;
 }
@@ -75,7 +75,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background-color: #5851bf;
+    background-color: #10163a;
     color: var(--white);
     width: 45px;
     height: 45px;
