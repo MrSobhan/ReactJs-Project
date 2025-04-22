@@ -12,7 +12,7 @@ const App = () => {
   const navigate = useNavigate();
   const router = useRoutes(routes);
 
-  const baseUrl = "https://frail-hortense-sj-group-271834cf.koyeb.app"
+  const baseUrl = "https://crms-ddmm.onrender.com"
 
   const [user, setUser] = useState({
     role: null,
