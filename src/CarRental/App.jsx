@@ -6,6 +6,7 @@ import "./styles/reset.css";
 import "./styles/App.css";
 import swal from "sweetalert";
 import DevAuth from "./Components/DevAuth/DevAuth";
+import UpdatePage from "./Components/UpdatePage/UpdatePage.jsx";
 
 const App = () => {
 
@@ -201,8 +202,8 @@ const App = () => {
       }}
     >
       {/* <DevAuth> */}
-
-        {router}
+      <UpdatePage />
+      {/* {router} */}
 
       {/* </DevAuth> */}
     </AuthContext.Provider>

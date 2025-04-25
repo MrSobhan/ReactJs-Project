@@ -1,10 +1,10 @@
-import React, { useState , useEffect } from 'react';
+import React from 'react';
 import { Button, Typography, Input } from "@material-tailwind/react";
 import { FiSearch } from "react-icons/fi";
 
 const Header = () => {
 
-  
+
   return (
     <header className=' relative'>
       <div className="absolute inset-x-0 lg:top-20 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
@@ -35,7 +35,7 @@ const Header = () => {
 
         </div>
         <div className="flex gap-x-6 w-full justify-end items-center imgBox__HeaderHome">
-          <img src="./carReantal/42.jpg" alt="carReantalf1"  className='max-h-96 w-56 object-cover rounded-lg'/>
+          <img src="./carReantal/42.jpg" alt="carReantalf1" className='max-h-96 w-56 object-cover rounded-lg' />
           <div className='flex flex-col gap-y-6'>
             <img src="./carReantal/43.jpg" alt="carReantalf2" className='h-44 w-56 object-cover rounded-lg' />
             <img src="./carReantal/44.jpg" alt="carReantalf3" className='max-h-96 object-cover rounded-lg' />
@@ -43,16 +43,16 @@ const Header = () => {
         </div>
 
       </div>
-        <div className="lg:absolute lg:bottom-14 lg:left-0 w-full px-3">
+      <div className="lg:absolute lg:bottom-14 lg:left-0 w-full px-3">
 
-      <div className='lg:rounded-full lg:w-[60%] px-4 py-4 lg:px-8 mx-auto lg:shadow-lg bgNavbar flex items-center justify-evenly gap-7 overflow-hidden flex-wrap lg:flex-nowrap pb-12 lg:pb-4'>
-      <Input label="تاریخ گرفتن خودرو" />
-      <Input label="تاریخ پس دادن خودرو " />
-      <Input label="محل تحویل" />
-      <button className='rounded-full text-xl p-3 bg-blue-gray-900 text-white'><FiSearch /></button>
-      </div>
-
+        <div className='lg:rounded-full lg:w-[60%] px-4 py-4 lg:px-8 mx-auto lg:shadow-lg bgNavbar flex items-center justify-evenly gap-7 overflow-hidden flex-wrap lg:flex-nowrap pb-12 lg:pb-4'>
+          <Input label="تاریخ گرفتن خودرو" />
+          <Input label="تاریخ پس دادن خودرو " />
+          <Input label="محل تحویل" />
+          <button className='rounded-full text-xl p-3 bg-blue-gray-900 text-white'><FiSearch /></button>
         </div>
+
+      </div>
     </header>
   );
 }

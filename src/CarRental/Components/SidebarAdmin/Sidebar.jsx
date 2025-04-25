@@ -7,6 +7,7 @@ import { SiCodefactor } from "react-icons/si";
 import { MdCarRental } from "react-icons/md";
 import { FaRegComments } from "react-icons/fa6";
 import { IoBookOutline } from "react-icons/io5";
+import { LuDatabaseBackup } from "react-icons/lu";
 import { IoClose } from "react-icons/io5";
 import { NavLink, Link } from "react-router-dom";
 import AuthContext from "../../context/authContext";
@@ -46,6 +47,7 @@ export default function Sidebar({ isSidebarOpen, toggleSidebar }) {
                     <li><NavLink to="payments"><RiSecurePaymentFill className="icon" /> پرداختی ها</NavLink></li>
                     {isLoginUser && <li><NavLink to="posts"><FaRegComments className="icon" /> وبلاگ</NavLink></li>}
                     <li><NavLink to="comments"><FaRegCommentDots className="icon" /> کامنت ها</NavLink></li>
+                    {isLoginUser && <li><NavLink to="backup"><LuDatabaseBackup className="icon" />پشتیبان گیری</NavLink></li>}
                 </ul>
             </div>
         </div>

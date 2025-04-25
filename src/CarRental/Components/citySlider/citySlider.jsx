@@ -15,8 +15,6 @@ const CitySlider = () => {
         const response = await fetch(`https://iranplacesapi.liara.run/api/provinces`);
 
         const allCity = await response.json();
-
-        console.log(allCity);
         
 
         if(response.status ===200){

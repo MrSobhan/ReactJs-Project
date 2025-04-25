@@ -21,8 +21,10 @@ import Comments from "./ComponentsPanel/Comments/Comments";
 import Payments from "./ComponentsPanel/Payments/Payments";
 import Posts from "./ComponentsPanel/Posts/Posts";
 import Admins from "./ComponentsPanel/Admins/Admins";
+import BackUp from "./ComponentsPanel/BackUp/BackUp";
 import Cart from "./pages/Cart";
 import BlogList from "./pages/BlogList";
+
 
 // ? Customer Panel
 
@@ -64,6 +66,7 @@ const routes = [
       { path: "payments", element: <Payments /> },
       { path: "posts", element: <Posts /> },
       { path: "comments", element: <Comments /> },
+      { path: "backup", element: <BackUp /> },
     ],
   },
   {
