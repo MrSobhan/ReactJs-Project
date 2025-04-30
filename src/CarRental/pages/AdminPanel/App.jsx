@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "../../Components/SidebarAdmin/Sidebar";
 import Header from "../../Components/HeaderAdmin/Header";
+import ReminderAlert from "../../Components/ReminderAlert/ReminderAlert";
 import "./App.css";
 
 export default function App() {
@@ -13,6 +14,7 @@ export default function App() {
 
     return (
         <div className="Panel__Wrapper">
+            <ReminderAlert />
             <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
             <div className={`main ${isSidebarOpen ? "sidebar-open" : ""}`}>
                 <Header toggleSidebar={toggleSidebar}/>

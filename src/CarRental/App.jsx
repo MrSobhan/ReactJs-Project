@@ -201,11 +201,10 @@ const App = () => {
         RefreshToken
       }}
     >
-      {/* <DevAuth> */}
-      <UpdatePage />
-      {/* {router} */}
-
-      {/* </DevAuth> */}
+      {/* <UpdatePage /> */}
+      <DevAuth>
+        {router}
+      </DevAuth>
     </AuthContext.Provider>
   );
 }

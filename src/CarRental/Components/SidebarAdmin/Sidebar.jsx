@@ -29,7 +29,7 @@ export default function Sidebar({ isSidebarOpen, toggleSidebar }) {
                 </button>
                 <h1 className="sidebar-title my-10">
                     <div className="flex items-center">
-                        <img src="https://mitbix.com/wp-content/uploads/2024/02/google-gemini-icon.png" alt="Logo_img" className="w-9 h-9" />
+                        <img src="../carReantal/darklogo.png" alt="Logo_img" className="w-9 h-9" />
                         <Link to={'/'}>
                             <p className="mr-2 font-medium text-3xl text-white lalezar">سوارینا</p>
                         </Link>

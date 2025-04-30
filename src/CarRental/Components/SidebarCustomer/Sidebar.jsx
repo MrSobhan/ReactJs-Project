@@ -18,7 +18,7 @@ export default function Sidebar({ isSidebarOpen, toggleSidebar }) {
         </button>
         <h1 className="sidebar-title">
           <div className="flex items-center justify-start mx-auto">
-            <img src="https://mitbix.com/wp-content/uploads/2024/02/google-gemini-icon.png" alt="Logo_img" className="w-9 h-9" />
+            <img src="../carReantal/darklogo.png" alt="Logo_img" className="w-9 h-9" />
             <Link to={'/'}>
               <p
                 className="mr-2 cursor-pointer py-1.5 font-medium lalezar text-3xl text-white"

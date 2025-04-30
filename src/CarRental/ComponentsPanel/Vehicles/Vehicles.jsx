@@ -420,7 +420,13 @@ const Vehicles = () => {
                                                         color="blue-gray"
                                                         className="font-medium iransans"
                                                     >
-                                                        {car.plate_number}
+                                                        {/* {car.plate_number} */}
+                                                        <div className="flex relative w-72">
+                                                            <img src="../carReantal/plate2.png" className='h-12' alt="" />
+                                                            <span className=' absolute left-[130px] top-4'>{car.plate_number.slice(0,8)}</span>
+                                                            <img src="../carReantal/plate1.png" className='h-12 w-44' alt="" />
+                                                            <span className=' absolute right-3 top-4'>{car.plate_number.slice(9)}</span>
+                                                        </div>
                                                     </Typography>
                                                 </td>
                                                 <td className={classes}>
