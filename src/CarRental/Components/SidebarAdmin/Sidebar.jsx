@@ -37,7 +37,7 @@ export default function Sidebar({ isSidebarOpen, toggleSidebar }) {
                 </h1>
 
                 <ul className="sidebar-links">
-                    <li><NavLink to=""><AiOutlineHome className="icon" /> صفحه اصلی</NavLink></li>
+                    <li><NavLink to=""><AiOutlineHome className="icon" />داشبورد</NavLink></li>
                     {isLoginUser && <li><NavLink to="admins"><RiAdminLine className="icon" /> ادمین ها</NavLink></li>}
                     <li><NavLink to="customers"><FiUsers className="icon" /> مشتریان</NavLink></li>
                     <li><NavLink to="vehicles"><FaCarSide className="icon" /> خودرو ها</NavLink></li>

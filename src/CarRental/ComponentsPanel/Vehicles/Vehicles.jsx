@@ -23,13 +23,13 @@ const Vehicles = () => {
     const [formData, setFormData] = useState({
         local_image_address: "",
         plate_number: "",
-        location: "",
-        brand: "",
+        location: "تهران",
+        brand: "تویوتا",
         model: "",
         year: 0,
         color: "",
         mileage: 0,
-        status: "",
+        status: "نو",
         hourly_rental_rate: 0,
         security_deposit: 0,
     });
@@ -69,7 +69,7 @@ const Vehicles = () => {
                 : value,
         }));
     };
-    
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -77,21 +77,21 @@ const Vehicles = () => {
 
         const response = null
 
-        if(isUpdate){
-            console.log("Updata..." , formData , idForUpdate);
+        if (isUpdate) {
+            console.log("Updata...", formData, idForUpdate);
 
             response = await fetch(`${authContext.baseUrl}/vehicles/${idForUpdate}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
                     "accept": "application/json",
-                    "Authorization" : `Bearer ${authContext.user.access_token}`,
-                    "Authorization-Refresh" : `Bearer ${authContext.user.refresh_token}`
+                    "Authorization": `Bearer ${authContext.user.access_token}`,
+                    "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
                 },
                 body: JSON.stringify(formData),
             });
-            
-        }else{
+
+        } else {
             console.log(formData);
 
             if (isNaN(formData.year) || isNaN(formData.mileage) || isNaN(formData.hourly_rental_rate) || isNaN(formData.security_deposit)) {
@@ -104,21 +104,21 @@ const Vehicles = () => {
                 setLoading(false);
                 return;
             }
-            
-    
+
+
             response = await fetch(`${authContext.baseUrl}/vehicles`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     "accept": "application/json",
-                    "Authorization" : `Bearer ${authContext.user.access_token}`,
-                    "Authorization-Refresh" : `Bearer ${authContext.user.refresh_token}`
+                    "Authorization": `Bearer ${authContext.user.access_token}`,
+                    "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
                 },
                 body: JSON.stringify(formData),
             });
         }
 
-        
+
 
 
 
@@ -176,16 +176,16 @@ const Vehicles = () => {
                     headers: {
                         "Content-Type": "application/json",
                         "accept": "application/json",
-                        "Authorization" : `Bearer ${authContext.user.access_token}`,
-                        "Authorization-Refresh" : `Bearer ${authContext.user.refresh_token}`
+                        "Authorization": `Bearer ${authContext.user.access_token}`,
+                        "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
                     },
                 });
 
                 if (response.status === 200) {
-                    swal({title:"خودرو با موفقیت حذف شد!",  icon: "success" ,buttons: "باشه",});
+                    swal({ title: "خودرو با موفقیت حذف شد!", icon: "success", buttons: "باشه", });
                     getAllVehicles();
                 } else {
-                    swal({title:"خطا در حذف",  icon: "error" ,buttons: "باشه",});
+                    swal({ title: "خطا در حذف", icon: "error", buttons: "باشه", });
                 }
             }
         });
@@ -211,9 +211,9 @@ const Vehicles = () => {
             hourly_rental_rate: vehicles.hourly_rental_rate,
             security_deposit: vehicles.security_deposit
         })
-        
-        
-        
+
+
+
     };
 
 
@@ -413,21 +413,12 @@ const Vehicles = () => {
                                                     </Typography>
                                                 </td>
                                                 <td className={classes}>
-                                                    <Typography
-                                                        as="a"
-                                                        href="#"
-                                                        variant=""
-                                                        color="blue-gray"
-                                                        className="font-medium iransans"
-                                                    >
-                                                        {/* {car.plate_number} */}
-                                                        <div className="flex relative w-72">
-                                                            <img src="../carReantal/plate2.png" className='h-12' alt="" />
-                                                            <span className=' absolute left-[130px] top-4'>{car.plate_number.slice(0,8)}</span>
-                                                            <img src="../carReantal/plate1.png" className='h-12 w-44' alt="" />
-                                                            <span className=' absolute right-3 top-4'>{car.plate_number.slice(9)}</span>
-                                                        </div>
-                                                    </Typography>
+                                                    <div className="flex relative w-72">
+                                                        <img src="../carReantal/plate2.png" className='h-12' alt="" />
+                                                        <span className=' absolute left-[130px] top-4'>{car.plate_number.slice(0, 8)}</span>
+                                                        <img src="../carReantal/plate1.png" className='h-12 w-44' alt="" />
+                                                        <span className=' absolute right-3 top-4'>{car.plate_number.slice(9)}</span>
+                                                    </div>
                                                 </td>
                                                 <td className={classes}>
                                                     <Typography
@@ -468,9 +459,9 @@ const Vehicles = () => {
                                                         href="#"
                                                         variant=""
                                                         color="blue-gray"
-                                                        className="font-medium"
+                                                        className="font-medium flex"
                                                     >
-                                                        <button className='p-2 ml-2 pl-3 rounded-full bg-blue-gray-900 text-white text-xl'  onClick={() => handleEdit(car)}><FaEdit /></button>
+                                                        <button className='p-2 ml-2 pl-3 rounded-full bg-blue-gray-900 text-white text-xl' onClick={() => handleEdit(car)}><FaEdit /></button>
                                                         <button className='p-2 rounded-full bg-blue-gray-900 text-white text-xl' onClick={() => handleDelete(car.id)}><MdDelete /></button>
                                                     </Typography>
                                                 </td>

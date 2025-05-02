@@ -13,7 +13,7 @@ function ContentCard({ id, subject, content, thumbnail }) {
         color="transparent"
       >
         <img
-          src={thumbnail}
+          src={'../'+thumbnail}
           alt="bg"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />

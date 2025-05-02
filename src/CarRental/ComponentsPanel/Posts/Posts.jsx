@@ -222,7 +222,7 @@ const Posts = () => {
                                     return (
                                         <tr key={post.id}>
                                             <td className={classes}>
-                                                <img src={post.thumbnail} alt="thumbnail" className="w-16 h-16 object-cover rounded-md" />
+                                                <img src={'../'+post.thumbnail} alt="thumbnail" className="w-16 h-16 object-cover rounded-md" />
                                             </td>
                                             <td className={classes}>{post.subject}</td>
                                             <td className={classes}>

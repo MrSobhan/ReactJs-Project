@@ -159,23 +159,23 @@ const AdminDashboard = () => {
             ) : (
                 <>
 
-                    <Typography variant="h4" className="text-center text-blue-gray-900 font-bold mb-6 lalezar">
+                    <Typography variant="h3" className="text-center text-blue-gray-900 font-bold mb-6 lalezar">
                         داشبورد مدیریت
                     </Typography>
 
 
-                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <div className="grid grid-cols-2 xl:grid-cols-3 gap-6 mb-8">
                         {
                             authContext.user.role == "Admin" ?
                                 (
                                     cardsGeneralAdmin.map((card, index) => {
                                         return (
-                                            <Card key={index} className="p-6 shadow-md flex md:flex-row items-center justify-between text-blue-gray-900 boxAdmin">
+                                            <Card key={index} className="p-6 shadow-md flex lg:flex-row items-center justify-between text-blue-gray-900 boxAdmin">
                                                 <div className={`p-4 text-3xl rounded-full text-white mb-3 bg-[#10163a]`}>
                                                     {card.icon}
                                                 </div>
-                                                <div>
-                                                    <Typography variant="h6" className="lalezar md:text-lg">{card.title}</Typography>
+                                                <div className="w-full flex flex-col lg:flex-row items-center justify-between md:ms-5">
+                                                    <Typography variant="h6" className="lalezar md:text-xl">{card.title} :</Typography>
                                                     <Typography variant="h4" className="font-bold text-center">{card.value}</Typography>
                                                 </div>
                                             </Card>
@@ -184,12 +184,12 @@ const AdminDashboard = () => {
                                 ) : (
                                     cards.map((card, index) => {
                                         return (
-                                            <Card key={index} className="p-6 shadow-none flex md:flex-row items-center justify-between text-blue-gray-900 boxAdmin">
+                                            <Card key={index} className="p-6 shadow-none flex lg:flex-row items-center justify-between text-blue-gray-900 boxAdmin">
                                                 <div className={`p-4 text-3xl rounded-full text-white mb-3 bg-[#10163a]`}>
                                                     {card.icon}
                                                 </div>
-                                                <div className="w-full flex flex-col md:flex-row items-center justify-between md:ms-5">
-                                                    <Typography variant="h6" className="lalezar md:text-lg">{card.title}</Typography>
+                                                <div className="w-full flex flex-col lg:flex-row items-center justify-between md:ms-5">
+                                                    <Typography variant="h6" className="lalezar md:text-xl">{card.title} :</Typography>
                                                     <Typography variant="h4" className="font-bold text-center">{card.value}</Typography>
                                                 </div>
                                             </Card>

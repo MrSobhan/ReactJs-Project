@@ -34,7 +34,7 @@ export function Blog() {
                 <section className="p-8">
                     <div className="mx-auto max-w-screen-md">
                         <img
-                            src={blogData.thumbnail}
+                            src={'../'+blogData.thumbnail}
                             alt="team work"
                             className="mb-4 h-[28rem] w-full rounded-xl object-cover"
                         />

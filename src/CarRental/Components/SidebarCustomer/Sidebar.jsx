@@ -34,7 +34,7 @@ export default function Sidebar({ isSidebarOpen, toggleSidebar }) {
           <li>
             <NavLink to="">
               <AiOutlineHome className="icon" />
-              صفحه اصلی
+              داشبورد
             </NavLink>
           </li>
           <li>

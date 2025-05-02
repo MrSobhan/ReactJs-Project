@@ -69,7 +69,7 @@ const App = () => {
         localStorage.removeItem("user");
 
         isTrueLogout = true
-        navigate("/");
+        navigate("/login");
 
       }
     });

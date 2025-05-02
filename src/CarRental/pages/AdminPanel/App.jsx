@@ -18,7 +18,7 @@ export default function App() {
             <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
             <div className={`main ${isSidebarOpen ? "sidebar-open" : ""}`}>
                 <Header toggleSidebar={toggleSidebar}/>
-                <div className="py-10">
+                <div className="py-10 lg:pr-10">
                     <Outlet />
                 </div>
             </div>

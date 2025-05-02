@@ -306,7 +306,7 @@ const Customers = () => {
                                                 <td className={classes}>{customer.password}</td>
                                                 <td className={classes}>
                                                     <button className='p-2 ml-2 pl-3 rounded-full bg-blue-gray-900 text-white text-xl' onClick={() => handleEdit(customer)}><FaEdit /></button>
-                                                    <button className='p-2 rounded-full bg-red-600 text-white text-xl' onClick={() => handleDelete(customer.id)}><MdDelete /></button>
+                                                    <button className='p-2 rounded-full bg-blue-gray-900 text-white text-xl' onClick={() => handleDelete(customer.id)}><MdDelete /></button>
                                                 </td>
                                             </tr>
                                         );
