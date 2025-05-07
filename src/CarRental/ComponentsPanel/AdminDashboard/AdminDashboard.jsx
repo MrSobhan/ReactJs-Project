@@ -176,7 +176,7 @@ const AdminDashboard = () => {
                                                 </div>
                                                 <div className="w-full flex flex-col lg:flex-row items-center justify-between md:ms-5">
                                                     <Typography variant="h6" className="lalezar md:text-xl">{card.title} :</Typography>
-                                                    <Typography variant="h4" className="font-bold text-center">{card.value}</Typography>
+                                                    <Typography variant="h4" className="font-bold text-center mt-4 lg:mt-0">{card.value != null ? card.value : (<Spinner className="h-4 w-4 mx-auto" />)}</Typography>
                                                 </div>
                                             </Card>
                                         )
@@ -190,7 +190,7 @@ const AdminDashboard = () => {
                                                 </div>
                                                 <div className="w-full flex flex-col lg:flex-row items-center justify-between md:ms-5">
                                                     <Typography variant="h6" className="lalezar md:text-xl">{card.title} :</Typography>
-                                                    <Typography variant="h4" className="font-bold text-center">{card.value}</Typography>
+                                                    <Typography variant="h4" className="font-bold text-center mt-4 lg:mt-0">{card.value != null ? card.value : (<Spinner className="h-4 w-4 mx-auto" />)}</Typography>
                                                 </div>
                                             </Card>
                                         )
@@ -203,7 +203,7 @@ const AdminDashboard = () => {
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
 
-                        <Card className="p-6 shadow-md bg-white !max-h-max">
+                        <Card className="p-6 shadow-md bg-white h-full">
                             <Typography variant="h6" className="text-center text-blue-gray-900 font-semibold mb-4 lalezar">
                                 توزیع اطلاعات کلی
                             </Typography>

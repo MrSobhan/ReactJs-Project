@@ -12,6 +12,7 @@ import { IoSettingsSharp, IoLogOut, IoCloseOutline } from "react-icons/io5";
 import { IoIosHelpCircle } from "react-icons/io";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/authContext";
+import Banner from '../Banner/Banner.jsx';
 export function NavbarDefault() {
     const [openNav, setOpenNav] = useState(false);
     const [openDropDown, setOpenDropDown] = useState(false);
@@ -67,8 +68,9 @@ export function NavbarDefault() {
 
     return (
         <>
-            <header className="hidden lg:block w-full fixed top-0 lg:top-3 left-0 mx-auto z-50">
-                <Navbar className="w-full lg:w-[80%] px-4 py-2 lg:px-8 mx-auto  shadow-lg bgNavbar rounded-full">
+            <header className="hidden lg:block w-full fixed top-0 left-0 mx-auto z-50">
+                <Banner />
+                <Navbar className="w-full lg:w-[80%] px-4 py-2 lg:px-8 mx-auto mt-3  shadow-lg bgNavbar rounded-full">
                     <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
                         <div className="flex items-center justify-between">
                             <img src="../logoBrandCarRental.ico" alt="Logo_img" className="w-9 h-9" />

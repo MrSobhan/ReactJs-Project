@@ -13,6 +13,7 @@ import CarSlider from "../Components/CarSlider/CarSlider";
 import Loader from '../Components/Loader/Loader';
 import AuthContext from "../context/authContext";
 import CitySlider from '../Components/citySlider/citySlider';
+import LogoSection from '../Components/LogoSection/LogoSection';
 
 
 export default function Home() {
@@ -33,6 +34,7 @@ export default function Home() {
         <FeatureSection />
         <CitySlider />
         <BlogSection />
+        <LogoSection />
         <Contact />
         <DefaultAccordion />
         <Footer />

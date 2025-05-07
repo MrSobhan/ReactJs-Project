@@ -39,18 +39,16 @@
 .sidebar-title {
     font-size: 1.4rem;
     color: var(--white);
-    /* padding: 15px; */
     text-align: right;
-    /* border-bottom: 2px solid var(--white); */
 }
 
 .sidebar-links {
-    margin-top: 1rem;
+    margin-top: .7rem;
 }
 
 .sidebar-links a {
     position: relative;
-    padding: 12px;
+    padding: 8px;
     border-radius: .3rem;
     width: 100%;
     color: #ffffffc0;
@@ -58,7 +56,7 @@
     display: flex;
     justify-content: right;
     align-items: center;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .sidebar-links a:hover {

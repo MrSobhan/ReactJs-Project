@@ -292,25 +292,25 @@ const CarPage = () => {
                                     <TimelineBody>
                                         <Typography color="gary" className="font-normal text-gray-600">
                                             <div class="p-2 pt-0 w-full flex items-center justify-start gap-3 flex-wrap">
-                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md text-sm lg:text-md'>
+                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-50 rounded-lg shadow-md text-sm lg:text-md'>
                                                     {singleCarData.location}
                                                 </button>
-                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md text-sm lg:text-md'>
+                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-50 rounded-lg shadow-md text-sm lg:text-md'>
                                                     تحویل در محل
                                                 </button>
-                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md text-sm lg:text-md'>
+                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-50 rounded-lg shadow-md text-sm lg:text-md'>
                                                     ارزان
                                                 </button>
-                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md text-sm lg:text-md'>
+                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-50 rounded-lg shadow-md text-sm lg:text-md'>
                                                     رزرو خودرو
                                                 </button>
-                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md text-sm lg:text-md'>
+                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-50 rounded-lg shadow-md text-sm lg:text-md'>
                                                     ایران
                                                 </button>
-                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md text-sm lg:text-md'>
+                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-50 rounded-lg shadow-md text-sm lg:text-md'>
                                                     اجاره خودرو
                                                 </button>
-                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-100 rounded-lg shadow-md text-sm lg:text-md'>
+                                                <button className='lg:px-4 px-2 lg:py-2 py-1 bg-blue-gray-50 rounded-lg shadow-md text-sm lg:text-md'>
                                                     نو
                                                 </button>
                                             </div>

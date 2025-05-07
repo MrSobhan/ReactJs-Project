@@ -27,7 +27,7 @@ export default function Sidebar({ isSidebarOpen, toggleSidebar }) {
                 <button className="close-btn" onClick={toggleSidebar}>
                     <IoClose size={24} className="text-white"/>
                 </button>
-                <h1 className="sidebar-title my-10">
+                <h1 className="sidebar-title my-7">
                     <div className="flex items-center">
                         <img src="../carReantal/darklogo.png" alt="Logo_img" className="w-9 h-9" />
                         <Link to={'/'}>
