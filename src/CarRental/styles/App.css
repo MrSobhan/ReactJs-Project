@@ -17,6 +17,53 @@
 body {
     overflow-x: hidden !important;
     font-family: "iransans" !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark body {
+    overflow-x: hidden !important;
+    font-family: "iransans" !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    background-color: #1a202c;
+    color: #e2e8f0 !important;
+}
+
+.dark {
+    --tw-bg-opacity: 1;
+    background-color: rgb(26 32 44 / var(--tw-bg-opacity));
+    color: rgb(226 232 240 / var(--tw-text-opacity));
+}
+
+.dark .bg-white {
+    background-color: #2d3748 !important;
+}
+
+.dark .text-gray-900 {
+    color: #e2e8f0 !important;
+}
+
+.dark .text-gray-800 {
+    color: #e2e8f0 !important;
+}
+
+.dark .text-gray-700 {
+    color: #cbd5e0 !important;
+}
+
+.dark .text-gray-600 {
+    color: #a0aec0 !important;
+}
+
+.dark .border-gray-200 {
+    border-color: #4a5568 !important;
+}
+
+.dark .bg-gray-50 {
+    background-color: #2d3748 !important;
+}
+
+.dark .bg-gray-100 {
+    background-color: #4a5568 !important;
 }
 
 p,

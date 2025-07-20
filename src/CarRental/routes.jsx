@@ -24,6 +24,7 @@ import Admins from "./ComponentsPanel/Admins/Admins";
 import BackUp from "./ComponentsPanel/BackUp/BackUp";
 import Cart from "./pages/Cart";
 import BlogList from "./pages/BlogList";
+import Contact from "./pages/Contact";
 
 
 // ? Customer Panel
@@ -46,6 +47,7 @@ const routes = [
   { path: "/carList", element: <Car /> },
   { path: "/blogList", element: <BlogList /> },
   { path: "/cart", element: <Cart /> },
+  { path: "/contact", element: <Contact /> },
   { path: "*", element: <Error404 /> },
 
   {

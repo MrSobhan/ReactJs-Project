@@ -8,14 +8,16 @@ import {
 import { BsCart2 } from "react-icons/bs";
 import { RiMenu2Line } from "react-icons/ri";
 import { FaRegUser, FaCar, FaUserAlt } from "react-icons/fa";
-import { IoSettingsSharp, IoLogOut, IoCloseOutline } from "react-icons/io5";
+import { IoSettingsSharp, IoLogOut, IoCloseOutline, IoMoon, IoSunny } from "react-icons/io5";
 import { IoIosHelpCircle } from "react-icons/io";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/authContext";
+import { useTheme } from "../../context/themeContext";
 import Banner from '../Banner/Banner.jsx';
 export function NavbarDefault() {
     const [openNav, setOpenNav] = useState(false);
     const [openDropDown, setOpenDropDown] = useState(false);
+    const { isDarkMode, toggleDarkMode } = useTheme();
 
     useEffect(() => {
         window.addEventListener(
@@ -48,19 +50,19 @@ export function NavbarDefault() {
     const navList = (
         <ul className="text-blue-gray-900 mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
             <li>
-                <p className="text-sm cursor-pointer">صفحه اصلی</p>
+                <Link to="/" className="text-sm cursor-pointer hover:text-blue-600 transition-colors">صفحه اصلی</Link>
             </li>
             <li>
-                <p className="text-sm cursor-pointer"> اجاره خودرو</p>
+                <Link to="/carList" className="text-sm cursor-pointer hover:text-blue-600 transition-colors">اجاره خودرو</Link>
             </li>
             <li>
-                <p className="text-sm cursor-pointer">ویژگی های سوارینا</p>
+                <Link to="/#features" className="text-sm cursor-pointer hover:text-blue-600 transition-colors">ویژگی های سوارینا</Link>
             </li>
             <li>
-                <p className="text-sm cursor-pointer">وبلاگ</p>
+                <Link to="/blogList" className="text-sm cursor-pointer hover:text-blue-600 transition-colors">وبلاگ</Link>
             </li>
             <li>
-                <p className="text-sm cursor-pointer">ارتباط با ما</p>
+                <Link to="/contact" className="text-sm cursor-pointer hover:text-blue-600 transition-colors">ارتباط با ما</Link>
             </li>
         </ul>
     )
@@ -87,6 +89,15 @@ export function NavbarDefault() {
                             {navList}
                         </div>
                         <div className="flex items-center gap-x-1">
+                            
+                            <Button
+                                variant="text"
+                                size="sm"
+                                className="hidden lg:inline-block p-3 text-lg rounded-full"
+                                onClick={toggleDarkMode}
+                            >
+                                {isDarkMode ? <IoSunny /> : <IoMoon />}
+                            </Button>
                             
                             {
                                 isLoginUser ? (
@@ -206,7 +217,7 @@ export function NavbarDefault() {
                     <Link to={'/blogList'}>
                         <div className="group relative px-3 cursor-pointer">
                             <div
-                                className="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-blue-gray-200 hover:text-blue-gray-900 transition-colors duration-300"
+                                className="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-blue-gray-200 hover:text-blue-gray-900 transition-colors duration-300 dark:hover:bg-gray-700"
                             >
                                 <svg
                                     className="group-hover:scale-110 transition-transform duration-300"
@@ -237,7 +248,7 @@ export function NavbarDefault() {
                         authContext.isLogin() ? (
                             <Link to={'/cart'}>
                                 <div className="group relative px-3 cursor-pointer">
-                                    <div className="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-blue-gray-200 hover:text-blue-gray-900 transition-colors duration-300">
+                                    <div className="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-blue-gray-200 hover:text-blue-gray-900 transition-colors duration-300 dark:hover:bg-gray-700">
                                         <BsCart2 className="text-xl" />
                                     </div>
                                     <span className="absolute -top-12 left-[50%] -translate-x-[50%] z-20 origin-bottom scale-0 px-3 py-1.5 rounded-lg border border-gray-200 bg-white text-xs font-medium shadow-lg transition-all duration-300 ease-in-out group-hover:scale-100 before:absolute before:bottom-[-5px] before:left-[50%] before:-translate-x-[50%] before:border-[6px] before:border-transparent before:border-t-white">
@@ -252,7 +263,7 @@ export function NavbarDefault() {
 
                     <Link to={authContext.isLogin() ? (authContext.user?.role === "Admin" || authContext.user?.role === "SuperAdmin" ? "/p-admin/" : "/c-admin/") : "/login"}>
                         <div className="group relative px-3 cursor-pointer">
-                            <div className="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-blue-gray-200 hover:text-blue-gray-900 transition-colors duration-300">
+                            <div className="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-blue-gray-200 hover:text-blue-gray-900 transition-colors duration-300 dark:hover:bg-gray-700">
                                 <svg className="group-hover:scale-110 transition-transform duration-300" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13M16 3.13C16.8604 3.3503 17.623 3.8507 18.1676 4.55231C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89317 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88M13 7C13 9.20914 11.2091 11 9 11C6.79086 11 5 9.20914 5 7C5 4.79086 6.79086 3 9 3C11.2091 3 13 4.79086 13 7Z" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor"></path>
                                 </svg>
@@ -267,7 +278,7 @@ export function NavbarDefault() {
                     <Link to={'/carList'}>
                         <div className="group relative px-3 cursor-pointer">
                             <div
-                                className="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-blue-gray-200 hover:text-blue-gray-900 transition-colors duration-300"
+                                className="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-blue-gray-200 hover:text-blue-gray-900 transition-colors duration-300 dark:hover:bg-gray-700"
                             >
                                 <FaCar className="text-xl" />
                             </div>
@@ -278,6 +289,15 @@ export function NavbarDefault() {
                             </span>
                         </div>
                     </Link>
+                    
+                    <div className="group relative px-3 cursor-pointer" onClick={toggleDarkMode}>
+                        <div className="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-blue-gray-200 hover:text-blue-gray-900 transition-colors duration-300 dark:hover:bg-gray-700">
+                            {isDarkMode ? <IoSunny className="text-xl" /> : <IoMoon className="text-xl" />}
+                        </div>
+                        <span className="absolute -top-12 left-[50%] -translate-x-[50%] z-20 origin-bottom scale-0 px-3 py-1.5 rounded-lg border border-gray-200 bg-white text-xs font-medium shadow-lg transition-all duration-300 ease-in-out group-hover:scale-100 before:absolute before:bottom-[-5px] before:left-[50%] before:-translate-x-[50%] before:border-[6px] before:border-transparent before:border-t-white">
+                            {isDarkMode ? 'حالت روز' : 'حالت شب'}
+                        </span>
+                    </div>
                 </div>
             </div>
 

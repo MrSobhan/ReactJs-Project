@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Card, Typography, Spinner, Button } from "@material-tailwind/react";
+import { Card, Typography, Spinner, Button, Input, Dialog, DialogHeader, DialogBody, DialogFooter } from "@material-tailwind/react";
 import { MdDelete } from "react-icons/md";
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaSearch } from "react-icons/fa";
 import AuthContext from "../../context/authContext";
 import swal from "sweetalert";
 import { TbStatusChange } from "react-icons/tb";
@@ -12,6 +12,9 @@ const Comments = () => {
     const authContext = useContext(AuthContext);
     const [commentsData, setCommentsData] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [openStatusModal, setOpenStatusModal] = useState(false);
+    const [selectedComment, setSelectedComment] = useState(null);
 
     useEffect(() => {
         getAllComments();
@@ -56,52 +59,34 @@ const Comments = () => {
     };
 
     const handleStatusChange = async (comment) => {
-        swal({
-            title: "تغییر وضعیت کامنت",
-            text: "لطفاً وضعیت جدید را انتخاب کنید:",
-            content: {
-                element: "div",
-                attributes: {
-                    innerHTML: `
-                        <label>
-                            <input type="radio" name="status" value="pending" className="mt-2" checked> در انتظار بررسی
-                        </label><br><br>
-                        <label>
-                            <input type="radio" name="status" value="approved" className="mt-2"> تأیید شده
-                        </label><br><br>
-                        <label>
-                            <input type="radio" name="status" value="rejected" className="mt-2"> رد شده
-                        </label><br><br>
-                        <label>
-                            <input type="radio" name="status" value="spam" className="mt-2"> اسپم
-                        </label>
-                    `,
-                },
-            },
-            buttons: ["لغو", "تأیید"],
-        }).then(async (confirm) => {
-            if (confirm) {
-                const selectedStatus = document.querySelector('input[name="status"]:checked').value;
-
-                const response = await fetch(`${authContext.baseUrl}/comments/${comment.id}`, {
-                    method: "PATCH",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${authContext.user.access_token}`,
-                        "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
-                    },
-                    body: JSON.stringify({ status: selectedStatus }),
-                });
-
-                if (response.status === 200) {
-                    swal({ title: "وضعیت با موفقیت تغییر کرد!", icon: "success", buttons: "باشه" });
-                    getAllComments();
-                } else {
-                    swal({ title: "خطا در تغییر وضعیت", icon: "error", buttons: "باشه" });
-                }
-            }
-        });
+        setSelectedComment(comment);
+        setOpenStatusModal(true);
     };
+
+    const updateCommentStatus = async (newStatus) => {
+        const response = await fetch(`${authContext.baseUrl}/comments/${selectedComment.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${authContext.user.access_token}`,
+                "Authorization-Refresh": `Bearer ${authContext.user.refresh_token}`
+            },
+            body: JSON.stringify({ status: newStatus }),
+        });
+
+        if (response.status === 200) {
+            swal({ title: "وضعیت با موفقیت تغییر کرد!", icon: "success", buttons: "باشه" });
+            getAllComments();
+            setOpenStatusModal(false);
+        } else {
+            swal({ title: "خطا در تغییر وضعیت", icon: "error", buttons: "باشه" });
+        }
+    };
+
+    const filteredComments = commentsData.filter(comment =>
+        comment.subject.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        comment.content.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     return (
         <>
@@ -109,9 +94,24 @@ const Comments = () => {
                 <Spinner className="h-8 w-8 mx-auto mt-16" />
             ) : (
                 <div className="container mx-auto p-6">
-                    <Typography variant="h5" className="text-center text-gray-900 font-bold mb-4">
-                        لیست کامنت‌ها
-                    </Typography>
+                    
+                    {/* Header with Search */}
+                    <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+                        <Typography variant="h4" className="lalezar">
+                            مدیریت کامنت‌ها
+                        </Typography>
+                        <div className="relative">
+                            <Input
+                                type="text"
+                                placeholder="جستجو در کامنت‌ها..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="pl-10"
+                            />
+                            <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                        </div>
+                    </div>
+                    
                     <Card className="h-full w-full overflow-scroll">
                         <table className="w-full min-w-max table-auto text-right">
                             <thead>
@@ -126,8 +126,8 @@ const Comments = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {commentsData.map((comment, index) => {
-                                    const isLast = index === commentsData.length - 1;
+                                {filteredComments.map((comment, index) => {
+                                    const isLast = index === filteredComments.length - 1;
                                     const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
                                     return (
@@ -175,6 +175,53 @@ const Comments = () => {
                             </tbody>
                         </table>
                     </Card>
+                    
+                    {/* Status Change Modal */}
+                    <Dialog open={openStatusModal} handler={() => setOpenStatusModal(false)}>
+                        <DialogHeader className="text-right">
+                            تغییر وضعیت کامنت
+                        </DialogHeader>
+                        <DialogBody>
+                            <Typography className="mb-4">
+                                وضعیت جدید را انتخاب کنید:
+                            </Typography>
+                            <div className="flex flex-col gap-2">
+                                <Button 
+                                    variant="outlined" 
+                                    onClick={() => updateCommentStatus('pending')}
+                                    className="text-right"
+                                >
+                                    در انتظار بررسی
+                                </Button>
+                                <Button 
+                                    variant="outlined" 
+                                    onClick={() => updateCommentStatus('approved')}
+                                    className="text-right"
+                                >
+                                    تأیید شده
+                                </Button>
+                                <Button 
+                                    variant="outlined" 
+                                    onClick={() => updateCommentStatus('rejected')}
+                                    className="text-right"
+                                >
+                                    رد شده
+                                </Button>
+                                <Button 
+                                    variant="outlined" 
+                                    onClick={() => updateCommentStatus('spam')}
+                                    className="text-right"
+                                >
+                                    اسپم
+                                </Button>
+                            </div>
+                        </DialogBody>
+                        <DialogFooter>
+                            <Button variant="text" color="red" onClick={() => setOpenStatusModal(false)}>
+                                لغو
+                            </Button>
+                        </DialogFooter>
+                    </Dialog>
                 </div>
             )}
         </>

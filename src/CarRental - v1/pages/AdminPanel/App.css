@@ -1,0 +1,18 @@
+.Panel__Wrapper{
+
+    background-color: #f8f8f8;
+    min-height: 100vh;
+}
+.main {
+    flex: 4;
+    padding: 20px;
+    padding-right: 280px;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+@media (max-width: 768px) {
+    .main {
+        padding-right: 0;
+        padding: 20px 0;
+    }
+}

@@ -8,7 +8,7 @@ import { FaCar } from "react-icons/fa";
 
 export function FeatureSection() {
   return (
-    <section className="py-16 container w-full lg:w-[80%] mx-auto">
+    <section id="features" className="py-16 container w-full lg:w-[80%] mx-auto">
 
       <div className="my-10 lg:my-20 grid lg:grid-cols-4  grid-cols-2 items-center gap-4 w-full px-10 divide">
         <Card className="shadow-lg md:shadow-none rounded-lg md:rounded-none">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRoutes, useParams, useNavigate } from "react-router-dom";
 import AuthContext from "./context/authContext";
+import { ThemeProvider } from "./context/themeContext";
 import routes from "./routes";
 import "./styles/reset.css";
 import "./styles/App.css";
@@ -13,7 +14,7 @@ const App = () => {
   const navigate = useNavigate();
   const router = useRoutes(routes);
 
-  const baseUrl = "https://crms-ddmm.onrender.com"
+  const baseUrl = "https://savarina.onrender.com"
 
   const [user, setUser] = useState({
     role: null,
@@ -188,24 +189,26 @@ const App = () => {
   }, []);
 
   return (
-    <AuthContext.Provider
-      value={{
-        baseUrl,
-        setLocalStorage,
-        getLocalStorage,
-        calcuteRelativeTimeDifference,
-        isLogin,
-        LogOut,
-        LoginUser,
-        user,
-        RefreshToken
-      }}
-    >
-      {/* <UpdatePage /> */}
-      {/* <DevAuth> */}
-        {router}
-      {/* </DevAuth> */}
-    </AuthContext.Provider>
+    <ThemeProvider>
+      <AuthContext.Provider
+        value={{
+          baseUrl,
+          setLocalStorage,
+          getLocalStorage,
+          calcuteRelativeTimeDifference,
+          isLogin,
+          LogOut,
+          LoginUser,
+          user,
+          RefreshToken
+        }}
+      >
+        {/* <UpdatePage /> */}
+        {/* <DevAuth> */}
+          {router}
+        {/* </DevAuth> */}
+      </AuthContext.Provider>
+    </ThemeProvider>
   );
 }
 

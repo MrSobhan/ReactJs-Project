@@ -1,9 +1,9 @@
 import React, { useEffect, useContext, useState } from 'react';
 import AuthContext from "../../context/authContext";
 
-import { Card, Typography, Spinner, Select, Option, Button, Input, Textarea } from "@material-tailwind/react";
+import { Card, Typography, Spinner, Select, Option, Button, Input, Textarea, Dialog, DialogHeader, DialogBody, DialogFooter } from "@material-tailwind/react";
 import { MdDelete } from "react-icons/md";
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaPlus, FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 
@@ -19,6 +19,8 @@ const Vehicles = () => {
     const [loading, setLoading] = useState(false);
     const [isUpdate, setIsUpdate] = useState(false);
     const [idForUpdate, setIdForUpdate] = useState("");
+    const [openModal, setOpenModal] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("");
 
     const [formData, setFormData] = useState({
         local_image_address: "",
@@ -212,9 +214,33 @@ const Vehicles = () => {
             security_deposit: vehicles.security_deposit
         })
 
-
-
+        setOpenModal(true);
     };
+
+    const handleOpenModal = () => {
+        setIsUpdate(false);
+        setFormData({
+            local_image_address: "",
+            plate_number: "",
+            location: "تهران",
+            brand: "تویوتا",
+            model: "",
+            year: 0,
+            color: "",
+            mileage: 0,
+            status: "نو",
+            hourly_rental_rate: 0,
+            security_deposit: 0,
+        });
+        setOpenModal(true);
+    };
+
+    const filteredVehicles = vehiclesData.filter(vehicle =>
+        vehicle.brand.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        vehicle.model.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        vehicle.plate_number.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        vehicle.location.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
 
     return (
@@ -222,129 +248,31 @@ const Vehicles = () => {
             {
                 loaderVehicles ? (<Spinner className="h-8 w-8 mx-auto mt-16" />) : (
                     <div className="container w-full mx-auto">
-                        <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-xl mx-auto p-6 mb-16 bg-white shadow-lg rounded-md">
-                            <Typography variant="h5" className="text-center text-gray-900 font-bold mb-4">
-                                ثبت اطلاعات خودرو
+                        
+                        {/* Header with Add Button and Search */}
+                        <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+                            <Typography variant="h4" className="lalezar">
+                                مدیریت خودروها
                             </Typography>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
-                                        شماره پلاک
-                                    </Typography>
-                                    <Input color="gray" size="lg" name="plate_number" value={formData.plate_number} onChange={handleChange} />
+                            <div className="flex gap-4 items-center">
+                                <div className="relative">
+                                    <Input
+                                        type="text"
+                                        placeholder="جستجو..."
+                                        value={searchTerm}
+                                        onChange={(e) => setSearchTerm(e.target.value)}
+                                        className="pl-10"
+                                    />
+                                    <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                                 </div>
-                                <div>
-                                    <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
-                                        مکان
-                                    </Typography>
-                                    <Select name="city" value={formData.location} onChange={(val) => setFormData({ ...formData, location: val })}>
-                                        <Option value="تهران">تهران</Option>
-                                        <Option value="مشهد">مشهد</Option>
-                                        <Option value="اصفهان">اصفهان</Option>
-                                        <Option value="شیراز">شیراز</Option>
-                                        <Option value="تبریز">تبریز</Option>
-                                        <Option value="کیش">کیش</Option>
-                                        <Option value="قم">قم</Option>
-                                        <Option value="اهواز">اهواز</Option>
-                                        <Option value="رشت">رشت</Option>
-                                        <Option value="کرمان">کرمان</Option>
-                                        <Option value="همدان">همدان</Option>
-                                        <Option value="یزد">یزد</Option>
-                                        <Option value="ارومیه">ارومیه</Option>
-                                        <Option value="بندرعباس">بندرعباس</Option>
-                                        <Option value="بوشهر">بوشهر</Option>
-                                    </Select>
-
-                                </div>
+                                <Button 
+                                    onClick={handleOpenModal}
+                                    className="flex items-center gap-2 bg-blue-gray-900"
+                                >
+                                    <FaPlus /> افزودن خودرو
+                                </Button>
                             </div>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
-                                        برند خودرو
-                                    </Typography>
-                                    <Select
-                                        name="carBrand"
-                                        value={formData.brand}
-                                        onChange={(val) => setFormData({ ...formData, brand: val })}
-                                    >
-                                        {carBrands.map((brand, index) => (
-                                            <Option key={index} value={brand}>{brand}</Option>
-                                        ))}
-                                    </Select>
-                                </div>
-                                <div>
-                                    <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
-                                        مدل
-                                    </Typography>
-                                    <Input color="gray" size="lg" name="model" value={formData.model} onChange={handleChange} />
-                                </div>
-                            </div>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
-                                        سال ساخت
-                                    </Typography>
-                                    <Input type="number" color="gray" size="lg" name="year" value={formData.year} onChange={handleChange} />
-                                </div>
-                                <div>
-                                    <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
-                                        رنگ
-                                    </Typography>
-                                    <Input color="gray" size="lg" name="color" value={formData.color} onChange={handleChange} />
-                                </div>
-                            </div>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
-                                        کارکرد (کیلومتر)
-                                    </Typography>
-                                    <Input type="number" color="gray" size="lg" name="mileage" value={formData.mileage} onChange={handleChange} />
-                                </div>
-                                <div>
-                                    <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
-                                        وضعیت
-                                    </Typography>
-                                    <Select name="status" value={formData.status} onChange={(val) => setFormData({ ...formData, status: val })}>
-                                        <Option value="نو">نو</Option>
-                                        <Option value="اجاره شده">اجاره شده</Option>
-                                        <Option value="موجود">موجود</Option>
-                                        <Option value="در سرویس">در سرویس</Option>
-                                        <Option value="آسیب‌دیده">آسیب‌دیده</Option>
-                                        <Option value="نامشخص">نامشخص</Option>
-                                    </Select>
-                                </div>
-                            </div>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
-                                        نرخ اجاره ساعتی (تومان)
-                                    </Typography>
-                                    <Input type="number" color="gray" size="lg" name="hourly_rental_rate" value={formData.hourly_rental_rate} onChange={handleChange} />
-                                </div>
-                                <div>
-                                    <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
-                                        مبلغ ودیعه (تومان)
-                                    </Typography>
-                                    <Input type="number" color="gray" size="lg" name="security_deposit" value={formData.security_deposit} onChange={handleChange} />
-                                </div>
-                            </div>
-
-                            <div>
-                                <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
-                                    لینک عکس
-                                </Typography>
-                                <Input type="text" color="gray" size="lg" name="local_image_address" value={formData.local_image_address} onChange={handleChange} />
-                            </div>
-
-                            <Button type="submit" className="w-full bg-blue-gray-900 text-white">
-                                {loading ? <Spinner className="inline h-4 w-4" /> : "ثبت اطلاعات"}
-                            </Button>
-                        </form>
+                        </div>
 
                         <Card className="h-full w-full overflow-scroll">
                             <table className="w-full table-auto text-right">
@@ -368,8 +296,8 @@ const Vehicles = () => {
                                     </tr >
                                 </thead >
                                 <tbody>
-                                    {vehiclesData.map((car, index) => {
-                                        const isLast = index === vehiclesData.length - 1;
+                                    {filteredVehicles.map((car, index) => {
+                                        const isLast = index === filteredVehicles.length - 1;
                                         const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
                                         return (
@@ -472,6 +400,141 @@ const Vehicles = () => {
 
                             </table >
                         </Card >
+                        
+                        {/* Modal for Add/Edit */}
+                        <Dialog open={openModal} handler={() => setOpenModal(false)} size="lg">
+                            <DialogHeader className="text-right">
+                                {isUpdate ? "ویرایش خودرو" : "افزودن خودرو جدید"}
+                            </DialogHeader>
+                            <DialogBody className="max-h-[70vh] overflow-y-auto">
+                                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
+                                                شماره پلاک
+                                            </Typography>
+                                            <Input color="gray" size="lg" name="plate_number" value={formData.plate_number} onChange={handleChange} />
+                                        </div>
+                                        <div>
+                                            <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
+                                                مکان
+                                            </Typography>
+                                            <Select name="city" value={formData.location} onChange={(val) => setFormData({ ...formData, location: val })}>
+                                                <Option value="تهران">تهران</Option>
+                                                <Option value="مشهد">مشهد</Option>
+                                                <Option value="اصفهان">اصفهان</Option>
+                                                <Option value="شیراز">شیراز</Option>
+                                                <Option value="تبریز">تبریز</Option>
+                                                <Option value="کیش">کیش</Option>
+                                                <Option value="قم">قم</Option>
+                                                <Option value="اهواز">اهواز</Option>
+                                                <Option value="رشت">رشت</Option>
+                                                <Option value="کرمان">کرمان</Option>
+                                                <Option value="همدان">همدان</Option>
+                                                <Option value="یزد">یزد</Option>
+                                                <Option value="ارومیه">ارومیه</Option>
+                                                <Option value="بندرعباس">بندرعباس</Option>
+                                                <Option value="بوشهر">بوشهر</Option>
+                                            </Select>
+                                        </div>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
+                                                برند خودرو
+                                            </Typography>
+                                            <Select
+                                                name="carBrand"
+                                                value={formData.brand}
+                                                onChange={(val) => setFormData({ ...formData, brand: val })}
+                                            >
+                                                {carBrands.map((brand, index) => (
+                                                    <Option key={index} value={brand}>{brand}</Option>
+                                                ))}
+                                            </Select>
+                                        </div>
+                                        <div>
+                                            <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
+                                                مدل
+                                            </Typography>
+                                            <Input color="gray" size="lg" name="model" value={formData.model} onChange={handleChange} />
+                                        </div>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
+                                                سال ساخت
+                                            </Typography>
+                                            <Input type="number" color="gray" size="lg" name="year" value={formData.year} onChange={handleChange} />
+                                        </div>
+                                        <div>
+                                            <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
+                                                رنگ
+                                            </Typography>
+                                            <Input color="gray" size="lg" name="color" value={formData.color} onChange={handleChange} />
+                                        </div>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
+                                                کارکرد (کیلومتر)
+                                            </Typography>
+                                            <Input type="number" color="gray" size="lg" name="mileage" value={formData.mileage} onChange={handleChange} />
+                                        </div>
+                                        <div>
+                                            <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
+                                                وضعیت
+                                            </Typography>
+                                            <Select name="status" value={formData.status} onChange={(val) => setFormData({ ...formData, status: val })}>
+                                                <Option value="نو">نو</Option>
+                                                <Option value="اجاره شده">اجاره شده</Option>
+                                                <Option value="موجود">موجود</Option>
+                                                <Option value="در سرویس">در سرویس</Option>
+                                                <Option value="آسیب‌دیده">آسیب‌دیده</Option>
+                                                <Option value="نامشخص">نامشخص</Option>
+                                            </Select>
+                                        </div>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
+                                                نرخ اجاره ساعتی (تومان)
+                                            </Typography>
+                                            <Input type="number" color="gray" size="lg" name="hourly_rental_rate" value={formData.hourly_rental_rate} onChange={handleChange} />
+                                        </div>
+                                        <div>
+                                            <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
+                                                مبلغ ودیعه (تومان)
+                                            </Typography>
+                                            <Input type="number" color="gray" size="lg" name="security_deposit" value={formData.security_deposit} onChange={handleChange} />
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
+                                            لینک عکس
+                                        </Typography>
+                                        <Input type="text" color="gray" size="lg" name="local_image_address" value={formData.local_image_address} onChange={handleChange} />
+                                    </div>
+                                </form>
+                            </DialogBody>
+                            <DialogFooter className="flex gap-2">
+                                <Button variant="text" color="red" onClick={() => setOpenModal(false)}>
+                                    لغو
+                                </Button>
+                                <Button 
+                                    onClick={handleSubmit} 
+                                    className="bg-blue-gray-900"
+                                    disabled={loading}
+                                >
+                                    {loading ? <Spinner className="inline h-4 w-4" /> : (isUpdate ? "ویرایش" : "افزودن")}
+                                </Button>
+                            </DialogFooter>
+                        </Dialog>
                     </div>
                 )
             }
