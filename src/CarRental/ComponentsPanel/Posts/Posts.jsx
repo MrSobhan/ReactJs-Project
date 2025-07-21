@@ -261,11 +261,11 @@ const Posts = () => {
                     </Card>
                     
                     {/* Modal for Add/Edit */}
-                    <Dialog open={openModal} handler={() => setOpenModal(false)} size="lg" className="dark:bg-gray-800">
-                        <DialogHeader className="text-right dark:text-white">
+                    <Dialog open={openModal} handler={() => setOpenModal(false)} size="lg">
+                        <DialogHeader className="text-right dark:text-white iransans">
                             {isUpdate ? "ویرایش پست" : "افزودن پست جدید"}
                         </DialogHeader>
-                        <DialogBody className="max-h-[70vh] overflow-y-auto dark:bg-gray-800">
+                        <DialogBody className="max-h-[70vh] overflow-y-auto">
                             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                                 <div>
                                     <Typography variant="small" className="mb-2 text-right font-medium text-gray-900 dark:text-white">
@@ -291,7 +291,7 @@ const Posts = () => {
                                 </div>
                             </form>
                         </DialogBody>
-                        <DialogFooter className="flex gap-2 dark:bg-gray-800">
+                        <DialogFooter className="flex gap-2">
                             <Button variant="text" color="red" onClick={() => setOpenModal(false)}>
                                 لغو
                             </Button>

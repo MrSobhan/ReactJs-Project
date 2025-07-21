@@ -441,7 +441,7 @@ const Admins = () => {
                         
                         {/* Modal for Add/Edit */}
                         <Dialog open={openModal} handler={() => setOpenModal(false)} size="lg">
-                            <DialogHeader className="text-right">
+                            <DialogHeader className="text-right iransans">
                                 {isUpdate ? "ویرایش ادمین" : "افزودن ادمین جدید"}
                             </DialogHeader>
                             <DialogBody className="max-h-[70vh] overflow-y-auto">

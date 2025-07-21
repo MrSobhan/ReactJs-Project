@@ -403,7 +403,7 @@ const Vehicles = () => {
                         
                         {/* Modal for Add/Edit */}
                         <Dialog open={openModal} handler={() => setOpenModal(false)} size="lg">
-                            <DialogHeader className="text-right">
+                            <DialogHeader className="text-right iransans">
                                 {isUpdate ? "ویرایش خودرو" : "افزودن خودرو جدید"}
                             </DialogHeader>
                             <DialogBody className="max-h-[70vh] overflow-y-auto">
