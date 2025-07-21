@@ -1,8 +1,8 @@
 import React, { useEffect, useContext, useState } from "react";
 import AuthContext from "../../context/authContext";
-import { Card, Typography, Spinner, Select, Option, Button, Input } from "@material-tailwind/react";
+import { Card, Typography, Spinner, Select, Option, Button, Input, Dialog, DialogHeader, DialogBody, DialogFooter } from "@material-tailwind/react";
 import { MdDelete } from "react-icons/md";
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaPlus, FaSearch } from "react-icons/fa";
 import swal from "sweetalert";
 
 const TABLE_HEAD = ["شناسه", "مبلغ کل", "مالیات", "تخفیف", "مبلغ نهایی", "وضعیت", ""];
@@ -14,6 +14,8 @@ const Invoices = () => {
     const [loading, setLoading] = useState(false);
     const [isUpdate, setIsUpdate] = useState(false);
     const [idForUpdate, setIdForUpdate] = useState("");
+    const [openModal, setOpenModal] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("");
 
 
     const [formData, setFormData] = useState({
@@ -90,6 +92,7 @@ const Invoices = () => {
             response.json().then(() => {
                 setLoading(false);
                 setIsUpdate(false);
+                setOpenModal(false);
                 swal({
                     title: "فاکتور با موفقیت ثبت شد",
                     icon: "success",
@@ -151,9 +154,25 @@ const Invoices = () => {
             final_amount: invoices.final_amount,
             status: invoices.status,
         })
-
+        setOpenModal(true);
     };
 
+    const handleOpenModal = () => {
+        setIsUpdate(false);
+        setFormData({
+            total_amount: 0,
+            tax: 0,
+            discount: 0,
+            final_amount: 0,
+            status: "ایجاد شده",
+        });
+        setOpenModal(true);
+    };
+
+    const filteredInvoices = invoicesData.filter(invoice =>
+        invoice.status.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        invoice.id.toString().includes(searchTerm)
+    );
 
     return (
         <>
@@ -162,67 +181,38 @@ const Invoices = () => {
             ) : (
                 <div className="container mx-auto">
 
-                    <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-xl mx-auto p-6 mb-16 bg-white shadow-lg rounded-md">
-                        <Typography variant="h5" className="text-center text-gray-900 font-bold mb-4">
-                            ثبت اطلاعات فاکتور
+                    {/* Header with Add Button and Search */}
+                    <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+                        <Typography variant="h4" className="lalezar dark:text-white">
+                            مدیریت فاکتورها
                         </Typography>
-
-                        <div>
-                            <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
-                                مبلغ کل (تومان)
-                            </Typography>
-                            <Input type="number" color="gray" size="lg" name="total_amount" value={formData.total_amount} onChange={handleChange} />
+                        <div className="flex gap-4 items-center">
+                            <div className="relative">
+                                <Input
+                                    type="text"
+                                    placeholder="جستجو..."
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                    className="pl-10 dark:text-white"
+                                />
+                                <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                            </div>
+                            <Button 
+                                onClick={handleOpenModal}
+                                className="flex items-center gap-2 bg-blue-gray-900"
+                            >
+                                <FaPlus /> افزودن فاکتور
+                            </Button>
                         </div>
+                    </div>
 
-                        <div>
-                            <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
-                                مالیات (تومان)
-                            </Typography>
-                            <Input type="number" color="gray" size="lg" name="tax" value={formData.tax} onChange={handleChange} />
-                        </div>
-
-                        <div>
-                            <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
-                                تخفیف (تومان)
-                            </Typography>
-                            <Input type="number" color="gray" size="lg" name="discount" value={formData.discount} onChange={handleChange} />
-                        </div>
-
-                        <div>
-                            <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
-                                مبلغ نهایی (تومان)
-                            </Typography>
-                            <Input type="number" color="gray" size="lg" name="final_amount" value={formData.final_amount} onChange={handleChange} />
-                        </div>
-
-                        <div>
-                            <Typography variant="small" className="mb-2 text-right font-medium text-gray-900">
-                                وضعیت فاکتور
-                            </Typography>
-                            <Select name="status" value={formData.status} onChange={(val) => setFormData({ ...formData, status: val })}>
-                                <Option value="ایجاد شده">ایجاد شده</Option>
-                                <Option value="در انتظار تایید">در انتظار تایید</Option>
-                                <Option value="تایید شده">تایید شده</Option>
-                                <Option value="ناموفق">ناموفق</Option>
-                                <Option value="لغو شده">لغو شده</Option>
-                                <Option value="منقضی شده">منقضی شده</Option>
-                            </Select>
-
-                        </div>
-
-                        <Button type="submit" className="w-full bg-blue-gray-900 text-white">
-                            {loading ? <Spinner className="inline h-4 w-4" /> : "ثبت اطلاعات"}
-                        </Button>
-                    </form>
-
-
-                    <Card className="h-full w-full overflow-scroll">
+                    <Card className="h-full w-full overflow-scroll dark:bg-gray-800">
                         <table className="w-full min-w-max table-auto text-right">
                             <thead>
                                 <tr>
                                     {TABLE_HEAD.map((head) => (
-                                        <th key={head} className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
-                                            <Typography variant="" color="blue-gray" className="font-normal leading-none opacity-70">
+                                        <th key={head} className="border-b border-blue-gray-100 bg-blue-gray-50 p-4 dark:bg-gray-700 dark:border-gray-600">
+                                            <Typography variant="" color="blue-gray" className="font-normal leading-none opacity-70 dark:text-white">
                                                 {head}
                                             </Typography>
                                         </th>
@@ -230,51 +220,49 @@ const Invoices = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {invoicesData.map((invoice, index) => {
-                                    const isLast = index === invoicesData.length - 1;
-                                    const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
+                                {filteredInvoices.map((invoice, index) => {
+                                    const isLast = index === filteredInvoices.length - 1;
+                                    const classes = isLast ? "p-4 dark:text-white" : "p-4 border-b border-blue-gray-50 dark:border-gray-600 dark:text-white";
 
                                     return (
                                         <tr key={invoice.id}>
                                             <td className={classes}>
-                                                <Typography variant="" color="blue-gray" className="font-normal">
+                                                <Typography variant="" color="blue-gray" className="font-normal dark:text-white">
                                                     {invoice.id}
                                                 </Typography>
                                             </td>
                                             <td className={classes}>
-                                                <Typography variant="" color="blue-gray" className="font-normal">
+                                                <Typography variant="" color="blue-gray" className="font-normal dark:text-white">
                                                     {invoice.total_amount.toLocaleString()}
                                                 </Typography>
                                             </td>
                                             <td className={classes}>
-                                                <Typography variant="" color="blue-gray" className="font-normal">
+                                                <Typography variant="" color="blue-gray" className="font-normal dark:text-white">
                                                     {invoice.tax.toLocaleString()}
                                                 </Typography>
                                             </td>
                                             <td className={classes}>
-                                                <Typography variant="" color="blue-gray" className="font-normal">
+                                                <Typography variant="" color="blue-gray" className="font-normal dark:text-white">
                                                     {invoice.discount.toLocaleString()}
                                                 </Typography>
                                             </td>
                                             <td className={classes}>
-                                                <Typography variant="" color="blue-gray" className="font-normal">
+                                                <Typography variant="" color="blue-gray" className="font-normal dark:text-white">
                                                     {invoice.final_amount.toLocaleString()}
                                                 </Typography>
                                             </td>
                                             <td className={classes}>
-                                                <Typography variant="" color="blue-gray" className="font-normal">
+                                                <Typography variant="" color="blue-gray" className="font-normal dark:text-white">
                                                     {invoice.status}
                                                 </Typography>
                                             </td>
                                             <td className={classes}>
-                                                <Typography as="a" href="#" variant="" color="blue-gray" className="font-medium">
-                                                    <button className="p-2 ml-2 pl-3 rounded-full bg-blue-gray-900 text-white text-xl" onClick={() => handleEdit(invoice)}>
-                                                        <FaEdit />
-                                                    </button>
-                                                    <button className="p-2 rounded-full bg-blue-gray-900 text-white text-xl" onClick={() => handleDelete(invoice.id)}>
-                                                        <MdDelete />
-                                                    </button>
-                                                </Typography>
+                                                <button className="p-2 ml-2 pl-3 rounded-full bg-blue-gray-900 text-white text-xl" onClick={() => handleEdit(invoice)}>
+                                                    <FaEdit />
+                                                </button>
+                                                <button className="p-2 rounded-full bg-blue-gray-900 text-white text-xl" onClick={() => handleDelete(invoice.id)}>
+                                                    <MdDelete />
+                                                </button>
                                             </td>
                                         </tr>
                                     );
@@ -282,6 +270,70 @@ const Invoices = () => {
                             </tbody>
                         </table>
                     </Card>
+                    
+                    {/* Modal for Add/Edit */}
+                    <Dialog open={openModal} handler={() => setOpenModal(false)} size="lg" className="dark:bg-gray-800">
+                        <DialogHeader className="text-right dark:text-white">
+                            {isUpdate ? "ویرایش فاکتور" : "افزودن فاکتور جدید"}
+                        </DialogHeader>
+                        <DialogBody className="max-h-[70vh] overflow-y-auto dark:bg-gray-800">
+                            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                                <div>
+                                    <Typography variant="small" className="mb-2 text-right font-medium text-gray-900 dark:text-white">
+                                        مبلغ کل (تومان)
+                                    </Typography>
+                                    <Input type="number" color="gray" size="lg" name="total_amount" value={formData.total_amount} onChange={handleChange} className="dark:text-white" />
+                                </div>
+
+                                <div>
+                                    <Typography variant="small" className="mb-2 text-right font-medium text-gray-900 dark:text-white">
+                                        مالیات (تومان)
+                                    </Typography>
+                                    <Input type="number" color="gray" size="lg" name="tax" value={formData.tax} onChange={handleChange} className="dark:text-white" />
+                                </div>
+
+                                <div>
+                                    <Typography variant="small" className="mb-2 text-right font-medium text-gray-900 dark:text-white">
+                                        تخفیف (تومان)
+                                    </Typography>
+                                    <Input type="number" color="gray" size="lg" name="discount" value={formData.discount} onChange={handleChange} className="dark:text-white" />
+                                </div>
+
+                                <div>
+                                    <Typography variant="small" className="mb-2 text-right font-medium text-gray-900 dark:text-white">
+                                        مبلغ نهایی (تومان)
+                                    </Typography>
+                                    <Input type="number" color="gray" size="lg" name="final_amount" value={formData.final_amount} onChange={handleChange} className="dark:text-white" />
+                                </div>
+
+                                <div>
+                                    <Typography variant="small" className="mb-2 text-right font-medium text-gray-900 dark:text-white">
+                                        وضعیت فاکتور
+                                    </Typography>
+                                    <Select name="status" value={formData.status} onChange={(val) => setFormData({ ...formData, status: val })}>
+                                        <Option value="ایجاد شده">ایجاد شده</Option>
+                                        <Option value="در انتظار تایید">در انتظار تایید</Option>
+                                        <Option value="تایید شده">تایید شده</Option>
+                                        <Option value="ناموفق">ناموفق</Option>
+                                        <Option value="لغو شده">لغو شده</Option>
+                                        <Option value="منقضی شده">منقضی شده</Option>
+                                    </Select>
+                                </div>
+                            </form>
+                        </DialogBody>
+                        <DialogFooter className="flex gap-2 dark:bg-gray-800">
+                            <Button variant="text" color="red" onClick={() => setOpenModal(false)}>
+                                لغو
+                            </Button>
+                            <Button 
+                                onClick={handleSubmit} 
+                                className="bg-blue-gray-900"
+                                disabled={loading}
+                            >
+                                {loading ? <Spinner className="inline h-4 w-4" /> : (isUpdate ? "ویرایش" : "افزودن")}
+                            </Button>
+                        </DialogFooter>
+                    </Dialog>
                 </div>
             )}
         </>

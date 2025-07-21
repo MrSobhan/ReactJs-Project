@@ -3,6 +3,12 @@
     background-color: #f8f8f8;
     min-height: 100vh;
 }
+.dark .Panel__Wrapper{
+
+    background-color: #1a202c;
+    color: #e2e8f0;
+    min-height: 100vh;
+}
 .main {
     flex: 4;
     padding: 20px;

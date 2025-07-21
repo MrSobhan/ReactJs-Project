@@ -123,7 +123,7 @@ function Login() {
                   onChange={(e) => setPassInput(e.target.value)}
                 />
               </div>
-              <Button size="lg" color="gray" className="py-3" fullWidth onClick={LoginHandler}>
+              <Button size="lg" color="gray" className="py-3 dark:bg-white dark:!text-black" fullWidth onClick={LoginHandler}>
                 {loadingSub ? <Spinner className=" inline h-4 w-4" /> : ''} ورود
               </Button>
               <div className="h-12 w-12 rounded-full mx-auto flex items-center justify-center border-2 border-solid border-gray-300 cursor-pointer">

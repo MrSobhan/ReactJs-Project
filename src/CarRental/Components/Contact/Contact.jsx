@@ -218,7 +218,7 @@ export function Contact() {
                 onChange={(e) => setContentInput(e.target.value)}
               />
             </div>
-            <Button className="w-full" color="gray" onClick={CommentHandler}>
+            <Button className="w-full dark:bg-white dark:!text-black" color="gray" onClick={CommentHandler}>
               {loadingSub ? <Spinner className=" inline h-4 w-4" /> : ''}  ارسال نظرات
             </Button>
           </form>

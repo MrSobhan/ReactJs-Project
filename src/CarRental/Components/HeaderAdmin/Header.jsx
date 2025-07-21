@@ -26,9 +26,9 @@ export default function Header({ toggleSidebar }) {
             </div>
 
             <div className='header-left-section'>
-                <div className="search-box">
+                <div className="search-box overflow-hidden">
                     <input type="text" placeholder='جست و جو کنید ...' />
-                    <button><FaSearch /></button>
+                    <button><FaSearch className='dark:fill-black' /></button>
                 </div>
 
                 <button className='header-left-icon'><AiOutlineBell /></button>

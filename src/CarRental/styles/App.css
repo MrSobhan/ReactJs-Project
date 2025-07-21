@@ -21,12 +21,24 @@ body {
 }
 
 .dark body {
-    overflow-x: hidden !important;
-    font-family: "iransans" !important;
-    transition: background-color 0.3s ease, color 0.3s ease;
     background-color: #1a202c;
+    color: #e2e8f0;
+}
+
+.dark * {
     color: #e2e8f0 !important;
 }
+
+/* .dark button {
+    background-color: #dfdfdf !important;
+    color: #000000 !important;
+} */
+
+/* .dark svg {
+    fill: #000000 !important;
+} */
+
+
 
 .dark {
     --tw-bg-opacity: 1;
@@ -36,6 +48,10 @@ body {
 
 .dark .bg-white {
     background-color: #2d3748 !important;
+}
+
+.dark .text-black {
+    color: #e2e8f0 !important;
 }
 
 .dark .text-gray-900 {
@@ -54,6 +70,10 @@ body {
     color: #a0aec0 !important;
 }
 
+.dark .text-gray-500 {
+    color: #9ca3af !important;
+}
+
 .dark .border-gray-200 {
     border-color: #4a5568 !important;
 }
@@ -64,6 +84,46 @@ body {
 
 .dark .bg-gray-100 {
     background-color: #4a5568 !important;
+}
+
+.dark .bg-blue-gray-50 {
+    background-color: #374151 !important;
+}
+
+.dark .shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.1) !important;
+}
+
+.dark .shadow-md {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Button styles for dark mode */
+.dark button:not(.bg-blue-gray-900):not(.bg-red-600):not([class*="bg-"]) {
+    background-color: #374151 !important;
+    color: #e2e8f0 !important;
+}
+
+.dark .bg-blue-gray-900 {
+    background-color: #1f2937 !important;
+}
+
+/* Input styles for dark mode */
+.dark input {
+    background-color: #374151 !important;
+    border-color: #4b5563 !important;
+    color: #e2e8f0 !important;
+}
+
+.dark textarea {
+    background-color: #374151 !important;
+    border-color: #4b5563 !important;
+    color: #e2e8f0 !important;
+}
+
+/* Card styles for dark mode */
+.dark .bg-transparent {
+    background-color: transparent !important;
 }
 
 p,
@@ -92,6 +152,11 @@ input {
 
 .bgNavbar {
     background-color: rgba(255, 255, 255, 0.386);
+    backdrop-filter: blur(20px);
+}
+
+.dark .bgNavbar {
+    background-color: rgba(255, 255, 255, 0.095);
     backdrop-filter: blur(20px);
 }
 
@@ -143,15 +208,20 @@ span>.w-0\.5 {
     border-radius: 30px;
 }
 
+.swal-title {
+    color: #1a202c !important;
+
+}
+
 .swal-button {
-    background-color: black;
+    background-color: #1f2937 !important;
     transition: all .4s;
 }
 
 .swal-button:hover {
     background-color: white !important;
-    border: 2px solid black;
-    color: black;
+    border: 2px solid #1f2937 !important;
+    color: #1f2937 !important;
     box-shadow: none;
     outline: none;
     transform: scale(.9);
@@ -160,6 +230,7 @@ span>.w-0\.5 {
 
 .swal-button--cancel {
     background-color: white !important;
+    color: #1f2937 !important;
 }
 
 .boxAdmin {
@@ -168,7 +239,7 @@ span>.w-0\.5 {
     border-radius: 1rem;
 }
 
-.boxAdmin::after{
+.boxAdmin::after {
     content: '';
     position: absolute;
     left: 20%;
@@ -184,23 +255,45 @@ span>.w-0\.5 {
         border-left: 2px solid rgba(0, 0, 0, 0.129);
     }
 
+    .dark .divide>div {
+        border-left: 2px solid rgba(255, 255, 255, 0.129);
+    }
+
     .endDivide {
         border-left: 0 !important;
     }
+
 }
 
 
-.imgBox__HeaderHome{
+.imgBox__HeaderHome {
     animation: box-img-head 5s linear infinite;
 }
 
+.dark .swal-button {
+    color: #1a202c !important;
+}
+
+.dark button:not(.bg-blue-gray-900):not(.bg-red-600):not([class*="bg-"]) {
+    background-color: transparent !important;
+}
+
+
+.dark .titleSlider::after {
+    background-color: #e2e8f0;
+}
+
 @keyframes box-img-head {
-    0% , 100% {
+
+    0%,
+    100% {
         transform: translateY(0);
     }
+
     50% {
         transform: translateY(-10px);
     }
+
     75% {
         transform: translateY(10px);
     }

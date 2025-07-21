@@ -17,11 +17,11 @@ export default function ReminderAlert() {
               <div>
                 <div className="flex">
                   <div className="ml-2 text-yellow-500 text-xl">⚠️</div>
-                  <p className="font-semibold lalezar text-lg">یادآوری مهم</p>
+                  <p className="font-semibold lalezar text-lg dark:!text-black">یادآوری مهم</p>
                 </div>
-                <p className="text-xs md:text-md mt-2">لطفاً وضعیت دیتابیس را بررسی و در صورت نیاز به‌روزرسانی کنید.</p>
+                <p className="text-xs md:text-md mt-2 dark:!text-black">لطفاً وضعیت دیتابیس را بررسی و در صورت نیاز به‌روزرسانی کنید.</p>
               </div>
-              <IoClose className="md:ml-4 text-3xl cursor-pointer" onClick={() => setIsVisible(false)} />
+              <IoClose className="md:ml-4 text-3xl cursor-pointer dark:!fill-black" onClick={() => setIsVisible(false)} />
             </div>
           </div>
         )

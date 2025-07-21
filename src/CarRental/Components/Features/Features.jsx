@@ -11,8 +11,8 @@ export function FeatureSection() {
     <section id="features" className="py-16 container w-full lg:w-[80%] mx-auto">
 
       <div className="my-10 lg:my-20 grid lg:grid-cols-4  grid-cols-2 items-center gap-4 w-full px-10 divide">
-        <Card className="shadow-lg md:shadow-none rounded-lg md:rounded-none">
-          <CardBody className="p-4">
+        <Card className="shadow-none rounded-lg md:rounded-none">
+          <CardBody className="p-4 dark:!bg-[#1a202c]">
             <div className="flex flex-col justify-between items-center">
 
               <div className="flex items-center gap-1 text-blue-gray-800 text-5xl md:text-7xl">
@@ -27,8 +27,8 @@ export function FeatureSection() {
             </div>
           </CardBody>
         </Card>
-        <Card className="shadow-lg md:shadow-none rounded-lg md:rounded-none">
-          <CardBody className="p-4">
+        <Card className="shadow-none rounded-lg md:rounded-none">
+          <CardBody className="p-4 dark:!bg-[#1a202c]">
             <div className="flex flex-col justify-between items-center">
 
               <div className="flex items-center gap-1 text-blue-gray-800 text-5xl md:text-7xl">
@@ -43,8 +43,8 @@ export function FeatureSection() {
             </div>
           </CardBody>
         </Card>
-        <Card className="shadow-lg md:shadow-none rounded-lg md:rounded-none">
-          <CardBody className="p-4">
+        <Card className="shadow-none rounded-lg md:rounded-none">
+          <CardBody className="p-4 dark:!bg-[#1a202c]">
             <div className="flex flex-col justify-between items-center">
 
               <div className="flex items-center gap-1 text-blue-gray-800 text-5xl md:text-7xl">
@@ -59,8 +59,8 @@ export function FeatureSection() {
             </div>
           </CardBody>
         </Card>
-        <Card className="shadow-lg md:shadow-none rounded-lg md:rounded-none endDivide">
-          <CardBody className="p-4">
+        <Card className="shadow-none rounded-lg md:rounded-none endDivide">
+          <CardBody className="p-4 dark:!bg-[#1a202c]">
             <div className="flex flex-col justify-between items-center">
 
               <div className="flex items-center gap-1 text-blue-gray-800 text-5xl md:text-7xl">

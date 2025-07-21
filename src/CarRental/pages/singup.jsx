@@ -269,7 +269,7 @@ function Singup() {
                                     onChange={(e) => setPassInput(e.target.value)}
                                 />
                             </div>
-                            <Button size="lg" color="gray" className="py-3" fullWidth onClick={SingupHandler}>
+                            <Button size="lg" color="gray" className="py-3 dark:bg-white dark:!text-black" fullWidth onClick={SingupHandler}>
                                 {loadingSub ? <Spinner className=" inline h-4 w-4" /> : ''}  ثبت نام
                             </Button>
                             <div className="h-12 w-12 rounded-full mx-auto flex items-center justify-center border-2 border-solid border-gray-300 cursor-pointer">

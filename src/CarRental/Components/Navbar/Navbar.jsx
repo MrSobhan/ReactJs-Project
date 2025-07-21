@@ -71,7 +71,7 @@ export function NavbarDefault() {
     return (
         <>
             <header className="hidden lg:block w-full fixed top-0 left-0 mx-auto z-50">
-                <Banner />
+                {/* <Banner /> */}
                 <Navbar className="w-full lg:w-[80%] px-4 py-2 lg:px-8 mx-auto mt-3  shadow-lg bgNavbar rounded-full">
                     <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
                         <div className="flex items-center justify-between">
@@ -107,19 +107,19 @@ export function NavbarDefault() {
                                             <Button
                                                 variant="filled"
                                                 size="sm"
-                                                className="hidden lg:inline-block p-3 text-lg rounded-full"
+                                                className="hidden lg:inline-block p-3 text-lg rounded-full dark:bg-white"
                                             >
-                                                <span><BsCart2 /></span>
+                                                <span><BsCart2 className="dark:fill-black"/></span>
                                             </Button>
                                         </Link>
 
                                         <Button
                                             variant="filled"
                                             size="sm"
-                                            className="hidden lg:inline-block p-3 text-lg rounded-full"
+                                            className="hidden lg:inline-block p-3 text-lg rounded-full dark:bg-white"
                                             onClick={() => setOpenDropDown(prev => !prev)}
                                         >
-                                            <span><FaRegUser /></span>
+                                            <span><FaRegUser className="dark:fill-black"/></span>
                                         </Button>
 
 
@@ -127,12 +127,12 @@ export function NavbarDefault() {
                                             openDropDown && (
                                                 <ul className=" absolute -bottom-52 -left-20 w-40 p-2 bg-white shadow-lg rounded-lg">
                                                     <Link to={authContext.user.role == "SuperAdmin" || authContext.user.role == "Admin" ? "/p-admin/" : "/c-admin/"}>
-                                                        <li className="px-2 py-3 cursor-pointer hover:bg-blue-gray-50 rounded-md"><FaUserAlt className="inline ml-1" /> پنل کاربری</li>
+                                                        <li className="px-2 py-3 cursor-pointer hover:bg-blue-gray-50 dark:hover:bg-blue-gray-500 rounded-md"><FaUserAlt className="inline ml-1" /> پنل کاربری</li>
                                                     </Link>
-                                                    <li className="px-2 py-3 cursor-pointer hover:bg-blue-gray-50 rounded-md"> <IoSettingsSharp className="inline ml-1" /> تنظیمات</li>
-                                                    <li className="px-2 py-3 cursor-pointer hover:bg-blue-gray-50 rounded-md"><IoIosHelpCircle className="inline ml-1" /> راهنما</li>
+                                                    <li className="px-2 py-3 cursor-pointer hover:bg-blue-gray-50 dark:hover:bg-blue-gray-500 rounded-md"> <IoSettingsSharp className="inline ml-1" /> تنظیمات</li>
+                                                    <li className="px-2 py-3 cursor-pointer hover:bg-blue-gray-50 dark:hover:bg-blue-gray-500 rounded-md"><IoIosHelpCircle className="inline ml-1" /> راهنما</li>
                                                     <hr className="my-2" />
-                                                    <li className="px-2 py-3 cursor-pointer hover:bg-blue-gray-50 rounded-md" onClick={LogoutHandler}><IoLogOut className="inline ml-1" /> خروج</li>
+                                                    <li className="px-2 py-3 cursor-pointer hover:bg-blue-gray-50 dark:hover:bg-blue-gray-500 rounded-md" onClick={LogoutHandler}><IoLogOut className="inline ml-1" /> خروج</li>
                                                 </ul>
 
                                             )
@@ -214,7 +214,7 @@ export function NavbarDefault() {
                         </div>
                     </Link>
 
-                    <Link to={'/blogList'}>
+                    {/* <Link to={'/blogList'}>
                         <div className="group relative px-3 cursor-pointer">
                             <div
                                 className="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-blue-gray-200 hover:text-blue-gray-900 transition-colors duration-300 dark:hover:bg-gray-700"
@@ -242,7 +242,7 @@ export function NavbarDefault() {
                                 وبلاگ
                             </span>
                         </div>
-                    </Link>
+                    </Link> */}
 
                     {
                         authContext.isLogin() ? (

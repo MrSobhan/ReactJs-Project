@@ -24,6 +24,9 @@
     transform-origin: 50%;
     animation: circle7124 .5s alternate infinite ease;
 }
+.dark .circle {
+    background-color: aliceblue;
+}
 
 @keyframes circle7124 {
     0% {

@@ -405,7 +405,7 @@ const CarPage = () => {
                                         }}
                                     />
                                 </div>
-                                <Button className="w-full" color="gray">
+                                <Button className="w-full dark:bg-white dark:!text-black" color="gray">
                                     ارسال نظرات
                                 </Button>
                             </form>
@@ -436,7 +436,7 @@ const CarPage = () => {
 
                                 <div class="flex items-center gap-3 mt-4">
                                     <button
-                                        class="bg-gray-200/65 hover:bg-gray-200 transition-colors p-2 rounded-full"
+                                        class="bg-gray-200/65 hover:bg-gray-200 dark:bg-white transition-colors p-2 rounded-full"
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -444,7 +444,7 @@ const CarPage = () => {
                                             viewBox="0 0 24 24"
                                             stroke-width="1.5"
                                             stroke="currentColor"
-                                            class="w-5 h-5"
+                                            className="w-5 h-5 dark:fill-black"
                                         >
                                             <path
                                                 stroke-linecap="round"
@@ -454,29 +454,29 @@ const CarPage = () => {
                                         </svg>
                                     </button>
                                     <button
-                                        class="bg-gray-200/65 hover:bg-gray-200 transition-colors p-2 rounded-full"
+                                        class="bg-gray-200/65 hover:bg-gray-200 dark:bg-white transition-colors p-2 rounded-full"
                                     >
-                                        <LiaTelegram className='text-lg' />
+                                        <LiaTelegram className='text-lg dark:fill-black' />
                                     </button>
                                     <button
-                                        class="bg-gray-200/65 hover:bg-gray-200 transition-colors p-2 rounded-full"
+                                        class="bg-gray-200/65 hover:bg-gray-200 dark:bg-white transition-colors p-2 rounded-full"
                                     >
-                                        <AiOutlineInstagram className='text-lg' />
+                                        <AiOutlineInstagram className='text-lg dark:fill-black' />
                                     </button>
                                 </div>
 
                                 {
                                     singleCarData.status == "موجود" ? (
                                         <div class="flex items-center flex-col mt-4">
-                                            <p title="name/نام" class="text-black font-Roboto-md text-xs text-center">هزینه را بعد از پذیرش درخواست توسط میزبان پرداخت خواهید کرد.</p>
-                                            <Button className='w-full mt-3' onClick={RentalHandle}>
+                                            <p title="name/نام" class="text-black dark:text-white font-Roboto-md text-xs text-center">هزینه را بعد از پذیرش درخواست توسط میزبان پرداخت خواهید کرد.</p>
+                                            <Button className='w-full mt-3 dark:bg-white dark:!text-black' onClick={RentalHandle}>
                                                 {loading ? <Spinner className="inline h-4 w-4" /> : "ادامه"}
                                             </Button>
                                         </div>
                                     ) : (
                                         <div class="flex items-center flex-col mt-4">
-                                            <p title="name/نام" class="text-black font-Roboto-md text-xs text-center">هزینه را بعد از پذیرش درخواست توسط میزبان پرداخت خواهید کرد.</p>
-                                            <Button className='w-full mt-3'>این خودرو موجود نمی باشد.</Button>
+                                            <p title="name/نام" class="text-black dark:text-white font-Roboto-md text-xs text-center">هزینه را بعد از پذیرش درخواست توسط میزبان پرداخت خواهید کرد.</p>
+                                            <Button className='w-full mt-3 dark:bg-white dark:!text-black'>این خودرو موجود نمی باشد.</Button>
                                         </div>
                                     )
                                 }

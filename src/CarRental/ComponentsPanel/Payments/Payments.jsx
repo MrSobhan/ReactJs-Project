@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import AuthContext from "../../context/authContext";
 import swal from "sweetalert";
-import { Card, Typography, Spinner, Button, Input, Select, Option } from "@material-tailwind/react";
+import { Card, Typography, Spinner, Button, Input } from "@material-tailwind/react";
 import { MdDelete } from "react-icons/md";
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaSearch } from "react-icons/fa";
 
 
 const TABLE_HEAD = ["تاریخ پرداخت", "روش پرداخت", "شناسه تراکنش", "مبلغ", "وضعیت پرداخت", "فاکتور"];
@@ -13,6 +13,7 @@ const Payments = () => {
     const [loading, setLoading] = useState(false);
     const [paymentData, setPaymentData] = useState([]);
     const [loader, setLoader] = useState(true);
+    const [searchTerm, setSearchTerm] = useState("");
 
 
     useEffect(() => {
@@ -92,6 +93,12 @@ const Payments = () => {
 
     };
 
+    const filteredPayments = paymentData.filter(payment =>
+        payment.payment_method.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        payment.payment_status.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (payment.transaction_id && payment.transaction_id.toString().includes(searchTerm))
+    );
+
     return (
         <>
             {loader ? (
@@ -99,30 +106,57 @@ const Payments = () => {
             ) : (
                 <div className="container mx-auto p-6">
 
-
-                    <Card className="h-full w-full overflow-scroll">
-                        <Typography variant="h5" className="text-center text-gray-900 font-bold mb-4">
-                            لیست پرداخت‌ها
+                    {/* Header with Search */}
+                    <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+                        <Typography variant="h4" className="lalezar dark:text-white">
+                            مدیریت پرداخت‌ها
                         </Typography>
+                        <div className="flex gap-4 items-center">
+                            <div className="relative">
+                                <Input
+                                    type="text"
+                                    placeholder="جستجو..."
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                    className="pl-10 dark:text-white"
+                                />
+                                <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                            </div>
+                        </div>
+                    </div>
 
+                    <Card className="h-full w-full overflow-scroll dark:bg-gray-800">
                         <table className="w-full min-w-max table-auto text-right">
                             <thead>
                                 <tr>
                                     {TABLE_HEAD.map((head) => (
-                                        <th key={head} className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
-                                            <Typography className="font-normal leading-none opacity-70">{head}</Typography>
+                                        <th key={head} className="border-b border-blue-gray-100 bg-blue-gray-50 p-4 dark:bg-gray-700 dark:border-gray-600">
+                                            <Typography className="font-normal leading-none opacity-70 dark:text-white">{head}</Typography>
                                         </th>
                                     ))}
                                 </tr>
                             </thead>
                             <tbody>
-                                {paymentData.map((payment, index) => (
+                                {filteredPayments.map((payment, index) => {
+                                    const classes = "p-4 border-b border-blue-gray-50 dark:border-gray-600";
+                                    
+                                    return (
                                     <tr key={payment.id}>
-                                        <td className="p-4">{payment.payment_datetime}</td>
-                                        <td className="p-4">{payment.payment_method}</td>
-                                        <td className="p-4">{payment.transaction_id}</td>
-                                        <td className="p-4">{payment.amount.toLocaleString()}</td>
-                                        <td className="p-4">{payment.payment_status}</td>
+                                        <td className={classes}>
+                                            <Typography className="dark:text-white">{payment.payment_datetime}</Typography>
+                                        </td>
+                                        <td className={classes}>
+                                            <Typography className="dark:text-white">{payment.payment_method}</Typography>
+                                        </td>
+                                        <td className={classes}>
+                                            <Typography className="dark:text-white">{payment.transaction_id}</Typography>
+                                        </td>
+                                        <td className={classes}>
+                                            <Typography className="dark:text-white">{payment.amount.toLocaleString()}</Typography>
+                                        </td>
+                                        <td className={classes}>
+                                            <Typography className="dark:text-white">{payment.payment_status}</Typography>
+                                        </td>
                                         <td className="p-4">
                                             <Button size="sm" onClick={() => showInvoiceInfo(payment.invoice)}>نمایش</Button>
                                         </td>
@@ -133,7 +167,7 @@ const Payments = () => {
                                             <MdDelete />
                                         </button>
                                     </tr>
-                                ))}
+                                )})}
                             </tbody>
                         </table>
 

@@ -31,7 +31,7 @@ const Header = () => {
           >
             سوییچ رنت این امکان را فراهم نموده است تا خدمات کرایه ماشین بدون راننده را چه در ایران و چه در هر نقطه دیگر از جهان با شرایط آسان در اختیار شما قرار دهد. با اجاره ماشین بدون راننده افراد خیلی آزادانه می توانند به هر کجا که
           </Typography>
-          <Button className='rounded-full py-4 px-9 mt-5'>شروع جستجو</Button>
+          <Button className='rounded-full py-4 px-9 mt-5 dark:bg-white dark:!text-black'>شروع جستجو</Button>
 
         </div>
         <div className="flex gap-x-6 w-full justify-end items-center imgBox__HeaderHome">
